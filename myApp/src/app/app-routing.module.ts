@@ -18,10 +18,7 @@ const routes: Routes = [
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
-  {
-    path: 'contancts',
-    loadChildren: () => import('./contancts/contancts.module').then( m => m.ContanctsPageModule)
-  },
+ 
   {
     path: 'contacts',
     loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)

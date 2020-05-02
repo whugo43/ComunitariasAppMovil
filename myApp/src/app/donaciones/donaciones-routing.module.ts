@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: DonacionesPage
+  },
+  {
+    path: 'generar-donacion',
+    loadChildren: () => import('./generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
   }
 ];
 

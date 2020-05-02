@@ -38,6 +38,10 @@ const routes: Routes = [
   {
     path: 'generar-categoria',
     loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
+  },
+  {
+    path: 'generar-donacion',
+    loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
   }
 ];
 @NgModule({

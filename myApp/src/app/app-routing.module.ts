@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'centro-acopio',
     loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
+  },
+  {
+    path: 'generar-categoria',
+    loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   }
 ];
 @NgModule({

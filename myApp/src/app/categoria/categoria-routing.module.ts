@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: CategoriaPage
+  },
+  {
+    path: 'generar-categoria',
+    loadChildren: () => import('./generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   }
 ];
 

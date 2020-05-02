@@ -26,6 +26,14 @@ const routes: Routes = [
   {
     path: 'empresas',
     loadChildren: () => import('./empresas/empresas.module').then( m => m.EmpresasPageModule)
+  },
+  {
+    path: 'categoria',
+    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+  },
+  {
+    path: 'centro-acopio',
+    loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
   }
 ];
 @NgModule({

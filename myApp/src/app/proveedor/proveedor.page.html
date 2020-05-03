@@ -5,5 +5,13 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let proveedor of proveedores" >
+      <ion-label>
+        <h2>{{proveedor.name}}</h2>
+        <p>{{proveedor.email}}</p>
+        <p>{{proveedor.phoneNumber}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 </ion-content>

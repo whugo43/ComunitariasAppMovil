@@ -17,14 +17,10 @@
   <ion-card *ngFor="let categoria of categorias">
     <ion-item>
       <ion-label>{{categoria.name}}</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-button fill="outline" slot="end" (click)="deleteCategorias(categoria.id)">View</ion-button>
     </ion-item>
     <ion-card-content>
      <p>{{categoria.description}}</p>
-     <p>estate: {{categoria.state}}</p>
-     <p>createdAt: {{categoria.createdAt}}</p>
-     <p>createdBy: {{categoria.createdBy}}</p>
-    <!--<p> {{categoria.id}} <p>-->
     </ion-card-content>
   </ion-card>
 </ion-content>

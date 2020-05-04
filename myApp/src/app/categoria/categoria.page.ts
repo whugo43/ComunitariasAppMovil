@@ -19,8 +19,6 @@ categorias
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}
       )
-
-    
     
   }
 

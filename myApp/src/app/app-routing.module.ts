@@ -29,7 +29,16 @@ const routes: Routes = [
   },
   {
     path: 'proveedor',
-    loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+    children:  [
+      {
+        path: '',
+        loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+      },
+      {
+        path: ':proveedorId',
+        loadChildren: () => import('./proveedor/detalle-proveedor/detalle-proveedor.module').then(m => m.DetalleProveedorPageModule)
+      }
+    ]
   }
 ];
 @NgModule({

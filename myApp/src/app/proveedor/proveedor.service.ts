@@ -13,7 +13,10 @@ export class ProveedorService {
     return this.http.get<any>('http://127.0.0.1:8000/api/provider/');
   }
 
-  getProveedor(){}
+  getProveedor(proveedorId: string){
+    console.log('http://127.0.0.1:8000/api/provider/'+proveedorId)
+    return this.http.get<any>('http://127.0.0.1:8000/api/provider/'+proveedorId);
+  }
 
   addProveedor(){}
 

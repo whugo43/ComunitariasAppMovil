@@ -14,13 +14,19 @@
     </ion-fab-button>
   </ion-fab>
   
-  <ion-card>
+  <ion-card *ngFor="let categoria of categorias">
     <ion-item>
-      <ion-label>Categoria A.</ion-label>
+      <ion-label>{{categoria.name}}</ion-label>
       <ion-button fill="outline" slot="end">View</ion-button>
     </ion-item>
     <ion-card-content>
-      Descripcion de categoria A.
+     <p>{{categoria.description}}</p>
+     <p>estate: {{categoria.state}}</p>
+     <p>createdAt: {{categoria.createdAt}}</p>
+     <p>createdAt: {{categoria.createdBy}}</p>
+
+    <!--<p> {{categoria.id}} <p>-->
+
     </ion-card-content>
   </ion-card>
 </ion-content>

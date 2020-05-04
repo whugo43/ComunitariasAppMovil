@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CategoriaService} from '../services/categoria.service';
 
 @Component({
   selector: 'app-categoria',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categoria.page.scss'],
 })
 export class CategoriaPage implements OnInit {
+categorias
+  constructor(public categoriaservice:CategoriaService) {
 
-  constructor() { }
+   }
 
   ngOnInit() {
+    this.categoriaservice.getCategorias()
+    .subscribe(
+      (data)=>{this.categorias=data},
+      (error)=>{console.log(error);}
+      )
+
+    
+    
   }
 
 }

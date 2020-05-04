@@ -12,6 +12,6 @@ export class CategoriaService {
    console.log("categorias de donaciones");
    }
    getCategorias(){
-     return this.http.get('');
+     return this.http.get('http://127.0.0.1:8000/api/category/');
    }
 }

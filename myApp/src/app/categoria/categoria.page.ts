@@ -8,12 +8,13 @@ import {CategoriaService} from '../services/categoria.service';
 })
 export class CategoriaPage implements OnInit {
 categorias
+
   constructor(public categoriaservice:CategoriaService) {
 
    }
 
   ngOnInit() {
-    this.categoriaservice.getCategorias()
+    this.categoriaservice.postCategorias()
     .subscribe(
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}

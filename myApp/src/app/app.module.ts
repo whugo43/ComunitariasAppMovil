@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 
 import {CategoriaService} from './services/categoria.service';
+import {DonacionesService} from './services/donaciones.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import {CategoriaService} from './services/categoria.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    CategoriaService
+    CategoriaService,
+    DonacionesService
   ],
   bootstrap: [AppComponent]
 })

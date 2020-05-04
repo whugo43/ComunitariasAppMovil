@@ -33,47 +33,20 @@
   </ion-fab>
 
 
-  <ion-card>
+  <ion-card *ngFor="let donacion of donaciones">
     <ion-item>
-      <ion-label>Empresa A</ion-label>
+      <ion-label>proveedor: {{donacion.provider}}</ion-label>
       <ion-button fill="outline" slot="end">View</ion-button>
     </ion-item>
     <ion-card-content>
-      Descripcion de la donacion A
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-item>
-      <ion-label>Empresa B</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
-    </ion-item>
-    <ion-card-content>
-      Descripcion de la donacion B
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-item>
-      <ion-label>Empresa C</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
-    </ion-item>
-    <ion-card-content>
-      Descripcion de la donacion C
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card>
-    <ion-item>
-      <ion-label>Empresa D</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
-    </ion-item>
-    <ion-card-content>
-      Descripcion de la donacion D
-    </ion-card-content>
-  </ion-card>
+     <p>{{donacion.description}}</p>
+     <p>estate: {{donacion.state}}</p>
+     <p>createdAt: {{donacion.createdAt}}</p>
+     <p>createdAt: {{donacion.createdBy}}</p>
+     <p>category: {{donacion.category}}</p>
   
-  
+    </ion-card-content>
+  </ion-card>
 
 
 </ion-content>

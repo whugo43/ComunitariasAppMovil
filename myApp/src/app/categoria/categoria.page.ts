@@ -14,7 +14,7 @@ categorias
    }
 
   ngOnInit() {
-    this.categoriaservice.postCategorias()
+    this.categoriaservice.getCategorias()
     .subscribe(
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}

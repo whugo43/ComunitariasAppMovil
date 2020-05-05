@@ -1,7 +1,8 @@
 export interface Categoria {
-    id:string;
+    id?:string;
     name: string;
-    description: string;
-    state: string;
+    description?: string;
+    state?: string;
+    createdAt?: string;
     createdBy: string;
 }

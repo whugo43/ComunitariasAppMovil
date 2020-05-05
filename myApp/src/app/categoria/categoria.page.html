@@ -17,11 +17,11 @@
   <ion-card *ngFor="let categoria of categorias">
     <ion-item>
       <ion-label>{{categoria.name}}</ion-label>
-      <ion-button fill="outline" slot="end" (click)="deleteCategoria()">View</ion-button>
+      <ion-button fill="outline" slot="end" (click)="deleteCategoria()" >View</ion-button>
     </ion-item>
     <ion-card-content>
-      <p>{{categoria.id}}</p>
      <p>{{categoria.description}}</p>
+     <p>Creado por: {{categoria.createdBy}}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>

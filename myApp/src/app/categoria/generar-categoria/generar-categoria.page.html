@@ -9,34 +9,26 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form onsubmit="">
+  <form #formulario="ngForm" (ngSubmit)="postCategorias()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="floating">Nombre <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text" ></ion-input>
+        <ion-input required type="text" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea  ></ion-textarea>
+        <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required></ion-textarea>
       </ion-item>
-
-      <!--<ion-item>
-        <ion-label position="floating">Estado</ion-label>
-        <ion-textarea required type="number"></ion-textarea>
-      </ion-item>-->
-
-
 
       <ion-item>
         <ion-label position="floating">Creado por <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text" ></ion-input>
+        <ion-input required type="text"  name="createdBy" [(ngModel)]='formulariocategoria.createdBy' ></ion-input>
       </ion-item>
-
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button   shape="round" type="submit"  expand="block"  (click)="postCategorias()" routerLink="/categoria" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/categoria" routerDirection="root">
       Guardar
       </ion-button>
     </div>

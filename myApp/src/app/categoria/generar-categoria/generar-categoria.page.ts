@@ -8,6 +8,12 @@ import {CategoriaService} from '../../services/categoria.service';
   styleUrls: ['./generar-categoria.page.scss'],
 })
 export class GenerarCategoriaPage implements OnInit {
+  formulariocategoria={
+  name: '',
+  description: '',
+  createdBy: ''
+  }
+  
   categorias: any={};
 
   constructor(public categoriaservice:CategoriaService) { }
@@ -17,14 +23,13 @@ export class GenerarCategoriaPage implements OnInit {
   }
   postCategorias(){
     const Categoria={
-      name: 'Prueba 1',
-    description: 'prueba 1.1.1',
-    createdBy: 'Wong hugo Prueba1'
+    name: this.formulariocategoria.name,
+    description:this.formulariocategoria.description,
+    createdBy: this.formulariocategoria.createdBy
     };
-    this.categoriaservice.postCategorias(Categoria)
-    .subscribe(
-      (newTask)=>{console.log(newTask)}
+    
+    this.categoriaservice.postCategorias(Categoria).subscribe(
+      (newTask)=>{console.log(newTask);}
     );
     }
-    
 }

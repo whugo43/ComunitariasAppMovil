@@ -21,8 +21,10 @@ export class GenerarCategoriaPage implements OnInit {
     description: 'prueba 1.1.1',
     createdBy: 'Wong hugo Prueba1'
     };
-    this.categoriaservice.postCategorias(Categoria).subscribe(
+    this.categoriaservice.postCategorias(Categoria)
+    .subscribe(
       (newTask)=>{console.log(newTask)}
     );
     }
+    
 }

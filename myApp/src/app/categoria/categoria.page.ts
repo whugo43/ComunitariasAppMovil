@@ -18,8 +18,30 @@ categorias
     .subscribe(
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}
-      )
-    
+      )  
   }
 
+  updateCategorias(){
+    const Categoria={
+      id: '1',
+      name: 'prueba update 1',
+      description: 'prueba update 1.1.1',
+      state:'1',
+      createdAt: '2020-05-04T02:14:09.246686Z',
+      createdBy: 'Wong hugo Prueba1'
+    };
+    this.categoriaservice.updateCategorias(Categoria)
+    .subscribe(
+      todo=>{console.log(todo)}
+    );
+    }
+  
+    deleteCategoria(){
+      this.categoriaservice.deleteCategorias('7').
+      subscribe(
+        (data)=>{console.log(data)},
+        (error)=>{console.log(error);}
+        )  
+    }
+  
 }

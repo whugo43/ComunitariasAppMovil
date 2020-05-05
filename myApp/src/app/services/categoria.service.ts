@@ -19,7 +19,7 @@ export class CategoriaService {
   }
 
   getCategoriaId(id: string){ 
-    const path= this.api+id;
+    const path=  `${this.api}${id} `;
     return this.http.get<Categoria>(path)
 
   }
@@ -31,12 +31,14 @@ export class CategoriaService {
 
   }
 
-  updateCategorias(){
-     
+  updateCategorias(categoria:Categoria){
+    const path= `${this.api}${categoria.id}`;
+    return this.http.put<Categoria>(path,categoria)
   }
   
-  deleteCategorias(){
-
+  deleteCategorias(id: string){
+    const path=  `${this.api}${id}`;
+    return this.http.delete(path)
   }
 
 }

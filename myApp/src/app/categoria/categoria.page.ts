@@ -19,12 +19,12 @@ categorias
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}
       );
-      this.doRefresh(event);  
+    
   }
 
   updateCategorias(){
     const Categoria={
-      id: '1',
+      id: '41',
       name: 'prueba update 1',
       description: 'prueba update 1.1.1',
       state:'1',
@@ -43,6 +43,7 @@ categorias
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
         );
+       
 
     }
 

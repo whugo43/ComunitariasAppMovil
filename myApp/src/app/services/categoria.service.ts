@@ -14,25 +14,22 @@ export class CategoriaService {
   }
   
   getCategorias(){
-    const path=  `${this.api}?state=1 `;
+    const path= this.api;
     return this.http.get<Categoria[]>(path)
   }
 
   getCategoriaId(id: string){ 
-    const path=  `${this.api}${id} `;
-    return this.http.get<Categoria>(path)
+    return this.http.get<any>(this.api+id);
 
   }
   
   postCategorias(categoria:Categoria){
     const path= this.api;
     return this.http.post(path,categoria)
-
-
   }
 
   updateCategorias(categoria:Categoria){
-    const path= `${this.api}${categoria.id}`;
+    const path= this.api+categoria.id;
     return this.http.put<Categoria>(path,categoria)
   }
   

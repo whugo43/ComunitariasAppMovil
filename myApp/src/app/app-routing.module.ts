@@ -29,7 +29,16 @@ const routes: Routes = [
   },
   {
     path: 'categoria',
-    loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+      },
+      {
+        path: ':categoriaId',
+        loadChildren: () => import('./categoria/editar-categoria/editar-categoria.module').then( m => m.EditarCategoriaPageModule)
+      }
+  ]
   },
   {
     path: 'centro-acopio',
@@ -39,6 +48,7 @@ const routes: Routes = [
     path: 'generar-categoria',
     loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   },
+  
   {
     path: 'generar-donacion',
     loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)

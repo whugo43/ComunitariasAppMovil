@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'generar-categoria',
     loadChildren: () => import('./generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
+  },  {
+    path: 'editar-categoria',
+    loadChildren: () => import('./editar-categoria/editar-categoria.module').then( m => m.EditarCategoriaPageModule)
   }
+
 ];
 
 @NgModule({

@@ -18,7 +18,8 @@ categorias
     .subscribe(
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}
-      )  
+      );
+      this.doRefresh(event);  
   }
 
   updateCategorias(){
@@ -36,12 +37,20 @@ categorias
     );
     }
   
-    deleteCategoria(){
-      this.categoriaservice.deleteCategorias('7').
+    deleteCategoria(id: string,event){
+      this.categoriaservice.deleteCategorias(id).
       subscribe(
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
-        )  
+        );
+
+    }
+
+    doRefresh(event) {
+      setTimeout(() => {
+        this.ngOnInit();
+        event.target.complete();   
+      }, 2000);
     }
   
 }

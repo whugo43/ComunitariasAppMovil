@@ -14,7 +14,7 @@ export class CategoriaService {
   }
   
   getCategorias(){
-    const path= this.api;
+    const path=  `${this.api}?state=1 `;
     return this.http.get<Categoria[]>(path)
   }
 

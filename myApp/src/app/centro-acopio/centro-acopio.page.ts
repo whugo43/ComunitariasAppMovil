@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-centro-acopio',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CentroAcopioPage implements OnInit {
 
-  constructor() { }
+  private registrationForm: FormGroup;
 
+  constructor(private formBuilder:
+    FormBuilder) {
+
+    this.registrationForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.maxLength(10)]],
+      direccion: ['', [Validators.required, Validators.maxLength(100)]],
+      ubicacion_map : this.formBuilder.group({
+        latitud:'',
+        longuitud:'',
+      })
+    });
+
+  }
   ngOnInit() {
   }
-
 }

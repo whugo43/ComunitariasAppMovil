@@ -5,5 +5,23 @@
 </ion-header>
 
 <ion-content>
+  <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input autocapitalize inputmode="text" formControlName="nombre"></ion-input>
+      </ion-item>
+    </ion-card>
 
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Direccion</ion-label>
+        <ion-input inputmode="text" formControlName="direccion"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-button [disabled]="isinValid()" type="submit" expand="block">Enviar <ion-icon slot="end" name="create">
+      </ion-icon>
+    </ion-button>
+  </form>
 </ion-content>

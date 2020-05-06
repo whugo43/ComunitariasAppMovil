@@ -56,7 +56,6 @@ const routes: Routes = [
     path: 'distribucion',
     loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)
   }
-
 ];
 @NgModule({
   imports: [

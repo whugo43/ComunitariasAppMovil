@@ -28,9 +28,9 @@ export class CategoriaService {
     return this.http.post(path,categoria)
   }
 
-  updateCategorias(categoria:Categoria){
-    const path= this.api+categoria.id;
-    return this.http.put<Categoria>(path,categoria)
+  updateCategorias(categoria:Categoria,id){
+    const path= this.api+id;
+    return this.http.patch(path,categoria)
   }
   
   deleteCategorias(id: string){

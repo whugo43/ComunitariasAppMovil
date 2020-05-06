@@ -6,3 +6,7 @@ export interface Categoria {
     createdAt?: string;
     createdBy: string;
 }
+
+export interface Categorias{
+    Categorias: Array<Categoria>
+ }

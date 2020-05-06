@@ -21,21 +21,6 @@ categorias
       );
     
   }
-
-  updateCategorias(){
-    const Categoria={
-      id: '41',
-      name: 'prueba update 1',
-      description: 'prueba update 1.1.1',
-      state:'1',
-      createdAt: '2020-05-04T02:14:09.246686Z',
-      createdBy: 'Wong hugo Prueba1'
-    };
-    this.categoriaservice.updateCategorias(Categoria)
-    .subscribe(
-      todo=>{console.log(todo)}
-    );
-    }
   
     deleteCategoria(id: string,event){
       this.categoriaservice.deleteCategorias(id).

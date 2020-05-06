@@ -34,32 +34,17 @@ export class EditarCategoriaPage implements OnInit {
   }
 
   upDatetCategorias(){
-    console.log(this.id)
-    console.log(this.formulariocategoria.name)
-    console.log(this.formulariocategoria.description)
-    console.log(this.formulariocategoria.createdBy)
-
-    const Categorias={
-      id: this.id,
-      name: 'prueba update 1',
-      description: 'prueba update 1.1.1',
-      state:'1',
-      createdAt: '2020-05-04T02:14:09.246686Z',
-      createdBy: 'Wong hugo Prueba1'
-    }
 
     let categoria:Categoria ={
       id: this.id,
-      name: 'prueba update 1',
-      description: 'prueba update 1.1.1',
-      state:'1',
-      createdAt: '2020-05-04T02:14:09.246686Z',
-      createdBy: 'Wong hugo Prueba1'
+      name: this.formulariocategoria.name,
+      description:this.formulariocategoria.description,
+      createdBy: this.formulariocategoria.createdBy
     };
     this.categoriaservice.updateCategorias(categoria,this.id)
     .subscribe(
-      success => alert("Done"),
-       error => alert(error)
+      success => console.log('done'),
+       error => console.log(error)
     );
     
   }

@@ -29,13 +29,25 @@ export class CategoriaService {
   }
 
   updateCategorias(categoria:Categoria,id: string){
-    const path= this.api+id;
-    return this.http.put(path,categoria)
+    const path= this.api+id+'/';
+    
+    return this.http.patch(path,categoria)
   }
   
   deleteCategorias(id: string){
     const path=  `${this.api}${id}`;
     return this.http.delete(path)
   }
+
+  updateCategoria0(id: string){
+    const path= this.api+id+'/';
+    return this.http.patch(path,
+    {
+      state:'0'
+    })
+
+  }
+
+  
 
 }

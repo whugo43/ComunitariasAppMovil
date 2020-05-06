@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'generar-donacion',
     loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
+  },  {
+    path: 'distribucion',
+    loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)
   }
+
 ];
 @NgModule({
   imports: [

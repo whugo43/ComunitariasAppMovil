@@ -4,26 +4,26 @@
       <ion-back-button defaultHref="/categoria"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Categoria</ion-title>
+    <ion-title>Editar Categoria</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" (ngSubmit)="postCategorias()">
+  <form #formulario="ngForm" (ngSubmit)="upDatetCategorias()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="floating">Nombre <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
+        <ion-label position="floating"><ion-text color="danger"></ion-text>Nombre</ion-label>
+        <ion-input required type="text" [(ngModel)]='formulariocategoria.name' name='name' value="{{categoria.name}}" clear-input></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required></ion-textarea>
+        <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required value="{{categoria.description}}" clear-textarea></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Creado por <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text"  name="createdBy" [(ngModel)]='formulariocategoria.createdBy' ></ion-input>
+        <ion-input required type="text"  name="createdBy" [(ngModel)]='formulariocategoria.createdBy' value="{{categoria.createdBy}}" clear-input></ion-input>
       </ion-item>
     </ion-list>
 

@@ -13,14 +13,32 @@
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      refreshingSpinner="circles">
+           </ion-refresher-content>
+  </ion-refresher>
   
-  <ion-card>
+  <ion-card *ngFor="let categoria of categorias; let index= i">
     <ion-item>
-      <ion-label>Categoria A</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-label>{{categoria.name}}</ion-label>
+
+      <ion-button fill="outline" slot="end" [routerLink]="['/categoria',categoria.id]">
+        <ion-icon name="create"></ion-icon >
+      </ion-button>
+      <ion-button fill="outline" slot="end" (click)="deleteCategoria(categoria.id)">
+      <ion-icon name="trash">
+      </ion-icon></ion-button>
+
     </ion-item>
+
     <ion-card-content>
-      Descripcion de categoria A.
+     <p>{{categoria.description}}</p>
+     <p>Creado por: {{categoria.createdBy}}</p>
     </ion-card-content>
   </ion-card>
+ 
+
 </ion-content>

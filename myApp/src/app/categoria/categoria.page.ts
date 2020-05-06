@@ -27,16 +27,22 @@ categorias
       subscribe(
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
-        );
-       
+        );       
+    }
 
+    deleteUpdateCategoria(id: string,event){
+      this.categoriaservice.updateCategoria0(id).
+      subscribe(
+        (data)=>{console.log(data)},
+        (error)=>{console.log(error);}
+        );       
     }
 
     doRefresh(event) {
       setTimeout(() => {
         this.ngOnInit();
         event.target.complete();   
-      }, 2000);
+      }, 200);
     }
   
 }

@@ -41,16 +41,34 @@ const routes: Routes = [
   ]
   },
   {
-    path: 'centro-acopio',
-    loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
-  },
-  {
     path: 'generar-categoria',
     loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   },
   {
+    path: 'centro-acopio',
+    loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
+  },
+  
+  {
     path: 'generar-donacion',
     loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
+  },
+  {
+    path: 'campaign',
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
+      },
+      {
+        path: ':campaignId',
+        loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+      }
+  ]
+  },
+  {
+    path: 'generar-campaign',
+    loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule)
   },
   {
     path: 'distribucion',

@@ -15,9 +15,11 @@
   </ion-fab>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content
+   <ion-refresher-content
       pullingIcon="chevron-down-circle-outline"
-      refreshingSpinner="circles">
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
            </ion-refresher-content>
   </ion-refresher>
   

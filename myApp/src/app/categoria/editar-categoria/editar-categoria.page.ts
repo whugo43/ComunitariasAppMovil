@@ -50,11 +50,11 @@ export class EditarCategoriaPage implements OnInit {
 
     let categoria:Categoria ={
       id: this.id,
-      name: this.formulariocategoria.name,
-      description:this.formulariocategoria.description,
-      createdBy: this.formulariocategoria.createdBy,
+      name: 'prueba update 1',
+      description: 'prueba update 1.1.1',
       state:'1',
       createdAt: '2020-05-04T02:14:09.246686Z',
+      createdBy: 'Wong hugo Prueba1'
     };
     this.categoriaservice.updateCategorias(categoria,this.id)
     .subscribe(

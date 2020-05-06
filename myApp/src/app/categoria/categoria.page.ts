@@ -36,7 +36,7 @@ categorias
       setTimeout(() => {
         this.ngOnInit();
         event.target.complete();   
-      }, 2000);
+      }, 200);
     }
   
 }

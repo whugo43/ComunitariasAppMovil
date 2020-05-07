@@ -14,6 +14,7 @@ import { from } from 'rxjs';
 
 import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
+import {CampaignService} from './services/campaign.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,7 +25,8 @@ import {DonacionesService} from './services/donaciones.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
-    DonacionesService
+    DonacionesService,
+    CampaignService,
   ],
   bootstrap: [AppComponent]
 })

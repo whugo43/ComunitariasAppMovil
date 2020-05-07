@@ -63,6 +63,10 @@ const routes: Routes = [
       {
         path: ':campaignId',
         loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+      },
+      {
+        path: ':detallecampaignId',
+        loadChildren: () => import('./campaign/detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule)
       }
   ]
   },

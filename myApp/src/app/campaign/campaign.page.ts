@@ -18,6 +18,22 @@ export class CampaignPage implements OnInit {
       );
   }
 
+  deleteCampaign(id: string){
+    this.campaignservice.deleteCampaigns(id).
+    subscribe(
+      (data)=>{console.log(data)},
+      (error)=>{console.log(error);}
+      );       
+  }
+
+  deleteUpdateCampaign(id: string){
+    this.campaignservice.updateCampaigns0(id).
+    subscribe(
+      (data)=>{console.log(data)},
+      (error)=>{console.log(error);}
+      );       
+  }
+
   doRefresh(event) {
     setTimeout(() => {
       this.ngOnInit();

@@ -28,9 +28,6 @@ export class EditarCategoriaPage implements OnInit {
       (error)=>{console.log(error);}
       )
     });
-
-  
-
   }
 
   upDatetCategorias(){

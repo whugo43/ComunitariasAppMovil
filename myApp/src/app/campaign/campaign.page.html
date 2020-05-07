@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
+      <ion-back-button defaultHref="/campaign"></ion-back-button>
     </ion-buttons>
     <ion-title>Campañas</ion-title>
   </ion-toolbar>
@@ -27,12 +27,17 @@
     <ion-item>
       <ion-label>{{campaign.name}}</ion-label>
 
-      <ion-button fill="outline" slot="end" [routerLink]="['/campaign',campaignId]">
+      <ion-button fill="outline" slot="end" [routerLink]="['/campaign',campaign.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
+      
+      <ion-button fill="outline" slot="end" [routerLink]="['/campaignid',campaign.id]">
+        <ion-icon name="create"></ion-icon >
+      </ion-button>
+
       <ion-button fill="outline" slot="end" (click)="deleteUpdateCampaign(campaign.id)">
-      <ion-icon name="trash">
-      </ion-icon></ion-button>
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
     </ion-item>
 
     <ion-card-content>

@@ -12,13 +12,18 @@
   <form #formulario="ngForm" (ngSubmit)="postCampaign()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="floating">Nombre <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
+        <ion-label position="floating">Campaña <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="search" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
         <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Contacto<ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text"  name="contactName" [(ngModel)]='formulariocategoria.contactName' ></ion-input>
       </ion-item>
 
       <ion-item>

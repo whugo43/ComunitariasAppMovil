@@ -9,8 +9,17 @@
 </ion-header>
 
 <ion-content>
-<p>{{campaign.name}}</p>
-<p>{{campaign.description}}</p>
-<p>{{campaign.photo}}</p>
-<p>{{campaign.state}}</p>
+      <ion-card>
+        <img src="{{campaign.photo}}" />
+        <ion-card-header>
+          <ion-card-subtitle>Destination</ion-card-subtitle>
+          <ion-card-title>{{campaign.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          {{campaign.description}}
+          <h3>Contactos</h3>
+          {{campaign.contactName}}
+          
+        </ion-card-content>
+      </ion-card>
 </ion-content>

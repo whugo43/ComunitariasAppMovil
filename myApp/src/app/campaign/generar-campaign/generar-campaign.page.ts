@@ -10,6 +10,7 @@ export class GenerarCampaignPage implements OnInit {
   formulariocategoria={
     name: '',
     description: '',
+    contactName:'',
     createdBy: ''
     }
 
@@ -22,7 +23,7 @@ export class GenerarCampaignPage implements OnInit {
     const campaign={
     photo:  'http://localhost:8000/media/campaigns/FOTO.jpg',
     name: this.formulariocategoria.name,
-    contactName: 'fgb',
+    contactName: this.formulariocategoria.contactName,
     description:this.formulariocategoria.description,
     
     

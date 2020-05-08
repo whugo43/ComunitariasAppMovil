@@ -46,7 +46,16 @@ const routes: Routes = [
   },
   {
     path: 'centro-acopio',
-    loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
+      },
+      {
+        path: ':centro-acopioId',
+        loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
+      }
+  ]
   },
   
   {

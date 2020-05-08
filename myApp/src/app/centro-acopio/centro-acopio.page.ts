@@ -25,4 +25,8 @@ export class CentroAcopioPage implements OnInit {
   }
   ngOnInit() {
   }
+  public check(){
+    return this.registrationForm.get("nombre").value==''||
+    this.registrationForm.get("direccion").value=='';
+  }
 }

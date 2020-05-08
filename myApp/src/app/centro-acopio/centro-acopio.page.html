@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+  <form [formGroup]="registrationForm">
     <ion-card>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>
@@ -20,8 +20,8 @@
       </ion-item>
     </ion-card>
 
-    <ion-button [disabled]="isinValid()" type="submit" expand="block">Enviar <ion-icon slot="end" name="create">
-      </ion-icon>
+    <ion-button [disabled]="check()" [routerLink]="['./ubicacion']">
+      Ingresar ubicacion en el mapa <ion-icon slot="end" name="create"></ion-icon>
     </ion-button>
   </form>
-</ion-content>
+  <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet"></ion-content>

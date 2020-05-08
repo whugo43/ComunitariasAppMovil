@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 
+import {Geolocation} from "@ionic-native/geolocation/ngx"
 import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
 
@@ -24,7 +25,8 @@ import {DonacionesService} from './services/donaciones.service';
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
-    DonacionesService
+    DonacionesService,
+    Geolocation
   ],
   bootstrap: [AppComponent]
 })

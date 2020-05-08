@@ -1,6 +1,6 @@
 export interface Campaign {
     id?:string;
-    photo: string;
+    photo: File;
     name:string;
     contactName: string;
     description:string;

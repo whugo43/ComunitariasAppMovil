@@ -23,7 +23,7 @@
            </ion-refresher-content>
   </ion-refresher>
   
-  <ion-card *ngFor="let campaign of campaigns; let index= i" >
+  <ion-card *ngFor="let campaign of campaigns; let index= i">
     <ion-item>
       <ion-label [routerLink]="['/campaign',campaign.id]">{{campaign.name}}</ion-label>
       

@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/campaign"></ion-back-button>
+      <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Campañas</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content >
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/generar-campaign" routerDirection="root">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
@@ -23,13 +23,9 @@
            </ion-refresher-content>
   </ion-refresher>
   
-  <ion-card *ngFor="let campaign of campaigns; let index= i">
+  <ion-card *ngFor="let campaign of campaigns; let index= i" >
     <ion-item>
-      <ion-label>{{campaign.name}}</ion-label>
-
-      <ion-button fill="outline" slot="end" [routerLink]="['/campaign',campaign.id]">
-        <ion-icon name="create"></ion-icon >
-      </ion-button>
+      <ion-label [routerLink]="['/campaign',campaign.id]">{{campaign.name}}</ion-label>
       
       <ion-button fill="outline" slot="end" [routerLink]="['/campaignid',campaign.id]">
         <ion-icon name="create"></ion-icon >

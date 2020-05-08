@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CampaignService} from '../../services/campaign.service';
+import {Campaign} from '../../interfaces/campaign';
 
 @Component({
   selector: 'app-generar-campaign',
@@ -9,6 +10,7 @@ import {CampaignService} from '../../services/campaign.service';
 export class GenerarCampaignPage implements OnInit {
   formulariocategoria={
     name: '',
+    photo: '',
     description: '',
     contactName:'',
     createdBy: ''
@@ -20,9 +22,11 @@ export class GenerarCampaignPage implements OnInit {
   }
 
   postCampaign(){
-    const campaign={
-    photo:  'http://localhost:8000/media/campaigns/FOTO.jpg',
+    let campaign:Campaign= {
+    
+    photo:  this.formulariocategoria.photo,  
     name: this.formulariocategoria.name,
+    
     contactName: this.formulariocategoria.contactName,
     description:this.formulariocategoria.description,
     

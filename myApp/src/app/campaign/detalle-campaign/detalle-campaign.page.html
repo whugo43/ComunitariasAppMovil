@@ -10,16 +10,14 @@
 
 <ion-content>
       <ion-card>
-        <img src="{{campaign.photo}}" />
+        <ion-img src="{{campaign.photo}}"></ion-img>
         <ion-card-header>
-          <ion-card-subtitle>Destination</ion-card-subtitle>
           <ion-card-title>{{campaign.name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
           {{campaign.description}}
-          <h3>Contactos</h3>
+           <ion-card-subtitle>Contacto: </ion-card-subtitle>
           {{campaign.contactName}}
-          
         </ion-card-content>
       </ion-card>
 </ion-content>

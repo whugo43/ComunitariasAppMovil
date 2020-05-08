@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 
+import {Geolocation} from "@ionic-native/geolocation/ngx"
 import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
 import {CampaignService} from './services/campaign.service';
@@ -26,7 +27,8 @@ import {CampaignService} from './services/campaign.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
     DonacionesService,
-    CampaignService,
+    Geolocation,
+    CampaignService
   ],
   bootstrap: [AppComponent]
 })

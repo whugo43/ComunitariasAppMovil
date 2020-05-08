@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: CentroAcopioPage
+  },  {
+    path: 'ubicacion',
+    loadChildren: () => import('./ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
   }
+
 ];
 
 @NgModule({

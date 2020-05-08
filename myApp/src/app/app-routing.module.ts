@@ -70,11 +70,27 @@ const routes: Routes = [
         loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
       },
       {
+        path: ':detallecampaign',
+        loadChildren: () => import('./campaign/detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule)
+      }
+  ]
+  },  
+  {
+    path: 'campaignid',
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
+      },
+      {
         path: ':campaignId',
         loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
       }
   ]
   },
+     
+  
+
   {
     path: 'generar-campaign',
     loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule)

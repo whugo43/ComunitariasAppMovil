@@ -1,10 +1,12 @@
 export interface Campaign {
-    id?:number;
+    id?:string;
+    photo?:string;
     name:string;
     contactName: string;
     description:string;
-    state?:number;
-    createdBy?:number;
+    state?:string;
+    createdAt?:string;
+    createdBy:string;
 }
 export interface Campaigns{
     campaigns: Array<Campaign>

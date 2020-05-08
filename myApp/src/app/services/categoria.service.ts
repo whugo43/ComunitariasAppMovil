@@ -46,8 +46,6 @@ export class CategoriaService {
       state:'0'
     })
 
-  }
-
-  
+  }  
 
 }

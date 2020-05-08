@@ -15,6 +15,7 @@ import { from } from 'rxjs';
 import {Geolocation} from "@ionic-native/geolocation/ngx"
 import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
+import {CampaignService} from './services/campaign.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,7 +27,8 @@ import {DonacionesService} from './services/donaciones.service';
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     CategoriaService,
     DonacionesService,
-    Geolocation
+    Geolocation,
+    CampaignService
   ],
   bootstrap: [AppComponent]
 })

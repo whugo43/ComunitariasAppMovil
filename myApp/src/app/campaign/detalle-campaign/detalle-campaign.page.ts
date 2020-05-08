@@ -3,12 +3,11 @@ import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign.service';
 
 @Component({
-  selector: 'app-editar-campaign',
-  templateUrl: './editar-campaign.page.html',
-  styleUrls: ['./editar-campaign.page.scss'],
+  selector: 'app-detalle-campaign',
+  templateUrl: './detalle-campaign.page.html',
+  styleUrls: ['./detalle-campaign.page.scss'],
 })
-export class EditarCampaignPage implements OnInit {
-
+export class DetalleCampaignPage implements OnInit {
   campaign=[];
   id: string;
 
@@ -16,7 +15,7 @@ export class EditarCampaignPage implements OnInit {
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
-      const detallecampaign = paramMap.get('campaignId')
+      const detallecampaign = paramMap.get('detallecampaign')
       this.id = detallecampaign
       this.campaignservice.getCampaignsId(detallecampaign)
       .subscribe(

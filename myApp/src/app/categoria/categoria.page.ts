@@ -22,7 +22,7 @@ categorias
     
   }
   
-    deleteCategoria(id: string,event){
+    deleteCategoria(id: string){
       this.categoriaservice.deleteCategorias(id).
       subscribe(
         (data)=>{console.log(data)},
@@ -30,7 +30,7 @@ categorias
         );       
     }
 
-    deleteUpdateCategoria(id: string,event){
+    deleteUpdateCategoria(id: string){
       this.categoriaservice.updateCategoria0(id).
       subscribe(
         (data)=>{console.log(data)},

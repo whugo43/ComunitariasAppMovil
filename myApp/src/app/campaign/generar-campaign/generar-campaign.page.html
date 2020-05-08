@@ -1,9 +1,36 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>generar-campaign</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/campaign"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Campaña</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content fullscreen>
+  <form #formulario="ngForm" (ngSubmit)="postCampaign()">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="floating">Nombre <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
+      </ion-item>
 
+      <ion-item>
+        <ion-label position="floating">Descripcion</ion-label>
+        <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Creado por <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text"  name="createdBy" [(ngModel)]='formulariocategoria.createdBy' ></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/campaign" routerDirection="root">
+      Guardar
+      </ion-button>
+    </div>
+  </form>
 </ion-content>

@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'editar-campaign',
     loadChildren: () => import('./editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+  },
+  {
+    path: 'detalle-campaign',
+    loadChildren: () => import('./detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule)
   }
 ];
 

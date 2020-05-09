@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-centro-acopio',
@@ -7,26 +6,24 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
   styleUrls: ['./centro-acopio.page.scss'],
 })
 export class CentroAcopioPage implements OnInit {
+  indice:number=0;
+  lista:any[]=[];
 
-  private registrationForm: FormGroup;
+  constructor() {
+  }
 
-  constructor(private formBuilder:
-    FormBuilder) {
+  llenarlista(nombre:any,direccion:any,ubicacion:any) {
 
-    this.registrationForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.maxLength(10)]],
-      direccion: ['', [Validators.required, Validators.maxLength(100)]],
-      ubicacion_map : this.formBuilder.group({
-        latitud:'',
-        longuitud:'',
-      })
-    });
-
+    const listp={
+      'id':this.indice,
+      'nombre':nombre,
+      'direccion':direccion,
+      'ubicacion':ubicacion
+    }
+    this.indice=this.indice+1;
+    this.lista.push(listp);
   }
   ngOnInit() {
   }
-  public check(){
-    return this.registrationForm.get("nombre").value==''||
-    this.registrationForm.get("direccion").value=='';
-  }
+
 }

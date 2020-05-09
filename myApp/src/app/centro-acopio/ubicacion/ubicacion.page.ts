@@ -38,8 +38,8 @@ export class UbicacionPage implements OnInit {
 
   obtenerUbicacionActual(){
     this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
+      this.lat_ac=resp.coords.latitude
+      this.long_ac=resp.coords.longitude
      }).catch((error) => {
        console.log('Error getting location', error);
      });

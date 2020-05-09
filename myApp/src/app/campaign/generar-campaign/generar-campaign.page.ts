@@ -8,9 +8,9 @@ import {Campaign} from '../../interfaces/campaign';
   styleUrls: ['./generar-campaign.page.scss'],
 })
 export class GenerarCampaignPage implements OnInit {
+  photo: File;
   formulariocategoria={
     name: '',
-    photo: '',
     description: '',
     contactName:'',
     createdBy: ''
@@ -24,7 +24,7 @@ export class GenerarCampaignPage implements OnInit {
   postCampaign(){
     let campaign:Campaign= {
     
-    photo:  this.formulariocategoria.photo,  
+    photo:  this.photo,  
     name: this.formulariocategoria.name,
     
     contactName: this.formulariocategoria.contactName,
@@ -37,6 +37,10 @@ export class GenerarCampaignPage implements OnInit {
     this.campaignservice.postCampaigns(campaign).subscribe(
       (newTask)=>{console.log(newTask);}
     );
+    }
+
+    changeListener($event) : void {
+      this.photo = $event.target.files[0];
     }
 
 }

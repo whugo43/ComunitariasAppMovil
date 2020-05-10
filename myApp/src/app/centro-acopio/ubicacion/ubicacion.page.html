@@ -3,13 +3,15 @@
     <ion-title>Ubicacion</ion-title>
   </ion-toolbar>
   <ion-buttons end>
-    <button ion-button (click)="llenarlista()">
+    <button ion-button [disabled]="check_ubicacion()" (click)="enviarDatos()">
       <ion-icon name="add"></ion-icon>Guardar
     </button>
   </ion-buttons>
 </ion-header>
 
 <ion-content>
-  <div id='mapId2' style="width: 100% ;height: 100%"></div>
-  <ion-button (click)="getPositions()">Market</ion-button>
+  <ion-label>{{nombre}}</ion-label><br><br>
+  <ion-label>{{direccion}}</ion-label>
+  <div id='mapId2' style="width: 100% ;height: 80%"></div>
+  <ion-button (click)="obtenerUbicacionActual()">Market</ion-button>
 </ion-content>

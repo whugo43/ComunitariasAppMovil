@@ -21,7 +21,7 @@
       </ion-item>
     </ion-card>
 
-    <ion-button [disabled]="check()" [routerLink]="['../../ubicacion']" click=''>
+    <ion-button [disabled]="check()" (click)='sendData()'>
       Ingresar ubicacion en el mapa<ion-icon slot="end" name="create"></ion-icon>
     </ion-button>
     </form>

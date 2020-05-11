@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DonacionesService } from '../services/donaciones.service';
+import {CategoriaService} from '../services/categoria.service';
 
 @Component({
   selector: 'app-donaciones',
@@ -8,7 +9,9 @@ import { DonacionesService } from '../services/donaciones.service';
 })
 export class DonacionesPage implements OnInit {
   donaciones
-  constructor(public donacionesService:DonacionesService) { }
+  categoria
+  proveedor
+  constructor(public donacionesService:DonacionesService,public campaignservice: CategoriaService ) { }
 
   ngOnInit() {
     this.donacionesService.getDonaciones()
@@ -18,4 +21,19 @@ export class DonacionesPage implements OnInit {
       )
   }
 
+  viewcategoria(categoria:string){
+    this.campaignservice.getCategoriaId(categoria)
+    .subscribe(
+    (data)=>{this.categoria.name=data},
+    (error)=>{console.log(error);}
+    )
+  }
+
+  viewprovider(provider:string){
+    this.campaignservice.getCategoriaId(provider)
+    .subscribe(
+    (data)=>{this.proveedor.name=data},
+    (error)=>{console.log(error);}
+    )
+  }  
 }

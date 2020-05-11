@@ -16,6 +16,8 @@ import {Geolocation} from "@ionic-native/geolocation/ngx"
 import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
 import {CampaignService} from './services/campaign.service';
+import {ProviderService} from './services/provider.service';
+import {CentroAcopioService} from './services/centro-acopio.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +30,11 @@ import {CampaignService} from './services/campaign.service';
     CategoriaService,
     DonacionesService,
     Geolocation,
-    CampaignService
+    CampaignService,
+    ProviderService,
+    CentroAcopioService
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}

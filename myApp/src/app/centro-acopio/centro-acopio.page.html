@@ -4,17 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card  *ngFor ="let data of lista">
-    <ion-label ><b>id:</b>{{data.id}}</ion-label><br><br>
+<ion-content class="ion-padding">
+  <ion-card *ngFor="let data of lista">
+    <ion-label><b>id:</b>{{data.id}}</ion-label><br><br>
 
-    <ion-label ><b>Nombre:</b>{{data.nombre}}</ion-label><br><br>
+    <ion-label><b>Nombre:</b>{{data.nombre}}</ion-label><br><br>
     <ion-label><b>Ubicacion:</b>{{data.direccion}}</ion-label><br><br>
-    <ion-label ><b>Latitud:</b>{{data.latitud}}</ion-label><br><br>
+    <ion-label><b>Latitud:</b>{{data.latitud}}</ion-label><br><br>
 
-    <ion-label ><b>Longuitud:</b>{{data.longuitud}}</ion-label><br><br>
-
-  </ion-card>
-  <ion-button [routerLink]="['./centro-acopio-registro']"> 
-    Registrar un Centro de Acopio</ion-button >
+    <ion-label><b>Longuitud:</b>{{data.longuitud}}</ion-label><br><br>
+    </ion-card>
+  
+    <ion-button expand='full' [routerLink]="['./centro-acopio-registro']">
+        Registrar un Centro de Acopio</ion-button>
+    
 </ion-content>

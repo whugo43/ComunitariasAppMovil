@@ -38,6 +38,7 @@ export class UbicacionPage implements OnInit {
     })
 
   }
+  
   public enviarDatos() {
     this.route.navigate(['../centro-acopio'], {
       queryParams: {
@@ -81,35 +82,25 @@ export class UbicacionPage implements OnInit {
     if (this.band == 0) {
       this.lat_pa = e.latlng.lat;
       this.lng_pa = e.latlng.lng;
-
-      console.log(e.latlng.lat, e.latlng.lng, this.band)
-      this.markPoint = marker([e.latlng.lat, e.latlng.lng]);
-      this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + this.nombre + "</p>");
-
-      this.map.addLayer(this.markPoint);
-      this.map.setView([e.latlng.lat, e.latlng.lng], 19);
+     
       this.band = 1;
     } else if (this.band == 1) {
-      console.log(this.lat_pa, this.lng_pa, this.band)
+    
       this.map.removeLayer(this.markPoint);
 
-      this.markPoint = marker([e.latlng.lat, e.latlng.lng]);
-      this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + this.nombre + "</p>");
-
-      this.map.addLayer(this.markPoint);
-      this.map.setView([e.latlng.lat, e.latlng.lng], 19);
       this.band = 2;
     } else if (this.band == 2) {
-      console.log(this.lat_pa, this.lng_pa, this.band)
       this.map.removeLayer(this.markPoint);
 
-      this.markPoint = marker([e.latlng.lat, e.latlng.lng]);
-      this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + this.nombre + "</p>");
-
-      this.map.addLayer(this.markPoint);
-      this.map.setView([e.latlng.lat, e.latlng.lng], 19);
       this.band = 1;
     }
+    this.markPoint = marker([e.latlng.lat, e.latlng.lng]);
+    this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + this.nombre + "</p>");
+
+    this.map.addLayer(this.markPoint);
+    this.map.setView([e.latlng.lat, e.latlng.lng], 19);
+
+    /*Añadiendo las coordenadas de latitud y longuitud para ser enviadas*/
     this.lat_enviar=e.latlng.lat;
     this.lng_enviar=e.latlng.lng;
   }

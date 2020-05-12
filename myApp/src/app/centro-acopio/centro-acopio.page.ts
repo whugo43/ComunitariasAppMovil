@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'
-import { isNull } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-centro-acopio',
   templateUrl: './centro-acopio.page.html',

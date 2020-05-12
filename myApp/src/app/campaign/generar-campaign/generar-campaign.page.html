@@ -26,12 +26,6 @@
         <ion-input required type="text"  name="contactName" [(ngModel)]='formulariocategoria.contactName' ></ion-input>
       </ion-item>
 
-      <ion-item>
-      <ion-label position="floating"><ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="file" accept="image/*" name="photo"  [(ngModel)]='formulariocategoria.photo'>
-        </ion-input>
-      </ion-item>     
-
        <ion-item>
       <ion-label position="floating"><ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formulariocategoria.photo'>

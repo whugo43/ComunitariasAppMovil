@@ -37,7 +37,9 @@ export class GenerarDonacionPage implements OnInit {
     (data)=>{this.centrosAcopios=data},
     (error)=>{console.log(error)}
     );
+  }
 
-
+  postDonaciones(){
+    
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Campaign} from '../interfaces/campaign';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,10 @@ export class CampaignService {
 
   }
 
-  postCampaigns(campaign:Campaign){
+  postCampaigns(campaign){
     const path= this.api;
     return this.http.post(path,campaign)
+
   }
 
   updateCampaigns(campaign:Campaign,id: string){

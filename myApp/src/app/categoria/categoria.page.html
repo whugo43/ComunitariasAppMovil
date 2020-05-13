@@ -22,8 +22,8 @@
       refreshingText="Refreshing...">
            </ion-refresher-content>
   </ion-refresher>
-  
-  <ion-card *ngFor="let categoria of categorias; let index= i">
+  <ng-container *ngFor="let categoria of categorias; let index= i">
+  <ion-card  *ngIf="categoria.state == 1">
     <ion-item>
       <ion-label>{{categoria.name}}</ion-label>
 
@@ -38,9 +38,9 @@
 
     <ion-card-content>
      <p>{{categoria.description}}</p>
-     <p>Creado por: {{categoria.createdBy}}</p>
     </ion-card-content>
   </ion-card>
+  </ng-container>
  
 
 </ion-content>

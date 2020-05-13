@@ -39,8 +39,6 @@ export class GenerarCampaignPage implements OnInit {
 
     changeListener($event) : void {
       this.photo = $event.target.files[0];
-      console.log( "metodo listener")
-      console.log( $event.target.files[0])
     }
 
 }

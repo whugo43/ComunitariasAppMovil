@@ -13,7 +13,8 @@ export class CampaignPage implements OnInit {
   ngOnInit() {
     this.campaignservice.getCampaigns()
     .subscribe(
-      (data)=>{this.campaigns=data},
+      (data)=>{this.campaigns=data
+      },
       (error)=>{console.log(error);}
       );
   }

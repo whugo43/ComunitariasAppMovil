@@ -29,7 +29,7 @@ export class CampaignService {
 
   }
 
-  updateCampaigns(campaign:Campaign,id: string){
+  updateCampaigns(campaign,id: string){
     const path= this.api+id+'/';
     return this.http.patch(path,campaign)
   }

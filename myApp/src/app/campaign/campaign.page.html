@@ -22,8 +22,8 @@
       refreshingText="Refreshing...">
            </ion-refresher-content>
   </ion-refresher>
-  
-  <ion-card *ngFor="let campaign of campaigns; let index= i">
+  <ng-container *ngFor="let campaign of campaigns; let index= i">
+  <ion-card *ngIf="campaign.state == 1">
     <ion-item>
       <ion-label [routerLink]="['/campaign',campaign.id]">{{campaign.name}}</ion-label>
       
@@ -35,12 +35,11 @@
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
-
     <ion-card-content>
      <p>{{campaign.description}}</p>
-     <p>Creado por: {{campaign.createdBy}}</p>
     </ion-card-content>
   </ion-card>
+  </ng-container>
  
 
 </ion-content>

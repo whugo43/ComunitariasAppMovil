@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/categoria"></ion-back-button>
+      <ion-back-button defaultHref="/campaign"></ion-back-button>
     </ion-buttons>
     
     <ion-title>Detalle</ion-title>
@@ -16,7 +16,9 @@
         </ion-card-header>
         <ion-card-content>
           {{campaign.description}}
-           <ion-card-subtitle>Contacto: </ion-card-subtitle>
+        </ion-card-content>
+        <ion-card-content>
+         <ion-card-subtitle>Contacto: </ion-card-subtitle>
           {{campaign.contactName}}
         </ion-card-content>
       </ion-card>

@@ -13,7 +13,7 @@ export class GenerarDonacionPage implements OnInit {
   donaciones;
   centrosAcopios;
   providers;
-  categoria;
+  categorias;
   constructor(public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
@@ -22,7 +22,7 @@ export class GenerarDonacionPage implements OnInit {
   ngOnInit() {
     this.categoriaservice.getCategorias()
     .subscribe(
-    (data)=>{this.categoria=data},
+    (data)=>{this.categorias=data},
     (error)=>{console.log(error)}
     );
     

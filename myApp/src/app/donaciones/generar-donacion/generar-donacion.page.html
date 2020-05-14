@@ -9,25 +9,52 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm">
+  <form #formulario="ngForm" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
+
+      <ion-item>
+        <ion-label>Proveedor</ion-label>
+        <ion-select placeholder="Seleccione uno">
+          <ng-container *ngFor="let provider of providers">
+            <ion-select-option *ngIf="provider.state == 1" value="{{provider.id}}">{{provider.name}}</ion-select-option>
+           </ng-container>           
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Centro de acopio</ion-label>
+        <ion-select placeholder="Seleccione uno">
+        <ng-container *ngFor="let centrosAcopio of centrosAcopios">
+          <ion-select-option *ngIf="centrosAcopio.state == 1" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
+        </ng-container>     
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Categoria</ion-label>
+        <ion-select placeholder="Seleccione uno">    
+          <ng-container *ngFor="let categoria of categorias">
+            <ion-select-option *ngIf="categoria.state == 1" value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
+          </ng-container>     
+        </ion-select>
+      </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
         <ion-textarea name='description' required></ion-textarea>
       </ion-item>
 
+      <ion-item>
+         <ion-label>Fecha de inicio</ion-label>
+        <ion-datetime value="2020-05-14T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+         <ion-label>Fecha de Caducidad</ion-label>
+        <ion-datetime value="2020-05-14T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+      </ion-item>
+        
     </ion-list>
-
-     <ion-item>
-    <ion-label>Centro de acopio</ion-label>
-    <ion-select placeholder="Select One">
-      <ion-select-option value="f">Female</ion-select-option>
-      <ion-select-option value="m">Male</ion-select-option>
-      
-    </ion-select>
-  </ion-item>
-
     <div class="ion-padding">
       <ion-button   shape="round" type="submit"  expand="block" [disabled]="formulario.invalid" routerLink="/donaciones" routerDirection="root">
       Guardar
@@ -35,3 +62,4 @@
     </div>
   </form>
 </ion-content>
+ 

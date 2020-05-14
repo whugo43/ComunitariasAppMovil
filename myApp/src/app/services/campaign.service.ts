@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   providedIn: 'root'
 })
 export class CampaignService {
-  private api='http://localhost:8000/api/campaign/';
+  private api='http://127.0.0.1:8000/api/campaign/';
 
   constructor(private http: HttpClient) {
     console.log("campañas");

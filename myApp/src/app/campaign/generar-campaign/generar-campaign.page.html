@@ -13,28 +13,28 @@
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="floating">Campaña </ion-label>
-        <ion-input required type="search" [(ngModel)]='formulariocategoria.name' name='name'></ion-input>
+        <ion-input required type="search" [(ngModel)]='formularios.name' name='name'></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea [(ngModel)]='formulariocategoria.description' name='description' required></ion-textarea>
+        <ion-textarea [(ngModel)]='formularios.description' name='description' required></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Contacto</ion-label>
-        <ion-input required type="text"  name="contactName" [(ngModel)]='formulariocategoria.contactName' ></ion-input>
+        <ion-input required type="text"  name="contactName" [(ngModel)]='formularios.contactName' ></ion-input>
       </ion-item>
 
        <ion-item>
       <ion-label position="stacked">Imagen</ion-label>
-        <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formulariocategoria.photo'>
+        <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
         </ion-input>
       </ion-item> 
 
       <ion-item>
         <ion-label position="floating">Creado por </ion-label>
-        <ion-input required type="text"  name="createdBy" [(ngModel)]='formulariocategoria.createdBy' ></ion-input>
+        <ion-input required type="text"  name="createdBy" [(ngModel)]='formularios.createdBy' ></ion-input>
       </ion-item>
     </ion-list>
 

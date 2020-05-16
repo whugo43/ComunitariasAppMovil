@@ -4,62 +4,71 @@
       <ion-back-button defaultHref="/donaciones"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Donaciones</ion-title>
+    <ion-title>Donacion</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" >
+  <form #formulario="ngForm" (ngSubmit)="postDonaciones()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
-
       <ion-item>
         <ion-label>Proveedor</ion-label>
-        <ion-select placeholder="Seleccione uno">
-          <ng-container *ngFor="let provider of providers">
+        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.proveedor' name='proveedor' required >
+          <ng-container *ngFor="let provider of providers" >
             <ion-select-option *ngIf="provider.state == 1" value="{{provider.id}}">{{provider.name}}</ion-select-option>
            </ng-container>           
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Centro de acopio</ion-label>
-        <ion-select placeholder="Seleccione uno">
-        <ng-container *ngFor="let centrosAcopio of centrosAcopios">
-          <ion-select-option *ngIf="centrosAcopio.state == 1" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
-        </ng-container>     
+        <ion-label>Centro de Acopio</ion-label>
+        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.centroacopio' name="centroacopio" required >
+          <ng-container *ngFor="let centrosAcopio of centrosAcopios" >
+            <ion-select-option *ngIf="centrosAcopio.state == 1" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
+           </ng-container>           
         </ion-select>
       </ion-item>
 
       <ion-item>
-        <ion-label>Categoria</ion-label>
-        <ion-select placeholder="Seleccione uno">    
-          <ng-container *ngFor="let categoria of categorias">
+        <ion-label>Categorias</ion-label>
+        <ion-select placeholder="Seleccione uno" aria-required="required" [(ngModel)]='formularios.categoria' name='categoria'>
+          <ng-container *ngFor="let categoria of categorias" >
             <ion-select-option *ngIf="categoria.state == 1" value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
-          </ng-container>     
+           </ng-container>           
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea name='description' required></ion-textarea>
+        <ion-textarea [(ngModel)]='formularios.description' name='description' required></ion-textarea>
       </ion-item>
 
       <ion-item>
-         <ion-label>Fecha de inicio</ion-label>
-        <ion-datetime value="2020-05-14T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+        <ion-label position="floating">Fecha de inicio</ion-label>
+        <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
       </ion-item>
 
       <ion-item>
-         <ion-label>Fecha de Caducidad</ion-label>
-        <ion-datetime value="2020-05-14T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+        <ion-label position="floating">Fecha de caducidad</ion-label>
+        <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
       </ion-item>
-        
+
+      <ion-item>
+        <ion-label position="stacked">Imagen</ion-label>
+        <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
+        </ion-input>
+      </ion-item> 
+
+      <ion-item>
+        <ion-label position="floating">Creado por </ion-label>
+        <ion-input required type="text"  name="createdBy" [(ngModel)]='formularios.createdBy' ></ion-input>
+      </ion-item>
     </ion-list>
+
     <div class="ion-padding">
-      <ion-button   shape="round" type="submit"  expand="block" [disabled]="formulario.invalid" routerLink="/donaciones" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/donaciones" routerDirection="root">
       Guardar
       </ion-button>
     </div>
   </form>
 </ion-content>
- 

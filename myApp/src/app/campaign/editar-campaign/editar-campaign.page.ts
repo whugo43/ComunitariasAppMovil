@@ -14,7 +14,7 @@ export class EditarCampaignPage implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,public campaignservice: CampaignService ) { }
   photo: File;
-  formulariocategoria={
+  formularios={
     photo: '',
     name: '',
     description: '',
@@ -36,10 +36,11 @@ export class EditarCampaignPage implements OnInit {
    formData= new FormData();
 
   postCampaign(){   
-    this.formData.append("name",this.formulariocategoria.name) 
-    this.formData.append("contactName", this.formulariocategoria.contactName) 
-    this.formData.append("description",this.formulariocategoria.description)  
-    this.formData.append("createdBy", this.formulariocategoria.createdBy) 
+    this.formData.append("name",this.formularios.name) 
+    this.formData.append("contactName", this.formularios.contactName) 
+    this.formData.append("description",this.formularios.description)  
+    this.formData.append("createdBy", this.formularios.createdBy) 
+    this.formData.append("photo",this.photo)
    
     console.log("metodo update")
  
@@ -49,7 +50,7 @@ export class EditarCampaignPage implements OnInit {
 
     changeListener($event) : void {
       this.photo = $event.target.files[0];
-      this.formData.append("photo",this.photo) 
+       
     }
 
 }

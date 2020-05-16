@@ -14,6 +14,18 @@ export class GenerarDonacionPage implements OnInit {
   centrosAcopios;
   providers;
   categorias;
+  photo: File;
+  formularios={
+    photo: '',
+    name: '',
+    description: '',
+    contactName:'',
+    proveedor:'',
+    centroacopio:'',
+    categoria:'',
+    createdBy: ''
+    }
+
   constructor(public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
@@ -40,6 +52,23 @@ export class GenerarDonacionPage implements OnInit {
   }
 
   postDonaciones(){
-    
+    const formData= new FormData();
+    formData.append("name",this.formularios.name) 
+    formData.append("contactName", this.formularios.contactName) 
+    formData.append("description",this.formularios.description) 
+    formData.append("photo",this.photo) 
+    formData.append("createdBy", this.formularios.createdBy)
+    console.log("metodo create")
+    console.log("metodo categoria")
+    console.log(this.formularios.categoria)
+    console.log("metodo proveedor")
+    console.log(this.formularios.proveedor)
+    console.log("metodo centroacopio")
+    console.log(this.formularios.categoria)
   }
+
+  changeListener($event) : void {
+    this.photo = $event.target.files[0];
+  }
+
 }

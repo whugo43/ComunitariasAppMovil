@@ -36,7 +36,9 @@ categorias
       subscribe(
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
-        );       
+        );
+        event
+        this.doRefresh(event);       
     }
 
     doRefresh(event) {

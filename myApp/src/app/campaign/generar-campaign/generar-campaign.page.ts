@@ -9,13 +9,14 @@ import {Campaign} from '../../interfaces/campaign';
 })
 export class GenerarCampaignPage implements OnInit {
   photo: File;
-  formulariocategoria={
+  formularios={
     photo: '',
     name: '',
     description: '',
     contactName:'',
     createdBy: ''
-    }
+    };
+  formData= new FormData();
 
   constructor(public campaignservice:CampaignService) { }
 
@@ -23,16 +24,15 @@ export class GenerarCampaignPage implements OnInit {
   }
 
   postCampaign(){ 
-    const formData= new FormData();
-    formData.append("name",this.formulariocategoria.name) 
-    formData.append("contactName", this.formulariocategoria.contactName) 
-    formData.append("description",this.formulariocategoria.description) 
-    formData.append("photo",this.photo) 
-    formData.append("createdBy", this.formulariocategoria.createdBy) 
+    this.formData.append("name",this.formularios.name) 
+    this.formData.append("contactName", this.formularios.contactName) 
+    this.formData.append("description",this.formularios.description) 
+    this.formData.append("photo",this.photo) 
+    this.formData.append("createdBy", this.formularios.createdBy) 
 
     console.log("metodo create")
  
-    this.campaignservice.postCampaigns(formData).subscribe(
+    this.campaignservice.postCampaigns(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}
     );
     }

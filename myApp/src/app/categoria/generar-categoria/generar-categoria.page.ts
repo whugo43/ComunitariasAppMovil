@@ -8,7 +8,7 @@ import {CategoriaService} from '../../services/categoria.service';
   styleUrls: ['./generar-categoria.page.scss'],
 })
 export class GenerarCategoriaPage implements OnInit {
-  formulariocategoria={
+  formularios={
   name: '',
   description: '',
   createdBy: ''
@@ -23,9 +23,9 @@ export class GenerarCategoriaPage implements OnInit {
   }
   postCategorias(){
     const Categoria={
-    name: this.formulariocategoria.name,
-    description:this.formulariocategoria.description,
-    createdBy: this.formulariocategoria.createdBy
+    name: this.formularios.name,
+    description:this.formularios.description,
+    createdBy: this.formularios.createdBy
     };
     
     this.categoriaservice.postCategorias(Categoria).subscribe(

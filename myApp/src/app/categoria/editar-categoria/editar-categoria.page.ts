@@ -9,7 +9,7 @@ import {Categoria} from '../../interfaces/categoria';
   styleUrls: ['./editar-categoria.page.scss'],
 })
 export class EditarCategoriaPage implements OnInit {
-  formulariocategoria={
+  formularios={
     name: '',
     description: '',
     createdBy: ''
@@ -34,9 +34,9 @@ export class EditarCategoriaPage implements OnInit {
 
     let categoria:Categoria ={
       id: this.id,
-      name: this.formulariocategoria.name,
-      description:this.formulariocategoria.description,
-      createdBy: this.formulariocategoria.createdBy
+      name: this.formularios.name,
+      description:this.formularios.description,
+      createdBy: this.formularios.createdBy
     };
     this.categoriaservice.updateCategorias(categoria,this.id)
     .subscribe(

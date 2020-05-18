@@ -34,7 +34,31 @@ export class DonacionesPage implements OnInit {
     )
   }
 
+
   viewprovider(provider:string){
  
   }  
+
+  deleteCampaign(id: string){
+    this.donacionesService.deleteDonaciones(id).
+    subscribe(
+      (data)=>{console.log(data)},
+      (error)=>{console.log(error);}
+      );       
+  }
+
+  deleteUpdateCampaign(id: string){
+    this.donacionesService.updateDonaciones0(id).
+    subscribe(
+      (data)=>{console.log(data)},
+      (error)=>{console.log(error);}
+      );       
+  }
+
+  doRefresh(event) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();   
+    }, 200);
+  }
 }

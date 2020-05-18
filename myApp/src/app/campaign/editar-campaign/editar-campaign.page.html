@@ -18,7 +18,7 @@
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea [(ngModel)]='formularios.description' name='description' required value="{{campaign.description}}"></ion-textarea>
+        <ion-textarea [(ngModel)]='formularios.description' name='description'  autoGrow="true" minlength="1" required value="{{campaign.description}}"></ion-textarea>
       </ion-item>
 
       <ion-item>

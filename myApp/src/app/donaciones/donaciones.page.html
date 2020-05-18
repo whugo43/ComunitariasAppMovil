@@ -32,15 +32,29 @@
     </ion-fab-button>
   </ion-fab>
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+   <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngFor="let donacion of donaciones">
+  <ion-card *ngIf="donacion.state == 1" >
+  <ion-item>
+      <ion-label>{{donacion.provider}}</ion-label>
+      
+      <ion-button fill="outline" slot="end">
+        <ion-icon name="create"></ion-icon >
+      </ion-button>
 
-  <ion-card *ngFor="let donacion of donaciones">
-    <ion-item>
-      <ion-label>proveedor: {{donacion.provider}}</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-button fill="outline" slot="end" (click)="deleteUpdateCampaign(donacion.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-card-content>
      <p>{{donacion.description}}</p>
-     <p>estate: {{donacion.state}}</p>
      <p>createdAt: {{donacion.createdAt}}</p>
      <p>createdAt: {{donacion.createdBy}}</p>
      <p>proveedor: {{donacion.provider}}</p>
@@ -48,6 +62,7 @@
   
     </ion-card-content>
   </ion-card>
+  </ng-container>
 
 
 </ion-content>

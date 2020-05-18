@@ -11,6 +11,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { from } from 'rxjs';
+import { DatePipe } from "@angular/common";
 
 import {Geolocation} from "@ionic-native/geolocation/ngx"
 import {CategoriaService} from './services/categoria.service';
@@ -27,6 +28,7 @@ import {CentroAcopioService} from './services/centro-acopio.service';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    DatePipe,
     CategoriaService,
     DonacionesService,
     Geolocation,

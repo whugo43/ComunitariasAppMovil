@@ -21,17 +21,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-label>Centro de Acopio</ion-label>
-        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.centroacopio' name="centroacopio" required >
-          <ng-container *ngFor="let centrosAcopio of centrosAcopios" >
-            <ion-select-option *ngIf="centrosAcopio.state == 1" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
-           </ng-container>           
-        </ion-select>
-      </ion-item>
-
-      <ion-item>
         <ion-label>Categorias</ion-label>
-        <ion-select placeholder="Seleccione uno" aria-required="required" [(ngModel)]='formularios.categoria' name='categoria'>
+        <ion-select placeholder="Seleccione uno" required [(ngModel)]='formularios.categoria' name='categoria'>
           <ng-container *ngFor="let categoria of categorias" >
             <ion-select-option *ngIf="categoria.state == 1" value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
            </ng-container>           
@@ -39,18 +30,27 @@
       </ion-item>
 
       <ion-item>
+        <ion-label>Centro de Acopio</ion-label>
+        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.centroacopio' name="centroacopio">
+          <ng-container *ngFor="let centrosAcopio of centrosAcopios" >
+            <ion-select-option *ngIf="centrosAcopio.state == 1" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
+           </ng-container>           
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
-        <ion-textarea [(ngModel)]='formularios.description' name='description' required></ion-textarea>
+        <ion-textarea [(ngModel)]='formularios.description' name='description' autoGrow="true" minlength="1" required></ion-textarea>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Fecha de inicio</ion-label>
-        <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+        <ion-datetime placeholder="Seleccionar fecha"  value="15-12-2020" display-timezone="utc" displayFormat="DD/MMMM/YYYY" max="2050" [(ngModel)]='formularios.BeginDate' name="BeginDate"></ion-datetime>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Fecha de caducidad</ion-label>
-        <ion-datetime value="2019-10-01T15:43:40.394Z" display-timezone="utc"></ion-datetime>
+        <ion-datetime placeholder="Seleccionar fecha" display-timezone="utc" max="2050" [(ngModel)]='formularios.ExpirationDate' name='ExpirationDate'></ion-datetime>
       </ion-item>
 
       <ion-item>

@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker, Popup, Marker } from "leaflet"
 import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { ActivatedRoute, Router } from "@angular/router"
+import {CentroAcopioClass } from '../centro-acopio-class'
+import {CentroAcopioService} from '../../services/centro-acopio.service'
+import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
   selector: 'app-ubicacion',
@@ -14,21 +17,23 @@ export class UbicacionPage implements OnInit {
   public lat_ac: number=0;
   public long_ac: number=0;
   public nombre: string = '';
-  direccion: string = '';
+  public direccion: string = '';
   public lat_pa: number;
   public lng_pa: number;
-
+  public centroAcopio_save:CentroAcopioClass=new CentroAcopioClass();
   public band: number = 0;
   public markPoint: Marker;
 
   public lat_enviar:number=0;
   public lng_enviar:number=0;
+  formData= new FormData();
+
 
   constructor(public geolocation: Geolocation,
-    public activateRoute: ActivatedRoute, public route: Router) {
+    public activateRoute: ActivatedRoute, public route: Router,private conexionApi: CentroAcopioService, private formBuilder:
+    FormBuilder) {
     this.obtenerUbicacionActual();
     this.recibiendoDatos();
-
   }
 
   public recibiendoDatos() {
@@ -40,14 +45,18 @@ export class UbicacionPage implements OnInit {
   }
   
   public enviarDatos() {
-    this.route.navigate(['../centro-acopio'], {
-      queryParams: {
-        nombre: this.nombre,
-        direccion: this.direccion,
-        latitud: this.lat_enviar,
-        longitud: this.lng_enviar,
-      }
-    });
+    this.formData.append('name',this.nombre);
+    this.formData.append('address',this.direccion);
+    this.formData.append('latitude',this.lat_enviar.toString());
+    this.formData.append('longitude',this.lng_enviar.toString());
+    this.formData.append('createdBy','mi');
+
+    console.log(this.formData);
+    this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
+      (newTask)=>{console.log(newTask);}
+    );
+    this.route.navigateByUrl('../centro-acopio');
+    this.route.navigate(['../centro-acopio']);
   }
 
   check_ubicacion() {
@@ -59,7 +68,7 @@ export class UbicacionPage implements OnInit {
   }
 
   leafletMap() {
-    this.map = new Map('mapId2').setView([this.lat_ac, this.long_ac], 13);
+    this.map = new Map('mapId2').setView([this.lat_ac, this.long_ac], 16);
     tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
       attribution: 'edupala.com'
     }).addTo(this.map);
@@ -78,14 +87,12 @@ export class UbicacionPage implements OnInit {
   }
 
   addMarker(e: any) {
-
     if (this.band == 0) {
       this.lat_pa = e.latlng.lat;
       this.lng_pa = e.latlng.lng;
      
       this.band = 1;
     } else if (this.band == 1) {
-    
       this.map.removeLayer(this.markPoint);
 
       this.band = 2;

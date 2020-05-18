@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { Router } from '@angular/router'
+import { CentroAcopioPage } from '../centro-acopio.page'
 
 @Component({
   selector: 'app-centro-acopio-registro',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router'
 })
 export class CentroAcopioRegistroPage implements OnInit {
 
-
+  private c: CentroAcopioPage;
   private registrationForm: FormGroup;
 
   constructor(private formBuilder:
@@ -31,10 +32,11 @@ export class CentroAcopioRegistroPage implements OnInit {
   public sendData() {
     this.router.navigate(['../centro-acopio/ubicacion'], {
       queryParams: {
-        nombre:this.registrationForm.get('nombre').value,
-        direccion:this.registrationForm.get('direccion').value
+        nombre: this.registrationForm.get('nombre').value,
+        direccion: this.registrationForm.get('direccion').value
       }
     });
+    
   }
 
 }

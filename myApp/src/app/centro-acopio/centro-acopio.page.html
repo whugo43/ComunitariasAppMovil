@@ -6,16 +6,37 @@
 
 <ion-content class="ion-padding">
   <ion-card *ngFor="let data of lista">
-    <ion-label><b>id:</b>{{data.id}}</ion-label><br><br>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-label><b>id:</b>{{data.id}}</ion-label><br><br>
+        </ion-col>
+        <ion-col>
+          <!--Esta es para poder editar un centro dee acopio ya registrado-->
+          <ion-button fill="outline" size='small' (click)='editar()' [routerLink]="['./centro-acopio-registro']">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
 
-    <ion-label><b>Nombre:</b>{{data.nombre}}</ion-label><br><br>
-    <ion-label><b>Ubicacion:</b>{{data.direccion}}</ion-label><br><br>
-    <ion-label><b>Latitud:</b>{{data.latitud}}</ion-label><br><br>
+          <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
+          <ion-button fill="outline" size='small'>
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
+      </ion-row>
+      <ion-row>
+        <ion-label><b>Ubicacion:</b>{{data.address}}</ion-label><br><br>
+      </ion-row>
+      <ion-row>
+        <ion-label><b>Latitud:</b>{{data.latitude}}</ion-label><br><br>
+      </ion-row>
+      <ion-label><b>Longuitud:</b>{{data.longitude}}</ion-label><br><br>
+    </ion-grid>
+  </ion-card>
 
-    <ion-label><b>Longuitud:</b>{{data.longuitud}}</ion-label><br><br>
-    </ion-card>
-  
-    <ion-button expand='full' [routerLink]="['./centro-acopio-registro']">
-        Registrar un Centro de Acopio</ion-button>
-    
+  <ion-button expand='full' [routerLink]="['./centro-acopio-registro']">
+    Registrar un Centro de Acopio</ion-button>
+
 </ion-content>

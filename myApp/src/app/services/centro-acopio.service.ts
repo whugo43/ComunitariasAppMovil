@@ -24,4 +24,13 @@ export class CentroAcopioService {
     const path= this.api;
     return this.http.post(path,centroAcopio)
   }
+
+  getCEntroAcopioId(id: string){ 
+    return this.http.get<any>(this.api+id);
+  }
+
+  deleteCentroAcopio(id: string){
+    const path=  `${this.api}${id}`;
+    return this.http.delete(path)
+  }
 } 

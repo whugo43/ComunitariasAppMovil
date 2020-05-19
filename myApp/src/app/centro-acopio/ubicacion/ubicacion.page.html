@@ -2,6 +2,9 @@
   <ion-toolbar>
     <ion-title>Ubicacion
     </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
   <ion-button float-right [disabled]="check_ubicacion()" (click)="enviarDatos()" 
   routerLink='../../../centro-acopio'>
@@ -10,8 +13,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-button></ion-button>
-
   <ion-label><b>Datos ingresados</b></ion-label><br><br>
   <ion-label><em>Nombre: </em>{{nombre}}</ion-label><br><br>
   <ion-label><em>Direccion: </em>{{direccion}}</ion-label>

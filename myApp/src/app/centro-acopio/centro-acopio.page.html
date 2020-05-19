@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Centros de Acopios</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,9 +21,10 @@
           </ion-button>
 
           <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
-          <ion-button fill="outline" size='small'>
+          <ion-button fill="outline" size='small' (click)="presentAlertConfirm(data.id)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
+
         </ion-col>
       </ion-row>
       <ion-row>
@@ -36,7 +40,10 @@
     </ion-grid>
   </ion-card>
 
-  <ion-button expand='full' [routerLink]="['./centro-acopio-registro']">
-    Registrar un Centro de Acopio</ion-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="./centro-acopio-registro" routerDirection="root">
+    <ion-fab-button>
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

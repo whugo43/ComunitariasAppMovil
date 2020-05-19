@@ -32,11 +32,10 @@ export class EditarCategoriaPage implements OnInit {
 
   upDatetCategorias(){
 
-    let categoria:Categoria ={
+    let categoria ={
       id: this.id,
       name: this.formularios.name,
-      description:this.formularios.description,
-      createdBy: this.formularios.createdBy
+      description:this.formularios.description
     };
     this.categoriaservice.updateCategorias(categoria,this.id)
     .subscribe(

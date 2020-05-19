@@ -28,7 +28,8 @@ categorias
       subscribe(
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
-        );       
+        );   
+      this.ngOnInit();      
     }
 
     deleteUpdateCategoria(id: string){
@@ -37,8 +38,8 @@ categorias
         (data)=>{console.log(data)},
         (error)=>{console.log(error);}
         );
-        event
-        this.doRefresh(event);       
+        this.ngOnInit();
+             
     }
 
     doRefresh(event) {

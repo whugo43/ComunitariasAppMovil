@@ -25,13 +25,14 @@ export class DonacionesPage implements OnInit {
       (error)=>{console.log(error);}
       )
   }
-
+  
   viewcategoria(categoria:string){
     this.categoriaservice.getCategoriaId(categoria)
     .subscribe(
-    (data)=>{this.categoria.name=data},
+    (data)=>{this.categoria=data},
     (error)=>{console.log(error);}
     )
+    console.log(this.categoria)
   }
 
 
@@ -44,7 +45,8 @@ export class DonacionesPage implements OnInit {
     subscribe(
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
-      );       
+      );   
+    this.ngOnInit();    
   }
 
   deleteUpdateCampaign(id: string){
@@ -52,7 +54,8 @@ export class DonacionesPage implements OnInit {
     subscribe(
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
-      );       
+      ); 
+    this.ngOnInit();      
   }
 
   doRefresh(event) {

@@ -14,15 +14,16 @@ export class DetalleCampaignPage implements OnInit {
   constructor(private activateRoute: ActivatedRoute,public campaignservice: CampaignService ) { }
 
   ngOnInit() {
+    
     this.activateRoute.paramMap.subscribe(paramMap => {
-      const detallecampaign = paramMap.get('detallecampaign')
+      const detallecampaign = paramMap.get('id')
       this.id = detallecampaign
       this.campaignservice.getCampaignsId(detallecampaign)
       .subscribe(
       (data)=>{this.campaign=data},
       (error)=>{console.log(error);}
       )
-    });
+    }); 
   }
 
 }

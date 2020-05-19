@@ -24,7 +24,8 @@ export class CampaignPage implements OnInit {
     subscribe(
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
-      );       
+      );
+    this.ngOnInit();       
   }
 
   deleteUpdateCampaign(id: string){
@@ -32,7 +33,8 @@ export class CampaignPage implements OnInit {
     subscribe(
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
-      );       
+      ); 
+    this.ngOnInit();      
   }
 
   doRefresh(event) {

@@ -13,6 +13,11 @@ export class DonacionesService {
     return this.http.get(path);
   }
 
+  getDonacionesId(id: string){ 
+    return this.http.get<any>(this.api+id);
+
+  }
+
   postDonaciones(donaciones){
     const path= this.api;
     return this.http.post(path,donaciones)

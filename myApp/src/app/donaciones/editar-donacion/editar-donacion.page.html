@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/donaciones"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Donacion</ion-title>
+    <ion-title>Editar Donacion</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -58,11 +58,6 @@
         <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
         </ion-input>
       </ion-item> 
-
-      <ion-item>
-        <ion-label position="floating">Creado por </ion-label>
-        <ion-input required type="text"  name="createdBy" [(ngModel)]='formularios.createdBy' ></ion-input>
-      </ion-item>
     </ion-list>
 
     <div class="ion-padding">

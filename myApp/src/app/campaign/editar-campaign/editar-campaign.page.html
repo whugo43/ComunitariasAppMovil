@@ -30,14 +30,8 @@
         <ion-label position="stacked">Imagen</ion-label>
         <ion-input  color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'></ion-input>
          
-
       </ion-item> 
       <ion-img src="{{campaign.photo}}"></ion-img>     
-
-      <ion-item>
-        <ion-label position="floating">Creado por </ion-label>
-        <ion-input  type="text"  name="createdBy" [(ngModel)]='formularios.createdBy' value="{{campaign.createdBy}}"></ion-input>
-      </ion-item>
     </ion-list>
 
     <div class="ion-padding">

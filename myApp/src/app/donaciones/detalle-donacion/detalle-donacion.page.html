@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/donaciones"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Detalle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <ion-card>
+        <ion-img src="{{donacion.photo}}"></ion-img>
+        <ion-card-header>
+          <ion-card-title>{{proveedor.name}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>{{donacion.description}}</p>
+          <p>Fecha de inicio: {{donacion.beginDate}}</p>
+          <p>Fecha de caducidad: {{donacion.expirationDate}}</p>
+        </ion-card-content>
+
+        <ion-card-content>
+         <ion-card-subtitle>Categoria: </ion-card-subtitle>
+         {{categoria.name}}
+        </ion-card-content>
+
+        <ion-card-content>
+         <ion-card-subtitle>Centro de Acopio: </ion-card-subtitle>
+         {{centroacopio.name}}
+        </ion-card-content>
+      </ion-card>
+</ion-content>

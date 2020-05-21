@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
+import {ActivatedRoute } from '@angular/router';
 import { DonacionesService } from '../../services/donaciones.service';
 import {CategoriaService} from '../../services/categoria.service';
 import {ProviderService} from '../../services/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio.service';
 
+
 @Component({
-  selector: 'app-generar-donacion',
-  templateUrl: './generar-donacion.page.html',
-  styleUrls: ['./generar-donacion.page.scss'],
+  selector: 'app-editar-donacion',
+  templateUrl: './editar-donacion.page.html',
+  styleUrls: ['./editar-donacion.page.scss'],
 })
-export class GenerarDonacionPage implements OnInit {
-  donaciones;
+export class EditarDonacionPage implements OnInit {
+  id: string;
+  donaciones=[];
   centrosAcopios;
   providers;
   categorias;
@@ -29,56 +32,64 @@ export class GenerarDonacionPage implements OnInit {
     }
 
   constructor(private datePipe: DatePipe,
+              private activateRoute: ActivatedRoute,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
               public centroAcopioservice: CentroAcopioService) { }
 
   ngOnInit() {
+    this.activateRoute.paramMap.subscribe(paramMap => {
+      const donaciones = paramMap.get('id')
+      this.id = donaciones
+      this.donacionesService.getDonacionesId(donaciones)
+      .subscribe(
+      (data)=>{this.donaciones=data},
+      (error)=>{console.log(error);}
+      )
+    });        
+
     this.categoriaservice.getCategorias()
     .subscribe(
-    (data)=>{this.categorias=data},
-    (error)=>{console.log(error)}
-    );
-    
-    this.providerservice.getPoviders()
-    .subscribe(
-    (data)=>{this.providers=data},
-    (error)=>{console.log(error)}
-    );
-
-    this.centroAcopioservice.getCentrosAcopios()
-    .subscribe(
-    (data)=>{this.centrosAcopios=data},
-    (error)=>{console.log(error)}
-    );
+      (data)=>{this.categorias=data},
+      (error)=>{console.log(error)}
+      );
+                
+      this.providerservice.getPoviders()
+      .subscribe(
+      (data)=>{this.providers=data},
+      (error)=>{console.log(error)}
+      );
+            
+      this.centroAcopioservice.getCentrosAcopios()
+      .subscribe(
+      (data)=>{this.centrosAcopios=data},
+      (error)=>{console.log(error)}
+      );
   }
 
   postDonaciones(){
     this.formData.append("description",this.formularios.description) 
-    this.formData.append("photo",this.photo) 
+
+    
     if(this.formularios.BeginDate.length>0){
       this.formData.append('beginDate',this.formularios.BeginDate)
-    }
-    else{
-    const fecha= new Date()
-    const fechastr =this.datePipe.transform(fecha,"yyyy-MM-ddTHH:mm:ssZ")
-    this.formData.append('beginDate',fechastr)
+      console.log(this.formularios.BeginDate)
     }
     
     this.formData.append("expirationDate", this.formularios.ExpirationDate)
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
-    this.formData.append("createdBy", this.formularios.createdBy)
-
-    this.donacionesService.postDonaciones(this.formData).subscribe(
+    this.donacionesService.updateDonaciones(this.formData,this.id).subscribe(
       (newTask)=>{console.log(newTask);}
     );
   }
 
   changeListener($event) : void {
     this.photo = $event.target.files[0];
+    this.formData.append("photo",this.photo) 
   }
+
 
 }

@@ -28,7 +28,7 @@ export class CategoriaService {
     return this.http.post(path,categoria)
   }
 
-  updateCategorias(categoria:Categoria,id: string){
+  updateCategorias(categoria,id: string){
     const path= this.api+id+'/';
     
     return this.http.patch(path,categoria)

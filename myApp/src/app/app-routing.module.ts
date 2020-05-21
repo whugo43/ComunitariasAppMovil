@@ -7,10 +7,6 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'donaciones',
-    loadChildren: () => import('./donaciones/donaciones.module').then( m => m.DonacionesPageModule)
-  },
-  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
@@ -56,12 +52,7 @@ const routes: Routes = [
         loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
       }
   ]
-  },
-  
-  {
-    path: 'generar-donacion',
-    loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
-  },
+  },  
   {
     path: 'campaign',
     children:[
@@ -70,31 +61,43 @@ const routes: Routes = [
         loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
       },
       {
-        path: ':detallecampaign',
+        path: 'editarcampaign/:id',
+        loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+      },
+      {
+        path: 'detallecampaign/:id',
         loadChildren: () => import('./campaign/detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule)
+      }, 
+      {
+        path: 'generar-campaign',
+        loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule)
       }
-  ]
-  },  
+    ]
+  },
+
   {
-    path: 'campaignid',
+    path: 'donaciones',
     children:[
       {
         path:'',
-        loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
+        loadChildren: () => import('./donaciones/donaciones.module').then( m => m.DonacionesPageModule)
+      },
+
+      {
+        path: 'editardonacion/:id',
+        loadChildren: () => import('./donaciones/editar-donacion/editar-donacion.module').then( m => m.EditarDonacionPageModule)
       },
       {
-        path: ':campaignId',
-        loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+        path: 'detalledonacion/:id',
+        loadChildren: () => import('./donaciones/detalle-donacion/detalle-donacion.module').then( m => m.DetalleDonacionPageModule)
+      },
+      {
+        path: 'generar-donacion',
+        loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
       }
-  ]
+    ]
   },
-     
-  
 
-  {
-    path: 'generar-campaign',
-    loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule)
-  },
   {
     path: 'distribucion',
     loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)

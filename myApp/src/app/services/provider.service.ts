@@ -13,6 +13,10 @@ export class ProviderService {
     const path= this.api;
     return this.http.get(path);
   }
+  getPoviderId(id: string){ 
+    return this.http.get<any>(this.api+id);
+
+  }
 
 
 }

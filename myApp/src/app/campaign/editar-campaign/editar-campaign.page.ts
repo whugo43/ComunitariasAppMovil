@@ -19,12 +19,11 @@ export class EditarCampaignPage implements OnInit {
     name: '',
     description: '',
     contactName:'',
-    createdBy: ''
     }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
-      const detallecampaign = paramMap.get('campaignId')
+      const detallecampaign = paramMap.get('id')
       this.id = detallecampaign
       this.campaignservice.getCampaignsId(detallecampaign)
       .subscribe(
@@ -39,9 +38,6 @@ export class EditarCampaignPage implements OnInit {
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
     this.formData.append("description",this.formularios.description)  
-    this.formData.append("createdBy", this.formularios.createdBy) 
-    this.formData.append("photo",this.photo)
-   
     console.log("metodo update")
  
     this.campaignservice.updateCampaigns(this.formData,this.id).subscribe(
@@ -50,6 +46,7 @@ export class EditarCampaignPage implements OnInit {
 
     changeListener($event) : void {
       this.photo = $event.target.files[0];
+      this.formData.append("photo",this.photo)
        
     }
 

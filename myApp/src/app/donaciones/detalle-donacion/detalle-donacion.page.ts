@@ -48,7 +48,7 @@ export class DetalleDonacionPage implements OnInit {
       (error)=>{console.log(error);}
     );
 
-    this.centroAcopioservice.getCEntroAcopioId(idcentroacopio)
+    this.centroAcopioservice.getCentroAcopioId(idcentroacopio)
     .subscribe(
       (data)=>{this.centroacopio=data},
       (error)=>{console.log(error);}

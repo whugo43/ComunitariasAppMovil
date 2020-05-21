@@ -25,12 +25,21 @@ export class CentroAcopioService {
     return this.http.post(path,centroAcopio)
   }
 
-  getCEntroAcopioId(id: string){ 
+  getCentroAcopioId(id: string){ 
     return this.http.get<any>(this.api+id);
   }
 
   deleteCentroAcopio(id: string){
-    const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    const path=`${this.api}${id}`;
+    console.log(path);
+    return this.http.delete(path).subscribe(
+      resp => console.log('eliminado'),
+      error => console.log('error occur, delete fail'));
+  }
+
+  updateCentroAcopio(centroAcopio:any,id:any){
+    const path= this.api+id+'/';
+    return this.http.patch(path,centroAcopio);
   }
 } 
+

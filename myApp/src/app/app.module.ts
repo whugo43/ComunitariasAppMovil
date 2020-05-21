@@ -13,17 +13,17 @@ import { AppComponent } from './app.component';
 import { from } from 'rxjs';
 import { DatePipe } from "@angular/common";
 
-import {Geolocation} from "@ionic-native/geolocation/ngx"
-import {CategoriaService} from './services/categoria.service';
-import {DonacionesService} from './services/donaciones.service';
-import {CampaignService} from './services/campaign.service';
-import {ProviderService} from './services/provider.service';
-import {CentroAcopioService} from './services/centro-acopio.service';
+import { Geolocation } from "@ionic-native/geolocation/ngx"
+import { CategoriaService } from './services/categoria.service';
+import { DonacionesService } from './services/donaciones.service';
+import { CampaignService } from './services/campaign.service';
+import { ProviderService } from './services/provider.service';
+import { CentroAcopioService } from './services/centro-acopio.service';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
   providers: [
     StatusBar,
     SplashScreen,
@@ -35,8 +35,8 @@ import {CentroAcopioService} from './services/centro-acopio.service';
     CampaignService,
     ProviderService,
     CentroAcopioService
-  ],
+    ],
 
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker, Popup, Marker } from "leaflet"
 import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { ActivatedRoute, Router } from "@angular/router"
-import {CentroAcopioClass } from '../centro-acopio-class'
-import {CentroAcopioService} from '../../services/centro-acopio.service'
+import { CentroAcopioClass } from '../centro-acopio-class'
+import { CentroAcopioService } from '../../services/centro-acopio.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
@@ -14,24 +14,25 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 export class UbicacionPage implements OnInit {
 
   map: Map;
-  public lat_ac: number=0;
-  public long_ac: number=0;
+  public lat_ac: number = 0;
+  public long_ac: number = 0;
   public nombre: string = '';
   public direccion: string = '';
   public lat_pa: number;
   public lng_pa: number;
-  public centroAcopio_save:CentroAcopioClass=new CentroAcopioClass();
+  public centroAcopio_save: CentroAcopioClass = new CentroAcopioClass();
   public band: number = 0;
   public markPoint: Marker;
 
-  public lat_enviar:number=0;
-  public lng_enviar:number=0;
-  formData= new FormData();
-
+  public lat_enviar: number = 0;
+  public lng_enviar: number = 0;
+  formData = new FormData();
+  private accionEditar: number = 0;
+  private centroAcopioId: any;
 
   constructor(public geolocation: Geolocation,
-    public activateRoute: ActivatedRoute, public route: Router,private conexionApi: CentroAcopioService, private formBuilder:
-    FormBuilder) {
+    public activateRoute: ActivatedRoute, public route: Router, private conexionApi: CentroAcopioService, private formBuilder:
+      FormBuilder) {
     this.obtenerUbicacionActual();
     this.recibiendoDatos();
   }
@@ -40,27 +41,44 @@ export class UbicacionPage implements OnInit {
     this.activateRoute.queryParamMap.subscribe((data) => {
       this.nombre = data.get('nombre');
       this.direccion = data.get('direccion');
+      if (data.get('accionEditar')=="1") {
+        this.accionEditar = 1;
+        this.centroAcopioId = data.get('id');
+        console.log('Entro en editar');
+      }
     })
 
   }
-  
-  public enviarDatos() {
-    this.formData.append('name',this.nombre);
-    this.formData.append('address',this.direccion);
-    this.formData.append('latitude',this.lat_enviar.toString());
-    this.formData.append('longitude',this.lng_enviar.toString());
-    this.formData.append('createdBy','mi');
 
-    console.log(this.formData);
-    this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
-      (newTask)=>{console.log(newTask);}
-    );
-    this.route.navigateByUrl('../centro-acopio');
+  public enviarDatos() {
+    this.formData.append('name', this.nombre);
+    this.formData.append('address', this.direccion);
+    if (this.accionEditar>0) {
+      this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {
+        this.formData.append('latitude', data['latitude']);
+        this.formData.append('longitude', data['longitude']);
+      });
+      this.formData.append('createdBy', 'mi');
+      this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId).subscribe((newTask) => {
+        { console.log(newTask) }
+      });
+      console.log('Entro en editar');
+      this.accionEditar=1;
+
+    } else {
+      this.formData.append('latitude', this.lat_enviar.toString());
+      this.formData.append('longitude', this.lng_enviar.toString());
+      this.formData.append('createdBy', 'mi');
+      this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
+        (newTask) => { console.log(newTask); }
+      );
+    }
+
     this.route.navigate(['../centro-acopio']);
   }
 
   check_ubicacion() {
-    return this.lng_enviar + this.lat_enviar ==0;
+    return this.lng_enviar + this.lat_enviar == 0;
   }
 
   ionViewDidEnter() {
@@ -86,11 +104,12 @@ export class UbicacionPage implements OnInit {
     })
   }
 
+  /*Esta funcion solo añadira un marcador*/
   addMarker(e: any) {
     if (this.band == 0) {
       this.lat_pa = e.latlng.lat;
       this.lng_pa = e.latlng.lng;
-     
+
       this.band = 1;
     } else if (this.band == 1) {
       this.map.removeLayer(this.markPoint);
@@ -108,8 +127,8 @@ export class UbicacionPage implements OnInit {
     this.map.setView([e.latlng.lat, e.latlng.lng], 19);
 
     /*Añadiendo las coordenadas de latitud y longuitud para ser enviadas*/
-    this.lat_enviar=e.latlng.lat;
-    this.lng_enviar=e.latlng.lng;
+    this.lat_enviar = e.latlng.lat;
+    this.lng_enviar = e.latlng.lng;
   }
 
   ngOnInit() {

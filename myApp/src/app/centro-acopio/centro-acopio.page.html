@@ -7,16 +7,21 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let data of lista">
     <ion-grid>
       <ion-row>
-        <ion-col size="6">
-          <ion-label><b>id:</b>{{data.id}}</ion-label><br><br>
-        </ion-col>
+        <ion-col size='7'>Accion:</ion-col>
         <ion-col>
           <!--Esta es para poder editar un centro dee acopio ya registrado-->
-          <ion-button fill="outline" size='small' (click)='editar()' [routerLink]="['./centro-acopio-registro']">
+          <ion-button fill="outline" size='small' (click)='editar(data.id)' [routerLink]="['./centro-acopio-registro']">
             <ion-icon name="create"></ion-icon>
           </ion-button>
 
@@ -30,13 +35,10 @@
       <ion-row>
         <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
       </ion-row>
+
       <ion-row>
-        <ion-label><b>Ubicacion:</b>{{data.address}}</ion-label><br><br>
+        <ion-label><b>Direccion:</b>{{data.address}}</ion-label><br><br>
       </ion-row>
-      <ion-row>
-        <ion-label><b>Latitud:</b>{{data.latitude}}</ion-label><br><br>
-      </ion-row>
-      <ion-label><b>Longuitud:</b>{{data.longitude}}</ion-label><br><br>
     </ion-grid>
   </ion-card>
 

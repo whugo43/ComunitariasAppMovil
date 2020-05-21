@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'
+import { ActivatedRoute,Router } from '@angular/router'
 import { CentroAcopioService } from "../services/centro-acopio.service"
 import { AlertController } from '@ionic/angular';
-
 
 @Component({
   selector: 'app-centro-acopio',
@@ -13,17 +12,21 @@ export class CentroAcopioPage implements OnInit {
   public indice: number = 0;
   public lista: any[] = [];
   public accionEditar: boolean = false;
-  public seleccionado: any;
+  public seleccionado: string='';
+  public centroAcopio:any[]=[];
 
   constructor(public activateRoute: ActivatedRoute, 
-    private conexionApi: CentroAcopioService,private alertController:AlertController) {
+    private conexionApi: CentroAcopioService,private alertController:AlertController,private router:Router) {
     this.recibiendoDatosApi();
   }
+
   doRefresh(event:any) {
+    console.log('Begin async operation');
+
     setTimeout(() => {
-      this.ngOnInit();
-      event.target.complete();   
-    }, 200);
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
 
   checklist() {
@@ -44,19 +47,20 @@ export class CentroAcopioPage implements OnInit {
   }
 
   async presentAlertConfirm(id:any) {
-    const alert = await this.alertController.create({
-      header: 'Confirm!',
-      message: 'Message <strong>text</strong>!!!',
+    this.obtenerNombre(id);
+    let alert = await this.alertController.create({
+      header: 'Confirmación!',
+      message: '<strong>Esta seguro que desea eliminar: '+this.seleccionado+'</strong>!!!',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Okay',
+          text: 'Eliminar',
           handler: () => {
             console.log('Confirm Okay');
             console.log(id);
@@ -65,24 +69,39 @@ export class CentroAcopioPage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   }
 
-  public eliminar(){
-
-  }
-
-  public editar(id: string) {
-    this.accionEditar = true;
-    this.seleccionado = this.bucarid(id);
-  }
-
-  public bucarid(id: string) {
-    this.lista.forEach(data => {
-      if (data.id == id) {
-        this.seleccionado = data;
+  obtenerNombre(id:any){
+    this.lista.forEach(data=>{
+      if(data['id']==id){
+        this.seleccionado=data['name'].toString();
+        return;
       }
     });
   }
+
+  obtenerCentroAcopio(id:any){
+    this.lista.forEach(data=>{
+      if(data['id']==id){
+        this.centroAcopio=data;
+        return;
+      }
+    });
+  }
+
+  cambiarUbicacion(id:any){
+    this.accionEditar=true;
+  }
+
+  editar(id:any){
+    this.obtenerCentroAcopio(id);
+    this.router.navigate(['./centro-acopio/centro-acopio-registro'], {
+      queryParams: {
+        centroAcopioId:id,
+        editar:'1',
+      }
+    })
+  }
+
 }

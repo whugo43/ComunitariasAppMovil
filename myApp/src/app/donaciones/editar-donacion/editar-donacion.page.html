@@ -13,7 +13,7 @@
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label>Proveedor</ion-label>
-        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.proveedor' name='proveedor' required >
+        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.proveedor' value="{{donaciones.provider}}" name='proveedor' required >
           <ng-container *ngFor="let provider of providers" >
             <ion-select-option  value="{{provider.id}}">{{provider.name}}</ion-select-option>
            </ng-container>           
@@ -22,7 +22,7 @@
 
       <ion-item>
         <ion-label>Categorias</ion-label>
-        <ion-select placeholder="Seleccione uno"   required [(ngModel)]='formularios.categoria' name='categoria'>
+        <ion-select placeholder="Seleccione uno"   value="{{donaciones.category}}" [(ngModel)]='formularios.categoria' required  name='categoria'>
           <ng-container  *ngFor="let categoria of categorias" >
             <ion-select-option  value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
            </ng-container>           
@@ -31,10 +31,9 @@
 
       <ion-item>
         <ion-label>Centro de Acopio</ion-label>
-        <ion-select placeholder="Seleccione uno" selectedVal="2" [(ngModel)]='formularios.centroacopio' name="centroacopio">
+        <ion-select placeholder="Seleccione uno" value="{{donaciones.collectionCenter}}" [(ngModel)]='formularios.centroacopio' name="centroacopio">
           <ng-container *ngFor="let centrosAcopio of centrosAcopios" >
-            <ion-select-option *ngIf="centrosAcopio.id == donaciones.collectionCenter"  value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
-          
+            <ion-select-option  value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>  
           </ng-container>           
         </ion-select>
       </ion-item>

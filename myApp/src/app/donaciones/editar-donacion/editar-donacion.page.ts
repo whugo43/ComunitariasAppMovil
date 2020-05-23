@@ -30,24 +30,26 @@ export class EditarDonacionPage implements OnInit {
     ExpirationDate:'',
     createdBy: ''
     }
+  
 
   constructor(private datePipe: DatePipe,
               private activateRoute: ActivatedRoute,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
-              public centroAcopioservice: CentroAcopioService) { }
+              public centroAcopioservice: CentroAcopioService) { 
+                this.activateRoute.paramMap.subscribe(paramMap => {
+                  const donaciones = paramMap.get('id')
+                  this.id = donaciones
+                  this.donacionesService.getDonacionesId(donaciones)
+                  .subscribe(
+                  (data)=>{this.donaciones=data},
+                  (error)=>{console.log(error);}
+                  )
+                });  
+              }
 
-  ngOnInit() {
-    this.activateRoute.paramMap.subscribe(paramMap => {
-      const donaciones = paramMap.get('id')
-      this.id = donaciones
-      this.donacionesService.getDonacionesId(donaciones)
-      .subscribe(
-      (data)=>{this.donaciones=data},
-      (error)=>{console.log(error);}
-      )
-    });        
+  ngOnInit() {      
 
     this.categoriaservice.getCategorias()
     .subscribe(

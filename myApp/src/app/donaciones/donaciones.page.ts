@@ -35,12 +35,11 @@ export class DonacionesPage implements OnInit {
     console.log(this.categoria)
   }
 
-
   viewprovider(provider:string){
  
   }  
 
-  deleteCampaign(id: string){
+  deleteDonacion(id: string){
     this.donacionesService.deleteDonaciones(id).
     subscribe(
       (data)=>{console.log(data)},
@@ -49,7 +48,7 @@ export class DonacionesPage implements OnInit {
     this.ngOnInit();    
   }
 
-  deleteUpdateCampaign(id: string){
+  deleteUpdateDonacion(id: string){
     this.donacionesService.updateDonaciones0(id).
     subscribe(
       (data)=>{console.log(data)},

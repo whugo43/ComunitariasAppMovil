@@ -22,15 +22,15 @@
       refreshingText="Refreshing...">
            </ion-refresher-content>
   </ion-refresher>
-  <ng-container *ngFor="let categoria of categorias; let index= i">
-  <ion-card  *ngIf="categoria.state == 1">
+  <ng-container >
+  <ion-card  *ngFor="let categoria of categorias; let index= i">
     <ion-item>
       <ion-label>{{categoria.name}}</ion-label>
 
       <ion-button fill="outline" slot="end" [routerLink]="['/categoria',categoria.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
-      <ion-button fill="outline" slot="end" (click)="deleteUpdateCategoria(categoria.id)">
+      <ion-button fill="outline" slot="end" (click)="deleteCategoria(categoria.id)">
       <ion-icon name="trash">
       </ion-icon></ion-button>
 

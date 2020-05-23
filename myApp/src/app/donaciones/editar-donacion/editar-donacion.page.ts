@@ -77,7 +77,10 @@ export class EditarDonacionPage implements OnInit {
       console.log(this.formularios.BeginDate)
     }
     
-    this.formData.append("expirationDate", this.formularios.ExpirationDate)
+    if(this.formularios.ExpirationDate.length>0){
+      this.formData.append('expirationDate',this.datePipe.transform(this.formularios.ExpirationDate,"yyyy-MM-dd"))
+    }
+    
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)

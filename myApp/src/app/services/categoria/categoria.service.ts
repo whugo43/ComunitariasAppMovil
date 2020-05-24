@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-import {Categoria} from '../interfaces/categoria';
+import {Categoria} from '../../interfaces/categoria';
 import { $$ } from 'protractor';
 
 @Injectable({
@@ -30,7 +30,6 @@ export class CategoriaService {
 
   updateCategorias(categoria,id: string){
     const path= this.api+id+'/';
-    
     return this.http.patch(path,categoria)
   }
   

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import {Campaign} from '../interfaces/campaign';
+import {Campaign} from '../../interfaces/campaign';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Injectable({

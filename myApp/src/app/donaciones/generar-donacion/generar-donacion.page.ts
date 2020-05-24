@@ -58,15 +58,19 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("description",this.formularios.description) 
     this.formData.append("photo",this.photo) 
     if(this.formularios.BeginDate.length>0){
-      this.formData.append('beginDate',this.formularios.BeginDate)
+      this.formData.append('beginDate',this.datePipe.transform(this.formularios.BeginDate,"yyyy-MM-dd"))
+      
     }
     else{
-    const fecha= new Date()
-    const fechastr =this.datePipe.transform(fecha,"yyyy-MM-ddTHH:mm:ssZ")
-    this.formData.append('beginDate',fechastr)
+      const fecha= new Date()
+      const fechastr =this.datePipe.transform(fecha,"yyyy-MM-dd")
+      this.formData.append('beginDate',fechastr)
+    }
+
+    if(this.formularios.ExpirationDate.length>0){
+      this.formData.append('expirationDate',this.datePipe.transform(this.formularios.ExpirationDate,"yyyy-MM-dd"))
     }
     
-    this.formData.append("expirationDate", this.formularios.ExpirationDate)
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)

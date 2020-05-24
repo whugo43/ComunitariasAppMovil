@@ -30,24 +30,26 @@ export class EditarDonacionPage implements OnInit {
     ExpirationDate:'',
     createdBy: ''
     }
+  
 
   constructor(private datePipe: DatePipe,
               private activateRoute: ActivatedRoute,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
-              public centroAcopioservice: CentroAcopioService) { }
+              public centroAcopioservice: CentroAcopioService) { 
+                this.activateRoute.paramMap.subscribe(paramMap => {
+                  const donaciones = paramMap.get('id')
+                  this.id = donaciones
+                  this.donacionesService.getDonacionesId(donaciones)
+                  .subscribe(
+                  (data)=>{this.donaciones=data},
+                  (error)=>{console.log(error);}
+                  )
+                });  
+              }
 
-  ngOnInit() {
-    this.activateRoute.paramMap.subscribe(paramMap => {
-      const donaciones = paramMap.get('id')
-      this.id = donaciones
-      this.donacionesService.getDonacionesId(donaciones)
-      .subscribe(
-      (data)=>{this.donaciones=data},
-      (error)=>{console.log(error);}
-      )
-    });        
+  ngOnInit() {      
 
     this.categoriaservice.getCategorias()
     .subscribe(
@@ -77,7 +79,10 @@ export class EditarDonacionPage implements OnInit {
       console.log(this.formularios.BeginDate)
     }
     
-    this.formData.append("expirationDate", this.formularios.ExpirationDate)
+    if(this.formularios.ExpirationDate.length>0){
+      this.formData.append('expirationDate',this.datePipe.transform(this.formularios.ExpirationDate,"yyyy-MM-dd"))
+    }
+    
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)

@@ -101,7 +101,11 @@ const routes: Routes = [
   {
     path: 'distribucion',
     loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)
+  },  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
+
 ];
 @NgModule({
   imports: [

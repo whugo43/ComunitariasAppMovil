@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+      <ion-item>
+        <ion-label>Categorias</ion-label>
+        <ion-select placeholder="Seleccione uno"  name='categoria'  value="1">
+          <ng-container   >
+            <ion-select-option  value="1">d</ion-select-option>
+            <ion-select-option  value="2">b</ion-select-option>
+            <ion-select-option   value="3">c</ion-select-option>
+            
+           </ng-container>           
+        </ion-select>
+      </ion-item>
+
+            <ion-item>
+        <ion-label>Categorias</ion-label>
+        <ion-select placeholder="Seleccione uno"   required  name='categoria'  value="4">
+          <ng-container  *ngFor="let categoria of categorias" >
+            <ion-select-option  value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
+           </ng-container>           
+        </ion-select>
+      </ion-item>
+</ion-content>

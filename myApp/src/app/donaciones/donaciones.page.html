@@ -40,8 +40,8 @@
       refreshingText="Refreshing...">
     </ion-refresher-content>
   </ion-refresher>
-  <ng-container *ngFor="let donacion of donaciones">
-  <ion-card *ngIf="donacion.state == 1" >
+  <ng-container>
+  <ion-card  *ngFor="let donacion of donaciones">
   <ion-item>
       <ion-label [routerLink]="['detalledonacion',donacion.id]">{{donacion.provider}}</ion-label>
       
@@ -49,7 +49,7 @@
         <ion-icon name="create"></ion-icon >
       </ion-button>
 
-      <ion-button fill="outline" slot="end" (click)="deleteUpdateCampaign(donacion.id)">
+      <ion-button fill="outline" slot="end" (click)="deleteDonacion(donacion.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

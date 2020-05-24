@@ -4,7 +4,6 @@ export interface Campaign {
     name:string;
     contactName: string;
     description:string;
-    state?:string;
     createdAt?:string;
     createdBy:string;
 }

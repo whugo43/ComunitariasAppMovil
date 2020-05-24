@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { Router } from "@angular/router"
+import {DistribucionService } from '../../services/distribucion/distribucion.service'
 
 @Component({
   selector: 'app-registro-distribucion',
@@ -11,7 +12,8 @@ export class RegistroDistribucionPage implements OnInit {
   private registrationForm: FormGroup;
   public group: any = [];
   public voluntarios: any = [];
-  public seleccion:string;
+  public seleccion: string;
+  private accionEditar:number=0;
 
   compareWithFn = (o1, o2) => {
     return o1 && o2 ? o1.id === o2.id : o1 === o2;
@@ -58,7 +60,7 @@ export class RegistroDistribucionPage implements OnInit {
   }
 
   constructor(private formBuilder:
-    FormBuilder, private route: Router) {
+    FormBuilder, private route: Router, private conexionApi:DistribucionService) {
     this.registrationForm = this.formBuilder.group({
       lugar_partida: ['', [Validators.required, Validators.maxLength(10)]],
       lugar_destino: ['', [Validators.required, Validators.maxLength(100)]],
@@ -68,7 +70,7 @@ export class RegistroDistribucionPage implements OnInit {
       }),
       descripcion: ['', [Validators.required, Validators.maxLength(200)]]
     });
-    this.seleccion=this.registrationForm.get('encargado.tipo_seleccion_encargado').value;
+    this.seleccion = this.registrationForm.get('encargado.tipo_seleccion_encargado').value;
   }
 
 
@@ -137,16 +139,25 @@ export class RegistroDistribucionPage implements OnInit {
 
 
   public enviarDatos() {
-    console.log(this.registrationForm.get('lugar_partida').value)
-    this.route.navigate(['../distribucion'], {
-      queryParams: {
-        lugar_partida: this.registrationForm.get('lugar_partida').value,
-        lugar_destino: this.registrationForm.get('lugar_destino').value,
-        encargado_tipo: this.registrationForm.get('encargado.tipo_seleccion_encargado').value,
-        encargado_nombre: this.registrationForm.get('encargado.nombre').value,
-        informacion: this.registrationForm.get('descripcion').value,
-      }
-    });
+    const formData=new FormData();
+    formData.append('departureAddress',this.registrationForm.get('lugar_partida').value);
+    formData.append('destinationAddress', this.registrationForm.get('lugar_destino').value);
+    formData.append('manager_type', this.registrationForm.get('encargado.tipo_seleccion_encargado').value);
+    formData.append('information', this.registrationForm.get('descripcion').value);
+    formData.append('createdBy', 'mi');
+    formData.append('user', this.registrationForm.get('encargado.nombre').value);
+
+    if (this.accionEditar > 0) {
+      /**
+      this.conexionApi.agregarDistribucion(formData).subscribe((newTask) => {
+        { console.log(newTask) }
+      });
+      this.accionEditar = 1;
+         */ 
+    } else {
+      this.conexionApi.agregarDistribucion(formData);
+    }
+    this.route.navigate(['../distribucion']);
   }
 
   ngOnInit() {

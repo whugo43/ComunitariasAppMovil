@@ -1,31 +1,54 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Detallenos información acerca de la distribución</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card  *ngFor ="let data of distribucion_registrada">
-     <!--Esta es para poder editar un centro dee acopio ya registrado-->
-     <ion-button fill="outline" size='small' (click)='editar(data.id)' [routerLink]="['./centro-acopio-registro']">
-      <ion-icon name="create"></ion-icon>
-    </ion-button>
+  <ion-card *ngFor="let data of distribucion_registrada">
+    <ion-grid>
+      <ion-row>
+        <ion-col size='7'>Accion:</ion-col>
+        <ion-col>
+          <!--Esta es para poder editar un centro dee acopio ya registrado-->
+          <ion-button fill="outline" size='small' (click)='editar(data.id)' [routerLink]="['./centro-acopio-registro']">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
 
-    <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
-    <ion-button fill="outline" size='small' (click)="presentAlertConfirm(data.id)">
-      <ion-icon name="trash"></ion-icon>
-    </ion-button>
-    
-    <ion-label ><b>Lugar de partida:</b>{{data.lugar_partida}}</ion-label><br><br>
-    <ion-label><b>Lugar de origen:</b>{{data.lugar_destino}}</ion-label>
-    <ion-card>
-    <ion-label ><b>Encargado (tipo):</b>{{data.encargado.tipo_seleccion_encargado}}</ion-label><br><br>
-    <ion-label ><b>Encargado (nombre):</b>{{data.encargado.nombre}}</ion-label><br><br>
-  </ion-card>
-    <ion-label ><b>Informacion:</b>{{data.informacion}}</ion-label><br><br>
+          <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
+          <ion-button fill="outline" size='small' (click)="presentAlertConfirm(data.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
 
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-label><b>Lugar de partida:</b>{{data.departureAddress}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Lugar de origen:</b>{{data.destinationAddress}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Encargado (tipo):</b>{{data.manager_type}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Encargado (nombre):</b>{{data.user}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Informacion:</b>{{data.information}}</ion-label><br><br>
+      </ion-row>
+
+    </ion-grid>
   </ion-card>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="./registro-distribucion" routerDirection="root">
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="./registro-distribucion" routerDirection="root">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

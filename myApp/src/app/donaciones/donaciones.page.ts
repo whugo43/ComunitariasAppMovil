@@ -11,8 +11,7 @@ import {CentroAcopioService} from '../services/centro-acopio.service';
 })
 export class DonacionesPage implements OnInit {
   donaciones
-  categoria
-  proveedor
+  proveedores
   constructor(public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
@@ -23,17 +22,16 @@ export class DonacionesPage implements OnInit {
     .subscribe(
       (data)=>{this.donaciones=data},
       (error)=>{console.log(error);}
-      )
+      );
+    
+      this.providerservice.getPoviders()
+      .subscribe(
+      (data)=>{this.proveedores=data},
+      (error)=>{console.log(error)}
+      );
   }
   
-  viewcategoria(categoria:string){
-    this.categoriaservice.getCategoriaId(categoria)
-    .subscribe(
-    (data)=>{this.categoria=data},
-    (error)=>{console.log(error);}
-    )
-    console.log(this.categoria)
-  }
+
 
   viewprovider(provider:string){
  

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
 import {ActivatedRoute } from '@angular/router';
-import { DonacionesService } from '../../services/donaciones.service';
-import {CategoriaService} from '../../services/categoria.service';
-import {ProviderService} from '../../services/provider.service';
-import {CentroAcopioService} from '../../services/centro-acopio.service';
+import { DonacionesService } from '../../services/donaciones/donaciones.service';
+import {CategoriaService} from '../../services/categoria/categoria.service';
+import {ProviderService} from '../../services/provider/provider.service';
+import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
 
 
 @Component({

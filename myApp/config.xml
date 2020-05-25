@@ -3,8 +3,8 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <update>
-    <version>302048</version>
-    <url>http://127.0.0.1:8000/api/</url>
+        <version>302048</version>
+        <url>http://127.0.0.1:8000/api/</url>
     </update>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />

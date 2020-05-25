@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
-import {CategoriaService} from '../../services/categoria.service';
+import {CategoriaService} from '../../services/categoria/categoria.service';
 import {Categoria} from '../../interfaces/categoria';
 
 @Component({

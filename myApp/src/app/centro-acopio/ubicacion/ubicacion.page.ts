@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker, Popup, Marker } from "leaflet"
 import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { ActivatedRoute, Router } from "@angular/router"
-import { CentroAcopioClass } from '../centro-acopio-class'
-import { CentroAcopioService } from '../../services/centro-acopio.service'
+import { CentroAcopioClass } from '../../clases/centro-acopio-class'
+import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 
 @Component({
@@ -41,7 +41,7 @@ export class UbicacionPage implements OnInit {
     this.activateRoute.queryParamMap.subscribe((data) => {
       this.nombre = data.get('nombre');
       this.direccion = data.get('direccion');
-      if (data.get('accionEditar')=="1") {
+      if (data.get('accionEditar') == "1") {
         this.accionEditar = 1;
         this.centroAcopioId = data.get('id');
         console.log('Entro en editar');
@@ -53,22 +53,17 @@ export class UbicacionPage implements OnInit {
   public enviarDatos() {
     this.formData.append('name', this.nombre);
     this.formData.append('address', this.direccion);
-    if (this.accionEditar>0) {
-      this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {
-        this.formData.append('latitude', data['latitude']);
-        this.formData.append('longitude', data['longitude']);
-      });
-      this.formData.append('createdBy', 'mi');
+    this.formData.append('latitude', this.lat_enviar.toString());
+    this.formData.append('longitude', this.lng_enviar.toString());
+    this.formData.append('createdBy', 'mi');
+
+    if (this.accionEditar > 0) {
       this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId).subscribe((newTask) => {
         { console.log(newTask) }
       });
-      console.log('Entro en editar');
-      this.accionEditar=1;
+      this.accionEditar = 1;
 
     } else {
-      this.formData.append('latitude', this.lat_enviar.toString());
-      this.formData.append('longitude', this.lng_enviar.toString());
-      this.formData.append('createdBy', 'mi');
       this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
         (newTask) => { console.log(newTask); }
       );
@@ -86,10 +81,30 @@ export class UbicacionPage implements OnInit {
   }
 
   leafletMap() {
+    if (this.accionEditar > 0) {
+      this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {
+        this.lat_ac = data['latitude'];
+        this.long_ac = data['longitude'];
+      });
+
+    }
     this.map = new Map('mapId2').setView([this.lat_ac, this.long_ac], 16);
     tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
       attribution: 'edupala.com'
     }).addTo(this.map);
+    if (this.accionEditar > 0) {
+      this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {
+        this.markPoint = marker([data['latitude'], data['longitude']]);
+        this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + data['name'] + "</p>");
+
+        this.map.addLayer(this.markPoint);
+        this.lat_enviar=data['latitude'];
+        this.lng_enviar=data['longitude'];
+        this.map.setView([data['latitude'], data['longitude']], 19);
+        this.band = 1;
+      });
+
+    }
     this.map.on('click', (e) => { this.addMarker(e) });
   }
 
@@ -117,7 +132,6 @@ export class UbicacionPage implements OnInit {
       this.band = 2;
     } else if (this.band == 2) {
       this.map.removeLayer(this.markPoint);
-
       this.band = 1;
     }
     this.markPoint = marker([e.latlng.lat, e.latlng.lng]);

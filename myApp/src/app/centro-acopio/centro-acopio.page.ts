@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute,Router } from '@angular/router'
-import { CentroAcopioService } from "../services/centro-acopio.service"
+import { CentroAcopioService } from "../services/centro-acopio/centro-acopio.service"
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -25,6 +25,8 @@ export class CentroAcopioPage implements OnInit {
 
     setTimeout(() => {
       console.log('Async operation has ended');
+      this.lista=[];
+      this.recibiendoDatosApi();
       event.target.complete();
     }, 2000);
   }

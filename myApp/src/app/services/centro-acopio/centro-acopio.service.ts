@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { CentroAcopioClass } from '../centro-acopio/centro-acopio-class';
+import { CentroAcopioClass } from '../../clases/centro-acopio-class';
 
 
 @Injectable({

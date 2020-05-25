@@ -14,11 +14,11 @@ import { from } from 'rxjs';
 import { DatePipe } from "@angular/common";
 
 import { Geolocation } from "@ionic-native/geolocation/ngx"
-import { CategoriaService } from './services/categoria.service';
-import { DonacionesService } from './services/donaciones.service';
-import { CampaignService } from './services/campaign.service';
-import { ProviderService } from './services/provider.service';
-import { CentroAcopioService } from './services/centro-acopio.service';
+import { CategoriaService } from './services/categoria/categoria.service';
+import { DonacionesService } from './services/donaciones/donaciones.service';
+import { CampaignService } from './services/campaign/campaign.service';
+import { ProviderService } from './services/provider/provider.service';
+import { CentroAcopioService } from './services/centro-acopio/centro-acopio.service';
 
 @NgModule({
   declarations: [AppComponent],

@@ -10,6 +10,8 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="registrationForm">
+    <ion-button color="success" slot='end' (click)='enviarDatosOk()' 
+    [hidden]='!verificarEdicion()'>Ok</ion-button>
     <ion-card>
       <ion-item>
         <ion-label position="floating">Nombre</ion-label>

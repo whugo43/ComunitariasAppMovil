@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detallenos información acerca de la distribución</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registrationForm" (ngSubmit)="submit()">
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Lugar de partida</ion-label>
+        <ion-input autocapitalize inputmode="text" formControlName="lugar_partida"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Lugar de destino</ion-label>
+        <ion-input inputmode="text" formControlName="lugar_destino"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label>Tipo de encargado</ion-label>
+        <ion-select interface="action-sheet" formControlName="tipo_seleccion_encargado" placeholder="Seleccione una opción">
+          <ion-select-option value="Grupos">Grupos</ion-select-option>
+          <ion-select-option value="Voluntarios">Voluntarios</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item [hidden]="checkt()">
+        <ion-label>Encargado {{registrationForm.tipo_seleccion_encargado}}</ion-label>
+        <ion-select interface="action-sheet" formControlName="encargado" placeholder="Seleccione una opción">
+          <ion-select-option value='p1'>Persona 1</ion-select-option>
+          <ion-select-option value='p2'>Persona 2</ion-select-option>
+          <ion-select-option value='p3'>Persona 3</ion-select-option>
+          <ion-select-option value='p4'>Persona 4</ion-select-option>
+          <ion-select-option value='p5'>Persona 5</ion-select-option>
+          <ion-select-option value='p6'>Persona 6</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Descripción</ion-label>
+        <ion-textarea inputmode="text" formControlName="descripcion" placeholder="Ingrese el contenido de las donaciones...">
+        </ion-textarea>
+      </ion-item>
+    </ion-card>
+
+
+    <ion-button [disabled]="isinValid()" type="submit" expand="block">Enviar <ion-icon slot="end"
+        name="create">
+      </ion-icon>
+    </ion-button>
+  </form>
+</ion-content>

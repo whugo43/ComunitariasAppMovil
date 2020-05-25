@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Centros de Acopios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registrationForm">
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Nombre</ion-label>
+        <ion-input autocapitalize inputmode="text" formControlName="nombre"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Direccion</ion-label>
+        <ion-input inputmode="text" formControlName="direccion"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-button [disabled]="check()" [routerLink]="['./ubicacion']">
+      Ingresar ubicacion en el mapa <ion-icon slot="end" name="create"></ion-icon>
+    </ion-button>
+  </form>
+  <link href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" rel="stylesheet"></ion-content>

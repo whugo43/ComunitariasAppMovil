@@ -23,6 +23,6 @@ export class Distribucion {
     }
 
 }
-export interface Centro_Acopio {
+export interface Distribucion {
     Categorias: Array<Distribucion>
 }

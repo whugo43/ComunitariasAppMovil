@@ -27,22 +27,16 @@
       <ion-item>
         <ion-label>Tipo de encargado</ion-label>
         <ion-select interface="action-sheet" formControlName="tipo_seleccion_encargado"
-          placeholder="Seleccione una opción">
-          <ion-select-option value="Grupos">Grupos</ion-select-option>
-          <ion-select-option value="Voluntarios">Voluntarios</ion-select-option>
+          placeholder="Seleccione una opción" (ionChange)="llenarLista($event.detail['value'])">
+          <ion-select-option  value="Grupos">Grupos</ion-select-option>
+          <ion-select-option  value="Voluntarios">Voluntarios</ion-select-option>
         </ion-select>
       </ion-item>
 
-      <ion-item [hidden]="checkt()">
+      <ion-item [hidden]="checktEncargadoTipo()">
         <ion-label>Encargado {{seleccion}}</ion-label>
-        <ion-select interface="action-sheet" formControlName="nombre" placeholder="Seleccione una opción">
-          <ion-select-option value='Persona1'>Persona 1</ion-select-option>
-          <ion-select-option value='Persona2'>Persona 2</ion-select-option>
-          <ion-select-option value='Persona3'>Persona 3</ion-select-option>
-          <ion-select-option value='Persona4'>Persona 4</ion-select-option>
-          <ion-select-option value='Persona5'>Persona 5</ion-select-option>
-          <ion-select-option value='Persona6'>Persona 6</ion-select-option>
-
+        <ion-select interface="action-sheet" formControlName="nombre" placeholder="Seleccione una opción" (ionChange)="llen($event.detail['value'])" >
+          <ion-select-option *ngFor="let user of lista" value="{{user.user}}">{{user.name}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>
@@ -58,7 +52,7 @@
 
 
     <ion-button [disabled]="isinValid()"
-     type="submit" expand="block" (click)="enviarDatos()">Enviar <ion-icon slot="end" name="create">
+      expand="block" (click)="enviarDatos()">Enviar <ion-icon slot="end">
       </ion-icon>
     </ion-button>
   </form>

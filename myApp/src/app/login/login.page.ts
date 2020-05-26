@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CategoriaService} from '../services/categoria/categoria.service';
+import {LoginService} from '../services/login/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,16 +7,35 @@ import {CategoriaService} from '../services/categoria/categoria.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  categorias;
+  Logins 
+  formularios={
+    Username: '',
+    Password: '',
+    }
 
-  constructor( public categoriaservice: CategoriaService,) { }
+  constructor( public loginService: LoginService) { }
 
   ngOnInit() {  
-    this.categoriaservice.getCategorias()
+  }
+
+  validarlogin(){
+    
+    const log={
+    username: this.formularios.Username,
+    password:this.formularios.Password
+    };
+    console.log(log)
+    
+    let Login
+
+    this.loginService.getLogins()
     .subscribe(
-      (data)=>{this.categorias=data},
-      (error)=>{console.log(error)}
-      );
+      (data)=>{Login=data},
+      (error)=>{console.log(error);}
+    );
+
+    console.log(Login)
+
   }
 
 }

@@ -19,6 +19,7 @@ import { DonacionesService } from './services/donaciones/donaciones.service';
 import { CampaignService } from './services/campaign/campaign.service';
 import { ProviderService } from './services/provider/provider.service';
 import { CentroAcopioService } from './services/centro-acopio/centro-acopio.service';
+import { LoginService } from './services/login/login.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +35,8 @@ import { CentroAcopioService } from './services/centro-acopio/centro-acopio.serv
     Geolocation,
     CampaignService,
     ProviderService,
-    CentroAcopioService
+    CentroAcopioService,
+    LoginService
     ],
 
   bootstrap: [AppComponent]

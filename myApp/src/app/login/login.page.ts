@@ -17,7 +17,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {  
   }
 
-  postCategorias(){
+  validarlogin(){
     const Categoria={
     name: this.formularios.Username,
     description:this.formularios.Password

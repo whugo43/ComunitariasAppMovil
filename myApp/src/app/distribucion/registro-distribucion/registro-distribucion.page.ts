@@ -4,6 +4,9 @@ import { Router } from "@angular/router"
 import { DistribucionService } from '../../services/distribucion/distribucion.service'
 import { VoluntariosService } from '../../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
+import { ActivatedRoute } from '@angular/router';
+import { Voluntario } from 'src/app/clases/voluntario';
+import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-registro-distribucion',
@@ -18,6 +21,7 @@ export class RegistroDistribucionPage implements OnInit {
   private accionEditar: number = 0;
   private userId: number;
   private formData = new FormData();
+  private distribucionId:string;
 
   public errorMessage = {
     lugar_partida: [
@@ -44,8 +48,9 @@ export class RegistroDistribucionPage implements OnInit {
   }
 
   constructor(private formBuilder:
-    FormBuilder, private route: Router, private conexionApi: DistribucionService,
-    private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService) {
+    FormBuilder, private activateRoute: ActivatedRoute, private conexionApi: DistribucionService,
+    private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService,
+    private router: Router) {
     this.registrationForm = this.formBuilder.group({
       lugar_partida: ['', [Validators.required, Validators.maxLength(100)]],
       lugar_destino: ['', [Validators.required, Validators.maxLength(100)]],
@@ -55,10 +60,54 @@ export class RegistroDistribucionPage implements OnInit {
       }),
       descripcion: ['', [Validators.required, Validators.maxLength(200)]]
     });
-    this.seleccion = this.registrationForm.get('encargado.tipo_seleccion_encargado').value;
-
+    this.llenarParametrosEdicion();
   }
 
+  llenarParametrosEdicion() {
+    this.activateRoute.queryParamMap.subscribe((data) => {
+      if (data.get('accionEditar') == '1') {
+        this.accionEditar = 1;
+        this.distribucionId=data.get('id');
+        this.conexionApi.getDistribucionId(this.distribucionId).subscribe(distribuciones => {
+          let tipo = '';
+          let nombref = '';
+          if (distribuciones.manager_type == '1') {
+            tipo = 'Voluntarios';
+            this.conexionVoluntarios.getVoluntarios().subscribe(voluntarios => {
+              voluntarios.forEach(voluntario => {
+                console.log(voluntario.user.toString() + '  ' + distribuciones.user.toString());
+                if (voluntario.user.toString() == distribuciones.user.toString()) {
+                  nombref = voluntario.firstName;
+                  return;
+                }
+              });
+            });
+          } else {
+            tipo = 'Grupos';
+            this.conexionGrupos.getGrupo().subscribe(grupos => {
+              grupos.forEach(grupo => {
+                if (grupo.user.toString() == distribuciones.user.toString()) {
+                  nombref = grupo.name;
+                  return;
+                }
+              });
+            });
+          }
+          console.log(nombref);
+          this.seleccion = tipo;
+          this.registrationForm.setValue({
+            lugar_partida: distribuciones.departureAddress,
+            lugar_destino: distribuciones.destinationAddress,
+            encargado: {
+              tipo_seleccion_encargado: tipo,
+              nombre: nombref,
+            },
+            descripcion: distribuciones.information,
+          });
+        });
+      }
+    });
+  }
 
   public submit() {
     console.log(this.registrationForm.value);
@@ -121,25 +170,20 @@ export class RegistroDistribucionPage implements OnInit {
     this.formData.append('information', this.registrationForm.get('descripcion').value);
     this.formData.append('createdBy', 'mi');
     this.lista.forEach(dato => {
-
-      if (
-        dato['user'] == this.userId) {
+      if (dato['user'] == this.userId) {
         this.formData.append('user', dato['user']);
       }
     });
-
     if (this.accionEditar > 0) {
-      /**
-      this.conexionApi.agregarDistribucion(formData).subscribe((newTask) => {
-        { console.log(newTask) }
+      this.conexionApi.actualizarDistribucion(this.formData,this.distribucionId).subscribe(msm=>{
+        console.log(msm);
       });
-      this.accionEditar = 1;
-         */
+      this.accionEditar = 0;
     } else {
       console.log(this.formData);
       this.conexionApi.agregarDistribucion(this.formData);
     }
-    this.route.navigate(['../distribucion']);
+    this.router.navigate(['../distribucion']);
   }
 
   ngOnInit() {

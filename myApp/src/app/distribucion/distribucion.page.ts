@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { DistribucionService } from '../services/distribucion/distribucion.service';
 import { AlertController } from '@ionic/angular';
 import { VoluntariosService } from '../services/voluntarios/voluntarios.service'
@@ -20,7 +20,7 @@ export class DistribucionPage implements OnInit {
   private VOLUNTARIO: string = '1';
   private GRUPO: string = '2';
 
-  constructor(private activateRoute: ActivatedRoute, private conexionApi: DistribucionService
+  constructor(private activateRoute: Router, private conexionApi: DistribucionService
     , private alertController: AlertController, private conexionVoluntaio: VoluntariosService,
     private conexionGrupo: GrupoService) {
     this.recibiendoDatosApi();
@@ -90,8 +90,13 @@ export class DistribucionPage implements OnInit {
     });
   }
 
-  editar() {
-
+  editar(id:string) {
+    this.activateRoute.navigate(['./distribucion/registro-distribucion'], {
+      queryParams: {
+        accionEditar: "1",
+        id: id,
+      }
+    });
   }
 
   ngOnInit() {

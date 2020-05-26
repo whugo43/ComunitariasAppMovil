@@ -7,16 +7,21 @@ import {CategoriaService} from '../services/categoria/categoria.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  categorias;
+  formularios={
+    Username: '',
+    Password: '',
+    }
 
   constructor( public categoriaservice: CategoriaService,) { }
 
   ngOnInit() {  
-    this.categoriaservice.getCategorias()
-    .subscribe(
-      (data)=>{this.categorias=data},
-      (error)=>{console.log(error)}
-      );
+  }
+
+  postCategorias(){
+    const Categoria={
+    name: this.formularios.Username,
+    description:this.formularios.Password
+    };
   }
 
 }

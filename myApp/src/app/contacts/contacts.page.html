@@ -6,4 +6,13 @@
 
 <ion-content>
 
+<input type='file' (change)="readURL($event);" class="fileInput"/>
+<label for="file"><ion-icon name="images"></ion-icon> Images</label>
+
+<button ion-button icon-left (click)="removePic()" >
+        <ion-icon name="trash"></ion-icon>Remove
+      </button>
+
+<img id="blah" [src]="imageSrc || 'http://placehold.it/180'" alt="your image" />
+
 </ion-content>

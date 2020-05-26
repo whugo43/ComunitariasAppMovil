@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" (ngSubmit)="postDonaciones()">
+  <form #formulario="ngForm" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label>Proveedor</ion-label>
@@ -53,19 +53,24 @@
         <ion-datetime placeholder="Seleccionar fecha" display-timezone="utc" value='{{donaciones.expirationDate}}' displayFormat="YYYY-MM-DD" max="2050" [(ngModel)]='formularios.ExpirationDate' name='ExpirationDate'></ion-datetime>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Imagen</ion-label>
-        <ion-input color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
-        </ion-input>
+           <ion-item>
+        <input type='file' color="green" accept="image/*" name="photo" [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"/>
+        <ion-label for="file"><ion-icon name="images"></ion-icon> Imagen</ion-label>
+   
+        <ion-button ion-button icon-left (click)="removePic()" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
       </ion-item>
-      <ion-img src='{{donaciones.photo}}' alt="fvf"></ion-img> 
-      
-      
+
+      <ion-item>
+        <ion-img id="blah" *ngIf="imageSrc == null" src="{{donaciones.photo}}" alt="your image"></ion-img>
+        <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+      </ion-item> 
+        
     </ion-list>
     
-  
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/donaciones" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postDonaciones()" expand="block" routerLink="/donaciones" routerDirection="root">
       Guardar
       </ion-button>
     </div>

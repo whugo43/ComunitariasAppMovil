@@ -11,6 +11,7 @@ import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.se
   styleUrls: ['./generar-donacion.page.scss'],
 })
 export class GenerarDonacionPage implements OnInit {
+  imageSrc;
   donaciones;
   centrosAcopios;
   providers;
@@ -84,5 +85,21 @@ export class GenerarDonacionPage implements OnInit {
   changeListener($event) : void {
     this.photo = $event.target.files[0];
   }
+
+  readURL(event): void {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+        this.photo = event.target.files[0];
+        this.formData.append("photo",this.photo)
+
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+
+        reader.readAsDataURL(file);
+    }
+}
+removePic() {
+  this.imageSrc = null;
+}
 
 }

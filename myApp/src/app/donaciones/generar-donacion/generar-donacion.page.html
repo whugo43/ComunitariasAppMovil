@@ -48,10 +48,12 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Imagen</ion-label>
-        <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
-        </ion-input>
+        <ion-input type='file' accept="image/*" name="photo" required [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"></ion-input>
+        <ion-label for="file"><ion-icon name="images"></ion-icon> Images</ion-label>
       </ion-item> 
+      <ion-item *ngIf="imageSrc != null">
+      <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+      </ion-item>
 
       <ion-item>
         <ion-label position="floating">Creado por </ion-label>

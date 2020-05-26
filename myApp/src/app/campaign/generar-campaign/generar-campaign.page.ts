@@ -8,6 +8,7 @@ import {Campaign} from '../../interfaces/campaign';
   styleUrls: ['./generar-campaign.page.scss'],
 })
 export class GenerarCampaignPage implements OnInit {
+  imageSrc;
   photo: File;
   formularios={
     photo: '',
@@ -40,5 +41,20 @@ export class GenerarCampaignPage implements OnInit {
     changeListener($event) : void {
       this.photo = $event.target.files[0];
     }
+
+    readURL(event): void {
+      if (event.target.files && event.target.files[0]) {
+          const file = event.target.files[0];
+          this.photo = event.target.files[0];
+  
+          const reader = new FileReader();
+          reader.onload = e => this.imageSrc = reader.result;
+  
+          reader.readAsDataURL(file);
+      }
+  }
+  removePic() {
+    this.imageSrc = null;
+  }
 
 }

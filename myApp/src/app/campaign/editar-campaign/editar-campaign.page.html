@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" (ngSubmit)="postCampaign()">
+  <form #formulario="ngForm" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="floating">Campaña </ion-label>
@@ -27,15 +27,24 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="stacked">Imagen</ion-label>
-        <ion-input  color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'></ion-input>
-         
-      </ion-item> 
-      <ion-img src="{{campaign.photo}}"></ion-img>     
+        <input type='file' color="green" accept="image/*" name="photo" [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"/>
+        <ion-label for="file"><ion-icon name="images"></ion-icon> Imagen</ion-label>
+   
+        <ion-button ion-button icon-left (click)="removePic()" color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item>
+        <ion-img id="blah" *ngIf="imageSrc == null" src="{{campaign.photo}}" alt="your image"></ion-img>
+        <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+      </ion-item>
+
+      
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/campaign" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postCampaign()" expand="block" routerLink="/campaign" routerDirection="root">
       Guardar
       </ion-button>
     </div>

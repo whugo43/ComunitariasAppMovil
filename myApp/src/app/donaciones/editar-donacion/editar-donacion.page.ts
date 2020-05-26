@@ -13,6 +13,7 @@ import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.se
   styleUrls: ['./editar-donacion.page.scss'],
 })
 export class EditarDonacionPage implements OnInit {
+  imageSrc;
   id: string;
   donaciones=[];
   centrosAcopios;
@@ -95,6 +96,22 @@ export class EditarDonacionPage implements OnInit {
     this.photo = $event.target.files[0];
     this.formData.append("photo",this.photo) 
   }
+
+  readURL(event): void {
+    if (event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
+        this.photo = event.target.files[0];
+        this.formData.append("photo",this.photo)
+
+        const reader = new FileReader();
+        reader.onload = e => this.imageSrc = reader.result;
+
+        reader.readAsDataURL(file);
+    }
+}
+removePic() {
+  this.imageSrc = null;
+}
 
 
 }

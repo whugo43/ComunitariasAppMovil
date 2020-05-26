@@ -8,6 +8,7 @@ import {CampaignService} from '../../services/campaign/campaign.service';
   styleUrls: ['./editar-campaign.page.scss'],
 })
 export class EditarCampaignPage implements OnInit {
+  imageSrc;
 
   campaign=[];
   id: string;
@@ -49,5 +50,21 @@ export class EditarCampaignPage implements OnInit {
       this.formData.append("photo",this.photo)
        
     }
+
+    readURL(event): void {
+      if (event.target.files && event.target.files[0]) {
+          const file = event.target.files[0];
+          this.photo = event.target.files[0];
+          this.formData.append("photo",this.photo)
+  
+          const reader = new FileReader();
+          reader.onload = e => this.imageSrc = reader.result;
+  
+          reader.readAsDataURL(file);
+      }
+  }
+  removePic() {
+    this.imageSrc = null;
+  }
 
 }

@@ -26,11 +26,13 @@
         <ion-textarea required type="text"  name="contactName" autoGrow="true" [(ngModel)]='formularios.contactName' ></ion-textarea>
       </ion-item>
 
-       <ion-item>
-      <ion-label position="stacked">Imagen</ion-label>
-        <ion-input required color="primary" type="file" accept="image/*" name="photo" (change)="changeListener($event)"[(ngModel)]='formularios.photo'>
-        </ion-input>
+      <ion-item>
+        <ion-input type='file' accept="image/*" name="photo" required [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"></ion-input>
+        <ion-label for="file"><ion-icon name="images"></ion-icon> Images</ion-label>
       </ion-item> 
+      <ion-item>
+       <img id="blah" [src]="imageSrc || '../../assets/icon/imgfondo.png'" alt="your image" />
+      </ion-item>
 
       <ion-item>
         <ion-label position="floating">Creado por </ion-label>

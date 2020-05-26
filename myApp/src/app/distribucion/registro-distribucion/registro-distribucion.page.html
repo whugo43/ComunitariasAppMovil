@@ -36,7 +36,7 @@
       <ion-item [hidden]="checktEncargadoTipo()">
         <ion-label>Encargado {{seleccion}}</ion-label>
         <ion-select interface="action-sheet" formControlName="nombre" placeholder="Seleccione una opción" (ionChange)="llen($event.detail['id'])" >
-          <ion-select-option *ngFor="let user of lista" id="{{user.user}}">{{user.name}}</ion-select-option>
+          <ion-select-option *ngFor="let user of lista" value="{{user.user}}">{{user.name}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card>

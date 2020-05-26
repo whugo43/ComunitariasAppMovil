@@ -65,7 +65,8 @@ export class RegistroDistribucionPage implements OnInit {
 
   llenarParametrosEdicion() {
     this.activateRoute.queryParamMap.subscribe((data) => {
-      if (data.get('accionEditar') == '1') {
+      if (data.get('accionEditar') == '1'  && this.accionEditar==0) {
+        console.log('edicion');
         this.accionEditar = 1;
         this.distribucionId=data.get('id');
         this.conexionApi.getDistribucionId(this.distribucionId).subscribe(distribuciones => {
@@ -77,7 +78,7 @@ export class RegistroDistribucionPage implements OnInit {
               voluntarios.forEach(voluntario => {
                 console.log(voluntario.user.toString() + '  ' + distribuciones.user.toString());
                 if (voluntario.user.toString() == distribuciones.user.toString()) {
-                  nombref = voluntario.firstName;
+                  nombref = voluntario.user;
                   return;
                 }
               });
@@ -87,7 +88,7 @@ export class RegistroDistribucionPage implements OnInit {
             this.conexionGrupos.getGrupo().subscribe(grupos => {
               grupos.forEach(grupo => {
                 if (grupo.user.toString() == distribuciones.user.toString()) {
-                  nombref = grupo.name;
+                  nombref = grupo.user;
                   return;
                 }
               });
@@ -159,7 +160,6 @@ export class RegistroDistribucionPage implements OnInit {
 
 
   public enviarDatos() {
-    console.log(this.registrationForm.get('encargado.nombre').value);
     this.formData.append('departureAddress', this.registrationForm.get('lugar_partida').value);
     this.formData.append('destinationAddress', this.registrationForm.get('lugar_destino').value);
     if (this.seleccion == 'Voluntarios') {
@@ -169,11 +169,7 @@ export class RegistroDistribucionPage implements OnInit {
     }
     this.formData.append('information', this.registrationForm.get('descripcion').value);
     this.formData.append('createdBy', 'mi');
-    this.lista.forEach(dato => {
-      if (dato['user'] == this.userId) {
-        this.formData.append('user', dato['user']);
-      }
-    });
+    this.formData.append('user',this.registrationForm.get('encargado.nombre').value );
     if (this.accionEditar > 0) {
       this.conexionApi.actualizarDistribucion(this.formData,this.distribucionId).subscribe(msm=>{
         console.log(msm);

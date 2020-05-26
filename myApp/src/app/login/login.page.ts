@@ -7,6 +7,7 @@ import {LoginService} from '../services/login/login.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  Logins 
   formularios={
     Username: '',
     Password: '',
@@ -18,11 +19,22 @@ export class LoginPage implements OnInit {
   }
 
   validarlogin(){
-    const Categoria={
-    name: this.formularios.Username,
-    description:this.formularios.Password
+    
+    const log={
+    username: this.formularios.Username,
+    password:this.formularios.Password
     };
-    console.log(Categoria)
+    console.log(log)
+    
+    let Login
+
+    this.loginService.getLogins()
+    .subscribe(
+      (data)=>{Login=data},
+      (error)=>{console.log(error);}
+    );
+
+    console.log(Login)
 
   }
 

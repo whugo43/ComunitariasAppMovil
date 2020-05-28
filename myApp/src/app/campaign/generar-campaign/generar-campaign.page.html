@@ -17,6 +17,15 @@
       </ion-item>
 
       <ion-item>
+        <ion-label>Alcance</ion-label>
+        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.alcance' name='alcance' required >   
+          <ion-select-option  value="Abierto a todos">Abierto a todos</ion-select-option>
+          <ion-select-option  value="Empresas">Empresas</ion-select-option>
+          <ion-select-option  value="Medios de comunicación">Medios de comunicación</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
         <ion-textarea [(ngModel)]='formularios.description' name='description'  autoGrow="true" minlength="1" required></ion-textarea>
       </ion-item>
@@ -25,6 +34,8 @@
         <ion-label position="floating">Contacto</ion-label>
         <ion-textarea required type="text"  name="contactName" autoGrow="true" [(ngModel)]='formularios.contactName' ></ion-textarea>
       </ion-item>
+
+
 
       <ion-item>
         <ion-input type='file' accept="image/*" name="photo" required [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"></ion-input>

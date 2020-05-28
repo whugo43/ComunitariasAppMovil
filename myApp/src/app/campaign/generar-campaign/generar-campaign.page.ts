@@ -11,6 +11,7 @@ export class GenerarCampaignPage implements OnInit {
   imageSrc;
   photo: File;
   formularios={
+    alcance:'',
     photo: '',
     name: '',
     description: '',
@@ -27,7 +28,8 @@ export class GenerarCampaignPage implements OnInit {
   postCampaign(){ 
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
-    this.formData.append("description",this.formularios.description) 
+    this.formData.append("description",this.formularios.description)
+    //this.formData.append("alcance",this.formularios.alcance) 
     this.formData.append("photo",this.photo) 
     this.formData.append("createdBy", this.formularios.createdBy) 
 

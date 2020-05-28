@@ -38,6 +38,7 @@ export class EditarCampaignPage implements OnInit {
   postCampaign(){   
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
+    //this.formData.append("alcance",this.formularios.alcance) 
     this.formData.append("description",this.formularios.description)  
     console.log("metodo update")
  

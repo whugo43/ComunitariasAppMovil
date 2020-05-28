@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import {CampaignService} from '../services/campaign/campaign.service';
 
 @Component({
@@ -8,7 +9,8 @@ import {CampaignService} from '../services/campaign/campaign.service';
 })
 export class CampaignPage implements OnInit {
   campaigns
-  constructor(public campaignservice: CampaignService) { }
+  constructor(public alertController: AlertController,
+              public campaignservice: CampaignService) { }
 
   ngOnInit() {
     this.campaignservice.getCampaigns()
@@ -42,6 +44,31 @@ export class CampaignPage implements OnInit {
       this.ngOnInit();
       event.target.complete();   
     }, 200);
+  }
+
+  async presentAlertElimnarCampaign(id: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+
+      header: 'Esta seguro que desea eliminar esta campaña!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteCampaign(id)
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

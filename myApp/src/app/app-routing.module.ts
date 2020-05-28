@@ -88,8 +88,6 @@ const routes: Routes = [
       }
   ]
   },
-     
-  
 
   {
     path: 'generar-campaign',
@@ -98,6 +96,14 @@ const routes: Routes = [
   {
     path: 'distribucion',
     loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)
+  },
+  {
+    path: 'proveedor',
+    loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+  },
+  {
+    path: 'generarproveedor',
+    loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
   }
 ];
 @NgModule({

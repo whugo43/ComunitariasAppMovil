@@ -104,7 +104,16 @@ const routes: Routes = [
   {
     path: 'generarproveedor',
     loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
-  }
+  },
+  {
+    path: 'volunteer',
+    loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+  },
+  {
+    path: 'generarvolunteer',
+    loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

@@ -17,6 +17,7 @@ import {CategoriaService} from './services/categoria.service';
 import {DonacionesService} from './services/donaciones.service';
 import {CampaignService} from './services/campaign.service';
 import {ProveedorService} from './services/proveedor.service';
+import {VolunteerService} from './services/volunteer.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,7 +31,8 @@ import {ProveedorService} from './services/proveedor.service';
     DonacionesService,
     Geolocation,
     CampaignService,
-    ProveedorService
+    ProveedorService,
+    VolunteerService
   ],
   bootstrap: [AppComponent]
 })

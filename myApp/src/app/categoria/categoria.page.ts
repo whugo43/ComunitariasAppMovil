@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import {CategoriaService} from '../services/categoria/categoria.service';
 
 @Component({
@@ -9,7 +10,8 @@ import {CategoriaService} from '../services/categoria/categoria.service';
 export class CategoriaPage implements OnInit {
 categorias
 
-  constructor(public categoriaservice:CategoriaService) {
+  constructor(public alertController: AlertController,
+              public categoriaservice:CategoriaService) {
 
    }
 
@@ -48,5 +50,30 @@ categorias
         event.target.complete();   
       }, 200);
     }
+
+  async presentAlertElimnarCategoria(id: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+
+      header: 'Esta seguro que desea eliminar esta categoria!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteCategoria(id)
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
   
 }

@@ -39,4 +39,9 @@ export class DonacionesService {
     return this.http.patch(path,{state:'0'})
   } 
 
+  CambiarEstadoDonaciones(id: string){
+    const path= this.api+id+'/';
+    return this.http.patch(path,{state:'0'})
+  } 
+
 }

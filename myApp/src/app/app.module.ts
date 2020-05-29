@@ -20,6 +20,7 @@ import { CampaignService } from './services/campaign/campaign.service';
 import { ProviderService } from './services/provider/provider.service';
 import { CentroAcopioService } from './services/centro-acopio/centro-acopio.service';
 import { LoginService } from './services/login/login.service';
+import {ScopeService} from './services/Scope/scope.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,6 +37,7 @@ import { LoginService } from './services/login/login.service';
     CampaignService,
     ProviderService,
     CentroAcopioService,
+    ScopeService,
     LoginService
     ],
 

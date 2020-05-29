@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
+import {ScopeService} from '../../services/Scope/scope.service';
 
 @Component({
   selector: 'app-editar-campaign',
@@ -9,11 +10,11 @@ import {CampaignService} from '../../services/campaign/campaign.service';
 })
 export class EditarCampaignPage implements OnInit {
   imageSrc;
+  Scopes;
 
   campaign=[];
   id: string;
-
-  constructor(private activateRoute: ActivatedRoute,public campaignservice: CampaignService ) { }
+  formData= new FormData();
   photo: File;
   formularios={
     photo: '',
@@ -21,6 +22,11 @@ export class EditarCampaignPage implements OnInit {
     description: '',
     contactName:'',
     }
+
+  constructor(private activateRoute: ActivatedRoute,
+              public campaignservice: CampaignService,
+              public scopeService:ScopeService ) { }
+
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -32,8 +38,17 @@ export class EditarCampaignPage implements OnInit {
       (error)=>{console.log(error);}
       )
     });
+    this.Getscopes();
   }
-   formData= new FormData();
+
+   Getscopes(){
+    this.scopeService.getScope()
+    .subscribe(
+      (data)=>{this.Scopes=data
+      },
+      (error)=>{console.log(error);}
+      );
+  }
 
   postCampaign(){   
     this.formData.append("name",this.formularios.name) 

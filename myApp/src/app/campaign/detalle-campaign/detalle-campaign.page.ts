@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
+import {ScopeService} from '../../services/Scope/scope.service';
 
 @Component({
   selector: 'app-detalle-campaign',
@@ -10,8 +11,11 @@ import {CampaignService} from '../../services/campaign/campaign.service';
 export class DetalleCampaignPage implements OnInit {
   campaign=[];
   id: string;
+  Scopes;
 
-  constructor(private activateRoute: ActivatedRoute,public campaignservice: CampaignService ) { }
+  constructor(private activateRoute: ActivatedRoute,
+              public campaignservice: CampaignService,
+              public scopeService:ScopeService) { }
 
   ngOnInit() {
     
@@ -24,6 +28,13 @@ export class DetalleCampaignPage implements OnInit {
       (error)=>{console.log(error);}
       )
     }); 
+
+    this.scopeService.getScope()
+    .subscribe(
+      (data)=>{this.Scopes=data
+      },
+      (error)=>{console.log(error);}
+      );
   }
 
 }

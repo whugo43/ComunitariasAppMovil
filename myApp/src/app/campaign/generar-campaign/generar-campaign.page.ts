@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CampaignService} from '../../services/campaign/campaign.service';
+import {ScopeService} from '../../services/Scope/scope.service';
 import {Campaign} from '../../interfaces/campaign';
 
 @Component({
@@ -9,9 +10,10 @@ import {Campaign} from '../../interfaces/campaign';
 })
 export class GenerarCampaignPage implements OnInit {
   imageSrc;
+  Scopes;
   photo: File;
   formularios={
-    alcance:'',
+    scope:'',
     photo: '',
     name: '',
     description: '',
@@ -20,23 +22,32 @@ export class GenerarCampaignPage implements OnInit {
     };
   formData= new FormData();
 
-  constructor(public campaignservice:CampaignService) { }
+  constructor(public scopeService:ScopeService,
+              public campaignservice:CampaignService) { }
 
   ngOnInit() {
+  }
+  Getscopes(){
+    this.scopeService.getScope()
+    .subscribe(
+      (data)=>{this.Scopes=data
+      },
+      (error)=>{console.log(error);}
+      );
   }
 
   postCampaign(){ 
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
     this.formData.append("description",this.formularios.description)
-    //this.formData.append("alcance",this.formularios.alcance) 
+    this.formData.append("scope",this.formularios.scope) 
     this.formData.append("photo",this.photo) 
     this.formData.append("createdBy", this.formularios.createdBy) 
 
-    console.log("metodo create")
+    
  
     this.campaignservice.postCampaigns(this.formData).subscribe(
-      (newTask)=>{console.log(newTask);}
+      (newTask)=>{console.log("metodo create");}
     );
     }
 

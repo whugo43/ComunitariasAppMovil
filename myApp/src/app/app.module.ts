@@ -17,10 +17,11 @@ import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { CategoriaService } from './services/categoria/categoria.service';
 import { DonacionesService } from './services/donaciones/donaciones.service';
 import { CampaignService } from './services/campaign/campaign.service';
-import { ProviderService } from './services/provider/provider.service';
 import { CentroAcopioService } from './services/centro-acopio/centro-acopio.service';
 import { LoginService } from './services/login/login.service';
 import {ScopeService} from './services/Scope/scope.service';
+import {ProviderService} from './services/provider/provider.service';
+import {VoluntariosService} from './services/voluntarios/voluntarios.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +39,8 @@ import {ScopeService} from './services/Scope/scope.service';
     ProviderService,
     CentroAcopioService,
     ScopeService,
-    LoginService
+    LoginService,
+    VoluntariosService
     ],
 
   bootstrap: [AppComponent]

@@ -19,8 +19,14 @@
       <ion-item>
         <ion-label>Alcance</ion-label>
         <ion-select placeholder="Seleccione uno" (click)="Getscopes()" [(ngModel)]='formularios.scope' name='scope' required >   
-          <ion-select-option *ngFor="let scope of Scopes" value="{{scope.id}}">{{scope.name}}</ion-select-option>
+          <ion-select-option *ngFor="let scope of Scopes" value="{{scope.id}}">{{scope.name}}
+          </ion-select-option>
+          
         </ion-select>
+
+        <ion-button fill="outline" slot="end" color="success">
+          <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
       </ion-item>
 
       <ion-item>

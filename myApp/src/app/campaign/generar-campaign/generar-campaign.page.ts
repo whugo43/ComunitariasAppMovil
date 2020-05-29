@@ -26,7 +26,9 @@ export class GenerarCampaignPage implements OnInit {
               public campaignservice:CampaignService) { }
 
   ngOnInit() {
+    this.Getscopes()
   }
+
   Getscopes(){
     this.scopeService.getScope()
     .subscribe(
@@ -34,6 +36,9 @@ export class GenerarCampaignPage implements OnInit {
       },
       (error)=>{console.log(error);}
       );
+  }
+  agregarscopes(){
+    
   }
 
   postCampaign(){ 
@@ -44,8 +49,6 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("photo",this.photo) 
     this.formData.append("createdBy", this.formularios.createdBy) 
 
-    
- 
     this.campaignservice.postCampaigns(this.formData).subscribe(
       (newTask)=>{console.log("metodo create");}
     );

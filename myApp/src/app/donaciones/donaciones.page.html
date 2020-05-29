@@ -28,7 +28,7 @@
 
 
   <ion-item id="filtro">
-   <ion-label>Filtrar por:</ion-label>
+    <ion-label>Filtrar por:</ion-label>
     <ion-select #filtro placeholder='Seleccione Centro de Acopio' (ionChange)='onChange(filtro.value)'>
       <ion-select-option *ngFor='let centrosAcopio of centrosAcopios' value='{{centrosAcopio.id}}'>{{centrosAcopio.name}}</ion-select-option>
     </ion-select>
@@ -39,7 +39,7 @@
   <ion-item>
     <ng-container  *ngFor="let proveedor of proveedores">
       <ion-label  *ngIf="proveedor.id == donacion.provider" [routerLink]="['detalledonacion',donacion.id]">
-            {{proveedor.name}}
+          {{proveedor.name}}
       </ion-label>
     </ng-container>
       

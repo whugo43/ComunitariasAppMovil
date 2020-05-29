@@ -12,6 +12,7 @@ import {CentroAcopioService} from '../services/centro-acopio/centro-acopio.servi
 })
 export class DonacionesPage implements OnInit {
   opcionfiltro=''
+ 
   donaciones
   proveedores
   centrosAcopios
@@ -23,8 +24,8 @@ export class DonacionesPage implements OnInit {
               public centroAcopioservice: CentroAcopioService ) { }
 
   ngOnInit() {
+    
     this.opcionfiltro=''
-    this.filtro();
 
     this.centroAcopioservice.getCentrosAcopios()
     .subscribe(
@@ -57,6 +58,7 @@ export class DonacionesPage implements OnInit {
       (error)=>{console.log(error);}
       );   
     this.ngOnInit(); 
+    
   }
 
   deleteDonacion(id: string){

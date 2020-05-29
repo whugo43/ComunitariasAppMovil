@@ -4,6 +4,7 @@ export class Grupo {
     name:string;
     createdBy: string;
     user: string;
+    nombreuser: string;
 }
 
 export interface Grupo {

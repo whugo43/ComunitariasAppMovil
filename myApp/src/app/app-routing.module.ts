@@ -104,6 +104,10 @@ const routes: Routes = [
   },  {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'grupos-de-apoyo',
+    loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule)
   }
 
 ];

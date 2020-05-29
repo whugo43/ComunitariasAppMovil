@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
+import { User } from '../../clases/user'
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,6 @@ export class LoginService {
 
   getLogins(){
     const path= this.api;
-    return this.http.get(path)
+    return this.http.get<User[]>(path)
   }
 }

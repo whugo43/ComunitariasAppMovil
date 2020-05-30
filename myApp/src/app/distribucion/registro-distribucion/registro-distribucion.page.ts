@@ -5,8 +5,6 @@ import { DistribucionService } from '../../services/distribucion/distribucion.se
 import { VoluntariosService } from '../../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { ActivatedRoute } from '@angular/router';
-import { Voluntario } from 'src/app/clases/voluntario';
-import { Route } from '@angular/compiler/src/core';
 
 @Component({
   selector: 'app-registro-distribucion',

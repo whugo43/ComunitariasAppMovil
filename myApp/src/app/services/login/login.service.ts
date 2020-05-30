@@ -6,12 +6,21 @@ import { User } from '../../clases/user'
   providedIn: 'root'
 })
 export class LoginService {
-  private api='http://127.0.0.1:8000/api/user/';
+  private api = 'http://127.0.0.1:8000/api/user/';
+  private nombref: any;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getLogins(){
-    const path= this.api;
+  getLogins() {
+    const path = this.api;
     return this.http.get<User[]>(path)
   }
+
+  guardarUsuario(usuario) {
+    const path = this.api;
+    return this.http.post(path, usuario)
+  }
+
+
+
 }

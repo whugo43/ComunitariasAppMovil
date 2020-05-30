@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { GruposDeApolloRegistroPage } from './grupos-de-apollo-registro.page';
+import { GruposDeApoyoRegistroPage } from './grupos-de-apoyo-registro.page';
 
-describe('GruposDeApolloRegistroPage', () => {
-  let component: GruposDeApolloRegistroPage;
-  let fixture: ComponentFixture<GruposDeApolloRegistroPage>;
+describe('GruposDeApoyoRegistroPage', () => {
+  let component: GruposDeApoyoRegistroPage;
+  let fixture: ComponentFixture<GruposDeApoyoRegistroPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GruposDeApolloRegistroPage ],
+      declarations: [ GruposDeApoyoRegistroPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(GruposDeApolloRegistroPage);
+    fixture = TestBed.createComponent(GruposDeApoyoRegistroPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

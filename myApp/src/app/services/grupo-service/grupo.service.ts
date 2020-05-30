@@ -23,7 +23,7 @@ export class GrupoService {
   }
 
   getGrupoId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<Grupo>(this.api+id);
   }
 
   deleteGrupo(id: string){

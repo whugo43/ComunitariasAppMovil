@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>grupos-de-apoyo-registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="registrationFormGrupo">
+    <ion-card>
+      <ion-item>
+        <ion-label position="floating">Nombre del Grupo</ion-label>
+        <ion-input inputmode="text" formControlName="name"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <form [formGroup]="registrationFormUser">
+      <ion-card>
+        <ion-label><strong>Datos del usuario</strong></ion-label>
+        <ion-item>
+          <ion-label position="floating">Nombre de Usuario</ion-label>
+          <ion-input inputmode="text" formControlName="username"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [type]="passwordType" formControlName="password" placeholder="Ingrese la contraseña"></ion-input>
+        </ion-item>
+          <ion-checkbox (click)='hideShowPassword()' class='icon-mostrar-contrasenia'></ion-checkbox><ion-label class='text-mostrar-contrasenia'>Mostrar contraseña</ion-label> 
+      </ion-card>
+    </form>
+
+    <ion-button expand='full' [disabled]="check()" (click)='sendData()'>
+      Registrar Grupo<ion-icon slot="end" name="create"></ion-icon >
+    </ion-button>
+
+  </form>
+
+</ion-content>

@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,6 +15,7 @@ import { GruposDeApoyoPage } from './grupos-de-apoyo.page';
     CommonModule,
     FormsModule,
     IonicModule,
+    ReactiveFormsModule,
     GruposDeApoyoPageRoutingModule
   ],
   declarations: [GruposDeApoyoPage]

@@ -10,8 +10,8 @@ import {Campaign} from '../../interfaces/campaign';
   styleUrls: ['./generar-campaign.page.scss'],
 })
 export class GenerarCampaignPage implements OnInit {
+  Scopes
   imageSrc;
-  Scopes;
   photo: File;
   formularios={
     scope:'',
@@ -71,76 +71,6 @@ export class GenerarCampaignPage implements OnInit {
   }
   removePic() {
     this.imageSrc = null;
-  }
-
-  agregarscopes(name,description){
-    let formscope= new FormData();
-    formscope.append("name",name) 
-    formscope.append("description",description)
-    formscope.append("createdBy","hugo Wong")
-    this.scopeService.postScope(formscope).subscribe(
-      (newTask)=>{console.log("metodo create");}
-    ); 
-    
-    
-  }
-
-  async presentAlertScope() {
-
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Nuevo Alcance',
-      inputs: [
-        {
-          name: 'name',
-          placeholder: 'Nombre',
-          
-        },
-        {
-          name: 'description',
-          placeholder: 'Descripcion',
-          type: 'textarea'
-        }
-      ],
-
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-            console.log('Confirm Cancel: blah');
-          }
-        }, {
-          text: 'Ok',
-          handler: (data) => {
-            if(data.name!= "" && data.description!=""){
-              this.agregarscopes(data.name,data.description) 
-            }else if(data.name== "" && data.description==""){
-              this.failedAlert("Los campos nombres y descripcion son requeridos");
-            }else if(data.name== ""){
-              this.failedAlert("El campo nombre es requerido");
-            }else if(data.description== ""){
-              this.failedAlert("El campo descripcion es requerido");
-            }
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-  async failedAlert(text) {
-    const alert = await this.alertController.create({
-     cssClass: 'my-custom-class',
-     header: text,
-    buttons: [{
-    text: 'OK',
-      handler: () => {
-        this.presentAlertScope();
-      }
-    }]   
-    });
-    await alert.present();
   }
 
 }

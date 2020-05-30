@@ -18,11 +18,15 @@
 
       <ion-item>
         <ion-label>Alcance</ion-label>
-        <ion-select placeholder="Seleccione uno" [(ngModel)]='formularios.alcance' name='alcance' required >   
-          <ion-select-option  value="Abierto a todos">Abierto a todos</ion-select-option>
-          <ion-select-option  value="Empresas">Empresas</ion-select-option>
-          <ion-select-option  value="Medios de comunicación">Medios de comunicación</ion-select-option>
+        <ion-select placeholder="Seleccione uno" (click)="Getscopes()" [(ngModel)]='formularios.scope' name='scope' required >   
+          <ion-select-option *ngFor="let scope of Scopes" value="{{scope.id}}">{{scope.name}}
+          </ion-select-option>
+          
         </ion-select>
+
+        <ion-button fill="outline" slot="end" (click)="presentAlertScope()" color="success">
+          <ion-icon name="add-outline"></ion-icon>
+      </ion-button>
       </ion-item>
 
       <ion-item>
@@ -34,8 +38,6 @@
         <ion-label position="floating">Contacto</ion-label>
         <ion-textarea required type="text"  name="contactName" autoGrow="true" [(ngModel)]='formularios.contactName' ></ion-textarea>
       </ion-item>
-
-
 
       <ion-item>
         <ion-input type='file' accept="image/*" name="photo" required [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"></ion-input>

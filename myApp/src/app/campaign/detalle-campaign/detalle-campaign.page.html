@@ -13,7 +13,9 @@
         <ion-img src="{{campaign.photo}}"></ion-img>
         <ion-card-header>
           <ion-card-title>{{campaign.name}}</ion-card-title>
-          <ion-card-subtitle>Alcance: {{campaign.name}}</ion-card-subtitle>
+          <ng-container *ngFor="let scope of Scopes">
+            <ion-card-subtitle *ngIf="scope.id == campaign.scope">Alcance: {{scope.name}}</ion-card-subtitle>
+          </ng-container>
         </ion-card-header>
         <ion-card-content>
           {{campaign.description}}

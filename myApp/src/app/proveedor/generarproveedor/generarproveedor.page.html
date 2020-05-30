@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/proveedor"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Proveedor</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen>
+  <form onsubmit="">
+    <ion-list lines="full" class="ion-no-margin ion-no-padding">
+      <ion-item>
+        <ion-label position="floating">Razon Social <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Dirección</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Teléfono</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Persona de contacto</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Que donación va a realizar</ion-label>
+        <ion-textarea></ion-textarea>
+      </ion-item>
+
+
+    </ion-list>
+
+    <div class="ion-padding">
+      <ion-button   shape="round" type="submit"  expand="block" routerLink="/proveedor" routerDirection="root">
+      Guardar
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

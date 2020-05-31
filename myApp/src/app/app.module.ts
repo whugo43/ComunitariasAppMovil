@@ -21,6 +21,7 @@ import { CentroAcopioService } from './services/centro-acopio/centro-acopio.serv
 import { LoginService } from './services/login/login.service';
 import {ScopeService} from './services/Scope/scope.service';
 import {ProviderService} from './services/provider/provider.service';
+import {ProveedorService} from './services/proveedor/proveedor.service';
 import {VoluntariosService} from './services/voluntarios/voluntarios.service';
 
 @NgModule({
@@ -40,6 +41,7 @@ import {VoluntariosService} from './services/voluntarios/voluntarios.service';
     CentroAcopioService,
     ScopeService,
     LoginService,
+    ProveedorService,
     VoluntariosService
     ],
 

@@ -114,14 +114,21 @@ const routes: Routes = [
     path: 'grupos-de-apoyo',
     loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule)
   },
+
   {
     path: 'proveedor',
-    loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+      },
+      {
+        path: 'generarproveedor',
+        loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
+      }
+    ]
   },
-  {
-    path: 'generarproveedor',
-    loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
-  },
+
   {
     path: 'volunteer',
     loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)

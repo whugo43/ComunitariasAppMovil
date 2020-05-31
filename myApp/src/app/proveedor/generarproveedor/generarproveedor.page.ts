@@ -6,10 +6,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./generarproveedor.page.scss'],
 })
 export class GenerarproveedorPage implements OnInit {
+  formData= new FormData();
+  formularios={
+    razonsocial: '',
+    direccion: '',
+    telefono:'',
+    email:'',
+    contacto:'',
+    }
 
-  constructor() { }
+    constructor( ) { }
 
-  ngOnInit() {
+    ngOnInit() {  
+    }
+
+  postProveedor(){
+    this.formData.append("razonsocial",this.formularios.razonsocial) 
+    this.formData.append("direccion", this.formularios.direccion)
+    this.formData.append("telefono", this.formularios.telefono)
+    this.formData.append("email", this.formularios.email)
+    this.formData.append("contacto", this.formularios.contacto)
   }
+ 
 
 }
+

@@ -1,19 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-
+import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { ScopePagePage } from '../scope/scope-page/scope-page.page';
-import {ScopeService} from '../../services/Scope/scope.service';
-
-
+import {ScopeService} from '../../../services/Scope/scope.service';
 
 @Component({
-  selector: 'app-scope',
-  templateUrl: './scope.component.html',
-  styleUrls: ['./scope.component.scss'],
+  selector: 'app-scope-page',
+  templateUrl: './scope-page.page.html',
+  styleUrls: ['./scope-page.page.scss'],
 })
-export class ScopeComponent implements OnInit {
+export class ScopePagePage implements OnInit {
   Scopes;
 
   constructor(public navCtrl: NavController,
@@ -22,9 +18,6 @@ export class ScopeComponent implements OnInit {
               public scopeService:ScopeService) { }
 
   ngOnInit() {
-  }
-
-  Getscopes(){
     this.scopeService.getScope()
     .subscribe(
       (data)=>{this.Scopes=data
@@ -135,12 +128,15 @@ export class ScopeComponent implements OnInit {
       this.ngOnInit();       
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: ScopePagePage,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
+  doRefresh(event) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();   
+    }, 200);
+  }
+
+  async closeModal(){
+    await this.modalController.dismiss();
   }
 
 }

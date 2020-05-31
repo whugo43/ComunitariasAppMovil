@@ -136,7 +136,11 @@ const routes: Routes = [
   {
     path: 'generarvolunteer',
     loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+  },  {
+    path: 'scope-page',
+    loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
   },
+
 
 ];
 @NgModule({

@@ -1,29 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
   styleUrls: ['./contacts.page.scss'],
 })
+
+
 export class ContactsPage implements OnInit {
-  imageSrc;
-  constructor() { }
+          
+  constructor(public navCtrl: NavController,
+              public alertController: AlertController,
+              public modalController: ModalController) { }
 
   ngOnInit() {
   }
-  readURL(event): void {
-    if (event.target.files && event.target.files[0]) {
-        const file = event.target.files[0];
-
-        const reader = new FileReader();
-        reader.onload = e => this.imageSrc = reader.result;
-
-        reader.readAsDataURL(file);
-    }
-}
-
-removePic() {
-  this.imageSrc = null;
-}
 
 }
+ 
+ 

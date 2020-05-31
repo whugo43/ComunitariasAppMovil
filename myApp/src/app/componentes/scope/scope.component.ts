@@ -15,7 +15,6 @@ export class ScopeComponent implements OnInit {
               public scopeService:ScopeService) { }
 
   ngOnInit() {
-    console.log("hola hugo")
   }
 
   Getscopes(){

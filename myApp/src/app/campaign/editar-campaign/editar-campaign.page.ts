@@ -17,6 +17,7 @@ export class EditarCampaignPage implements OnInit {
   formData= new FormData();
   photo: File;
   formularios={
+    scope:'',
     photo: '',
     name: '',
     description: '',
@@ -29,6 +30,7 @@ export class EditarCampaignPage implements OnInit {
 
 
   ngOnInit() {
+    this.Getscopes();
     this.activateRoute.paramMap.subscribe(paramMap => {
       const detallecampaign = paramMap.get('id')
       this.id = detallecampaign
@@ -38,7 +40,6 @@ export class EditarCampaignPage implements OnInit {
       (error)=>{console.log(error);}
       )
     });
-    this.Getscopes();
   }
 
    Getscopes(){
@@ -50,10 +51,10 @@ export class EditarCampaignPage implements OnInit {
       );
   }
 
-  postCampaign(){   
+  UpdateCampaign(){   
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
-    //this.formData.append("alcance",this.formularios.alcance) 
+    this.formData.append("scope",this.formularios.scope)  
     this.formData.append("description",this.formularios.description)  
     console.log("metodo update")
  

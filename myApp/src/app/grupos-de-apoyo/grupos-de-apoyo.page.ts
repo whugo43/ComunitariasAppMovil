@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Grupo } from '../clases/grupo'
+import { Grupo } from '../clases/grupo/grupo'
 import { GrupoService } from '../services/grupo-service/grupo.service'
 import { LoginService } from '../services/login/login.service'
 import { AlertController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grupos-de-apoyo',
@@ -14,13 +15,13 @@ export class GruposDeApoyoPage implements OnInit {
   private seleccionado: string = '';
 
   constructor(private apiGrupoApoyo: GrupoService, private apiUser: LoginService,
-    private alertController:AlertController) { }
+    private alertController:AlertController,private router:Router) { }
 
   async presentAlertConfirm(id:any) {
     this.obtenerNombre(id);
     let alert = await this.alertController.create({
       header: 'Confirmación!',
-      message: '<p><Esta seguro que desea eliminar: strong>'+this.seleccionado+'</strong>!!!</p>',
+      message: '<p>Esta seguro que desea eliminar: <strong>'+this.seleccionado+'</strong>!!!</p>',
       buttons: [
         {
           text: 'Cancelar',
@@ -32,8 +33,6 @@ export class GruposDeApoyoPage implements OnInit {
         }, {
           text: 'Eliminar',
           handler: () => {
-            console.log('Confirm Okay');
-            console.log(id);
             this.apiGrupoApoyo.deleteGrupo(id);
           }
         }
@@ -43,9 +42,11 @@ export class GruposDeApoyoPage implements OnInit {
   }
 
   obtenerNombre(id:string){
-    this.apiGrupoApoyo.getGrupoId(id).subscribe(grupos=>{
-      this.seleccionado=grupos.name;
-    });
+   this.gruposDeApoyo.forEach(grupo=>{
+     if(grupo.id==id){
+        this.seleccionado=grupo.name;
+     }
+   });
   }
 
   obtenerGruposdeapoyo() {
@@ -77,8 +78,12 @@ export class GruposDeApoyoPage implements OnInit {
     console.log(this.gruposDeApoyo);
   }
 
-  eliminarGrupodeApoyo(){
-
+  goDetails(id:string){
+    this.router.navigate(['./grupos-de-apoyo/grupo-de-apoyo-detalles'], {
+      queryParams: {
+        idGrupo:id
+      }
+    })
   }
 
 

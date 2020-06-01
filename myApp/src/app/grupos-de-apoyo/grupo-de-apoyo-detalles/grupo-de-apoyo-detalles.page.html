@@ -1,9 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>grupo-de-apoyo-detalles</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/grupos-de-apoyo"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Detalles del Grupo de apoyo</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-label><strong>Nombre:</strong></ion-label>
+    <ion-label>{{grupo.name}}</ion-label><br><br>
+
+    <ion-label><strong>Usuario:</strong></ion-label>
+    <ion-label>{{grupo.user}}</ion-label><br><br>
+  </ion-grid>
+   <p class='texto_informacion_grupo'>A continuacion se listan los miembros de este grupo</p>
+  <ion-card *ngFor="let miembro of miembros">
+    <ion-item *ngIf="miembros.length != 0">
+      <ion-button fill="outline" slot="end">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
+
+      <ion-button class='button_trash' fill="outline" slot="end" color="danger">
+        <ion-icon class='icon_trash' name="trash"></ion-icon>
+      </ion-button>
+
+    </ion-item>
+
+    <ion-grid  *ngIf="miembros.length != 0">
+      <ion-row>
+        <ion-label><b>Nombre:</b>{{miembro.firstName}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Apellido:</b>{{miembro.lastName}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Telefono:</b>{{miembro.phoneNumber}}</ion-label><br><br>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+  <ion-card *ngIf="miembros.length == 0">
+    <ion-label ><p  class='texto_vacio'>Vacio no hay miembros registrados</p></ion-label>
+    <ion-img class='imagen_vacio' src="../../assets/icon/icons8-empty-box-64.png"></ion-img>
+
+  </ion-card>
 
 </ion-content>

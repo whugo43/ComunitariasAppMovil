@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-
 import { IonicModule } from '@ionic/angular';
 
 import { GruposDeApoyoPageRoutingModule } from './grupos-de-apoyo-routing.module';
 
 import { GruposDeApoyoPage } from './grupos-de-apoyo.page';
+
 
 @NgModule({
   imports: [
@@ -16,7 +16,7 @@ import { GruposDeApoyoPage } from './grupos-de-apoyo.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    GruposDeApoyoPageRoutingModule
+    GruposDeApoyoPageRoutingModule,
   ],
   declarations: [GruposDeApoyoPage]
 })

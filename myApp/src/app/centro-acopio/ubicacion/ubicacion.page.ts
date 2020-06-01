@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Map, tileLayer, marker, Popup, Marker } from "leaflet"
 import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { ActivatedRoute, Router } from "@angular/router"
-import { CentroAcopioClass } from '../../clases/centro-acopio-class'
+import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-class'
 import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 

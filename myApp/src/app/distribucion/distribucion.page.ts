@@ -4,7 +4,7 @@ import { DistribucionService } from '../services/distribucion/distribucion.servi
 import { AlertController } from '@ionic/angular';
 import { VoluntariosService } from '../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../services/grupo-service/grupo.service'
-import { Distribucion } from '../clases/distribucion';
+import { Distribucion } from '../clases/distribucion/distribucion';
 
 @Component({
   selector: 'app-distribucion',

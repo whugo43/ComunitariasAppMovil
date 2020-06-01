@@ -5,7 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { error } from 'protractor';
 import { Router } from '@angular/router';
-import { User } from '../../clases/user'
+import { User } from '../../clases/user/user'
 
 @Component({
   selector: 'app-grupos-de-apoyo-registro',

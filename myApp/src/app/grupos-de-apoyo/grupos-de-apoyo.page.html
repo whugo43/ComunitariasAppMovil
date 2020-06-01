@@ -20,7 +20,7 @@
     </ion-refresher-content>
   </ion-refresher>
 
-  <ion-card *ngFor="let grupo of gruposDeApoyo">
+  <ion-card *ngFor="let grupo of gruposDeApoyo" >
     <ion-item>
 
       <ion-button fill="outline" slot="end">
@@ -31,7 +31,7 @@
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>
-    <ion-card-content>
+    <ion-card-content (click)='goDetails(grupo.id)'>
       <ion-grid>
         <ion-row>
           <ion-col>

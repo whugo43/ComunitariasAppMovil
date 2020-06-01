@@ -40,7 +40,7 @@ import {VoluntariosService} from './services/voluntarios/voluntarios.service';
     CentroAcopioService,
     ScopeService,
     LoginService,
-    VoluntariosService
+    VoluntariosService,
     ],
 
   bootstrap: [AppComponent]

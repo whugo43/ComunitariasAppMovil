@@ -11,6 +11,10 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
   },
   {
+    path: 'tab1',
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+  },
+  {
     path: 'about',
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
@@ -110,14 +114,21 @@ const routes: Routes = [
     path: 'grupos-de-apoyo',
     loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule)
   },
+
   {
     path: 'proveedor',
-    loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+      },
+      {
+        path: 'generarproveedor',
+        loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
+      }
+    ]
   },
-  {
-    path: 'generarproveedor',
-    loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
-  },
+
   {
     path: 'volunteer',
     loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
@@ -125,7 +136,11 @@ const routes: Routes = [
   {
     path: 'generarvolunteer',
     loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+  },  {
+    path: 'scope-page',
+    loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
   },
+
 
 ];
 @NgModule({

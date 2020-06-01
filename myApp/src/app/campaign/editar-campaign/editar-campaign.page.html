@@ -21,6 +21,8 @@
         <ion-select placeholder="Seleccione uno" value="{{campaign.scope}}" (click)="Getscopes()" [(ngModel)]='formularios.scope' name='scope' required >   
           <ion-select-option *ngFor="let scope of Scopes" value="{{scope.id}}">{{scope.name}}</ion-select-option>
         </ion-select>
+
+        <app-scope></app-scope>
       </ion-item>
 
       <ion-item>
@@ -51,7 +53,7 @@
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postCampaign()" expand="block" routerLink="/campaign" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="UpdateCampaign()" expand="block" routerLink="/campaign" routerDirection="root">
       Guardar
       </ion-button>
     </div>

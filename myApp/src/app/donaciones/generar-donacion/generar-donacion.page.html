@@ -31,6 +31,26 @@
             <ion-select-option *ngFor="let centrosAcopio of centrosAcopios" value="{{centrosAcopio.id}}">{{centrosAcopio.name}}</ion-select-option>
         </ion-select>
       </ion-item>
+      <!--#############################################-->
+      <ion-text>
+        <h5>Responsables</h5>
+      </ion-text>
+   
+      <ion-item>
+        <ion-label>Voluntario</ion-label>
+        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
+            <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.id}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Grupo de Apoyo</ion-label>
+        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
+            <ion-select-option *ngFor="let gruposApoyos of gruposApoyos" value="{{gruposApoyos.id}}">{{gruposApoyos.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!--#############################################-->
 
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
@@ -52,7 +72,7 @@
         <ion-label for="file"><ion-icon name="images"></ion-icon> Images</ion-label>
       </ion-item> 
       <ion-item *ngIf="imageSrc != null">
-      <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+        <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
       </ion-item>
 
       <ion-item>

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
+import { AlertController } from '@ionic/angular';
+import {Router} from '@angular/router';
 import { DonacionesService } from '../../services/donaciones/donaciones.service';
 import {CategoriaService} from '../../services/categoria/categoria.service';
 import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
+
 
 @Component({
   selector: 'app-generar-donacion',
@@ -37,7 +40,9 @@ export class GenerarDonacionPage implements OnInit {
     createdBy: ''
     }
 
-  constructor(private datePipe: DatePipe,
+  constructor(public router: Router,
+              private datePipe: DatePipe,
+              public alertController: AlertController,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
@@ -98,13 +103,21 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("category", this.formularios.categoria)
     this.formData.append("createdBy", this.formularios.createdBy)
     //this.formData.append("volunteer", this.formularios.voluntario)
-    //this.formData.append("centrosAcopios", this.formularios.centrosAcopios)
+    //this.formData.append("centrosAcopios", this.formularios.grupoapoyo)
 
     console.log(this.formularios.voluntario)
     console.log(this.formularios.centroacopio)
-    this.donacionesService.postDonaciones(this.formData).subscribe(
+    if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
+      console.log("esta lleno")
+      this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}
-    );
+      );
+      this.router.navigateByUrl('/donaciones');
+    }
+    else{
+      this.presentAlert()
+    }
+    
   }
 
   changeListener($event) : void {
@@ -126,6 +139,24 @@ export class GenerarDonacionPage implements OnInit {
 
   removePic() {
     this.imageSrc = null;
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+
+      header: 'Debe seleccionar al menos un voluntario o un grupo de apoyo como responsable!',
+      buttons: [
+        {
+          text: 'ok',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 }

@@ -60,6 +60,7 @@ export class DonacionesPage implements OnInit {
       (error)=>{console.log(error);}
       );   
     this.ngOnInit(); 
+    //setTimeout(this.ngOnInit,300); 
     
   }
 
@@ -69,7 +70,6 @@ export class DonacionesPage implements OnInit {
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
       );   
-
     this.ngOnInit();  
       
   }
@@ -87,8 +87,8 @@ export class DonacionesPage implements OnInit {
     setTimeout(() => {
       this.ngOnInit();
       event.target.complete();   
-    }, 200);
-    //this.router.navigateByUrl('/donaciones')
+    }, 300);
+    
   }
 
   async presentAlertCambiarestado(id: string) {
@@ -142,9 +142,7 @@ export class DonacionesPage implements OnInit {
   }
 
   onChange(filtro){
-    console.log(filtro)
     this.opcionfiltro=filtro
-    console.log(this.opcionfiltro)
   }
   filtro() {
    // document.getElementById("filtro").innerHTML=

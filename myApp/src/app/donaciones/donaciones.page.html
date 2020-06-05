@@ -43,13 +43,13 @@
       </ion-label>
     </ng-container>
 
-    <ng-container *ngIf="opcionfiltro!=false">  
+    <ng-container>  
 
       <ion-button fill="outline" slot="end" [routerLink]="['editardonacion',donacion.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
 
-      <ion-button fill="outline" slot="end" (click)="presentAlertCambiarestado(donacion.id)">
+      <ion-button color="warning" fill="outline" slot="end" (click)="presentAlertCambiarestado(donacion.id)">
         <ion-icon name="alert"></ion-icon>
       </ion-button>
 

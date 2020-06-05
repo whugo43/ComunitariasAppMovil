@@ -110,10 +110,10 @@ export class EditarDonacionPage implements OnInit {
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
     //this.formData.append("volunteer", this.formularios.voluntario)
-    //this.formData.append("centrosAcopios", this.formularios.centrosAcopios)
+    //this.formData.append("centrosAcopios", this.formularios.grupoapoyo)
 
     console.log(this.formularios.voluntario)
-    console.log(this.formularios.centroacopio)
+    console.log(this.formularios.grupoapoyo)
     this.donacionesService.updateDonaciones(this.formData,this.id).subscribe(
       (newTask)=>{console.log(newTask);}
     );
@@ -135,10 +135,9 @@ export class EditarDonacionPage implements OnInit {
 
         reader.readAsDataURL(file);
     }
-}
-removePic() {
-  this.imageSrc = null;
-}
-
-
+  }
+  removePic() {
+    this.imageSrc = null;
+  }
+  
 }

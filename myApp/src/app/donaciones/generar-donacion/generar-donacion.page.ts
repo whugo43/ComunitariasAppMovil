@@ -102,9 +102,9 @@ export class GenerarDonacionPage implements OnInit {
 
     console.log(this.formularios.voluntario)
     console.log(this.formularios.centroacopio)
-    //this.donacionesService.postDonaciones(this.formData).subscribe(
-    //  (newTask)=>{console.log(newTask);}
-    //);
+    this.donacionesService.postDonaciones(this.formData).subscribe(
+      (newTask)=>{console.log(newTask);}
+    );
   }
 
   changeListener($event) : void {

@@ -5,6 +5,9 @@ import { DonacionesService } from '../../services/donaciones/donaciones.service'
 import {CategoriaService} from '../../services/categoria/categoria.service';
 import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
+import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
+import {GrupoService} from '../../services/grupo-service/grupo.service';
+
 
 
 @Component({
@@ -20,8 +23,13 @@ export class EditarDonacionPage implements OnInit {
   providers;
   categorias;
   photo: File;
+  voluntarios;
+  gruposApoyos;
+  
   formData= new FormData();
   formularios={
+    voluntario:[],
+    grupoapoyo:[],
     photo: '',
     description: '',
     proveedor:'',
@@ -38,7 +46,10 @@ export class EditarDonacionPage implements OnInit {
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
-              public centroAcopioservice: CentroAcopioService) { 
+              public centroAcopioservice: CentroAcopioService,
+              public voluntariosvervice: VoluntariosService,
+              public gruposervice: GrupoService) { 
+
                 this.activateRoute.paramMap.subscribe(paramMap => {
                   const donaciones = paramMap.get('id')
                   this.id = donaciones
@@ -50,7 +61,18 @@ export class EditarDonacionPage implements OnInit {
                 });  
               }
 
-  ngOnInit() {      
+  ngOnInit() {   
+    this.gruposervice.getGrupo()
+    .subscribe(
+    (data)=>{this.gruposApoyos=data},
+    (error)=>{console.log(error)}
+    );
+
+    this.voluntariosvervice.getVoluntarios()
+    .subscribe(
+    (data)=>{this.voluntarios=data},
+    (error)=>{console.log(error)}
+    );   
 
     this.categoriaservice.getCategorias()
     .subscribe(
@@ -87,6 +109,11 @@ export class EditarDonacionPage implements OnInit {
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
+    //this.formData.append("volunteer", this.formularios.voluntario)
+    //this.formData.append("centrosAcopios", this.formularios.centrosAcopios)
+
+    console.log(this.formularios.voluntario)
+    console.log(this.formularios.centroacopio)
     this.donacionesService.updateDonaciones(this.formData,this.id).subscribe(
       (newTask)=>{console.log(newTask);}
     );

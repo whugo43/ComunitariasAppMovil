@@ -38,6 +38,27 @@
         </ion-select>
       </ion-item>
 
+      <!--#############################################-->
+      <ion-text>
+        <h5>Responsables</h5>
+      </ion-text>
+   
+      <ion-item>
+        <ion-label>Voluntario</ion-label>
+        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
+            <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.id}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Grupo de Apoyo</ion-label>
+        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
+            <ion-select-option *ngFor="let gruposApoyos of gruposApoyos" value="{{gruposApoyos.id}}">{{gruposApoyos.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <!--#############################################-->
+
       <ion-item>
         <ion-label position="floating">Descripcion</ion-label>
         <ion-textarea [(ngModel)]='formularios.description' value='{{donaciones.description}}'name='description' autoGrow="true" minlength="1" required></ion-textarea>

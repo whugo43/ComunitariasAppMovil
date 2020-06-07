@@ -3,9 +3,7 @@ import { LoginService } from '../../services/login/login.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
-import { error } from 'protractor';
-import { Router } from '@angular/router';
-import { User } from '../../clases/user/user'
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grupos-de-apoyo-registro',
@@ -17,8 +15,8 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   private registrationFormUser: FormGroup
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
-  private usuarioid: any;
-  private exito: number = 0;
+  private edicion: string = '';
+  private idGrupoEdicion: string;
 
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
@@ -28,7 +26,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private formBuilderUser: FormBuilder, private conexionUser: LoginService,
     private conexionGrupos: GrupoService, public alertController: AlertController,
-    private router: Router) {
+    private router: Router, private activatedRouter: ActivatedRoute) {
 
     this.registrationFormGrupo = this.formBuilder.group({
       members: [],
@@ -41,8 +39,32 @@ export class GruposDeApoyoRegistroPage implements OnInit {
       password: ['', [Validators.required, Validators.maxLength(100)]],
       createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
     });
+    this.opcionEditar();
   }
 
+  opcionEditar() {
+    this.activatedRouter.queryParamMap.subscribe(data => {
+      this.edicion = data.get('editar');
+      if (this.edicion == 'editar') {
+        this.idGrupoEdicion = data.get('idGrupo');
+        this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
+          this.conexionUser.getUserId(grupo.user).subscribe(user => {
+            this.registrationFormGrupo.setValue({
+              members: grupo.members,
+              name: grupo.name,
+              user: grupo.user,
+            });
+            this.registrationFormUser = this.formBuilderUser.group({
+              username: [user.username, [Validators.required, Validators.maxLength(50)]],
+              password: [user.password, [Validators.required, Validators.maxLength(100)]],
+              createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
+            });
+          });
+        });
+      }
+    });
+
+  }
   check() {
     return this.registrationFormGrupo.get('name').value == '' ||
       this.registrationFormUser.get('username').value == '' ||
@@ -66,27 +88,49 @@ export class GruposDeApoyoRegistroPage implements OnInit {
     formDataUser.append('username', this.registrationFormUser.get('username').value);
     formDataUser.append('password', this.registrationFormUser.get('password').value);
     formDataUser.append('createdBy', 'mi');
-    this.conexionUser.guardarUsuario(formDataUser).subscribe(
-      (data) => {
-        let postData = {
+    console.log(this.edicion);
+    if (this.edicion == 'editar') {
+      let data;
+      this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
+        this.conexionUser.updateUser(formDataUser, grupo.user).subscribe();
+        data = {
           "name": this.registrationFormGrupo.get('name').value,
           "createdBy": "mi",
-          "user": data['id'],
+          "user": grupo.user,
         }
-        this.conexionGrupos.guardarGrupo(postData).subscribe(
-          newTask => {
-            console.log(newTask);
-            this.router.navigate(['../grupos-de-apoyo']);
-          },
-          error => {
-            console.log(error);
-          }
-        );
-      },
-      error => {
-        console.log(error);
-        this.presentAlert('El nombre del usuario ya existe, por favor <strong>eliga otro nombre</strong>');
+        console.log(data)
+        this.conexionGrupos.updateGrupo(data, this.idGrupoEdicion).subscribe(de => {
+          console.log('Entro en eidtar');
+          this.router.navigate(['../grupos-de-apoyo']);
+        }, error => {
+          console.log(error)
+        });
       });
+
+    } else {
+      this.conexionUser.guardarUsuario(formDataUser).subscribe(
+        (data) => {
+          let postData = {
+            "name": this.registrationFormGrupo.get('name').value,
+            "createdBy": "mi",
+            "user": data['id'],
+          }
+          this.conexionGrupos.guardarGrupo(postData).subscribe(
+            newTask => {
+              console.log(newTask);
+              this.router.navigate(['../grupos-de-apoyo']);
+            },
+            error => {
+              console.log(error);
+            }
+          );
+        },
+        error => {
+          console.log(error);
+          this.presentAlert('El nombre del usuario ya existe, por favor <strong>eliga otro nombre</strong>');
+        });
+    }
+
   }
 
   ngOnInit() {

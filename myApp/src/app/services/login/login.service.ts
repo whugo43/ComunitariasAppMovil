@@ -21,6 +21,14 @@ export class LoginService {
     return this.http.post(path, usuario)
   }
 
+  getUserId(id: string){ 
+    return this.http.get<User>(this.api+id);
+  }
+
+  updateUser(user: any, id: any) {
+    const path = this.api + id + '/';
+    return this.http.patch(path, user);
+  }
 
 
 }

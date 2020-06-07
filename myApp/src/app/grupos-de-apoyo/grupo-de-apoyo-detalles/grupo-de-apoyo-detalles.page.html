@@ -13,38 +13,52 @@
     <ion-label>{{grupo.name}}</ion-label><br><br>
 
     <ion-label><strong>Usuario:</strong></ion-label>
-    <ion-label>{{grupo.user}}</ion-label><br><br>
+    <ion-label>{{nombreUser}}</ion-label><br><br>
   </ion-grid>
-   <p class='texto_informacion_grupo'>A continuacion se listan los miembros de este grupo</p>
-  <ion-card *ngFor="let miembro of miembros">
-    <ion-item *ngIf="miembros.length != 0">
-      <ion-button fill="outline" slot="end">
-        <ion-icon name="create"></ion-icon>
-      </ion-button>
 
-      <ion-button class='button_trash' fill="outline" slot="end" color="danger">
-        <ion-icon class='icon_trash' name="trash"></ion-icon>
-      </ion-button>
+  <p class='texto_informacion_grupo'>A continuacion se listan los miembros de este grupo</p>
 
-    </ion-item>
+  <ion-item>
+    <ion-button slot="end" (click)="irARegistro(grupo.id)">Añadir un nuevo miembro
+      <ion-icon name="person-add"></ion-icon>
+    </ion-button>
+  </ion-item>
 
-    <ion-grid  *ngIf="miembros.length != 0">
-      <ion-row>
-        <ion-label><b>Nombre:</b>{{miembro.firstName}}</ion-label><br><br>
-      </ion-row>
+  <div class="scroll" scrollY="true">
+    <ion-card *ngFor="let miembro of miembros">
 
-      <ion-row>
-        <ion-label><b>Apellido:</b>{{miembro.lastName}}</ion-label><br><br>
-      </ion-row>
+      <ion-item *ngIf="miembros.length != 0">
+        <ion-button fill="outline" slot="end" (click)="opcionEditar(miembro.id)">
+          <ion-icon name="create"></ion-icon>
+        </ion-button>
 
-      <ion-row>
-        <ion-label><b>Telefono:</b>{{miembro.phoneNumber}}</ion-label><br><br>
-      </ion-row>
+        <ion-button class='button_trash' fill="outline" slot="end" color="danger"
+          (click)='presentAlertConfirm(miembro.id)'>
+          <ion-icon class='icon_trash' name="trash"></ion-icon>
+        </ion-button>
+      </ion-item>
 
-    </ion-grid>
-  </ion-card>
+      <ion-grid *ngIf="miembros.length != 0">
+        <ion-row>
+          <ion-label><b>Nombre:</b>{{miembro.firstName}}</ion-label><br><br>
+        </ion-row>
+
+        <ion-row>
+          <ion-label><b>Apellido:</b>{{miembro.lastName}}</ion-label><br><br>
+        </ion-row>
+
+        <ion-row>
+          <ion-label><b>Telefono:</b>{{miembro.phoneNumber}}</ion-label><br><br>
+        </ion-row>
+      </ion-grid>
+
+    </ion-card>
+  </div>
+
   <ion-card *ngIf="miembros.length == 0">
-    <ion-label ><p  class='texto_vacio'>Vacio no hay miembros registrados</p></ion-label>
+    <ion-label>
+      <p class='texto_vacio'>Vacio <br>No hay miembros registrados</p>
+    </ion-label>
     <ion-img class='imagen_vacio' src="../../assets/icon/icons8-empty-box-64.png"></ion-img>
 
   </ion-card>

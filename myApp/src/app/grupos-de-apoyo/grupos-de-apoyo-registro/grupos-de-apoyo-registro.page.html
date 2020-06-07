@@ -3,7 +3,9 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/grupos-de-apoyo"></ion-back-button>
     </ion-buttons>
-    <ion-title>Registro</ion-title>
+    <ion-title *ngIf="edicion!='editar'">Registro</ion-title>
+    <ion-title *ngIf="edicion=='editar'">Editar</ion-title>
+
   </ion-toolbar>
 </ion-header>
 
@@ -24,16 +26,19 @@
           <ion-input inputmode="text" formControlName="username"></ion-input>
         </ion-item>
 
-        <ion-item>
+        <ion-item *ngIf="edicion!='editar'">
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input [type]="passwordType" formControlName="password" placeholder="Ingrese la contraseña"></ion-input>
         </ion-item>
-          <ion-checkbox (click)='hideShowPassword()' class='icon-mostrar-contrasenia'></ion-checkbox><ion-label class='text-mostrar-contrasenia'>Mostrar contraseña</ion-label> 
+          <ion-checkbox *ngIf="edicion!='editar'" (click)='hideShowPassword()' class='icon-mostrar-contrasenia'></ion-checkbox><ion-label *ngIf="edicion!='editar'" class='text-mostrar-contrasenia'>Mostrar contraseña</ion-label> 
       </ion-card>
     </form>
 
-    <ion-button expand='full' [disabled]="check()" (click)='sendData()'>
+    <ion-button expand='full' [disabled]="check()" (click)='sendData()' *ngIf="edicion!='editar'">
       Registrar Grupo<ion-icon slot="end" name="create"></ion-icon >
+    </ion-button>
+    <ion-button expand='full' [disabled]="check()" (click)='sendData()' *ngIf="edicion=='editar'">
+      Guardar Edicion<ion-icon slot="end" name="create"></ion-icon >
     </ion-button>
 
   </form>

@@ -34,6 +34,7 @@ export class GruposDeApoyoPage implements OnInit {
           text: 'Eliminar',
           handler: () => {
             this.apiGrupoApoyo.deleteGrupo(id);
+            this.ngOnInit();
           }
         }
       ]
@@ -49,6 +50,14 @@ export class GruposDeApoyoPage implements OnInit {
    });
   }
 
+  editar(id:string){
+    this.router.navigate(['./grupos-de-apoyo/grupos-de-apoyo-registro'], {
+      queryParams: {
+        idGrupo:id,
+        editar:'editar',
+      }
+    });
+  }
   obtenerGruposdeapoyo() {
     this.gruposDeApoyo=[];
     this.apiGrupoApoyo.getGrupo().subscribe(grupos => {
@@ -83,7 +92,7 @@ export class GruposDeApoyoPage implements OnInit {
       queryParams: {
         idGrupo:id
       }
-    })
+    });
   }
 
 

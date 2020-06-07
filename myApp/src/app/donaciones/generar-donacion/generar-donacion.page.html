@@ -38,7 +38,7 @@
    
       <ion-item>
         <ion-label>Voluntario</ion-label>
-        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
+        <ion-select placeholder="Seleccione uno" value="1" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
             <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.id}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -82,7 +82,7 @@
     </ion-list>
 
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/donaciones" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block">
       Guardar
       </ion-button>
     </div>

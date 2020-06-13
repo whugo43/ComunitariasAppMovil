@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'generarvolunteer',
     loadChildren: () => import('./generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+  },  {
+    path: 'editarvolunteer',
+    loadChildren: () => import('./editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule)
   }
+
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from 'src/app/services/provider/provider.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-generarproveedor',
@@ -19,7 +20,10 @@ export class GenerarproveedorPage implements OnInit {
     id:string;
     
     providers: any ={};
-    constructor(public providerservice: ProviderService) { }
+    constructor(public providerservice: ProviderService,
+                public router: Router
+      
+      ) { }
 
     ngOnInit() {  
     }
@@ -32,9 +36,10 @@ export class GenerarproveedorPage implements OnInit {
     email: this.formularios.email,
     list:this.formularios.list
     };
-    this.providerservice.postProvider(Provider).subscribe(
+    this.providerservice.postProvider(this.formularios).subscribe(
         (newTask)=>{console.log(newTask);}
     );
+    this.router.navigateByUrl('/provider')
     }
 }
 

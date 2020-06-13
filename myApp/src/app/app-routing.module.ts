@@ -116,7 +116,7 @@ const routes: Routes = [
   },
 
   {
-    path: 'proveedor',
+    path: 'provider',
     children:[
       {
         path:'',

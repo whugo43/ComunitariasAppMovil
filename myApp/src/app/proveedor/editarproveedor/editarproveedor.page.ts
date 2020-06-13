@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {ProviderService} from '../../services/provider/provider.service';
-import {Provider} from '../../interfaces/provider';
 @Component({
   selector: 'app-editarproveedor',
   templateUrl: './editarproveedor.page.html',
@@ -20,16 +19,16 @@ export class EditarproveedorPage implements OnInit {
     provider=[];
     id: string;
     
-  constructor(private activateRoute: ActivatedRoute,public providerservice:ProviderService) { }
+  constructor(private activateRoute: ActivatedRoute, public providerservice: ProviderService) { }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
       const providerId = paramMap.get('providerId')
-      this.id = providerId
+      this.id = providerId;
       this.providerservice.getProviderId(providerId)
       .subscribe(
-      (data)=>{this.provider=data},
-      (error)=>{console.log(error);}
+      (data) => {this.provider = data;},
+      (error) => {console.log(error);}
       )
     });
   }
@@ -42,9 +41,9 @@ export class EditarproveedorPage implements OnInit {
       direction: this.formularios.direction,
       cell:this.formularios.cell,
       email: this.formularios.email,
-      list:this.formularios.list,
+      list:this.formularios.list
     };
-    this.providerservice.updateProvider(provider,this.id)
+    this.providerservice.updateProvider(provider, this.id)
       .subscribe(
       success => console.log('done'),
        error => console.log(error)

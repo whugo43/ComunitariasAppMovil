@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
 import {Provider} from '../../interfaces/provider';
-import { $$ } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { $$ } from 'protractor';
 export class ProviderService {
   private api='http://127.0.0.1:8000/api/provider/';
   constructor(private http:HttpClient) {
-   console.log("proveedores");
+   console.log("providers");
   }
   
   getProvider(){
@@ -44,7 +43,6 @@ export class ProviderService {
     {
       state:'0'
     })
-
   }  
 
 }

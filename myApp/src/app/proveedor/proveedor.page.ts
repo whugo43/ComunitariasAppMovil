@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ProviderService} from '../services/provider/provider.service';
+import { $$ } from 'protractor';
 
 
 @Component({
@@ -14,7 +15,6 @@ export class ProveedorPage implements OnInit {
 
   constructor(public alertController: AlertController,
               public providerservice:ProviderService) {
-
    }
 
   ngOnInit() {
@@ -26,7 +26,6 @@ export class ProveedorPage implements OnInit {
      
     
   }
-  
     deleteProvider(id: string){
       this.providerservice.deleteProvider(id).
       subscribe(

@@ -8,6 +8,6 @@ export interface Provider {
     list: string;
 }
 
-export interface Provider{
-    Provider: Array<Provider>
+export interface Providers{
+    providers: Array<Provider>
  }

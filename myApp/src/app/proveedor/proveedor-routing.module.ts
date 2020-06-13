@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'generarproveedor',
     loadChildren: () => import('./generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
+  },  {
+    path: 'editarproveedor',
+    loadChildren: () => import('./editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule)
   }
+
 ];
 
 @NgModule({

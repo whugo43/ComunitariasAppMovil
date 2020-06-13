@@ -70,7 +70,7 @@ export class GenerarDonacionPage implements OnInit {
     (error)=>{console.log(error)}
     );
     
-    this.providerservice.getPoviders()
+    this.providerservice.getProvider()
     .subscribe(
     (data)=>{this.providers=data},
     (error)=>{console.log(error)}

@@ -9,7 +9,6 @@ import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-clas
 export class CentroAcopioService {
   private api = 'http://127.0.0.1:8000/api/collection-center/';
   constructor(private http: HttpClient) {
-   
   }
 
   getCentrosAcopios() {

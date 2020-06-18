@@ -27,6 +27,7 @@ export class GenerarDonacionPage implements OnInit {
   gruposApoyos;
 
   formData= new FormData();
+  users:[any]
   formularios={
     voluntario:[],
     grupoapoyo:[], 
@@ -102,16 +103,24 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
     this.formData.append("createdBy", this.formularios.createdBy)
-    //this.formData.append("volunteer", this.formularios.voluntario)
-    //this.formData.append("centrosAcopios", this.formularios.grupoapoyo)
+    
 
-    console.log(this.formularios.voluntario)
-    console.log(this.formularios.centroacopio)
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
-      console.log("esta lleno")
+      
+      let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
+      for (let index = 0; index < user.length; index++) {
+        //this.users.push(Number(user[index]))        
+      }
+      console.log(this.users)
+      
+
+
+      this.formData.append("users","1")
+
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}
       );
+
       this.router.navigateByUrl('/donaciones');
     }
     else{

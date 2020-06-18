@@ -27,13 +27,8 @@ export class DonacionesPage implements OnInit {
 
   ngOnInit() {
     
-    this.opcionfiltro=''
-
-    this.centroAcopioservice.getCentrosAcopios()
-    .subscribe(
-    (data)=>{this.centrosAcopios=data},
-    (error)=>{console.log(error)}
-    );
+    this.opcionfiltro='';
+    this.flitrarpor();
     this.donacionesService.getDonaciones()
     .subscribe(
       (data)=>{this.donaciones=data},
@@ -47,21 +42,34 @@ export class DonacionesPage implements OnInit {
       );
   }
   
-
-
-  viewprovider(provider:string){
- 
+  flitrarpor(){
+    this.centroAcopioservice.getCentrosAcopios()
+    .subscribe(
+    (data)=>{this.centrosAcopios=data},
+    (error)=>{console.log(error)}
+    );
   }  
+  onChange(filtro){
+    this.opcionfiltro=filtro
+  }
 
   cambiarestado(id: string){
-    this.donacionesService.CambiarEstadoDonaciones(id).
-    subscribe(
-      (data)=>{console.log(data)},
-      (error)=>{console.log(error);}
-      );   
-    this.ngOnInit(); 
-    //setTimeout(this.ngOnInit,300); 
-    
+  let cont=1;  
+  while(cont==1){
+    if (cont==1){
+      this.donacionesService.CambiarEstadoDonaciones(id).
+      subscribe(
+        (data)=>{console.log(data); 
+                cont=0},
+        (error)=>{console.log(error);}
+        ); 
+    }
+    if(cont!=1){  
+    console.log("inficio")
+    this.ngOnInit();
+    console.log("final")
+    } 
+  }
   }
 
   deleteDonacion(id: string){
@@ -72,15 +80,6 @@ export class DonacionesPage implements OnInit {
       );   
     this.ngOnInit();  
       
-  }
-
-  deleteUpdateDonacion(id: string){
-    this.donacionesService.updateDonaciones0(id).
-    subscribe(
-      (data)=>{console.log(data)},
-      (error)=>{console.log(error);}
-      ); 
-    this.ngOnInit();      
   }
   
   doRefresh(event) {
@@ -141,10 +140,4 @@ export class DonacionesPage implements OnInit {
     await alert.present();
   }
 
-  onChange(filtro){
-    this.opcionfiltro=filtro
-  }
-  filtro() {
-   // document.getElementById("filtro").innerHTML=
-  }
 }

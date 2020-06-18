@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProviderService } from 'src/app/services/provider/provider.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-generarproveedor',
@@ -6,28 +8,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./generarproveedor.page.scss'],
 })
 export class GenerarproveedorPage implements OnInit {
-  formData= new FormData();
-  formularios={
-    razonsocial: '',
-    direccion: '',
-    telefono:'',
+    formularios={
+    name: '',
+    direction: '',
+    cell:'',
     email:'',
-    contacto:'',
-    }
-
-    constructor( ) { }
+    description:'',
+    list:''
+    };
+    provider=[];
+    id:string;
+    
+    providers: any ={};
+    constructor(public providerservice: ProviderService,
+                public router: Router
+      
+      ) { }
 
     ngOnInit() {  
     }
 
-  postProveedor(){
-    this.formData.append("razonsocial",this.formularios.razonsocial) 
-    this.formData.append("direccion", this.formularios.direccion)
-    this.formData.append("telefono", this.formularios.telefono)
-    this.formData.append("email", this.formularios.email)
-    this.formData.append("contacto", this.formularios.contacto)
-  }
- 
-
+  postProvider() {
+    const Provider = {
+    name: this.formularios.name,
+    direction: this.formularios.direction,
+    cell:this.formularios.cell,
+    email: this.formularios.email,
+    list:this.formularios.list
+    };
+    this.providerservice.postProvider(this.formularios).subscribe(
+        (newTask)=>{console.log(newTask);}
+    );
+    this.router.navigateByUrl('/provider')
+    }
 }
 

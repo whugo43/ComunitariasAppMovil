@@ -35,7 +35,7 @@ export class DonacionesPage implements OnInit {
       (error)=>{console.log(error);}
       );
     
-      this.providerservice.getPoviders()
+      this.providerservice.getProvider()
       .subscribe(
       (data)=>{this.proveedores=data},
       (error)=>{console.log(error)}

@@ -116,11 +116,15 @@ const routes: Routes = [
   },
 
   {
-    path: 'proveedor',
+    path: 'provider',
     children:[
       {
         path:'',
         loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+      },
+      {
+        path: 'editarproveedor/:id',
+        loadChildren: () => import('./proveedor/editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule)
       },
       {
         path: 'generarproveedor',
@@ -136,7 +140,8 @@ const routes: Routes = [
   {
     path: 'generarvolunteer',
     loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
-  },  {
+  },
+  {
     path: 'scope-page',
     loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
   },

@@ -9,7 +9,7 @@ import {Provider} from '../../interfaces/provider';
 export class ProviderService {
   private api='http://127.0.0.1:8000/api/provider/';
   constructor(private http:HttpClient) {
-   console.log("providers");
+   console.log('providers');
   }
   
   getProvider(){

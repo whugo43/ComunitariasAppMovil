@@ -1,11 +1,10 @@
 export interface Provider {
     id?: string;
-    name: string;
-    direction: string;
-    cell: string;
-    email: string;
-    description: string;
-    list: string;
+    name: string,
+    address: string,
+    phoneNumber: string,
+    email: string,
+    categories: string,
 }
 
 export interface Providers{

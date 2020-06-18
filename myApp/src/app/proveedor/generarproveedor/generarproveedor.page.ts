@@ -10,11 +10,10 @@ import {Router} from '@angular/router';
 export class GenerarproveedorPage implements OnInit {
     formularios={
     name: '',
-    direction: '',
-    cell:'',
+    address: '',
+    phoneNumber:'',
     email:'',
-    description:'',
-    list:''
+    categories:'',
     };
     provider=[];
     id:string;
@@ -31,10 +30,10 @@ export class GenerarproveedorPage implements OnInit {
   postProvider() {
     const Provider = {
     name: this.formularios.name,
-    direction: this.formularios.direction,
-    cell:this.formularios.cell,
+    address: this.formularios.address,
+    phoneNumber:this.formularios.phoneNumber,
     email: this.formularios.email,
-    list:this.formularios.list
+    categories:this.formularios.categories
     };
     this.providerservice.postProvider(this.formularios).subscribe(
         (newTask)=>{console.log(newTask);}

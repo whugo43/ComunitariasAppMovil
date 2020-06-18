@@ -10,11 +10,10 @@ export class EditarproveedorPage implements OnInit {
 
   formularios={
     name: '',
-    description: '',
-    cell: '',
-    direction:'',
-    email:'',
-    list:''
+    address: '',
+    phoneNumber: '',
+    email: '',
+    categories: '',
     };
     provider=[];
     id: string;
@@ -23,13 +22,11 @@ export class EditarproveedorPage implements OnInit {
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
-      const providerId = paramMap.get('providerId')
-      this.id = providerId;
-      this.providerservice.getProviderId(providerId)
+      this.providerservice.getProvider()
       .subscribe(
-      (data) => {this.provider = data;},
-      (error) => {console.log(error);}
-      )
+      (data)=>{this.provider=data},
+      (error)=>{console.log(error)}
+      );
     });
   }
 
@@ -38,10 +35,10 @@ export class EditarproveedorPage implements OnInit {
     let provider ={
       id: this.id,
       name: this.formularios.name,
-      direction: this.formularios.direction,
-      cell:this.formularios.cell,
+      address: this.formularios.address,
+      phoneNumber:this.formularios.phoneNumber,
       email: this.formularios.email,
-      list:this.formularios.list
+      categories:this.formularios.categories
     };
     this.providerservice.updateProvider(provider, this.id)
       .subscribe(

@@ -9,11 +9,22 @@
 
 <ion-content>
   <ion-grid>
-    <ion-label><strong>Nombre:</strong></ion-label>
-    <ion-label>{{grupo.name}}</ion-label><br><br>
+    <ion-item>
+      <ion-label><strong>Nombre:</strong></ion-label>
+    <ion-label>{{grupo.name}}
+    </ion-label>
+    <ion-note class='texto_contrasenia' slot="end">Cambiar de contraseña</ion-note>
+    <br><br>
+    </ion-item>
 
-    <ion-label><strong>Usuario:</strong></ion-label>
-    <ion-label>{{nombreUser}}</ion-label><br><br>
+    <ion-item>
+      <ion-label><strong>Usuario:</strong></ion-label>
+      <ion-label>{{nombreUser}}</ion-label>
+      <ion-note class='texto_contrasenia' slot="end">Reestablecer contraseña</ion-note>
+      <br><br>
+    </ion-item>
+
+
   </ion-grid>
 
   <p class='texto_informacion_grupo'>A continuacion se listan los miembros de este grupo</p>

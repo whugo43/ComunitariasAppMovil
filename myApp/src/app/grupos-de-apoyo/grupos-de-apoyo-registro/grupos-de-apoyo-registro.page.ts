@@ -16,7 +16,9 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
   private edicion: string = '';
-  private idGrupoEdicion: string;
+  private idGrupoEdicion: string = '';
+  private opcion: string = '';
+  private formGroupContrasenia: FormGroup;
 
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
@@ -24,7 +26,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   }
 
   constructor(private formBuilder:
-    FormBuilder, private formBuilderUser: FormBuilder, private conexionUser: LoginService,
+    FormBuilder, private conexionUser: LoginService,
     private conexionGrupos: GrupoService, public alertController: AlertController,
     private router: Router, private activatedRouter: ActivatedRoute) {
 
@@ -34,7 +36,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
       user: '',
     });
 
-    this.registrationFormUser = this.formBuilderUser.group({
+    this.registrationFormUser = this.formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.maxLength(100)]],
       createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
@@ -133,8 +135,50 @@ export class GruposDeApoyoRegistroPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  crearFormContrasenia() {
+    this.formGroupContrasenia = this.formBuilder.group({
+      currentPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      newPassword: ['', [Validators.required, Validators.maxLength(100)]],
+      newPassword2: ['', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
 
+  checkPassword() {
+    if (this.formGroupContrasenia.get('currentPassword').value ==
+      this.formGroupContrasenia.get('newPassword').value) {
+      return true;
+    }
+    this.presentAlert("<strong>Las contraseñas no coinciden</strong>");
+    return false;
+  }
+
+  ngOnInit() {
+    this.activatedRouter.queryParamMap.subscribe(data => {
+      this.idGrupoEdicion = data.get('grupoId');
+      this.opcion = data.get('opcion');
+
+      this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
+        var userId = grupo.user;
+        this.conexionUser.getUserId(userId).subscribe(user => {
+          var dataUser = {
+            
+          }
+          //cambio de contraseña
+          if (this.opcion == 'cambio') {
+            this.edicion == 'no';
+
+
+
+
+            //resstablacer contraseña
+          } else if (this.opcion == 'reestablecer') {
+            this.edicion == 'no';
+
+          }
+        });
+      });
+
+    });
   }
 
 }

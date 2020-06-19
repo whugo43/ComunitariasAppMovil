@@ -116,7 +116,7 @@ export class GenerarDonacionPage implements OnInit {
       
 
 
-     this.formData.append("users[]","[1,2,3,4]")
+     this.formData.append("users","1")
 
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}

@@ -41,9 +41,12 @@
         </ion-label>
       </ng-container>
 
-      <ng-container *ngIf="donacion.state == 1">  
+      <ng-container *ngIf="donacion.state == 1">
+        <ion-button fill="outline" (click)="mostrarpop($event,donacion.id)">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+        </ion-button>  
 
-        <ion-button fill="outline" slot="end" [routerLink]="['editardonacion',donacion.id]">
+        <!--<ion-button fill="outline" slot="end" [routerLink]="['editardonacion',donacion.id]">
           <ion-icon name="create"></ion-icon >
         </ion-button>
 
@@ -53,7 +56,7 @@
 
         <ion-button color="danger" fill="outline" slot="end" (click)="presentAlertElimnarDonacion(donacion.id)">
           <ion-icon name="trash"></ion-icon>
-        </ion-button>
+        </ion-button>-->
       </ng-container>
     </ion-item>
 

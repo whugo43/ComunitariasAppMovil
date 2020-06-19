@@ -20,27 +20,16 @@ export class DonacionComponent implements OnInit {
               }
 
   ngOnInit() {
-    console.log(this.id)
   }
 
   cambiarestado(){
 
-    let cont=1;  
-    while(cont==1){
-      if (cont==1){
-        this.donacionesService.CambiarEstadoDonaciones(this.id).
-        subscribe(
-          (data)=>{console.log(data); 
-                  cont=0},
-          (error)=>{console.log(error);}
-          ); 
-      }
-      if(cont!=1){  
-      console.log("inficio")
-      this.ngOnInit();
-      console.log("final")
-      } 
-    }
+    this.donacionesService.CambiarEstadoDonaciones(this.id).
+    subscribe(
+      (data)=>{console.log(data);},
+      (error)=>{console.log(error);}
+    ); 
+    this.router.navigateByUrl('/donaciones');
     }
 
   deleteDonacion(){
@@ -49,7 +38,7 @@ export class DonacionComponent implements OnInit {
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
       );   
-    this.ngOnInit();     
+    this.router.navigateByUrl('/donaciones');    
   }
 
   async presentAlertCambiarestado() {
@@ -102,9 +91,6 @@ export class DonacionComponent implements OnInit {
     await alert.present();
   }
 
-  editarDonacion(){
-    this.router.navigateByUrl('/donaciones/'+this.id);
-  }
 
 
 }

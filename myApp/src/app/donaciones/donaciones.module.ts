@@ -8,6 +8,8 @@ import { DonacionesPageRoutingModule } from './donaciones-routing.module';
 
 import { DonacionesPage } from './donaciones.page';
 
+import {DonacionComponent} from '../componentes/donacion/donacion.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,8 @@ import { DonacionesPage } from './donaciones.page';
     IonicModule,
     DonacionesPageRoutingModule
   ],
-  declarations: [DonacionesPage]
+  declarations: [DonacionesPage,  DonacionComponent],
+  entryComponents:[DonacionComponent]
+
 })
 export class DonacionesPageModule {}

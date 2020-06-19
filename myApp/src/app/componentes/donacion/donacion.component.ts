@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import { AlertController, NavParams } from '@ionic/angular';
+import { AlertController, NavParams, PopoverController } from '@ionic/angular';
 import { DonacionesService } from '../../services/donaciones/donaciones.service';
 
 @Component({
@@ -14,7 +14,8 @@ export class DonacionComponent implements OnInit {
 
   constructor(public router: Router,
               public alertController: AlertController,
-              navParams: NavParams,
+              private popoverController: PopoverController,
+              private navParams: NavParams,
               public donacionesService:DonacionesService) { 
                 this.id = navParams.get('id');
               }
@@ -29,6 +30,7 @@ export class DonacionComponent implements OnInit {
       (data)=>{console.log(data);},
       (error)=>{console.log(error);}
     ); 
+    this.DismissClick()
     this.router.navigateByUrl('/donaciones');
     }
 
@@ -37,7 +39,8 @@ export class DonacionComponent implements OnInit {
     subscribe(
       (data)=>{console.log(data)},
       (error)=>{console.log(error);}
-      );   
+      );
+    this.DismissClick()  
     this.router.navigateByUrl('/donaciones');    
   }
 
@@ -52,7 +55,7 @@ export class DonacionComponent implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            this.DismissClick()  
           }
         }, {
           text: 'Ok',
@@ -77,7 +80,7 @@ export class DonacionComponent implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: (blah) => {
-            console.log('Confirm Cancel: blah');
+            this.DismissClick()  
           }
         }, {
           text: 'Ok',
@@ -91,7 +94,9 @@ export class DonacionComponent implements OnInit {
     await alert.present();
   }
 
-
-
+  async DismissClick() {
+    await this.popoverController.dismiss();
+  }
+  
 }
 

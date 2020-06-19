@@ -1,11 +1,16 @@
 
-  <ion-button fill="outline" slot="end" [routerLink]="['donaciones','editardonacion',id]">
+<ion-list lines="full" class="ion-no-margin ion-no-padding">
+ <ion-item>
+  <ion-button fill="outline" horizontal="start"  slot="end"  (click)="DismissClick()" [routerLink]="['donaciones','editardonacion',id]">
     <ion-icon name="create"></ion-icon >
   </ion-button>
 
-  <ion-button color="warning" fill="outline" slot="end" (click)="presentAlertCambiarestado()">
+  <ion-button color="warning" fill="outline" horizontal="center"  slot="end"  (click)="presentAlertCambiarestado()">
     <ion-icon name="alert"></ion-icon>
   </ion-button>
-  <ion-button color="danger" fill="outline" slot="end" (click)="presentAlertElimnarDonacion()">
+
+  <ion-button color="danger" fill="outline" horizontal="end" slot="end" (click)="presentAlertElimnarDonacion()">
     <ion-icon name="trash"></ion-icon>
   </ion-button>
+  </ion-item>
+</ion-list>

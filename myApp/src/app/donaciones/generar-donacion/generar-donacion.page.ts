@@ -109,13 +109,14 @@ export class GenerarDonacionPage implements OnInit {
       
       let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
       for (let index = 0; index < user.length; index++) {
+         //this.formData.append("users", Number(user[index]));
+        
         //this.users.push(Number(user[index]))        
       }
-      console.log(this.users)
       
 
 
-      this.formData.append("users","1")
+     this.formData.append("users[]","[1,2,3,4]")
 
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}

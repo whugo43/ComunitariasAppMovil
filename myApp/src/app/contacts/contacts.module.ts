@@ -9,13 +9,17 @@ import { ContactsPageRoutingModule } from './contacts-routing.module';
 
 import { ContactsPage } from './contacts.page';
 
+import {DonacionComponent} from '../componentes/donacion/donacion.component';
+
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ContactsPageRoutingModule
+    ContactsPageRoutingModule,
+    
   ],
-  declarations: [ContactsPage]
+  declarations: [ContactsPage, DonacionComponent],
+  entryComponents:[DonacionComponent]
 })
 export class ContactsPageModule {}

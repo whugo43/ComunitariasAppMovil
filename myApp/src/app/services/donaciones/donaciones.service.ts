@@ -27,6 +27,7 @@ export class DonacionesService {
   updateDonaciones(donaciones,id: string){
     const path= this.api+id+'/';
     return this.http.patch(path,donaciones)
+    //return this.http.patch(path,{users:[1,2,3,4]})
   }
   
   deleteDonaciones(id: string){

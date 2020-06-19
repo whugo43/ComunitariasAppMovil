@@ -27,6 +27,7 @@ export class GenerarDonacionPage implements OnInit {
   gruposApoyos;
 
   formData= new FormData();
+  users:[any]
   formularios={
     voluntario:[],
     grupoapoyo:[], 
@@ -70,7 +71,7 @@ export class GenerarDonacionPage implements OnInit {
     (error)=>{console.log(error)}
     );
     
-    this.providerservice.getPoviders()
+    this.providerservice.getProvider()
     .subscribe(
     (data)=>{this.providers=data},
     (error)=>{console.log(error)}
@@ -102,16 +103,25 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
     this.formData.append("createdBy", this.formularios.createdBy)
-    //this.formData.append("volunteer", this.formularios.voluntario)
-    //this.formData.append("centrosAcopios", this.formularios.grupoapoyo)
+    
 
-    console.log(this.formularios.voluntario)
-    console.log(this.formularios.centroacopio)
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
-      console.log("esta lleno")
+      
+      let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
+      for (let index = 0; index < user.length; index++) {
+         //this.formData.append("users", Number(user[index]));
+        
+        //this.users.push(Number(user[index]))        
+      }
+      
+
+
+     this.formData.append("users[]","[1,2,3,4]")
+
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}
       );
+
       this.router.navigateByUrl('/donaciones');
     }
     else{

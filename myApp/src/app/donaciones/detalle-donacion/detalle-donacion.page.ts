@@ -42,7 +42,7 @@ export class DetalleDonacionPage implements OnInit {
       (data)=>{this.categoria=data},
       (error)=>{console.log(error);}
     );
-    this.providerservice.getPoviderId(idproveedor)
+    this.providerservice.getProviderId(idproveedor)
     .subscribe(
       (data)=>{this.proveedor=data},
       (error)=>{console.log(error);}

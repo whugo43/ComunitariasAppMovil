@@ -107,7 +107,7 @@ export class GenerarDonacionPage implements OnInit {
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
       
       let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
-      for (let index = 0; index < user.length; index++) {screenX
+      for (let index = 0; index < user.length; index++) {
         this.formData.append('users', user[index]);      
       }
 

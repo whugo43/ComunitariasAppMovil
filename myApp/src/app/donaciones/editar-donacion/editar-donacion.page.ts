@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from "@angular/common";
-import {ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import { DonacionesService } from '../../services/donaciones/donaciones.service';
 import {CategoriaService} from '../../services/categoria/categoria.service';
 import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
+import { AlertController } from '@ionic/angular';
 
 
 
@@ -41,7 +42,9 @@ export class EditarDonacionPage implements OnInit {
     }
   
 
-  constructor(private datePipe: DatePipe,
+  constructor(public router: Router,
+              private datePipe: DatePipe,
+              public alertController: AlertController,
               private activateRoute: ActivatedRoute,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
@@ -98,7 +101,7 @@ export class EditarDonacionPage implements OnInit {
 
     
     if(this.formularios.BeginDate.length>0){
-      this.formData.append('beginDate',this.formularios.BeginDate)
+      this.formData.append('beginDate',this.datePipe.transform(this.formularios.BeginDate,"yyyy-MM-dd"))
       console.log(this.formularios.BeginDate)
     }
     
@@ -109,14 +112,21 @@ export class EditarDonacionPage implements OnInit {
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
-    //this.formData.append("volunteer", this.formularios.voluntario)
-    //this.formData.append("centrosAcopios", this.formularios.grupoapoyo)
+    if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
+      
+      let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
+      for (let index = 0; index < user.length; index++) {
+        this.formData.append('users', user[index]);      
+      }
+  
 
-    console.log(this.formularios.voluntario)
-    console.log(this.formularios.grupoapoyo)
     this.donacionesService.updateDonaciones(this.formData,this.id).subscribe(
       (newTask)=>{console.log(newTask);}
     );
+    this.router.navigateByUrl('/donaciones');
+    }else{
+      this.presentAlert()
+    }
   }
 
   changeListener($event) : void {
@@ -136,8 +146,27 @@ export class EditarDonacionPage implements OnInit {
         reader.readAsDataURL(file);
     }
   }
+
   removePic() {
     this.imageSrc = null;
   }
-  
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+
+      header: 'Debe seleccionar al menos un voluntario o un grupo de apoyo como responsable!',
+      buttons: [
+        {
+          text: 'ok',
+          role: 'ok',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+ 
 }

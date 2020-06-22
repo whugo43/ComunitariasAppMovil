@@ -10,8 +10,7 @@ import {CategoriaService} from '../../services/categoria/categoria.service';
 export class GenerarCategoriaPage implements OnInit {
   formularios={
   name: '',
-  description: '',
-  createdBy: ''
+  description: ''
   }
   
   categorias: any={};
@@ -25,7 +24,7 @@ export class GenerarCategoriaPage implements OnInit {
     const Categoria={
     name: this.formularios.name,
     description:this.formularios.description,
-    createdBy: this.formularios.createdBy
+    createdBy: 'Hugo Wong'
     };
     
     this.categoriaservice.postCategorias(Categoria).subscribe(

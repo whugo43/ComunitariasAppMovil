@@ -18,8 +18,34 @@
           <ion-card-subtitle>Categoria: {{categoria.name}}</ion-card-subtitle>
           <ion-card-subtitle>Centro de Acopio: {{centroacopio.name}}</ion-card-subtitle>
         </ion-card-content>
+
+        <ion-card-content>
+          <ion-text color="dark">
+            <h2>Responsables</h2>
+          </ion-text>
+
+          <ion-card-subtitle>Grupos de Apoyos:</ion-card-subtitle>
+          <ng-container  *ngFor="let user of donacion.users">
+            <ng-container  *ngFor="let grupos of gruposApoyos">
+              <ng-container  *ngIf="user==grupos.user">
+                <p>{{grupos.name}}</p>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <ion-card-subtitle>Voluntarios:</ion-card-subtitle>
+          <ng-container  *ngFor="let user of donacion.users">
+            <ng-container  *ngFor="let voluntario of voluntarios">
+              <ng-container  *ngIf="user == voluntario.user">
+                <p>{{voluntario.firstName}} {{voluntario.lastName}}</p>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+        </ion-card-content>
         
         <ion-card-content>
+          <ion-card-subtitle color="dark">Descripcion:</ion-card-subtitle>
           <p>{{donacion.description}}</p>
         </ion-card-content>
 

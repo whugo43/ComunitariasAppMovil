@@ -113,10 +113,11 @@ export class GenerarDonacionPage implements OnInit {
         
         //this.users.push(Number(user[index]))        
       }
-      
 
+      const array = [ 1, 2, 3 ];
+      this.formData.append("users", JSON.stringify(array));
 
-     this.formData.append("users","1")
+     //this.formData.append("users","1")
 
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}

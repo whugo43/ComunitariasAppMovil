@@ -5,6 +5,8 @@ import { DonacionesService } from '../../services/donaciones/donaciones.service'
 import {CategoriaService} from '../../services/categoria/categoria.service';
 import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
+import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
+import {GrupoService} from '../../services/grupo-service/grupo.service';
 
 @Component({
   selector: 'app-detalle-donacion',
@@ -16,13 +18,17 @@ export class DetalleDonacionPage implements OnInit {
   categoria=[];
   proveedor=[];
   centroacopio=[];
+  voluntarios;
+  gruposApoyos;
 
   constructor(private datePipe: DatePipe,
     private activateRoute: ActivatedRoute,
     public donacionesService:DonacionesService,
     public categoriaservice: CategoriaService,
     public providerservice: ProviderService,
-    public centroAcopioservice: CentroAcopioService) { }
+    public centroAcopioservice: CentroAcopioService,
+    public voluntariosvervice: VoluntariosService,
+    public gruposervice: GrupoService) { }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -34,6 +40,19 @@ export class DetalleDonacionPage implements OnInit {
       (error)=>{console.log(error);}
       )
     });
+
+    this.gruposervice.getGrupo()
+    .subscribe(
+    (data)=>{this.gruposApoyos=data},
+    (error)=>{console.log(error)}
+    );
+
+    this.voluntariosvervice.getVoluntarios()
+    .subscribe(
+    (data)=>{this.voluntarios=data},
+    (error)=>{console.log(error)}
+    );
+
   }
 
   view(idcategoria, idproveedor, idcentroacopio){

@@ -40,6 +40,7 @@ const routes: Routes = [
     path: 'generar-categoria',
     loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   },
+
   {
     path: 'centro-acopio',
     children:[
@@ -52,7 +53,8 @@ const routes: Routes = [
         loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
       }
   ]
-  },  
+  },
+
   {
     path: 'campaign',
     children:[
@@ -128,7 +130,6 @@ const routes: Routes = [
       }
     ]
   },
-// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
   {
     path: 'volunteer',
@@ -140,11 +141,11 @@ const routes: Routes = [
 
       {
         path: 'editarvolunteer/:id',
-        loadChildren: () => import('./donaciones/editar-donacion/editar-donacion.module').then( m => m.EditarDonacionPageModule)
+        loadChildren: () => import('./volunteer/editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule)
       },
       {
-        path: 'detalledonacion/:id',
-        loadChildren: () => import('./donaciones/detalle-donacion/detalle-donacion.module').then( m => m.DetalleDonacionPageModule)
+        path: 'detallevolunteer/:id',
+        loadChildren: () => import('./volunteer/detallevolunteer/detallevolunteer.module').then( m => m.DetallevolunteerPageModule)
       },
       {
         path: 'generar-volunteer',
@@ -157,7 +158,6 @@ const routes: Routes = [
     path: 'scope-page',
     loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
   },
-
 
 ];
 @NgModule({

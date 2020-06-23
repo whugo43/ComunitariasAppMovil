@@ -14,6 +14,10 @@ const routes: Routes = [
   },  {
     path: 'editarvolunteer',
     loadChildren: () => import('./editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule)
+  },
+  {
+    path: 'detallevolunteer',
+    loadChildren: () => import('./detallevolunteer/detallevolunteer.module').then( m => m.DetallevolunteerPageModule)
   }
 
 ];

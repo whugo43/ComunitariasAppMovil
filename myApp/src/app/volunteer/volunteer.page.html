@@ -25,7 +25,7 @@
  
   <ion-card *ngFor="let volunteer of volunteers; let index= i">
     <ion-item>
-      <ion-label [routerLink]="['detallecampaign',volunteer.id]">{{volunteer.firstName}} {{volunteer.lastName}}</ion-label>
+      <ion-label [routerLink]="['detallevolunteer',volunteer.id]">{{volunteer.firstName}} {{volunteer.lastName}}</ion-label>
 
       <ion-button fill="outline" slot="end" [routerLink]="['editarvolunteer',volunteer.id]">
         <ion-icon name="create"></ion-icon >

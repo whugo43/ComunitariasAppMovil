@@ -7,46 +7,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <!--<ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">proveedores</ion-title>
-    </ion-toolbar>
-  </ion-header>-->
-
- <!----<ion-grid>
-    <ion-row>
-      <ion-col size="10" size-md-10>
-       <p>buscar</p>
-      </ion-col>
-      <ion-col size="2" size-md>
-        <p>boton</p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>-->
-<!-- <ion-button shape="round" expand="block"size="small">Agregar</ion-button>--> 
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="/voluntarios" routerDirection="root">
+<ion-content >
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" [routerLink]="['generar-volunteer']" routerDirection="root">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-
-  <ion-card *ngFor="let volunteer of volunteers">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"
+      refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+ 
+  <ion-card *ngFor="let volunteer of volunteers; let index= i">
     <ion-item>
-      <ion-label>volunteer: {{volunteer.provider}}</ion-label>
-      <ion-button fill="outline" slot="end">View</ion-button>
+      <ion-label [routerLink]="['detallecampaign',volunteer.id]">{{volunteer.firstName}} {{volunteer.lastName}}</ion-label>
+
+      <ion-button fill="outline" slot="end" [routerLink]="['editarvolunteer',volunteer.id]">
+        <ion-icon name="create"></ion-icon >
+      </ion-button>
+
+      <ion-button fill="outline" slot="end" color="danger" (click)="presentAlertElimnarVolunteer(volunteer.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
     </ion-item>
     <ion-card-content>
-     <p>{{volunteer.description}}</p>
-     <p>estate: {{volunteer.state}}</p>
-     <p>createdAt: {{volunteer.createdAt}}</p>
-     <p>createdAt: {{volunteer.createdBy}}</p>
-     <p>volunteer: {{volunteer.provider}}</p>
-  
+     <p>{{campaign.social}}</p>
     </ion-card-content>
   </ion-card>
-
-
+ 
 </ion-content>

@@ -17,7 +17,7 @@ export class VoluntariosService {
     return this.api;
   }
 
-  guardarVoluntario(Grupo) {
+  postVoluntario(Grupo) {
     const path= this.api;
     return this.http.post(path,Grupo)
   }
@@ -27,11 +27,8 @@ export class VoluntariosService {
   }
 
   deletevoluntario(id: string){
-    const path=`${this.api}${id}`;
-    console.log(path);
-    return this.http.delete(path).subscribe(
-      resp => console.log('eliminado'),
-      error => console.log('error occur, delete fail'));
+    const path=  `${this.api}${id}`;
+    return this.http.delete(path)
   }
 
   updateVoluntario(grupo:any,id:any){

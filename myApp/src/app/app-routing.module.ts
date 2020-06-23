@@ -24,10 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
   },
   {
-    path: 'empresas',
-    loadChildren: () => import('./empresas/empresas.module').then( m => m.EmpresasPageModule)
-  },
-  {
     path: 'categoria',
     children:[
       {
@@ -132,15 +128,31 @@ const routes: Routes = [
       }
     ]
   },
+// jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
 
   {
     path: 'volunteer',
-    loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+      },
+
+      {
+        path: 'editarvolunteer/:id',
+        loadChildren: () => import('./donaciones/editar-donacion/editar-donacion.module').then( m => m.EditarDonacionPageModule)
+      },
+      {
+        path: 'detalledonacion/:id',
+        loadChildren: () => import('./donaciones/detalle-donacion/detalle-donacion.module').then( m => m.DetalleDonacionPageModule)
+      },
+      {
+        path: 'generar-volunteer',
+        loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+      }
+    ]
   },
-  {
-    path: 'generarvolunteer',
-    loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
-  },
+  
   {
     path: 'scope-page',
     loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)

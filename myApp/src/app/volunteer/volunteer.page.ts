@@ -41,7 +41,7 @@ volunteers
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
 
-      header: 'Esta seguro que desea eliminar esta campaña!',
+      header: 'Esta seguro que desea eliminar este voluntario!',
       buttons: [
         {
           text: 'Cancel',

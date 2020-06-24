@@ -22,6 +22,7 @@ import { LoginService } from './services/login/login.service';
 import {ScopeService} from './services/Scope/scope.service';
 import {ProviderService} from './services/provider/provider.service';
 import {VoluntariosService} from './services/voluntarios/voluntarios.service';
+import {ActivityService} from './services/activity/activity.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -40,7 +41,8 @@ import {VoluntariosService} from './services/voluntarios/voluntarios.service';
     ScopeService,
     LoginService,
     ProviderService,
-    VoluntariosService
+    VoluntariosService,
+    ActivityService
     ],
 
   bootstrap: [AppComponent]

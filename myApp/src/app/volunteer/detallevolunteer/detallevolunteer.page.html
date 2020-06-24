@@ -1,9 +1,42 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>detallevolunteer</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/volunteer"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>Detalle</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{volunteer.firstName}} {{volunteer.lastName}}</ion-card-title>
+        </ion-card-header>
 
+        <ion-card-content>
+        <ion-card-subtitle color="dark">Social: </ion-card-subtitle>
+          {{volunteer.social}}
+        </ion-card-content>
+
+        <ion-card-content>
+        <ion-card-subtitle color="dark">Calendario: </ion-card-subtitle>
+          {{volunteer.schedule}}
+        </ion-card-content>
+
+        <ion-card-content>
+         <ion-card-subtitle color="dark">Telefono: </ion-card-subtitle>
+          {{volunteer.phoneNumber}}
+        </ion-card-content>
+
+        <ion-card-content>  
+          <ion-card-subtitle color="dark">Actividades: </ion-card-subtitle>
+          <ng-container *ngFor="let volunt of volunteer.activities">
+            <ng-container *ngFor="let activity of activities">
+              <ion-card-subtitle *ngIf="activity.id == volunt">{{activity.name}}</ion-card-subtitle>
+             </ng-container>
+          </ng-container>
+        </ion-card-content>   
+
+      </ion-card>
 </ion-content>

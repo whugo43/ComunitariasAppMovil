@@ -9,13 +9,18 @@ import { ActivityService } from 'src/app/services/activity/activity.service';
 })
 export class GenerarvolunteerPage implements OnInit {
   activities;
+  users;
+  formData= new FormData();
   formularios={
     activities:[], 
     firstName: '',
     lastName: '',
     social:'',
     schedule:'',
-    phoneNumber:''
+    phoneNumber:'',
+    email:'',
+    username:'',
+    password:''
     }
 
   constructor(public alertController: AlertController,
@@ -31,7 +36,7 @@ export class GenerarvolunteerPage implements OnInit {
   }
 
   postvolunteer(){
-    
+
   }
 
 }

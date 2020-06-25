@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { DatePipe } from "@angular/common";
 import {ActivatedRoute, Router } from '@angular/router';
 import { DonacionesService } from '../../services/donaciones/donaciones.service';
@@ -46,13 +46,13 @@ export class EditarDonacionPage implements OnInit {
               private datePipe: DatePipe,
               public alertController: AlertController,
               private activateRoute: ActivatedRoute,
+              private cdRef : ChangeDetectorRef,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
               public providerservice: ProviderService,
               public centroAcopioservice: CentroAcopioService,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService) { 
-
                 this.activateRoute.paramMap.subscribe(paramMap => {
                   const donaciones = paramMap.get('id')
                   this.id = donaciones
@@ -63,6 +63,10 @@ export class EditarDonacionPage implements OnInit {
                   )
                 });  
               }
+  ngAfterContentChecked() {
+    this.cdRef.detectChanges();
+  }
+
 
   ngOnInit() {   
     this.gruposervice.getGrupo()
@@ -113,10 +117,13 @@ export class EditarDonacionPage implements OnInit {
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
-      
-      let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
-      for (let index = 0; index < user.length; index++) {
-        this.formData.append('users', user[index]);      
+
+
+      for (let index = 0; index < this.formularios.voluntario.length; index++) {
+        this.formData.append('users', this.formularios.voluntario[index]);      
+      }
+      for (let index = 0; index < this.formularios.grupoapoyo.length; index++) {
+        this.formData.append('users', this.formularios.grupoapoyo[index]);      
       }
   
 

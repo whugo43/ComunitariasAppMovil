@@ -73,7 +73,7 @@ export class UbicacionPage implements OnInit {
   }
 
   check_ubicacion() {
-    return this.lng_enviar + this.lat_enviar == 0;
+    return this.lng_enviar + this.lat_enviar == 0 || this.geolocation.getCurrentPosition()==null;
   }
 
   ionViewDidEnter() {

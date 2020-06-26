@@ -17,8 +17,6 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   passwordIcon: string = 'eye-off';
   private edicion: string = '';
   private idGrupoEdicion: string = '';
-  private opcion: string = '';
-  private formGroupContrasenia: FormGroup;
 
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
@@ -39,6 +37,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
     this.registrationFormUser = this.formBuilder.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
       password: ['', [Validators.required, Validators.maxLength(100)]],
+      email: ['', [Validators.required, Validators.maxLength(100),Validators.email]],
       createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
     });
     this.opcionEditar();
@@ -56,9 +55,10 @@ export class GruposDeApoyoRegistroPage implements OnInit {
               name: grupo.name,
               user: grupo.user,
             });
-            this.registrationFormUser = this.formBuilderUser.group({
+            this.registrationFormUser = this.formBuilder.group({
               username: [user.username, [Validators.required, Validators.maxLength(50)]],
               password: [user.password, [Validators.required, Validators.maxLength(100)]],
+              email: [user.email, [Validators.required, Validators.maxLength(100)]],
               createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
             });
           });
@@ -89,8 +89,8 @@ export class GruposDeApoyoRegistroPage implements OnInit {
     let formDataUser = new FormData();
     formDataUser.append('username', this.registrationFormUser.get('username').value);
     formDataUser.append('password', this.registrationFormUser.get('password').value);
+    formDataUser.append('email', this.registrationFormUser.get('email').value);
     formDataUser.append('createdBy', 'mi');
-    console.log(this.edicion);
     if (this.edicion == 'editar') {
       let data;
       this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
@@ -102,7 +102,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         }
         console.log(data)
         this.conexionGrupos.updateGrupo(data, this.idGrupoEdicion).subscribe(de => {
-          console.log('Entro en eidtar');
+          console.log('Entro en editar');
           this.router.navigate(['../grupos-de-apoyo']);
         }, error => {
           console.log(error)
@@ -132,53 +132,11 @@ export class GruposDeApoyoRegistroPage implements OnInit {
           this.presentAlert('El nombre del usuario ya existe, por favor <strong>eliga otro nombre</strong>');
         });
     }
-
-  }
-
-  crearFormContrasenia() {
-    this.formGroupContrasenia = this.formBuilder.group({
-      currentPassword: ['', [Validators.required, Validators.maxLength(100)]],
-      newPassword: ['', [Validators.required, Validators.maxLength(100)]],
-      newPassword2: ['', [Validators.required, Validators.maxLength(100)]],
-    });
-  }
-
-  checkPassword() {
-    if (this.formGroupContrasenia.get('currentPassword').value ==
-      this.formGroupContrasenia.get('newPassword').value) {
-      return true;
-    }
-    this.presentAlert("<strong>Las contraseñas no coinciden</strong>");
-    return false;
   }
 
   ngOnInit() {
-    this.activatedRouter.queryParamMap.subscribe(data => {
-      this.idGrupoEdicion = data.get('grupoId');
-      this.opcion = data.get('opcion');
 
-      this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
-        var userId = grupo.user;
-        this.conexionUser.getUserId(userId).subscribe(user => {
-          var dataUser = {
-            
-          }
-          //cambio de contraseña
-          if (this.opcion == 'cambio') {
-            this.edicion == 'no';
-
-
-
-
-            //resstablacer contraseña
-          } else if (this.opcion == 'reestablecer') {
-            this.edicion == 'no';
-
-          }
-        });
-      });
-
-    });
   }
+
 
 }

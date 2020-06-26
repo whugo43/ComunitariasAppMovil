@@ -19,6 +19,10 @@ const routes: Routes = [
   {
     path: 'grupos-de-apoyo-registro',
     loadChildren: () => import('./grupos-de-apoyo-registro/grupos-de-apoyo-registro.module').then( m => m.GruposDeApoyoRegistroPageModule)
+  },
+  {
+    path: 'grupo-de-apoyo-password',
+    loadChildren: () => import('./grupo-de-apoyo-password/grupo-de-apoyo-password.module').then( m => m.GrupoDeApoyoPasswordPageModule)
   }
 ];
 

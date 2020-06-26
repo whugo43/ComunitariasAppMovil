@@ -38,7 +38,6 @@ export class GenerarDonacionPage implements OnInit {
     categoria:'',
     BeginDate:'',
     ExpirationDate:'',
-    createdBy: ''
     }
 
   constructor(public router: Router,
@@ -102,21 +101,15 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
-    this.formData.append("createdBy", this.formularios.createdBy)
+    this.formData.append("createdBy", "hugo wong")
     
 
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
       
       let user = this.formularios.voluntario.concat(this.formularios.grupoapoyo)
       for (let index = 0; index < user.length; index++) {
-         //this.formData.append("users", Number(user[index]));
-        
-        //this.users.push(Number(user[index]))        
+        this.formData.append('users', user[index]);      
       }
-      
-
-
-     this.formData.append("users[]","[1,2,3,4]")
 
       this.donacionesService.postDonaciones(this.formData).subscribe(
       (newTask)=>{console.log(newTask);}

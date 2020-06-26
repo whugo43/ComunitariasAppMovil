@@ -24,10 +24,6 @@ const routes: Routes = [
     loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
   },
   {
-    path: 'empresas',
-    loadChildren: () => import('./empresas/empresas.module').then( m => m.EmpresasPageModule)
-  },
-  {
     path: 'categoria',
     children:[
       {
@@ -44,6 +40,7 @@ const routes: Routes = [
     path: 'generar-categoria',
     loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
   },
+
   {
     path: 'centro-acopio',
     children:[
@@ -56,7 +53,8 @@ const routes: Routes = [
         loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
       }
   ]
-  },  
+  },
+
   {
     path: 'campaign',
     children:[
@@ -135,17 +133,31 @@ const routes: Routes = [
 
   {
     path: 'volunteer',
-    loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+      },
+
+      {
+        path: 'editarvolunteer/:id',
+        loadChildren: () => import('./volunteer/editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule)
+      },
+      {
+        path: 'detallevolunteer/:id',
+        loadChildren: () => import('./volunteer/detallevolunteer/detallevolunteer.module').then( m => m.DetallevolunteerPageModule)
+      },
+      {
+        path: 'generar-volunteer',
+        loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+      }
+    ]
   },
-  {
-    path: 'generarvolunteer',
-    loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
-  },
+  
   {
     path: 'scope-page',
     loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
   },
-
 
 ];
 @NgModule({

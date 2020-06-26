@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
-import {ScopeService} from '../../services/Scope/scope.service';
+import {ScopeService} from '../../services/scope/scope.service';
 
 @Component({
   selector: 'app-editar-campaign',
@@ -26,7 +26,12 @@ export class EditarCampaignPage implements OnInit {
 
   constructor(private activateRoute: ActivatedRoute,
               public campaignservice: CampaignService,
-              public scopeService:ScopeService ) { }
+              public scopeService:ScopeService,
+              private cdRef : ChangeDetectorRef ) { }
+  
+  ngAfterContentChecked() {
+    this.cdRef.detectChanges();
+  }
 
 
   ngOnInit() {
@@ -40,6 +45,7 @@ export class EditarCampaignPage implements OnInit {
       (error)=>{console.log(error);}
       )
     });
+   
   }
 
    Getscopes(){
@@ -48,7 +54,7 @@ export class EditarCampaignPage implements OnInit {
       (data)=>{this.Scopes=data
       },
       (error)=>{console.log(error);}
-      );
+      ); 
   }
 
   UpdateCampaign(){   

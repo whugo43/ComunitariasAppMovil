@@ -43,11 +43,6 @@
       <ion-item *ngIf="imageSrc != null">
         <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
       </ion-item>
-
-      <ion-item>
-        <ion-label position="floating">Creado por </ion-label>
-        <ion-input required type="text"  name="createdBy" [(ngModel)]='formularios.createdBy' ></ion-input>
-      </ion-item>
     </ion-list>
 
     <div class="ion-padding">

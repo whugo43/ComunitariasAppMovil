@@ -9,7 +9,7 @@ import { ContactsPageRoutingModule } from './contacts-routing.module';
 
 import { ContactsPage } from './contacts.page';
 
-import {DonacionComponent} from '../componentes/donacion/donacion.component';
+
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import {DonacionComponent} from '../componentes/donacion/donacion.component';
     ContactsPageRoutingModule,
     
   ],
-  declarations: [ContactsPage, DonacionComponent],
-  entryComponents:[DonacionComponent]
+  declarations: [ContactsPage],
+  entryComponents:[]
 })
 export class ContactsPageModule {}

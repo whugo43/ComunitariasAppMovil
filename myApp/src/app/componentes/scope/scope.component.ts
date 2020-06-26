@@ -4,7 +4,7 @@ import { NavController } from '@ionic/angular';
 
 import { AlertController } from '@ionic/angular';
 import { ScopePagePage } from '../scope/scope-page/scope-page.page';
-import {ScopeService} from '../../services/Scope/scope.service';
+import {ScopeService} from '../../services/scope/scope.service';
 
 
 

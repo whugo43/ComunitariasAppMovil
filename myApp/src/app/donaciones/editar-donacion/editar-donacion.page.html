@@ -45,15 +45,15 @@
    
       <ion-item>
         <ion-label>Voluntario</ion-label>
-        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
-            <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.id}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
+        <ion-select placeholder="Seleccione uno" value="{{donaciones.users}}" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
+            <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.user}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label>Grupo de Apoyo</ion-label>
-        <ion-select placeholder="Seleccione uno" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
-            <ion-select-option *ngFor="let gruposApoyos of gruposApoyos" value="{{gruposApoyos.id}}">{{gruposApoyos.name}}</ion-select-option>
+        <ion-select placeholder="Seleccione uno" [value]="['1']" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
+            <ion-select-option *ngFor="let gruposApoyos of gruposApoyos" value="{{gruposApoyos.user}}">{{gruposApoyos.name}}</ion-select-option>
         </ion-select>
       </ion-item>
 
@@ -74,7 +74,7 @@
         <ion-datetime placeholder="Seleccionar fecha" display-timezone="utc" value='{{donaciones.expirationDate}}' displayFormat="YYYY-MM-DD" max="2050" [(ngModel)]='formularios.ExpirationDate' name='ExpirationDate'></ion-datetime>
       </ion-item>
 
-           <ion-item>
+      <ion-item>
         <input type='file' color="green" accept="image/*" name="photo" [(ngModel)]='formularios.photo' (change)="readURL($event);" class="fileInput"/>
         <ion-label for="file"><ion-icon name="images"></ion-icon> Imagen</ion-label>
    
@@ -91,7 +91,7 @@
     </ion-list>
     
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postDonaciones()" expand="block" routerLink="/donaciones" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postDonaciones()" expand="block">
       Guardar
       </ion-button>
     </div>

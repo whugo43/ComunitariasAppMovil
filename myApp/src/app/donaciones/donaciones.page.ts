@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, NavController, ModalController, PopoverController  } from '@ionic/angular';
+import {Router} from '@angular/router';
+
 import { DonacionesService } from '../services/donaciones/donaciones.service';
 import {CategoriaService} from '../services/categoria/categoria.service';
 import {ProviderService} from '../services/provider/provider.service';
 import {CentroAcopioService} from '../services/centro-acopio/centro-acopio.service';
-import {Router} from '@angular/router';
+
+import {DonacionComponent} from '../componentes/donacion/donacion.component';
 
 @Component({
   selector: 'app-donaciones',
@@ -12,13 +15,15 @@ import {Router} from '@angular/router';
   styleUrls: ['./donaciones.page.scss'],
 })
 export class DonacionesPage implements OnInit {
-  opcionfiltro=''
- 
+  opcionfiltro='' 
   donaciones
   proveedores
   centrosAcopios
 
-  constructor(public router: Router,
+  constructor(public popoverController: PopoverController,
+              public navCtrl: NavController,  
+              public modalController: ModalController,
+              public router: Router,
               public alertController: AlertController,
               public donacionesService:DonacionesService,
               public categoriaservice: CategoriaService,
@@ -53,6 +58,26 @@ export class DonacionesPage implements OnInit {
     this.opcionfiltro=filtro
   }
 
+  doRefresh(event) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();   
+    }, 300);
+    
+  }
+
+  async mostrarpop(ev: any,id){
+      const popover = await this.popoverController.create({
+        component: DonacionComponent,
+        //cssClass: 'my-custom-class',
+        event: ev,
+        //translucent: true
+        componentProps: {id: id, popoverController: this.popoverController} 
+      });
+      return await popover.present();
+
+  }
+
   cambiarestado(id: string){
   let cont=1;  
   while(cont==1){
@@ -82,13 +107,7 @@ export class DonacionesPage implements OnInit {
       
   }
   
-  doRefresh(event) {
-    setTimeout(() => {
-      this.ngOnInit();
-      event.target.complete();   
-    }, 300);
-    
-  }
+
 
   async presentAlertCambiarestado(id: string) {
     const alert = await this.alertController.create({

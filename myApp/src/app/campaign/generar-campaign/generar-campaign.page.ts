@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CampaignService} from '../../services/campaign/campaign.service';
-import {ScopeService} from '../../services/Scope/scope.service';
+import {ScopeService} from '../../services/scope/scope.service';
 import { AlertController } from '@ionic/angular';
 import {Campaign} from '../../interfaces/campaign';
 
@@ -18,8 +18,7 @@ export class GenerarCampaignPage implements OnInit {
     photo: '',
     name: '',
     description: '',
-    contactName:'',
-    createdBy: ''
+    contactName:''
     };
   formData= new FormData();
   
@@ -47,7 +46,7 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("description",this.formularios.description)
     this.formData.append("scope",this.formularios.scope) 
     this.formData.append("photo",this.photo) 
-    this.formData.append("createdBy", this.formularios.createdBy) 
+    this.formData.append("createdBy","hugo wong") 
 
     this.campaignservice.postCampaigns(this.formData).subscribe(
       (newTask)=>{console.log("metodo create");}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
-import {ScopeService} from '../../services/Scope/scope.service';
+import {ScopeService} from '../../services/scope/scope.service';
 
 @Component({
   selector: 'app-detalle-campaign',

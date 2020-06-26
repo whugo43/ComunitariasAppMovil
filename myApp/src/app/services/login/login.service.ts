@@ -54,9 +54,13 @@ export class LoginService {
     localStorage.removeItem("EXPIRES_IN")
   }
   
-  saveToken(token:string, expiresIn:string): void{
+  saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{
     localStorage.setItem("ACCESS_TOKEN",token)
     localStorage.setItem("EXPIRES_IN",expiresIn)
+    localStorage.setItem("USER_ROLE", userRole)
+    localStorage.setItem("USER_EMAIL", userEmail)
+    localStorage.setItem("USER_NAME", userName)
+    localStorage.setItem("USER_ID", userId)
     this.token=token;
   }
   

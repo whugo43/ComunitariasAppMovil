@@ -42,7 +42,15 @@ export class LoginPage implements OnInit {
       .subscribe(
         data => {
           let data_user = this.loginService.getDecodeAccessToken(data['token']);
-          this.loginService.saveToken(data['token'], data_user.exp);
+          console.log(data_user)
+          this.loginService.saveToken(
+              data['token'], 
+              data_user.exp, 
+              data_user.role,
+              data_user.email,
+              data_user.username,
+              data_user.user_id,
+          );
           this.router.navigateByUrl('/home');
         },
         error => this.alertaError()

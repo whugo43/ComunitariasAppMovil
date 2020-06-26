@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CampaignService} from '../../services/campaign/campaign.service';
-import {ScopeService} from '../../services/Scope/scope.service';
+import {ScopeService} from '../../services/scope/scope.service';
 import { AlertController } from '@ionic/angular';
 import {Campaign} from '../../interfaces/campaign';
 

@@ -8,3 +8,8 @@ export interface JwtResponseI {
 
     }
 }
+
+export class LoginResponse {
+    token: string;
+    username: string
+}

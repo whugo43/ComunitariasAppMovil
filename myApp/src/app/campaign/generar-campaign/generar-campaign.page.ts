@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import {Campaign} from '../../interfaces/campaign';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 @Component({
   selector: 'app-generar-campaign',
@@ -29,7 +30,8 @@ export class GenerarCampaignPage implements OnInit {
   idcreador: string;
   
 
-  constructor(public alertController: AlertController,
+  constructor(public loginService: LoginService,
+              public alertController: AlertController,
               public scopeService:ScopeService,
               public campaignservice:CampaignService,
               public voluntariosvervice: VoluntariosService,
@@ -37,6 +39,30 @@ export class GenerarCampaignPage implements OnInit {
 
   ngOnInit() {
     this.Getscopes()
+
+    this.idcreador=this.loginService.getUserIdLogin();
+    this.gruposervice.getGrupo()
+    .subscribe(
+    (data)=>{this.gruposApoyos=data;
+      for (const iterator of this.gruposApoyos) {
+        if (this.idcreador == iterator.user){
+          this.formData.append("createdBy", iterator.name)
+        }
+      }
+    },(error)=>{console.log(error)}
+    );
+    this.voluntariosvervice.getVoluntarios()
+    .subscribe(
+    (data)=>{this.voluntarios=data;
+      for (const iterator of this.voluntarios) {
+        if (this.idcreador == iterator.user){
+          this.formData.append("createdBy", iterator.firstName+" "+iterator.lastName)
+         console.log(iterator.firstName+" "+iterator.lastName);
+        }
+      }
+      
+    },(error)=>{console.log(error)}
+    );
   }
 
   Getscopes(){
@@ -53,8 +79,7 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("contactName", this.formularios.contactName) 
     this.formData.append("description",this.formularios.description)
     this.formData.append("scope",this.formularios.scope) 
-    this.formData.append("photo",this.photo) 
-    this.formData.append("createdBy","hugo wong") 
+    this.formData.append("photo",this.photo)  
 
     this.campaignservice.postCampaigns(this.formData).subscribe(
       (newTask)=>{console.log("metodo create");}

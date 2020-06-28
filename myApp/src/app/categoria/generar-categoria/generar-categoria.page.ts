@@ -34,6 +34,16 @@ export class GenerarCategoriaPage implements OnInit {
 
   ngOnInit() {
     this.idcreador=this.loginService.getUserIdLogin();
+    this.gruposervice.getGrupo()
+    .subscribe(
+    (data)=>{this.gruposApoyos=data;
+      for (const iterator of this.gruposApoyos) {
+        if (this.idcreador == iterator.user){
+          this.formData.append("createdBy", iterator.name)
+        }
+      }
+    },(error)=>{console.log(error)}
+    );
     this.voluntariosvervice.getVoluntarios()
     .subscribe(
     (data)=>{this.voluntarios=data;

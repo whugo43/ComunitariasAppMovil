@@ -74,32 +74,6 @@ export class LoginService {
     this.token=token;
   }
   getUserIdLogin(){
-    const idcreador=localStorage.getItem("USER_ID");
-
-   // this.gruposervice.getGrupo()
-   // .subscribe(
-   // (data)=>{this.gruposApoyos=data;
-    //  for (const iterator of this.gruposApoyos) {
-    //    if (idcreador == iterator.user){
-    //      return (iterator.name);
-    //    }
-    //  }
-    //},(error)=>{console.log(error)}
-    //);
-    
-
-  //  this.voluntariosvervice.getVoluntarios()
-  //  .subscribe(
-  //  (data)=>{this.voluntarios=data;
-  //    for (const iterator of this.voluntarios) {
-  //      if (idcreador == iterator.user){
-  //      return (iterator.firstName+" "+iterator.lastName);
-  //      }
-  //    }
-      
-  //  },(error)=>{console.log(error)}
-  //  ); 
-
     return localStorage.getItem("USER_ID") 
   }
   

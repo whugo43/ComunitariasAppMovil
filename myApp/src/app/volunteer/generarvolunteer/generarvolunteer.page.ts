@@ -36,6 +36,18 @@ export class GenerarvolunteerPage implements OnInit {
   }
 
   postvolunteer(){
+    console.log("hugo")
+    let formDataUser = new FormData();
+    formDataUser.append('username', this.formularios.username);
+    formDataUser.append('password', this.formularios.password);
+    formDataUser.append('email', this.formularios.email);
+    formDataUser.append('createdBy', 'mi');
+    console.log(this.formularios.username);
+    console.log(this.formularios.password);
+    console.log(this.formularios.email);
+
+
+    
 
   }
 

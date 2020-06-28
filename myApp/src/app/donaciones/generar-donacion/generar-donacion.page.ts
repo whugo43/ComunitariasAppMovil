@@ -8,6 +8,7 @@ import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
+import { LoginService } from 'src/app/services/login/login.service';
 
 
 @Component({
@@ -48,19 +49,33 @@ export class GenerarDonacionPage implements OnInit {
               public providerservice: ProviderService,
               public centroAcopioservice: CentroAcopioService,
               public voluntariosvervice: VoluntariosService,
+              public loginService: LoginService,
               public gruposervice: GrupoService ) { }
 
   ngOnInit() {
-
+    this.idcreador=this.loginService.getUserIdLogin();
     this.gruposervice.getGrupo()
     .subscribe(
-    (data)=>{this.gruposApoyos=data},
+    (data)=>{this.gruposApoyos=data;
+      for (const iterator of this.gruposApoyos) {
+        if (this.idcreador == iterator.user){
+          this.formData.append("createdBy", iterator.name)
+        }
+      }
+    },
     (error)=>{console.log(error)}
     );
 
     this.voluntariosvervice.getVoluntarios()
     .subscribe(
-    (data)=>{this.voluntarios=data},
+    (data)=>{this.voluntarios=data;
+      for (const iterator of this.voluntarios) {
+        if (this.idcreador == iterator.user){
+          this.formData.append("createdBy", iterator.firstName+" "+iterator.lastName)
+         console.log(iterator.firstName+" "+iterator.lastName);
+        }
+      }
+    },
     (error)=>{console.log(error)}
     );
 
@@ -101,8 +116,6 @@ export class GenerarDonacionPage implements OnInit {
     this.formData.append("provider", this.formularios.proveedor)
     this.formData.append("collectionCenter", this.formularios.centroacopio)
     this.formData.append("category", this.formularios.categoria)
-    this.formData.append("createdBy", "hugo wong")
-    
 
     if(this.formularios.voluntario.length > 0 || this.formularios.grupoapoyo.length>0){
       

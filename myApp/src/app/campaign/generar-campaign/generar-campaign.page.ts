@@ -3,6 +3,8 @@ import {CampaignService} from '../../services/campaign/campaign.service';
 import {ScopeService} from '../../services/scope/scope.service';
 import { AlertController } from '@ionic/angular';
 import {Campaign} from '../../interfaces/campaign';
+import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
+import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 
 @Component({
   selector: 'app-generar-campaign',
@@ -20,12 +22,18 @@ export class GenerarCampaignPage implements OnInit {
     description: '',
     contactName:''
     };
+    
   formData= new FormData();
+  gruposApoyos;
+  voluntarios;
+  idcreador: string;
   
 
   constructor(public alertController: AlertController,
               public scopeService:ScopeService,
-              public campaignservice:CampaignService) { }
+              public campaignservice:CampaignService,
+              public voluntariosvervice: VoluntariosService,
+              public gruposervice: GrupoService) { }
 
   ngOnInit() {
     this.Getscopes()

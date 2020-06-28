@@ -5,6 +5,10 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import {tap, catchError } from 'rxjs/operators';
 import {JwtResponseI, LoginResponse} from '../../interfaces/jwt-response-i'
 import * as jwt_decode from "jwt-decode";
+import { VoluntariosService } from '../voluntarios/voluntarios.service';
+import { GrupoService } from '../grupo-service/grupo.service';
+import { importType } from '@angular/compiler/src/output/output_ast';
+import {Voluntario} from '../../clases/voluntario/voluntario'
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +19,13 @@ export class LoginService {
   authSubject=new BehaviorSubject(false);
   private token: string;
 
-  constructor(private http: HttpClient) { }
+  gruposApoyos;
+  voluntario:Voluntario;
+  voluntarios: Voluntario[];
+
+  constructor(private http: HttpClient,
+              public voluntariosvervice: VoluntariosService,
+              public gruposervice: GrupoService ) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -62,6 +72,44 @@ export class LoginService {
     localStorage.setItem("USER_NAME", userName)
     localStorage.setItem("USER_ID", userId)
     this.token=token;
+  }
+  getUserIdLogin(){
+    const idcreador=localStorage.getItem("USER_ID");
+
+   // this.gruposervice.getGrupo()
+   // .subscribe(
+   // (data)=>{this.gruposApoyos=data;
+    //  for (const iterator of this.gruposApoyos) {
+    //    if (idcreador == iterator.user){
+    //      return (iterator.name);
+    //    }
+    //  }
+    //},(error)=>{console.log(error)}
+    //);
+    
+
+  //  this.voluntariosvervice.getVoluntarios()
+  //  .subscribe(
+  //  (data)=>{this.voluntarios=data;
+  //    for (const iterator of this.voluntarios) {
+  //      if (idcreador == iterator.user){
+  //      return (iterator.firstName+" "+iterator.lastName);
+  //      }
+  //    }
+      
+  //  },(error)=>{console.log(error)}
+  //  ); 
+
+    return localStorage.getItem("USER_ID") 
+  }
+  
+  getCreador(){
+
+  }
+
+  getUserRolLogin(){
+   return localStorage.getItem("userRole")
+
   }
   
   private getToken():string{

@@ -40,6 +40,7 @@ export class GenerarDonacionPage implements OnInit {
     BeginDate:'',
     ExpirationDate:'',
     }
+  idcreador: string;
 
   constructor(public router: Router,
               private datePipe: DatePipe,
@@ -72,7 +73,6 @@ export class GenerarDonacionPage implements OnInit {
       for (const iterator of this.voluntarios) {
         if (this.idcreador == iterator.user){
           this.formData.append("createdBy", iterator.firstName+" "+iterator.lastName)
-         console.log(iterator.firstName+" "+iterator.lastName);
         }
       }
     },

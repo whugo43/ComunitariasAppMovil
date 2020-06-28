@@ -77,10 +77,6 @@ export class LoginService {
     return localStorage.getItem("USER_ID") 
   }
   
-  getCreador(){
-
-  }
-
   getUserRolLogin(){
    return localStorage.getItem("userRole")
 
@@ -110,6 +106,11 @@ export class LoginService {
   updateUser(user: any, id: any) {
     const path = this.api + id + '/';
     return this.http.patch(path, user);
+  }
+
+  deleteUser(id: string){
+    const path=  `${this.api}${id}`;
+    return this.http.delete(path)
   }
 
 

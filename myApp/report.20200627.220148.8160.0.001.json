@@ -1,0 +1,347 @@
+
+{
+  "header": {
+    "reportVersion": 2,
+    "event": "Allocation failed - JavaScript heap out of memory",
+    "trigger": "FatalError",
+    "filename": "report.20200627.220148.8160.0.001.json",
+    "dumpEventTime": "2020-06-27T22:01:48Z",
+    "dumpEventTimeStamp": "1593313308183",
+    "processId": 8160,
+    "threadId": null,
+    "cwd": "C:\\Users\\whugo\\Desktop\\ComunitariasAppMovil\\myApp",
+    "commandLine": [
+      "node",
+      "C:\\Users\\whugo\\Desktop\\ComunitariasAppMovil\\myApp\\node_modules\\.bin\\\\..\\@angular\\cli\\bin\\ng",
+      "run",
+      "app:serve",
+      "--host=localhost",
+      "--port=8100"
+    ],
+    "nodejsVersion": "v12.16.3",
+    "wordSize": 64,
+    "arch": "x64",
+    "platform": "win32",
+    "componentVersions": {
+      "node": "12.16.3",
+      "v8": "7.8.279.23-node.35",
+      "uv": "1.34.2",
+      "zlib": "1.2.11",
+      "brotli": "1.0.7",
+      "ares": "1.16.0",
+      "modules": "72",
+      "nghttp2": "1.40.0",
+      "napi": "5",
+      "llhttp": "2.0.4",
+      "http_parser": "2.9.3",
+      "openssl": "1.1.1g",
+      "cldr": "36.0",
+      "icu": "65.1",
+      "tz": "2019c",
+      "unicode": "12.1"
+    },
+    "release": {
+      "name": "node",
+      "lts": "Erbium",
+      "headersUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3-headers.tar.gz",
+      "sourceUrl": "https://nodejs.org/download/release/v12.16.3/node-v12.16.3.tar.gz",
+      "libUrl": "https://nodejs.org/download/release/v12.16.3/win-x64/node.lib"
+    },
+    "osName": "Windows_NT",
+    "osRelease": "10.0.18363",
+    "osVersion": "Windows 10 Home",
+    "osMachine": "x86_64",
+    "cpus": [
+      {
+        "model": "Intel(R) Core(TM) i3-5005U CPU @ 2.00GHz",
+        "speed": 2000,
+        "user": 8826671,
+        "nice": 0,
+        "sys": 5932671,
+        "idle": 44393531,
+        "irq": 728218
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-5005U CPU @ 2.00GHz",
+        "speed": 2000,
+        "user": 8131359,
+        "nice": 0,
+        "sys": 4634046,
+        "idle": 46387062,
+        "irq": 119609
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-5005U CPU @ 2.00GHz",
+        "speed": 2000,
+        "user": 9368015,
+        "nice": 0,
+        "sys": 5342562,
+        "idle": 44441890,
+        "irq": 74281
+      },
+      {
+        "model": "Intel(R) Core(TM) i3-5005U CPU @ 2.00GHz",
+        "speed": 2000,
+        "user": 9311062,
+        "nice": 0,
+        "sys": 4742984,
+        "idle": 45098406,
+        "irq": 59703
+      }
+    ],
+    "host": "DESKTOP-0Q42UVG"
+  },
+  "javascriptStack": {
+    "message": "No stack.",
+    "stack": [
+      "Unavailable."
+    ]
+  },
+  "nativeStack": [
+    {
+      "pc": "0x00007ff76a2e2449",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76a2e69a9",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76a2e5828",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76a41d8c2",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76ac39bbe",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76ac21c91",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76aaee1ec",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76aaf6171",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76aaeb743",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76aae9db4",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76ab0afbd",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76a871871",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76b086c4d",
+      "symbol": ""
+    },
+    {
+      "pc": "0x00007ff76b00b3b3",
+      "symbol": ""
+    },
+    {
+      "pc": "0x0000002ab19cf1b9",
+      "symbol": ""
+    }
+  ],
+  "javascriptHeap": {
+    "totalMemory": 27709440,
+    "totalCommittedMemory": 27709440,
+    "usedMemory": 26469184,
+    "availableMemory": 2126498976,
+    "memoryLimit": 2152726528,
+    "heapSpaces": {
+      "read_only_space": {
+        "memorySize": 262144,
+        "committedMemory": 262144,
+        "capacity": 32808,
+        "used": 32808,
+        "available": 0
+      },
+      "new_space": {
+        "memorySize": 1048576,
+        "committedMemory": 1048576,
+        "capacity": 1047456,
+        "used": 1047448,
+        "available": 8
+      },
+      "old_space": {
+        "memorySize": 22425600,
+        "committedMemory": 22425600,
+        "capacity": 22159560,
+        "used": 21736528,
+        "available": 423032
+      },
+      "code_space": {
+        "memorySize": 430080,
+        "committedMemory": 430080,
+        "capacity": 378784,
+        "used": 367392,
+        "available": 11392
+      },
+      "map_space": {
+        "memorySize": 1314816,
+        "committedMemory": 1314816,
+        "capacity": 1151520,
+        "used": 1151520,
+        "available": 0
+      },
+      "large_object_space": {
+        "memorySize": 1605632,
+        "committedMemory": 1605632,
+        "capacity": 1589200,
+        "used": 1589200,
+        "available": 0
+      },
+      "code_large_object_space": {
+        "memorySize": 622592,
+        "committedMemory": 622592,
+        "capacity": 544288,
+        "used": 544288,
+        "available": 0
+      },
+      "new_large_object_space": {
+        "memorySize": 0,
+        "committedMemory": 0,
+        "capacity": 1047456,
+        "used": 0,
+        "available": 1047456
+      }
+    }
+  },
+  "resourceUsage": {
+    "userCpuSeconds": 3.656,
+    "kernelCpuSeconds": 2.625,
+    "cpuConsumptionPercent": 5.71,
+    "maxRss": 49917952,
+    "pageFaults": {
+      "IORequired": 33273,
+      "IONotRequired": 0
+    },
+    "fsActivity": {
+      "reads": 1846,
+      "writes": 5
+    }
+  },
+  "libuv": [
+  ],
+  "workers": [
+  ],
+  "environmentVariables": {
+    "=C:": "C:\\Users\\whugo\\Desktop\\ComunitariasAppMovil\\myApp",
+    "allusersprofile": "C:\\ProgramData",
+    "appdata": "C:\\Users\\whugo\\AppData\\Roaming",
+    "BROWSERSLIST_IGNORE_OLD_DATA": "1",
+    "chocolateyinstall": "C:\\ProgramData\\chocolatey",
+    "chocolateylastpathupdate": "132327455603078881",
+    "colorterm": "truecolor",
+    "commonprogramfiles": "C:\\Program Files\\Common Files",
+    "commonprogramfiles(x86)": "C:\\Program Files (x86)\\Common Files",
+    "commonprogramw6432": "C:\\Program Files\\Common Files",
+    "computername": "DESKTOP-0Q42UVG",
+    "comspec": "C:\\Windows\\system32\\cmd.exe",
+    "dp0": "C:\\Users\\whugo\\Desktop\\ComunitariasAppMovil\\myApp\\node_modules\\.bin\\",
+    "driverdata": "C:\\Windows\\System32\\Drivers\\DriverData",
+    "force_color": "1",
+    "git_askpass": "c:\\Users\\whugo\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass.sh",
+    "homedrive": "C:",
+    "homepath": "\\Users\\whugo",
+    "ionic_cli_bin": "C:\\Users\\whugo\\AppData\\Roaming\\npm\\node_modules\\@ionic\\cli\\bin\\ionic",
+    "ionic_cli_lib": "C:\\Users\\whugo\\AppData\\Roaming\\npm\\node_modules\\@ionic\\cli",
+    "ionic_cli_local_error": "LOCAL_CLI_NOT_FOUND",
+    "lang": "es_ES.UTF-8",
+    "localappdata": "C:\\Users\\whugo\\AppData\\Local",
+    "logonserver": "\\\\DESKTOP-0Q42UVG",
+    "number_of_processors": "4",
+    "onedrive": "C:\\Users\\whugo\\OneDrive",
+    "onedriveconsumer": "C:\\Users\\whugo\\OneDrive",
+    "original_xdg_current_desktop": "undefined",
+    "os": "Windows_NT",
+    "path": "C:\\Users\\whugo\\Desktop\\ComunitariasAppMovil\\myApp\\node_modules\\.bin;C:\\Program Files (x86)\\Common Files\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\Scripts\\;C:\\Program Files (x86)\\;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Windows\\System32\\OpenSSH\\;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\Program Files\\Git\\cmd;C:\\ProgramData\\chocolatey\\bin;C:\\Program Files\\nodejs\\;C:\\Program Files\\dotnet\\;C:\\Program Files\\Microsoft SQL Server\\130\\Tools\\Binn\\;C:\\Program Files\\Microsoft SQL Server\\Client SDK\\ODBC\\170\\Tools\\Binn\\;C:\\Users\\whugo\\AppData\\Local\\Programs\\Python\\Python38\\Scripts\\;C:\\Users\\whugo\\AppData\\Local\\Programs\\Python\\Python38\\;C:\\Users\\whugo\\AppData\\Local\\Microsoft\\WindowsApps;C:\\Program Files\\JetBrains\\PyCharm Community Edition 2019.2.4\\bin;C:\\Users\\whugo\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\whugo\\AppData\\Roaming\\npm;C:\\Users\\whugo\\AppData\\Local\\GitHubDesktop\\bin",
+    "pathext": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JSE;.WSF;.WSH;.MSC;.PY;.PYW;.CPL",
+    "processor_architecture": "AMD64",
+    "processor_identifier": "Intel64 Family 6 Model 61 Stepping 4, GenuineIntel",
+    "processor_level": "6",
+    "processor_revision": "3d04",
+    "programdata": "C:\\ProgramData",
+    "programfiles": "C:\\Program Files",
+    "programfiles(x86)": "C:\\Program Files (x86)",
+    "programw6432": "C:\\Program Files",
+    "PROMPT": "$P$G",
+    "psmodulepath": "C:\\Users\\whugo\\Documents\\WindowsPowerShell\\Modules;C:\\Program Files\\WindowsPowerShell\\Modules;C:\\Windows\\system32\\WindowsPowerShell\\v1.0\\Modules",
+    "public": "C:\\Users\\Public",
+    "pycharm community edition": "C:\\Program Files\\JetBrains\\PyCharm Community Edition 2019.2.4\\bin;",
+    "sessionname": "Console",
+    "systemdrive": "C:",
+    "systemroot": "C:\\Windows",
+    "temp": "C:\\Users\\whugo\\AppData\\Local\\Temp",
+    "term_program": "vscode",
+    "term_program_version": "1.46.1",
+    "tmp": "C:\\Users\\whugo\\AppData\\Local\\Temp",
+    "userdomain": "DESKTOP-0Q42UVG",
+    "userdomain_roamingprofile": "DESKTOP-0Q42UVG",
+    "username": "whugo",
+    "userprofile": "C:\\Users\\whugo",
+    "vscode_git_askpass_main": "c:\\Users\\whugo\\AppData\\Local\\Programs\\Microsoft VS Code\\resources\\app\\extensions\\git\\dist\\askpass-main.js",
+    "vscode_git_askpass_node": "C:\\Users\\whugo\\AppData\\Local\\Programs\\Microsoft VS Code\\Code.exe",
+    "vscode_git_ipc_handle": "\\\\.\\pipe\\vscode-git-fa3532dd7d-sock",
+    "windir": "C:\\Windows",
+    "_prog": "node"
+  },
+  "sharedObjects": [
+    "C:\\Program Files\\nodejs\\node.exe",
+    "C:\\Windows\\SYSTEM32\\ntdll.dll",
+    "C:\\Windows\\System32\\KERNEL32.DLL",
+    "C:\\Windows\\System32\\KERNELBASE.dll",
+    "C:\\Windows\\System32\\WS2_32.dll",
+    "C:\\Windows\\System32\\RPCRT4.dll",
+    "C:\\Windows\\System32\\PSAPI.DLL",
+    "C:\\Windows\\System32\\ADVAPI32.dll",
+    "C:\\Windows\\System32\\msvcrt.dll",
+    "C:\\Windows\\SYSTEM32\\dbghelp.dll",
+    "C:\\Windows\\System32\\sechost.dll",
+    "C:\\Windows\\System32\\ucrtbase.dll",
+    "C:\\Windows\\System32\\USER32.dll",
+    "C:\\Windows\\System32\\win32u.dll",
+    "C:\\Windows\\System32\\GDI32.dll",
+    "C:\\Windows\\System32\\gdi32full.dll",
+    "C:\\Windows\\System32\\msvcp_win.dll",
+    "C:\\Windows\\SYSTEM32\\IPHLPAPI.DLL",
+    "C:\\Windows\\System32\\CRYPT32.dll",
+    "C:\\Windows\\System32\\MSASN1.dll",
+    "C:\\Windows\\System32\\bcrypt.dll",
+    "C:\\Windows\\SYSTEM32\\USERENV.dll",
+    "C:\\Windows\\System32\\profapi.dll",
+    "C:\\Windows\\SYSTEM32\\WINMM.dll",
+    "C:\\Windows\\SYSTEM32\\winmmbase.dll",
+    "C:\\Windows\\System32\\cfgmgr32.dll",
+    "C:\\Windows\\System32\\bcryptPrimitives.dll",
+    "C:\\Windows\\System32\\IMM32.DLL",
+    "C:\\Windows\\System32\\powrprof.dll",
+    "C:\\Windows\\System32\\UMPDC.dll",
+    "C:\\Windows\\SYSTEM32\\CRYPTBASE.DLL",
+    "C:\\Windows\\system32\\uxtheme.dll",
+    "C:\\Windows\\System32\\combase.dll",
+    "C:\\Windows\\system32\\mswsock.dll",
+    "C:\\Windows\\System32\\kernel.appcore.dll",
+    "C:\\Windows\\System32\\NSI.dll",
+    "C:\\Windows\\system32\\napinsp.dll",
+    "C:\\Windows\\system32\\pnrpnsp.dll",
+    "C:\\Windows\\SYSTEM32\\DNSAPI.dll"
+  ]
+}

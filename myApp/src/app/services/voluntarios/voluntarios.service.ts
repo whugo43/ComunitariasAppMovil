@@ -31,8 +31,8 @@ export class VoluntariosService {
     return this.http.delete(path)
   }
 
-  updateVoluntario(grupo:any,id:any){
+  updateVoluntario(voluntario,id:string){
     const path= this.api+id+'/';
-    return this.http.patch(path,grupo);
+    return this.http.patch(path,voluntario);
   }
 }

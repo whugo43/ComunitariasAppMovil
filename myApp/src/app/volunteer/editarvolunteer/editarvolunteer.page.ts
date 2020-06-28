@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 import { ActivityService } from 'src/app/services/activity/activity.service';
@@ -28,13 +28,28 @@ export class EditarvolunteerPage implements OnInit {
 
     formDataUser = new FormData();
     formDataVoluntario = new FormData();
+  id: string;
+  volunteer=[];
 
   constructor(public router: Router,
+              private activateRoute: ActivatedRoute,
               public alertController: AlertController,
+              private cdRef : ChangeDetectorRef,
               public voluntariosService: VoluntariosService,
               public activityService: ActivityService,
               private conexionUser: LoginService,
-              public gruposervice: GrupoService) { }
+            ) {     
+              this.activateRoute.paramMap.subscribe(paramMap => {
+                const voluntario = paramMap.get('id')
+                this.id = voluntario
+                this.voluntariosService.getVoluntarioId(voluntario)
+                .subscribe(
+                (data)=>{this.volunteer=data},
+                (error)=>{console.log(error);}
+                )
+              }); 
+              console.log(this.volunteer) 
+             }
 
   ngOnInit() {
     this.activityService.getActivity()
@@ -44,7 +59,11 @@ export class EditarvolunteerPage implements OnInit {
     );
   }
 
-  UpDatevolunteer(){
+  ngAfterContentChecked() {
+    this.cdRef.detectChanges();
+  }
+
+  UpDatevolunteer(idUser:string){
     this.formDataUser.append('username', this.formularios.username);
     this.formDataUser.append('email', this.formularios.email);
 
@@ -57,7 +76,38 @@ export class EditarvolunteerPage implements OnInit {
       this.formDataVoluntario.append('activities',  this.formularios.activities[index]);      
     }
 
+    this.conexionUser.updateUser(this.formDataUser,idUser).subscribe(
+      newTask => {
+        this.guardarvoluntario();
+      },
+      error => {
+        this.presentAlert('El nombre del usuario o correo ya existe, por favor <strong>eliga otro nombre</strong>');
+      }
+    );
+  }
+  guardarvoluntario(){
+    this.voluntariosService.updateVoluntario(this.formDataVoluntario,this.id).subscribe(
+      newTask => {
+        console.log(newTask);
+        this.router.navigateByUrl('/volunteer');
+      },
+      error => {
+        console.log(error);
+      }
+    );
 
+  }
+
+  async presentAlert(mensaje: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Error',
+      subHeader: 'Especificacion del error',
+      message: mensaje,
+      buttons: ['Aceptar']
+    });
+
+    await alert.present();
   }
 
 }

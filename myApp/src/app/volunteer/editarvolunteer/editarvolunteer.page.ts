@@ -5,6 +5,7 @@ import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.ser
 import { ActivityService } from 'src/app/services/activity/activity.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-editarvolunteer',
@@ -30,6 +31,7 @@ export class EditarvolunteerPage implements OnInit {
     formDataVoluntario = new FormData();
   id: string;
   volunteer=[];
+  users=[]
 
   constructor(public router: Router,
               private activateRoute: ActivatedRoute,
@@ -38,13 +40,24 @@ export class EditarvolunteerPage implements OnInit {
               public voluntariosService: VoluntariosService,
               public activityService: ActivityService,
               private conexionUser: LoginService,
+              private userservice: UserService,
+              
             ) {     
               this.activateRoute.paramMap.subscribe(paramMap => {
                 const voluntario = paramMap.get('id')
+                
                 this.id = voluntario
+                
                 this.voluntariosService.getVoluntarioId(voluntario)
                 .subscribe(
-                (data)=>{this.volunteer=data},
+                (data)=>{this.volunteer=data;
+                        
+                        this.userservice.getUserId(data.user)
+                        .subscribe(
+                          (data)=>{this.users=data},
+                          (error)=>{console.log(error)}
+                        )             
+                },
                 (error)=>{console.log(error);}
                 )
               }); 
@@ -57,6 +70,8 @@ export class EditarvolunteerPage implements OnInit {
     (data)=>{this.activities=data},
     (error)=>{console.log(error)}
     );
+
+    this.conexionUser.getUserId
   }
 
   ngAfterContentChecked() {

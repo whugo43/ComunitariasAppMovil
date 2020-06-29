@@ -46,12 +46,12 @@
 
       <ion-item>
         <ion-label position="floating">Usuario </ion-label>
-        <ion-input required type="search" [(ngModel)]='formularios.username' name='username'></ion-input>
+        <ion-input required type="search"value="{{users.username}}" [(ngModel)]='formularios.username' name='username'></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">Correo </ion-label>
-        <ion-input required type="email" [(ngModel)]='formularios.email' name='email'></ion-input>
+        <ion-input required type="email" value='{{users.email}}' [(ngModel)]='formularios.email' name='email'></ion-input>
       </ion-item>
 
 

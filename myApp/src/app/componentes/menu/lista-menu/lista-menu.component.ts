@@ -18,8 +18,4 @@ export class ListaMenuComponent implements OnInit {
     this.router.navigateByUrl(ventana);
     this.menu.close('menu')
   }
-
-  cerrarsesion(){
-
-  }
 }

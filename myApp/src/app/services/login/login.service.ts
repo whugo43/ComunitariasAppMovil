@@ -9,6 +9,7 @@ import { VoluntariosService } from '../voluntarios/voluntarios.service';
 import { GrupoService } from '../grupo-service/grupo.service';
 import { importType } from '@angular/compiler/src/output/output_ast';
 import {Voluntario} from '../../clases/voluntario/voluntario'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,7 @@ export class LoginService {
   voluntarios: Voluntario[];
 
   constructor(private http: HttpClient,
+              public router: Router,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService ) { }
 
@@ -62,6 +64,7 @@ export class LoginService {
     this.token='';
     localStorage.removeItem("ACCESS_TOKEN")
     localStorage.removeItem("EXPIRES_IN")
+    this.router.navigateByUrl('/login');
   }
   
   saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{

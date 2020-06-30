@@ -18,6 +18,8 @@ export class LoginPage implements OnInit {
   constructor(public loginService: LoginService,
               public router: Router,
               public alertController: AlertController) { }
+  
+
 
   ngOnInit() {  
   }
@@ -56,6 +58,8 @@ export class LoginPage implements OnInit {
         error => this.alertaError()
       );
 
+    
+    
     console.log(form.value)
   }
 

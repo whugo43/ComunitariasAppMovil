@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {LoginService} from '../services/login/login.service';
 import { AlertController } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -19,6 +20,7 @@ export class LoginPage implements OnInit {
               public router: Router,
               public alertController: AlertController) { }
   
+  
 
 
   ngOnInit() {  
@@ -32,13 +34,23 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+  
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
 
+  
+  
   validarlogin(form):void{
     
     const log={
       username: this.formularios.Username,
       password:this.formularios.Password
     };
+    
   
     this.loginService.login(form.value)
       .subscribe(

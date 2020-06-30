@@ -153,11 +153,6 @@ const routes: Routes = [
       }
     ]
   },
-  
-  {
-    path: 'scope-page',
-    loadChildren: () => import('./componentes/scope/scope-page/scope-page.module').then( m => m.ScopePagePageModule)
-  },
 
 ];
 @NgModule({

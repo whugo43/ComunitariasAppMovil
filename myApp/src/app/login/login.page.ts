@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login/login.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -16,8 +16,11 @@ export class LoginPage implements OnInit {
     }
 
   constructor(public loginService: LoginService,
+              public menu: MenuController,
               public router: Router,
-              public alertController: AlertController) { }
+              public alertController: AlertController) {
+                this.menu.enable(false);
+               }
   
 
 

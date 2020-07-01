@@ -1,44 +1,54 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { NologinGuard } from './guards/nologin.guard';
+import {AuthGuard} from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'tab1',
-    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule)
+    loadChildren: () => import('./tab1/tab1.module').then( m => m.Tab1PageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'about',
-    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
+    loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule),
+    canActivate:[AuthGuard]
   },
  
   {
     path: 'contacts',
-    loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule)
+    loadChildren: () => import('./contacts/contacts.module').then( m => m.ContactsPageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'categoria',
     children:[
       {
         path:'',
-        loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule)
+        loadChildren: () => import('./categoria/categoria.module').then( m => m.CategoriaPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: ':categoriaId',
-        loadChildren: () => import('./categoria/editar-categoria/editar-categoria.module').then( m => m.EditarCategoriaPageModule)
+        loadChildren: () => import('./categoria/editar-categoria/editar-categoria.module').then( m => m.EditarCategoriaPageModule),
+        canActivate:[AuthGuard]
       }
   ]
   },
   {
     path: 'generar-categoria',
-    loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule)
+    loadChildren: () => import('./categoria/generar-categoria/generar-categoria.module').then( m => m.GenerarCategoriaPageModule),
+    canActivate:[AuthGuard]
   },
 
   {
@@ -46,11 +56,13 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule)
+        loadChildren: () => import('./centro-acopio/centro-acopio.module').then( m => m.CentroAcopioPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: ':centro-acopioId',
-        loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule)
+        loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule),
+        canActivate:[AuthGuard]
       }
   ]
   },
@@ -60,19 +72,23 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule)
+        loadChildren: () => import('./campaign/campaign.module').then( m => m.CampaignPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'editarcampaign/:id',
-        loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule)
+        loadChildren: () => import('./campaign/editar-campaign/editar-campaign.module').then( m => m.EditarCampaignPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'detallecampaign/:id',
-        loadChildren: () => import('./campaign/detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule)
+        loadChildren: () => import('./campaign/detalle-campaign/detalle-campaign.module').then( m => m.DetalleCampaignPageModule),
+        canActivate:[AuthGuard]
       }, 
       {
         path: 'generar-campaign',
-        loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule)
+        loadChildren: () => import('./campaign/generar-campaign/generar-campaign.module').then( m => m.GenerarCampaignPageModule),
+        canActivate:[AuthGuard]
       }
     ]
   },
@@ -82,35 +98,42 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('./donaciones/donaciones.module').then( m => m.DonacionesPageModule)
+        loadChildren: () => import('./donaciones/donaciones.module').then( m => m.DonacionesPageModule),
+        canActivate:[AuthGuard]
       },
 
       {
         path: 'editardonacion/:id',
-        loadChildren: () => import('./donaciones/editar-donacion/editar-donacion.module').then( m => m.EditarDonacionPageModule)
+        loadChildren: () => import('./donaciones/editar-donacion/editar-donacion.module').then( m => m.EditarDonacionPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'detalledonacion/:id',
-        loadChildren: () => import('./donaciones/detalle-donacion/detalle-donacion.module').then( m => m.DetalleDonacionPageModule)
+        loadChildren: () => import('./donaciones/detalle-donacion/detalle-donacion.module').then( m => m.DetalleDonacionPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'generar-donacion',
-        loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule)
+        loadChildren: () => import('./donaciones/generar-donacion/generar-donacion.module').then( m => m.GenerarDonacionPageModule),
+        canActivate:[AuthGuard]
       }
     ]
   },
 
   {
     path: 'distribucion',
-    loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule)
+    loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule),
+    canActivate:[AuthGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+    canActivate:[NologinGuard]
   },
   {
     path: 'grupos-de-apoyo',
-    loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule)
+    loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule),
+    canActivate:[AuthGuard]
   },
 
   {
@@ -118,15 +141,18 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+        loadChildren: () => import('./proveedor/proveedor.module').then( m => m.ProveedorPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'editarproveedor/:id',
-        loadChildren: () => import('./proveedor/editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule)
+        loadChildren: () => import('./proveedor/editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'generarproveedor',
-        loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule)
+        loadChildren: () => import('./proveedor/generarproveedor/generarproveedor.module').then( m => m.GenerarproveedorPageModule),
+        canActivate:[AuthGuard]
       }
     ]
   },
@@ -136,20 +162,24 @@ const routes: Routes = [
     children:[
       {
         path:'',
-        loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule)
+        loadChildren: () => import('./volunteer/volunteer.module').then( m => m.VolunteerPageModule),
+        canActivate:[AuthGuard]
       },
 
       {
         path: 'editarvolunteer/:id',
-        loadChildren: () => import('./volunteer/editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule)
+        loadChildren: () => import('./volunteer/editarvolunteer/editarvolunteer.module').then( m => m.EditarvolunteerPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'detallevolunteer/:id',
-        loadChildren: () => import('./volunteer/detallevolunteer/detallevolunteer.module').then( m => m.DetallevolunteerPageModule)
+        loadChildren: () => import('./volunteer/detallevolunteer/detallevolunteer.module').then( m => m.DetallevolunteerPageModule),
+        canActivate:[AuthGuard]
       },
       {
         path: 'generar-volunteer',
-        loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule)
+        loadChildren: () => import('./volunteer/generarvolunteer/generarvolunteer.module').then( m => m.GenerarvolunteerPageModule),
+        canActivate:[AuthGuard]
       }
     ]
   },

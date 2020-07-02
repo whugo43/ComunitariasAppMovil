@@ -7,13 +7,17 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { ListaMenuComponentModule } from '../componentes/menu/lista-menu/lista-menu.module';
+
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule
+    HomePageRoutingModule,
+    ListaMenuComponentModule
   ],
   declarations: [HomePage]
 })

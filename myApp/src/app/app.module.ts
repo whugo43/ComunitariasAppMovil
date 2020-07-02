@@ -23,11 +23,13 @@ import {ScopeService} from './services/scope/scope.service';
 import {ProviderService} from './services/provider/provider.service';
 import {VoluntariosService} from './services/voluntarios/voluntarios.service';
 import {ActivityService} from './services/activity/activity.service';
+import { MenuComponentModule } from './componentes/menu/menu.module';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule,MenuComponentModule],
   providers: [
     StatusBar,
     SplashScreen,

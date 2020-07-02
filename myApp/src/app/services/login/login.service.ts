@@ -9,6 +9,7 @@ import { VoluntariosService } from '../voluntarios/voluntarios.service';
 import { GrupoService } from '../grupo-service/grupo.service';
 import { importType } from '@angular/compiler/src/output/output_ast';
 import {Voluntario} from '../../clases/voluntario/voluntario'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -17,13 +18,14 @@ export class LoginService {
   private api = 'http://127.0.0.1:8000/api/user/';
   private apiLogin = 'http://127.0.0.1:8000/api/login/';
   authSubject=new BehaviorSubject(false);
-  private token: string;
+  private token='';
 
   gruposApoyos;
   voluntario:Voluntario;
   voluntarios: Voluntario[];
 
   constructor(private http: HttpClient,
+              public router: Router,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService ) { }
 
@@ -58,10 +60,19 @@ export class LoginService {
                 );
   }
 
-  logout(): void{
+  logout(){
     this.token='';
     localStorage.removeItem("ACCESS_TOKEN")
     localStorage.removeItem("EXPIRES_IN")
+    this.router.navigateByUrl('/login')
+  }
+  tokenauth(){
+    if(localStorage.getItem("ACCESS_TOKEN")==null){
+      return 0
+    }else{
+      return 1
+    }  
+    
   }
   
   saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{

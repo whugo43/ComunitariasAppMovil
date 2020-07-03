@@ -125,10 +125,21 @@ const routes: Routes = [
     loadChildren: () => import('./distribucion/distribucion.module').then( m => m.DistribucionPageModule),
     canActivate:[AuthGuard]
   },
+  
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
-    canActivate:[NologinGuard]
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule),
+        canActivate:[NologinGuard]
+      },
+      {
+        path: 'resetpwd/:id',
+        loadChildren: () => import('./login/resetpwd/resetpwd.module').then( m => m.ResetpwdPageModule),
+        canActivate:[AuthGuard]
+      }
+    ]
   },
   {
     path: 'grupos-de-apoyo',

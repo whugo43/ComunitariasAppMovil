@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router';
 import {ProviderService} from '../../services/provider/provider.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
@@ -8,6 +8,7 @@ import { CategoriaService } from 'src/app/services/categoria/categoria.service';
   styleUrls: ['./editarproveedor.page.scss'],
 })
 export class EditarproveedorPage implements OnInit {
+  providercateg=[]
 
   formularios={
     name: '',
@@ -23,28 +24,27 @@ export class EditarproveedorPage implements OnInit {
     
   constructor(public providerservice: ProviderService,
               public router: Router,
+              private cdRef : ChangeDetectorRef,
               private activateRoute: ActivatedRoute,
-              public categoriaservice: CategoriaService) { }
+              public categoriaservice: CategoriaService) { 
+                this.activateRoute.paramMap.subscribe(paramMap => {
+                  const Id = paramMap.get('id')
+                  console.log(Id)
+                  this.id = Id
+                  this.providerservice.getProviderId(Id)
+                  .subscribe(
+                  (data)=>{this.provider=data;
+                          this.providercateg=data.categories},
+                  (error)=>{console.log(error);}
+                  )
+                });
+              }
+
+  ngAfterContentChecked() {
+    this.cdRef.detectChanges();
+  }
 
   ngOnInit() {
-    this.activateRoute.paramMap.subscribe(paramMap => {
-      const Id = paramMap.get('id')
-      this.id = Id
-      this.providerservice.getProviderId(Id)
-      .subscribe(
-      (data)=>{this.provider=data},
-      (error)=>{console.log(error);}
-      )
-    });
-    
-    this.activateRoute.paramMap.subscribe(paramMap => {
-      this.providerservice.getProvider()
-      .subscribe(
-      (data)=>{this.provider=data},
-      (error)=>{console.log(error)}
-      );
-    });
-
     this.categoriaservice.getCategorias()
     .subscribe(
     (data)=>{this.categorias=data},

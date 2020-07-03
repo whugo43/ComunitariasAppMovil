@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 import { ActivatedRoute } from '@angular/router';
 import { ActivityService } from 'src/app/services/activity/activity.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-detallevolunteer',
@@ -9,13 +10,15 @@ import { ActivityService } from 'src/app/services/activity/activity.service';
   styleUrls: ['./detallevolunteer.page.scss'],
 })
 export class DetallevolunteerPage implements OnInit {
+  users
   volunteer=[];
   id: string;
   activities;
 
   constructor(private activateRoute: ActivatedRoute,
               public voluntariosService: VoluntariosService,
-              public activityService: ActivityService) { }
+              public activityService: ActivityService,
+              public userService: UserService) { }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
@@ -34,8 +37,10 @@ export class DetallevolunteerPage implements OnInit {
     (error)=>{console.log(error)}
     );
 
-    
-
+    this.userService.getUser()
+    .subscribe(
+    (data)=>{this.users=data},
+    (error)=>{console.log(error)}
+    );
   }
-
 }

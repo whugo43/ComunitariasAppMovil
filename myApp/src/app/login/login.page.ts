@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login/login.service';
+<<<<<<< HEAD
 import { AlertController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+=======
+import { AlertController, MenuController } from '@ionic/angular';
+>>>>>>> 70aacf877e0d57ce8a46471125214547deb4bb7e
+
 
 @Component({
   selector: 'app-login',
@@ -16,8 +22,14 @@ export class LoginPage implements OnInit {
     }
 
   constructor(public loginService: LoginService,
+              public menu: MenuController,
               public router: Router,
-              public alertController: AlertController) { }
+              public alertController: AlertController) {
+                this.menu.enable(false);
+               }
+  
+  
+
 
   ngOnInit() {  
   }
@@ -30,13 +42,23 @@ export class LoginPage implements OnInit {
     });
     await alert.present();
   }
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off';
+  
+    hideShowPassword() {
+        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+    }
 
+  
+  
   validarlogin(form):void{
     
     const log={
       username: this.formularios.Username,
       password:this.formularios.Password
     };
+    
   
     this.loginService.login(form.value)
       .subscribe(
@@ -56,6 +78,8 @@ export class LoginPage implements OnInit {
         error => this.alertaError()
       );
 
+    
+    
     console.log(form.value)
   }
 

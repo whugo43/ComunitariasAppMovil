@@ -23,7 +23,7 @@ export class CategoriaService {
 
   }
   
-  postCategorias(categoria:Categoria){
+  postCategorias(categoria){
     const path= this.api;
     return this.http.post(path,categoria)
   }

@@ -5,6 +5,11 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import {tap, catchError } from 'rxjs/operators';
 import {JwtResponseI, LoginResponse} from '../../interfaces/jwt-response-i'
 import * as jwt_decode from "jwt-decode";
+import { VoluntariosService } from '../voluntarios/voluntarios.service';
+import { GrupoService } from '../grupo-service/grupo.service';
+import { importType } from '@angular/compiler/src/output/output_ast';
+import {Voluntario} from '../../clases/voluntario/voluntario'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +18,16 @@ export class LoginService {
   private api = 'http://127.0.0.1:8000/api/user/';
   private apiLogin = 'http://127.0.0.1:8000/api/login/';
   authSubject=new BehaviorSubject(false);
-  private token: string;
+  private token='';
 
-  constructor(private http: HttpClient) { }
+  gruposApoyos;
+  voluntario:Voluntario;
+  voluntarios: Voluntario[];
+
+  constructor(private http: HttpClient,
+              public router: Router,
+              public voluntariosvervice: VoluntariosService,
+              public gruposervice: GrupoService ) { }
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -48,10 +60,19 @@ export class LoginService {
                 );
   }
 
-  logout(): void{
+  logout(){
     this.token='';
     localStorage.removeItem("ACCESS_TOKEN")
     localStorage.removeItem("EXPIRES_IN")
+    this.router.navigateByUrl('/login')
+  }
+  tokenauth(){
+    if(localStorage.getItem("ACCESS_TOKEN")==null){
+      return 0
+    }else{
+      return 1
+    }  
+    
   }
   
   saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{
@@ -62,6 +83,14 @@ export class LoginService {
     localStorage.setItem("USER_NAME", userName)
     localStorage.setItem("USER_ID", userId)
     this.token=token;
+  }
+  getUserIdLogin(){
+    return localStorage.getItem("USER_ID") 
+  }
+  
+  getUserRolLogin(){
+   return localStorage.getItem("userRole")
+
   }
   
   private getToken():string{
@@ -88,6 +117,11 @@ export class LoginService {
   updateUser(user: any, id: any) {
     const path = this.api + id + '/';
     return this.http.patch(path, user);
+  }
+
+  deleteUser(id: string){
+    const path=  `${this.api}${id}`;
+    return this.http.delete(path)
   }
 
 

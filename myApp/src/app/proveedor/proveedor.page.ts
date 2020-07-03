@@ -29,21 +29,14 @@ export class ProveedorPage implements OnInit {
     deleteProvider(id: string){
       this.providerservice.deleteProvider(id).
       subscribe(
-        (data)=>{console.log(data)},
+        (data)=>{console.log(data);
+          this.ngOnInit();},
         (error)=>{console.log(error);}
         );   
-      this.ngOnInit();
+      
     }
 
-    deleteUpdateProvider(id: string){
-      this.providerservice.updateProvider0(id).
-      subscribe(
-        (data)=>{console.log(data)},
-        (error)=>{console.log(error);}
-        );
-        this.ngOnInit();
-             
-    }
+
 
     doRefresh(event) {
       setTimeout(() => {

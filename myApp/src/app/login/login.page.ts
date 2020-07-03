@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login/login.service';
-import { AlertController, MenuController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 
 @Component({
@@ -17,14 +18,8 @@ export class LoginPage implements OnInit {
     }
 
   constructor(public loginService: LoginService,
-              public menu: MenuController,
               public router: Router,
-              public alertController: AlertController,private user: User) {
-                this.menu.enable(false);
-               }
-  
-  
-
+              public alertController: AlertController) { }
 
   ngOnInit() {  
   }

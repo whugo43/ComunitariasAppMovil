@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ProviderService } from 'src/app/services/provider/provider.service';
 import {Router} from '@angular/router';
+import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
+import { LoginService } from 'src/app/services/login/login.service';
+import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
+import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 
 @Component({
   selector: 'app-generarproveedor',
@@ -13,31 +17,72 @@ export class GenerarproveedorPage implements OnInit {
     address: '',
     phoneNumber:'',
     email:'',
-    categories:'',
+    categories:[]
     };
+    formData= new FormData();
+
+    categorias;
     provider=[];
     id:string;
+    idcreador: string;
+    voluntarios;
+    gruposApoyos;
     
     providers: any ={};
     constructor(public providerservice: ProviderService,
-                public router: Router
-      
-      ) { }
+                public router: Router,
+                public categoriaservice: CategoriaService,
+                public voluntariosvervice: VoluntariosService,
+                public loginService: LoginService,
+                public gruposervice: GrupoService) { }
 
-    ngOnInit() {  
+    ngOnInit() { 
+      this.idcreador=this.loginService.getUserIdLogin();
+      this.gruposervice.getGrupo()
+      .subscribe(
+      (data)=>{this.gruposApoyos=data;
+        for (const iterator of this.gruposApoyos) {
+          if (this.idcreador == iterator.user){
+            this.formData.append("createdBy", iterator.name)
+          }
+        }
+      },
+      (error)=>{console.log(error)}
+      );
+  
+      this.voluntariosvervice.getVoluntarios()
+      .subscribe(
+      (data)=>{this.voluntarios=data;
+        for (const iterator of this.voluntarios) {
+          if (this.idcreador == iterator.user){
+            this.formData.append("createdBy", iterator.firstName+" "+iterator.lastName)
+          }
+        }
+      },
+      (error)=>{console.log(error)}
+      );
+
+      this.categoriaservice.getCategorias()
+      .subscribe(
+      (data)=>{this.categorias=data},
+      (error)=>{console.log(error)}
+      ); 
     }
 
   postProvider() {
-    const Provider = {
-    name: this.formularios.name,
-    address: this.formularios.address,
-    phoneNumber:this.formularios.phoneNumber,
-    email: this.formularios.email,
-    categories:this.formularios.categories
-    };
-    this.providerservice.postProvider(this.formularios).subscribe(
-        (newTask)=>{console.log(newTask);}
-    );
+
+    this.formData.append("name", this.formularios.name)
+    this.formData.append("address", this.formularios.address)
+    this.formData.append("phoneNumber", this.formularios.phoneNumber)
+    this.formData.append("email", this.formularios.email)
+    for (let index = 0; index <  this.formularios.categories.length; index++) {
+      this.formData.append('categories',  this.formularios.categories[index]);      
+    }
+    
+    this.providerservice.postProvider(this.formData).subscribe(
+      (newTask)=>{console.log(newTask);}
+      );
+  
     this.router.navigateByUrl('/provider')
     }
 }

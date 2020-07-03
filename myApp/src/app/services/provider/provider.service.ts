@@ -22,7 +22,7 @@ export class ProviderService {
 
   }
   
-  postProvider(provider:Provider){
+  postProvider(provider){
     const path= this.api;
     return this.http.post(path,provider)
   }
@@ -36,13 +36,5 @@ export class ProviderService {
     const path=  `${this.api}${id}`;
     return this.http.delete(path)
   }
-
-  updateProvider0(id: string){
-    const path= this.api+id+'/';
-    return this.http.patch(path,
-    {
-      state:'0'
-    })
-  }  
 
 }

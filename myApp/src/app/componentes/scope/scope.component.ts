@@ -129,10 +129,11 @@ export class ScopeComponent implements OnInit {
   deleteScope(id: string){
     this.scopeService.deleteScope(id).
     subscribe(
-      (data)=>{console.log(data)},
+      (data)=>{ console.log(data);
+                this.ngOnInit();},
       (error)=>{console.log(error);}
       ); 
-      this.ngOnInit();       
+             
   }
 
   async presentModal() {

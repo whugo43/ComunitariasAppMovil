@@ -28,21 +28,13 @@ categorias
     deleteCategoria(id: string){
       this.categoriaservice.deleteCategorias(id).
       subscribe(
-        (data)=>{console.log(data)},
+        (data)=>{console.log(data);
+                 this.ngOnInit();},
         (error)=>{console.log(error);}
         );   
-      this.ngOnInit();      
+           
     }
 
-    deleteUpdateCategoria(id: string){
-      this.categoriaservice.updateCategoria0(id).
-      subscribe(
-        (data)=>{console.log(data)},
-        (error)=>{console.log(error);}
-        );
-        this.ngOnInit();
-             
-    }
 
     doRefresh(event) {
       setTimeout(() => {

@@ -9,7 +9,7 @@
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" (ngSubmit)="postProvider()">
+  <form #formulario="ngForm" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
         <ion-label position="floating">Razon Social <ion-text color="danger"></ion-text></ion-label>
@@ -23,24 +23,24 @@
         <ion-label position="floating">Telefono <ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="text"  name="phoneNumber" [(ngModel)]='formularios.phoneNumber' ></ion-input>
       </ion-item>
-    </ion-list>
-    <ion-item>
+   
+      <ion-item>
         <ion-label position="floating">Email <ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="text"  name="emai" [(ngModel)]='formularios.email' ></ion-input>
       </ion-item>
-    </ion-list>
-    <ion-item>
+   
+      <ion-item>
         <ion-label position="floating">Persona de contacto <ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="text"  name="name" [(ngModel)]='formularios.name' ></ion-input>
       </ion-item>
-    </ion-list>
-    <ion-item>
+    
+      <ion-item>
         <ion-label position="floating">Que donacion va a realizar <ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="text"  name="categories" [(ngModel)]='formularios.categories' ></ion-input>
       </ion-item>
     </ion-list>
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/provider" routerDirection="root">
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postProvider()" expand="block" routerLink="/provider" routerDirection="root">
       Guardar
       </ion-button>
     </div>

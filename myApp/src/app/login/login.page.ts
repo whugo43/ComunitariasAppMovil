@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {LoginService} from '../services/login/login.service';
-<<<<<<< HEAD
-import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-=======
 import { AlertController, MenuController } from '@ionic/angular';
->>>>>>> 70aacf877e0d57ce8a46471125214547deb4bb7e
 
 
 @Component({

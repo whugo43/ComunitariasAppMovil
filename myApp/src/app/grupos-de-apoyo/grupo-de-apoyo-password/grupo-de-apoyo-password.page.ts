@@ -107,10 +107,12 @@ export class GrupoDeApoyoPasswordPage implements OnInit {
 
   enviarDatos() {
     if (this.idGrupoEdicion != null) {
+
       //cambio de contraseña
       if (this.opcion == 'cambio') {
         this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
           this.conexionUser.getUserId(grupo.user).subscribe(user => {
+            console.log(user.password)
             if(this.formGroupContrasenia.get('currentPassword').value=='' ){
              
             }else if(this.formGroupContrasenia.get('currentPassword').value==
@@ -131,6 +133,7 @@ export class GrupoDeApoyoPasswordPage implements OnInit {
           });
         });
       }
+      
       //resstablacer contraseña
       else if (this.opcion == 'reestablecer') {
         this.passwordFinal=this.formGroupContrasenia.get('newPassword2').value;

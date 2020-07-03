@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   constructor(public loginService: LoginService,
               public menu: MenuController,
               public router: Router,
-              public alertController: AlertController) {
+              public alertController: AlertController,private user: User) {
                 this.menu.enable(false);
                }
   
@@ -72,9 +72,7 @@ export class LoginPage implements OnInit {
         },
         error => this.alertaError()
       );
-
-    
-    
+        
     console.log(form.value)
   }
 

@@ -27,21 +27,25 @@ export class DonacionComponent implements OnInit {
 
     this.donacionesService.CambiarEstadoDonaciones(this.id).
     subscribe(
-      (data)=>{console.log(data);},
+      (data)=>{ console.log(data);
+                this.DismissClick()
+                this.router.navigateByUrl('/donaciones');},
+                
       (error)=>{console.log(error);}
     ); 
-    this.DismissClick()
-    this.router.navigateByUrl('/donaciones');
+
     }
 
   deleteDonacion(){
     this.donacionesService.deleteDonaciones(this.id).
     subscribe(
-      (data)=>{console.log(data)},
+      (data)=>{ console.log(data),
+                this.DismissClick()  
+                this.router.navigateByUrl('/donaciones'); },
+
       (error)=>{console.log(error);}
       );
-    this.DismissClick()  
-    this.router.navigateByUrl('/donaciones');    
+       
   }
 
   async presentAlertCambiarestado() {

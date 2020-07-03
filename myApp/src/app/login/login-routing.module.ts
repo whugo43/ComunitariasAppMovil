@@ -7,7 +7,11 @@ const routes: Routes = [
   {
     path: '',
     component: LoginPage
+  },  {
+    path: 'resetpwd',
+    loadChildren: () => import('./resetpwd/resetpwd.module').then( m => m.ResetpwdPageModule)
   },
+
  
 
 ];

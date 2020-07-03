@@ -4,47 +4,44 @@
       <ion-back-button defaultHref="/provider"></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Editar Proveedor</ion-title>
+    <ion-title>Proveedor</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
-  <form #formulario="ngForm" (ngSubmit)="updateProvider()">
+  <form #formulario="ngForm" >
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="floating">Razon Social <ion-text color="danger"></ion-text></ion-label>
+        <ion-label position="floating">Nombre <ion-text color="danger"></ion-text></ion-label>
         <ion-input required type="text" [(ngModel)]='formularios.name' name='name'></ion-input>
       </ion-item>
-
       <ion-item>
         <ion-label position="floating">Dirección</ion-label>
-        <ion-textarea [(ngModel)]='formularios.direction' name='direction'  autoGrow="true" minlength="1" required></ion-textarea>
+        <ion-textarea [(ngModel)]='formularios.address' name='address'  autoGrow="true" minlength="1" required></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Telefono <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text"  name="phoneNumber" [(ngModel)]='formularios.phoneNumber' ></ion-input>
+      </ion-item>
+   
+      <ion-item>
+        <ion-label position="floating">Email <ion-text color="danger"></ion-text></ion-label>
+        <ion-input required type="text"  name="emai" [(ngModel)]='formularios.email' ></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">Telefono <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text"  name="telefono" [(ngModel)]='formularios.cell' ></ion-input>
+        <ion-label>Categorias</ion-label>
+        <ion-select placeholder="Seleccione" multiple required [(ngModel)]='formularios.categories' name='categories'>
+            <ion-select-option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
+   
+      
+    
     </ion-list>
-    <ion-item>
-        <ion-label position="floating">Email <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text"  name="emai" [(ngModel)]='formularios.cell' ></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-item>
-        <ion-label position="floating">Persona de contacto <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text"  name="name" [(ngModel)]='formularios.name' ></ion-input>
-      </ion-item>
-    </ion-list>
-    <ion-item>
-        <ion-label position="floating">Que donacion va a realizar <ion-text color="danger"></ion-text></ion-label>
-        <ion-input required type="text"  name="description" [(ngModel)]='formularios.description' ></ion-input>
-      </ion-item>
-    </ion-list>
-
     <div class="ion-padding">
-      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" expand="block" routerLink="/provider" routerDirection="root">
-      Guardar
+      <ion-button  shape="round" type="submit" [disabled]="formulario.invalid" (click)="postProvider()" expand="block" >
+      Guardar 
       </ion-button>
     </div>
   </form>

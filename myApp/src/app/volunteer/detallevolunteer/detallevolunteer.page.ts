@@ -42,5 +42,9 @@ export class DetallevolunteerPage implements OnInit {
     (data)=>{this.users=data},
     (error)=>{console.log(error)}
     );
+
+    
+
   }
+
 }

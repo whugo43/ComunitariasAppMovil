@@ -28,6 +28,16 @@ export class EditarproveedorPage implements OnInit {
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
+      const Id = paramMap.get('id')
+      this.id = Id
+      this.providerservice.getProviderId(Id)
+      .subscribe(
+      (data)=>{this.provider=data},
+      (error)=>{console.log(error);}
+      )
+    });
+    
+    this.activateRoute.paramMap.subscribe(paramMap => {
       this.providerservice.getProvider()
       .subscribe(
       (data)=>{this.provider=data},

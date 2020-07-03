@@ -81,14 +81,14 @@ export class EditarvolunteerPage implements OnInit {
   UpDatevolunteer(idUser:string){
     this.formDataUser.append('username', this.formularios.username);
     this.formDataUser.append('email', this.formularios.email);
+
     this.formDataVoluntario.append('firstName', this.formularios.firstName);
     this.formDataVoluntario.append('lastName',  this.formularios.lastName);
     this.formDataVoluntario.append('social', this.formularios.social);
     this.formDataVoluntario.append('schedule', this.formularios.schedule);
     this.formDataVoluntario.append('phoneNumber', this.formularios.phoneNumber);
-    // tslint:disable-next-line:prefer-for-of
     for (let index = 0; index <  this.formularios.activities.length; index++) {
-      this.formDataVoluntario.append('activities',  this.formularios.activities[index]);
+      this.formDataVoluntario.append('activities',  this.formularios.activities[index]);      
     }
 
     this.conexionUser.updateUser(this.formDataUser,idUser).subscribe(
@@ -110,6 +110,7 @@ export class EditarvolunteerPage implements OnInit {
         console.log(error);
       }
     );
+
   }
 
   async presentAlert(mensaje: string) {

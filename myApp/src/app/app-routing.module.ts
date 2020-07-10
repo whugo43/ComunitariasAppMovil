@@ -146,6 +146,24 @@ const routes: Routes = [
     loadChildren: () => import('./grupos-de-apoyo/grupos-de-apoyo.module').then( m => m.GruposDeApoyoPageModule),
     canActivate:[AuthGuard]
   },
+  {
+    path: 'lista-contactos/:id',
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./lista-contactos/lista-contactos.module').then( m => m.ListaContactosPageModule)
+      }
+    ]
+  },
+  {
+    path: 'generar-contactos/:id',
+    children:[
+      {
+        path:'',
+        loadChildren: () => import('./lista-contactos/generar-contacto/generar-contacto.module').then( m => m.GenerarContactoPageModule)
+      }
+    ]
+  },
 
   {
     path: 'provider',
@@ -199,6 +217,8 @@ const routes: Routes = [
       }
     ]
   },
+
+
 
 ];
 @NgModule({

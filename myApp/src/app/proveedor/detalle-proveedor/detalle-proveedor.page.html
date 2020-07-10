@@ -10,8 +10,15 @@
 
 <ion-content>
       <ion-card>
+      
         <ion-card-header>
+          <ion-item>
           <ion-card-title>{{provider.name}}</ion-card-title>
+
+          <ion-button fill="outline" slot="end" (click)="dirigirpantalla(provider.id)">
+            <ion-icon name="people"></ion-icon>
+          </ion-button>
+          </ion-item>
         </ion-card-header>
 
         <ion-card-content>
@@ -41,4 +48,6 @@
           </ng-container>
         </ion-card-content>   
       </ion-card>
+
+      
 </ion-content>

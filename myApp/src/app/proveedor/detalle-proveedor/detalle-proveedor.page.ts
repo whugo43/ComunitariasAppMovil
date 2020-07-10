@@ -41,4 +41,9 @@ export class DetalleProveedorPage implements OnInit {
     );
   }
 
+  dirigirpantalla(ventana:string){
+    this.router.navigateByUrl("lista-contactos/"+ventana);
+    
+  }
+
 }

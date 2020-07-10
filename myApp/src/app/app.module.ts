@@ -23,6 +23,7 @@ import {ScopeService} from './services/scope/scope.service';
 import {ProviderService} from './services/provider/provider.service';
 import {VoluntariosService} from './services/voluntarios/voluntarios.service';
 import {ActivityService} from './services/activity/activity.service';
+import {ListaContactosService} from './services/lista-contactos/lista-contactos.service';
 import { MenuComponentModule } from './componentes/menu/menu.module';
 
 
@@ -43,6 +44,7 @@ import { MenuComponentModule } from './componentes/menu/menu.module';
     ScopeService,
     LoginService,
     ProviderService,
+    ListaContactosService,
     VoluntariosService,
     ActivityService
     ],

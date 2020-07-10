@@ -10,13 +10,14 @@ import { GrupoService } from '../grupo-service/grupo.service';
 import { importType } from '@angular/compiler/src/output/output_ast';
 import {Voluntario} from '../../clases/voluntario/voluntario'
 import { Router } from '@angular/router';
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private api = 'http://127.0.0.1:8000/api/user/';
-  private apiLogin = 'http://127.0.0.1:8000/api/login/';
+  private api = Api.api+'user/';
+  private apiLogin = Api.api+'login/';
   authSubject=new BehaviorSubject(false);
   private token='';
 
@@ -45,7 +46,7 @@ export class LoginService {
     
   }
 
-  getDecodeAccessToken(token: string) {
+  getDecodeAccessToken(token: string):any {
     try {
       return jwt_decode(token);
     } catch (Error) {

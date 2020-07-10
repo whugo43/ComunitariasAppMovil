@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Grupo } from '../../clases/grupo/grupo'
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class GrupoService {
-  private api = 'http://localhost:8000/api/support-group/';
+  private api = Api.api+'support-group/';
   constructor(private http: HttpClient) { }
 
   getGrupo() {

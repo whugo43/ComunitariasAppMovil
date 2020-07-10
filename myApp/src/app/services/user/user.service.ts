@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  private api='http://127.0.0.1:8000/api/user/';
+  private api=Api.api+'user/';
 
   constructor(private http: HttpClient) { }
   getUser(){

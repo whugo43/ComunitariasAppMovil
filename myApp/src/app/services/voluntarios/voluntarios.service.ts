@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Voluntario } from '../../clases/voluntario/voluntario'
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class VoluntariosService {
-  private api='http://localhost:8000/api/volunteer/';
+  private api=Api.api+'volunteer/';
   constructor(private http:HttpClient) { }
 
   getVoluntarios() {

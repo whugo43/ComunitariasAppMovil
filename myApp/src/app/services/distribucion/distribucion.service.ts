@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Distribucion } from '../../clases/distribucion/distribucion'
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DistribucionService {
-  private api: string = 'http://127.0.0.1:8000/api/distribution/';
+  private api: string = Api.api+'distribution/';
   constructor(private http: HttpClient) { }
 
   getDistribuciones() {

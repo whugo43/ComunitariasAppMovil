@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-
+import { Api } from '../enum'
 import {Provider} from '../../interfaces/provider';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProviderService {
-  private api='http://127.0.0.1:8000/api/provider/';
+  private api=Api.api+'provider/';
   constructor(private http:HttpClient) {
    console.log('providers');
   }

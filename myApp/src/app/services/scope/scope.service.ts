@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScopeService {
-  private api='http://127.0.0.1:8000/api/scope/';
+  private api=Api.api+'scope/';
 
   constructor(private http: HttpClient) { 
   }

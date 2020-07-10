@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Campaign} from '../../interfaces/campaign';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Api } from '../enum'
 
 @Injectable({
   providedIn: 'root'
 })
 export class CampaignService {
-  private api='http://127.0.0.1:8000/api/campaign/';
+  private api=Api.api+'campaign/';
 
   constructor(private http: HttpClient) {
     console.log("campañas");

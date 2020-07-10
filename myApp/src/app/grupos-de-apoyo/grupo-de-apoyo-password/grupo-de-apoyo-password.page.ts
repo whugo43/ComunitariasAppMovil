@@ -84,7 +84,7 @@ export class GrupoDeApoyoPasswordPage implements OnInit {
     this.formGroupContrasenia = this.formBuilder.group({
       currentPassword: ['', [Validators.required, Validators.maxLength(100)]],
       newPassword: ['', [Validators.required, Validators.maxLength(100)]],
-      newPassword2: ['', [Validators.required, Validators.maxLength(100)]],
+      newPassword2: ['', [Validators.required, Validators.maxLength(100)]],//para reestablecer password
     });
   }
 

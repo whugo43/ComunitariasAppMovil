@@ -159,7 +159,7 @@ const routes: Routes = [
             canActivate:[AuthGuard]
       },
       {
-        path: 'editar-contacto/:id',
+        path: 'editar-contacto/:idP',
             loadChildren: () => import('./lista-contactos/editar-contacto/editar-contacto.module').then( m => m.EditarContactoPageModule),
             canActivate:[AuthGuard]
       }

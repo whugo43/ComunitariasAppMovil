@@ -27,11 +27,11 @@
   <ng-container *ngFor="let contacto of contactos; let index= i">
   <ion-card *ngIf="contacto.provider == id">
     <ion-item>
-      <ion-label [routerLink]="['detallecampaign',contacto.id]">
+      <ion-label [routerLink]="['detalle-contacto',contacto.id]">
           {{contacto.lastName}} {{contacto.firstName}}
       </ion-label>
       
-      <ion-button fill="outline" slot="end" >
+      <ion-button fill="outline" slot="end" [routerLink]="['editar-contacto',contacto.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
 

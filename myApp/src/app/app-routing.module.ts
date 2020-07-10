@@ -152,9 +152,20 @@ const routes: Routes = [
       {
         path:'',
         loadChildren: () => import('./lista-contactos/lista-contactos.module').then( m => m.ListaContactosPageModule)
+      },
+      {
+        path: 'detalle-contacto/:id',
+            loadChildren: () => import('./lista-contactos/detalle-contacto/detalle-contacto.module').then( m => m.DetalleContactoPageModule),
+            canActivate:[AuthGuard]
+      },
+      {
+        path: 'editar-contacto/:id',
+            loadChildren: () => import('./lista-contactos/editar-contacto/editar-contacto.module').then( m => m.EditarContactoPageModule),
+            canActivate:[AuthGuard]
       }
     ]
   },
+  
   {
     path: 'generar-contactos/:id',
     children:[

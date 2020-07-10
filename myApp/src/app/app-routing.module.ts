@@ -156,6 +156,11 @@ const routes: Routes = [
         canActivate:[AuthGuard]
       },
       {
+        path: 'detalleproveedor/:id',
+        loadChildren: () => import('./proveedor/detalle-proveedor/detalle-proveedor.module').then( m => m.DetalleProveedorPageModule),
+        canActivate:[AuthGuard]
+      },
+      {
         path: 'editarproveedor/:id',
         loadChildren: () => import('./proveedor/editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule),
         canActivate:[AuthGuard]

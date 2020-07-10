@@ -14,6 +14,10 @@ const routes: Routes = [
   },  {
     path: 'editarproveedor',
     loadChildren: () => import('./editarproveedor/editarproveedor.module').then( m => m.EditarproveedorPageModule)
+  },
+  {
+    path: 'detalle-proveedor',
+    loadChildren: () => import('./detalle-proveedor/detalle-proveedor.module').then( m => m.DetalleProveedorPageModule)
   }
 
 ];

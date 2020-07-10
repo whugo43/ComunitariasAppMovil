@@ -31,7 +31,7 @@
  
   <ion-card *ngFor="let provider of providers; let index= i">
     <ion-item>
-      <ion-label [routerLink]="['detallecampaign',provider.id]">{{provider.name}}</ion-label>
+      <ion-label [routerLink]="['detalleproveedor',provider.id]">{{provider.name}}</ion-label>
       
       <ion-button fill="outline" slot="end" [routerLink]="['editarproveedor',provider.id]">
         <ion-icon name="create"></ion-icon >

@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProviderService } from '../services/provider/provider.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ListaContactosService } from '../services/lista-contactos/lista-contactos.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lista-contactos',
@@ -16,17 +17,16 @@ export class ListaContactosPage implements OnInit {
   constructor(public providerservice: ProviderService,
     public router: Router,
     private cdRef : ChangeDetectorRef,
+    public alertController: AlertController,
     private activateRoute: ActivatedRoute,
     public listacontactosService: ListaContactosService) { }
 
   ngOnInit() {
     this.activateRoute.paramMap.subscribe(paramMap => {
       const Id = paramMap.get('id')
-      console.log(Id+ "contactos")
       this.id = Id
-
-     
     });
+    
     this.listacontactosService.getContactos()
     .subscribe(
       (data)=>{this.contactos=data;},
@@ -42,6 +42,40 @@ export class ListaContactosPage implements OnInit {
 
   dirigirpantalla(){
     this.router.navigateByUrl("provider/detalleproveedor/"+this.id);
+  }
+
+  deleteContacto(id: string){
+    this.listacontactosService.deleteContactos(id).
+    subscribe(
+      (data)=>{console.log(data);
+               this.ngOnInit();},
+      (error)=>{console.log(error);}
+      );        
+  }
+
+  async presentAlertElimnarContacto(id: string) {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+
+      header: 'Esta seguro que desea eliminar este contacto!',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Ok',
+          handler: () => {
+            console.log('Confirm Okay');
+            this.deleteContacto(id)
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 

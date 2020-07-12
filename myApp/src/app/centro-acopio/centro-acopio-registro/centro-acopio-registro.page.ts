@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { CentroAcopioPage } from '../centro-acopio.page'
 import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
+import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-centro-acopio-registro',
@@ -12,41 +13,55 @@ import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.
 export class CentroAcopioRegistroPage implements OnInit {
 
   private c: CentroAcopioPage;
-  private registrationForm: FormGroup;
+  public registrationForm: FormGroup;
   private accionEditar: number = 0;
   private centroAcopioId: any;
   private formData = new FormData();
-  private photo: File;
-  private imageSrc:any;
+  static photo: File;
+  private file: any;
+  private reader: FileReader;
+  private imageSrc: any;
 
   constructor(private formBuilder:
-    FormBuilder, private router: Router, public activateRoute: ActivatedRoute, private centroAcopioapi: CentroAcopioService) {
-    this.registrationForm = this.formBuilder.group({
-      nombre: ['', [Validators.required, Validators.maxLength(100)]],
-      direccion: ['', [Validators.required, Validators.maxLength(100)]],
-      nombre_persona_contacto: ['', [Validators.required, Validators.maxLength(100)]],
-      telefono_persona_contacto: ['', [Validators.required, Validators.maxLength(100)],
-                                  Validators.pattern('[0-9]{11}'),]
-    });
-    this.opcionEditar();
+    FormBuilder, private router: Router, public activateRoute: ActivatedRoute, 
+    private centroAcopioapi: CentroAcopioService, private createBy:CreteByService) {
+    
+  }
+
+  removeImage(idButton: any) {
+    if (CentroAcopioRegistroPage.photo != null) {
+      idButton.value = '';
+      CentroAcopioRegistroPage.photo = null;
+      this.reader = null;
+      this.imageSrc = null;
+      this.file = null;
+    }
+  }
+
+  changeListener($event): void {
+    CentroAcopioRegistroPage.photo = $event.target.files[0];
   }
 
   readURL(event): void {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      this.photo = event.target.files[0];
+      this.file = event.target.files[0];
+      CentroAcopioRegistroPage.photo = event.target.files[0];
 
-      const reader = new FileReader();
-      reader.onload = e => this.imageSrc = reader.result;
+      this.reader = new FileReader();
+      this.reader.onload = e => this.imageSrc = this.reader.result;
 
-      reader.readAsDataURL(file);
+      this.reader.readAsDataURL(this.file);
     }
-  }
-  removePic() {
-    this.imageSrc = null;
   }
 
   ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      direccion: ['', [Validators.required, Validators.maxLength(100)]],
+      nombre_persona_contacto: ['', [Validators.required, Validators.maxLength(100)]],
+      telefono_persona_contacto: ['', [Validators.required,Validators.pattern('[0-9]{11}')]]
+    });
+    this.opcionEditar();
   }
 
   public opcionEditar() {
@@ -63,12 +78,14 @@ export class CentroAcopioRegistroPage implements OnInit {
       }
     });
   }
+  validation_messages = {
+    'telefono_persona_contacto': [
+        { type: 'pattern', message: 'Solo los números son permitidos, con una maxima \n longuitud de 11 caracteres, empezando con 09' },
+      ],
+    }
 
   public check() {
-    return this.registrationForm.get("nombre").value == '' ||
-      this.registrationForm.get("direccion").value == ''||
-      this.registrationForm.get('nombre_persona_contacto').value==''
-      ||this.registrationForm.get('telefono_persona_contacto').value=='';
+    return this.registrationForm.invalid;
   }
 
   public sendData() {
@@ -78,9 +95,9 @@ export class CentroAcopioRegistroPage implements OnInit {
         queryParams: {
           nombre: this.registrationForm.get('nombre').value,
           direccion: this.registrationForm.get('direccion').value,
-          nombre_contact:this.registrationForm.get('nombre_persona_contacto').value,
-          telefono_contact:this.registrationForm.get('telefono_persona_contacto').value,
-          photo:this.photo,
+          nombre_contact: this.registrationForm.get('nombre_persona_contacto').value,
+          telefono_contact: this.registrationForm.get('telefono_persona_contacto').value,
+          photo: CentroAcopioRegistroPage.photo,
           accionEditar: "1",
           id: this.centroAcopioId,
         }
@@ -90,9 +107,9 @@ export class CentroAcopioRegistroPage implements OnInit {
         queryParams: {
           nombre: this.registrationForm.get('nombre').value,
           direccion: this.registrationForm.get('direccion').value,
-          nombre_contact:this.registrationForm.get('nombre_persona_contacto').value,
-          telefono_contact:this.registrationForm.get('telefono_persona_contacto').value,
-          photo:this.photo,
+          nombre_contact: this.registrationForm.get('nombre_persona_contacto').value,
+          telefono_contact: this.registrationForm.get('telefono_persona_contacto').value,
+          photo: CentroAcopioRegistroPage.photo,
           accionEditar: '0',
         }
       });
@@ -105,10 +122,13 @@ export class CentroAcopioRegistroPage implements OnInit {
      */
     this.formData.append('name', this.registrationForm.get('nombre').value);
     this.formData.append('address', this.registrationForm.get('direccion').value);
+    this.formData.append('contactName', this.registrationForm.get('nombre_persona_contacto').value);
+    this.formData.append('contactPhone', this.registrationForm.get('telefono_persona_contacto').value);
+    this.formData.append('photo', CentroAcopioRegistroPage.photo);
     this.centroAcopioapi.getCentroAcopioId(this.centroAcopioId).subscribe(dato_final => {
       this.formData.append('latitude', dato_final['latitude']);
       this.formData.append('longitude', dato_final['longitude']);
-      this.formData.append('createdBy', 'mi');
+      this.formData.append('createdBy', this.createBy.getNombre());
     });
 
     if (this.accionEditar > 0) {

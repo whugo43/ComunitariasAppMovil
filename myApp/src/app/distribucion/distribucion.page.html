@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="end">
-      <ion-menu-button color = "primary" menu= "menu">
+      <ion-menu-button color="primary" menu="menu">
       </ion-menu-button>
     </ion-buttons>
-    
+
     <ion-title>Distribuciones</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
@@ -12,7 +12,14 @@
   </ion-toolbar>
 </ion-header>
 
+
+
 <ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-card *ngFor="let data of distribucion_registrada">
     <ion-grid>
       <ion-row>
@@ -37,7 +44,7 @@
       <ion-row>
         <ion-label><b>Lugar de origen:</b>{{data.destinationAddress}}</ion-label><br><br>
       </ion-row>
-      
+
       <ion-row>
         <ion-label><b>Encargado (tipo):</b>{{data.manager_type}}</ion-label><br><br>
       </ion-row>

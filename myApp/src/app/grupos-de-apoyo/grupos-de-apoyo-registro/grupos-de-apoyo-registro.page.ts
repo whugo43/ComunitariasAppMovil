@@ -4,6 +4,7 @@ import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
+import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-grupos-de-apoyo-registro',
@@ -26,21 +27,8 @@ export class GruposDeApoyoRegistroPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private conexionUser: LoginService,
     private conexionGrupos: GrupoService, public alertController: AlertController,
-    private router: Router, private activatedRouter: ActivatedRoute) {
-
-    this.registrationFormGrupo = this.formBuilder.group({
-      members: [],
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      user: '',
-    });
-
-    this.registrationFormUser = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.maxLength(50)]],
-      password: ['', [Validators.required, Validators.maxLength(100)]],
-      email: ['', [Validators.required, Validators.maxLength(100),Validators.email]],
-      createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
-    });
-    this.opcionEditar();
+    private router: Router, private activatedRouter: ActivatedRoute, 
+    private createby: CreteByService) {
   }
 
   opcionEditar() {
@@ -59,7 +47,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
               username: [user.username, [Validators.required, Validators.maxLength(50)]],
               password: [user.password, [Validators.required, Validators.maxLength(100)]],
               email: [user.email, [Validators.required, Validators.maxLength(100)]],
-              createBy: ['mi', [Validators.required, Validators.maxLength(50)]]
+              createBy: [this.createby.getNombre(), [Validators.required, Validators.maxLength(50)]]
             });
           });
         });
@@ -90,14 +78,14 @@ export class GruposDeApoyoRegistroPage implements OnInit {
     formDataUser.append('username', this.registrationFormUser.get('username').value);
     formDataUser.append('password', this.registrationFormUser.get('password').value);
     formDataUser.append('email', this.registrationFormUser.get('email').value);
-    formDataUser.append('createdBy', 'mi');
+    formDataUser.append('createdBy', this.createby.getNombre());
     if (this.edicion == 'editar') {
       let data;
       this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
         this.conexionUser.updateUser(formDataUser, grupo.user).subscribe();
         data = {
           "name": this.registrationFormGrupo.get('name').value,
-          "createdBy": "mi",
+          "createdBy": this.createby.getNombre(),
           "user": grupo.user,
         }
         console.log(data)
@@ -114,7 +102,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         (data) => {
           let postData = {
             "name": this.registrationFormGrupo.get('name').value,
-            "createdBy": "mi",
+            "createdBy": this.createby.getNombre(),
             "user": data['id'],
           }
           this.conexionGrupos.guardarGrupo(postData).subscribe(
@@ -129,13 +117,25 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         },
         error => {
           console.log(error);
-          this.presentAlert('El nombre del usuario ya existe, por favor <strong>eliga otro nombre</strong>');
+          this.presentAlert('El nombre del usuario o el correo ya existe, por favor <strong>eliga otro nombre u otro correo</strong>');
         });
     }
   }
 
   ngOnInit() {
+    this.registrationFormGrupo = this.formBuilder.group({
+      members: [],
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      user: '',
+    });
 
+    this.registrationFormUser = this.formBuilder.group({
+      username: ['', [Validators.required, Validators.maxLength(50)]],
+      password: ['', [Validators.required, Validators.maxLength(100)]],
+      email: ['', [Validators.required, Validators.maxLength(100), Validators.email]],
+      createBy: [this.createby.getNombre(), [Validators.required, Validators.maxLength(50)]]
+    });
+    this.opcionEditar();
   }
 
 

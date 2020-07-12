@@ -26,7 +26,15 @@ export class DistribucionPage implements OnInit {
     this.recibiendoDatosApi();
   }
 
+  doRefresh(event) {
+    setTimeout(() => {
+      this.ngOnInit();
+      event.target.complete();
+    }, 200);
+  }
+
   public recibiendoDatosApi() {
+    this.distribucion_registrada=[];
     /* Recibiendo los datos guardados de la api*/
     this.conexionApi.getDistribuciones().subscribe(data => {
       data.forEach(f => {
@@ -39,12 +47,12 @@ export class DistribucionPage implements OnInit {
               }
             });
           });
-        }else{
-          this.conexionGrupo.getGrupo().subscribe(grupos=>{
-            grupos.forEach(grupo=>{
-              f['manager_type']='Grupos';
-              if(f.user==grupo.user){
-                f['user']=grupo.name;
+        } else {
+          this.conexionGrupo.getGrupo().subscribe(grupos => {
+            grupos.forEach(grupo => {
+              f['manager_type'] = 'Grupos';
+              if (f.user == grupo.user) {
+                f['user'] = grupo.name;
               }
             });
           });
@@ -90,7 +98,7 @@ export class DistribucionPage implements OnInit {
     });
   }
 
-  editar(id:string) {
+  editar(id: string) {
     this.activateRoute.navigate(['./distribucion/registro-distribucion'], {
       queryParams: {
         accionEditar: "1",
@@ -100,7 +108,7 @@ export class DistribucionPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.recibiendoDatosApi();
   }
 
 }

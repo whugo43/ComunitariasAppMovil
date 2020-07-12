@@ -1,3 +1,5 @@
 export enum Api {
-    api='http://127.0.0.1:8000/api/'
+    api='http://a8bb1b66d9de.ngrok.io/api/'
 }
+//http://a8bb1b66d9de.ngrok.io/api para poder ejecutar la aplicacion en el movil
+//http://localhost:8000/api/

@@ -20,7 +20,7 @@
 
       <ion-item>
         <ion-label><ion-icon name="key-outline"></ion-icon> <ion-text color="danger"></ion-text></ion-label>
-        <ion-input placeholder="Password" name="password" type='password' ngModel required></ion-input>
+        <ion-input [type]="passwordType" placeholder="Password" name="password" type='password' ngModel required></ion-input>
         <ion-icon item-end [name]="passwordIcon" class="passwordIcon" (click)='hideShowPassword()'></ion-icon>
       </ion-item>
 

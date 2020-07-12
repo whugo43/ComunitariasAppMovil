@@ -2,6 +2,9 @@ export class CentroAcopioClass {
     id?:string;
     name: string;
     address?: string;
+    contactName:string;
+    contactPhone:string;
+    photo:File;
     latitude?: number;
     longitude?: number;
     createdBy: string;

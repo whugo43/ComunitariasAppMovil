@@ -85,6 +85,7 @@ export class LoginService {
     localStorage.setItem("USER_ID", userId)
     this.token=token;
   }
+  
   getUserIdLogin(){
     return localStorage.getItem("USER_ID") 
   }

@@ -112,15 +112,18 @@ export class GrupoDeApoyoPasswordPage implements OnInit {
       if (this.opcion == 'cambio') {
         this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
           this.conexionUser.getUserId(grupo.user).subscribe(user => {
-            console.log(user.password)
+            console.log(user)
+            console.log("ww"+this.formGroupContrasenia.get('currentPassword').value)
             if(this.formGroupContrasenia.get('currentPassword').value=='' ){
              
-            }else if(this.formGroupContrasenia.get('currentPassword').value==
-            user.password){
+            }else if(this.formGroupContrasenia.get('currentPassword').value!=null &&
+            this.formGroupContrasenia.get('newPassword').value!=null){
               let data={
+                currentpassword:this.formGroupContrasenia.get('currentPassword').value,
                 password:this.formGroupContrasenia.get('newPassword').value
               }
               this.conexionUser.updateUser(data,user.id).subscribe(exito=>{
+                this.presentExito("La contraseña se ha modificado correctamente..");
                 this.atras();
               },error=>{
                 this.presentAlert(':( ..No se pudo actualizar la contraseña del usuario: '

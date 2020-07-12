@@ -5,6 +5,9 @@ import { ActivatedRoute, Router } from "@angular/router"
 import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-class'
 import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
 import { FormBuilder, Validators, FormGroup } from '@angular/forms'
+import { CreteByService } from '../../services/create-by.service'
+import { CentroAcopioRegistroPage } from '../centro-acopio-registro/centro-acopio-registro.page'
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-ubicacion',
@@ -18,29 +21,33 @@ export class UbicacionPage implements OnInit {
   public long_ac: number = 0;
   public nombre: string = '';
   public direccion: string = '';
+  private nombreContact: string = '';
+  private telefonoContac: string = '';
+  private photo: any;
   public lat_pa: number;
   public lng_pa: number;
   public centroAcopio_save: CentroAcopioClass = new CentroAcopioClass();
   public band: number = 0;
   public markPoint: Marker;
-
+  private formData: FormData = new FormData();
   public lat_enviar: number = 0;
   public lng_enviar: number = 0;
-  formData = new FormData();
   private accionEditar: number = 0;
   private centroAcopioId: any;
 
   constructor(public geolocation: Geolocation,
     public activateRoute: ActivatedRoute, public route: Router, private conexionApi: CentroAcopioService, private formBuilder:
-      FormBuilder) {
-    this.obtenerUbicacionActual();
-    this.recibiendoDatos();
+      FormBuilder, private createBy: CreteByService, public alertController: AlertController) {
+
   }
 
   public recibiendoDatos() {
     this.activateRoute.queryParamMap.subscribe((data) => {
       this.nombre = data.get('nombre');
       this.direccion = data.get('direccion');
+      this.nombreContact = data.get('nombre_contact');
+      this.telefonoContac = data.get('telefono_contact');
+      this.photo = data.get('photo');
       if (data.get('accionEditar') == "1") {
         this.accionEditar = 1;
         this.centroAcopioId = data.get('id');
@@ -49,31 +56,57 @@ export class UbicacionPage implements OnInit {
     })
 
   }
-
+  async presentAlertConfirm() {
+    let alert = await this.alertController.create({
+      header: 'Error!',
+      message: '<p><strong>'+"Ha ocurrido un error por favor intentelo mas tarde.."+'</strong>!!!</p>',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+        },
+      ]
+    });
+    await alert.present();
+  }
   public enviarDatos() {
-    this.formData.append('name', this.nombre);
+    console.log(this.createBy.getNombre())
+    this.formData.append("name", this.nombre);
     this.formData.append('address', this.direccion);
     this.formData.append('latitude', this.lat_enviar.toString());
     this.formData.append('longitude', this.lng_enviar.toString());
-    this.formData.append('createdBy', 'mi');
+    this.formData.append('contactName', this.nombreContact);
+    this.formData.append('contactPhone', this.telefonoContac);
+    this.formData.append('photo', CentroAcopioRegistroPage.photo);
+    this.formData.append('createdBy', this.createBy.getNombre());
 
     if (this.accionEditar > 0) {
-      this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId).subscribe((newTask) => {
-        { console.log(newTask) }
-      });
+      this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId)
+      .subscribe((newTask) => {
+        { console.log(newTask) 
+          this.route.navigate(['../centro-acopio']);
+        }
+      },error=>{
+        this.presentAlertConfirm();
       this.accionEditar = 1;
+    });
 
     } else {
       this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
-        (newTask) => { console.log(newTask); }
-      );
+        (newTask) => { 
+          console.log(newTask); 
+          this.route.navigate(['../centro-acopio']);
+        }
+      ,error=>{
+        this.presentAlertConfirm();
+      });
     }
-
-    this.route.navigate(['../centro-acopio']);
+    
   }
 
   check_ubicacion() {
-    return this.lng_enviar + this.lat_enviar == 0 || this.geolocation.getCurrentPosition()==null;
+    return this.lng_enviar + this.lat_enviar == 0 || this.geolocation.getCurrentPosition() == null;
   }
 
   ionViewDidEnter() {
@@ -98,8 +131,8 @@ export class UbicacionPage implements OnInit {
         this.markPoint.bindPopup("<p>" + "<b>Nombre: </b>" + data['name'] + "</p>");
 
         this.map.addLayer(this.markPoint);
-        this.lat_enviar=data['latitude'];
-        this.lng_enviar=data['longitude'];
+        this.lat_enviar = data['latitude'];
+        this.lng_enviar = data['longitude'];
         this.map.setView([data['latitude'], data['longitude']], 19);
         this.band = 1;
       });
@@ -146,6 +179,8 @@ export class UbicacionPage implements OnInit {
   }
 
   ngOnInit() {
+    this.obtenerUbicacionActual();
+    this.recibiendoDatos();
   }
 
 }

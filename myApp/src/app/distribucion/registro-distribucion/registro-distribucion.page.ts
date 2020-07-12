@@ -5,6 +5,7 @@ import { DistribucionService } from '../../services/distribucion/distribucion.se
 import { VoluntariosService } from '../../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { ActivatedRoute } from '@angular/router';
+import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-registro-distribucion',
@@ -19,7 +20,7 @@ export class RegistroDistribucionPage implements OnInit {
   private accionEditar: number = 0;
   private userId: number;
   private formData = new FormData();
-  private distribucionId:string;
+  private distribucionId: string;
 
   public errorMessage = {
     lugar_partida: [
@@ -48,25 +49,16 @@ export class RegistroDistribucionPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private activateRoute: ActivatedRoute, private conexionApi: DistribucionService,
     private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService,
-    private router: Router) {
-    this.registrationForm = this.formBuilder.group({
-      lugar_partida: ['', [Validators.required, Validators.maxLength(100)]],
-      lugar_destino: ['', [Validators.required, Validators.maxLength(100)]],
-      encargado: this.formBuilder.group({
-        tipo_seleccion_encargado: ['', [Validators.required, Validators.maxLength(100)]],
-        nombre: ['', [Validators.required, Validators.maxLength(100)]],
-      }),
-      descripcion: ['', [Validators.required, Validators.maxLength(200)]]
-    });
-    this.llenarParametrosEdicion();
+    private router: Router, private createBy:CreteByService) {
+
   }
 
   llenarParametrosEdicion() {
     this.activateRoute.queryParamMap.subscribe((data) => {
-      if (data.get('accionEditar') == '1'  && this.accionEditar==0) {
+      if (data.get('accionEditar') == '1' && this.accionEditar == 0) {
         console.log('edicion');
         this.accionEditar = 1;
-        this.distribucionId=data.get('id');
+        this.distribucionId = data.get('id');
         this.conexionApi.getDistribucionId(this.distribucionId).subscribe(distribuciones => {
           let tipo = '';
           let nombref = '';
@@ -166,10 +158,10 @@ export class RegistroDistribucionPage implements OnInit {
       this.formData.append('manager_type', "2");
     }
     this.formData.append('information', this.registrationForm.get('descripcion').value);
-    this.formData.append('createdBy', 'mi');
-    this.formData.append('user',this.registrationForm.get('encargado.nombre').value );
+    this.formData.append('createdBy', this.createBy.getNombre());
+    this.formData.append('user', this.registrationForm.get('encargado.nombre').value);
     if (this.accionEditar > 0) {
-      this.conexionApi.actualizarDistribucion(this.formData,this.distribucionId).subscribe(msm=>{
+      this.conexionApi.actualizarDistribucion(this.formData, this.distribucionId).subscribe(msm => {
         console.log(msm);
       });
       this.accionEditar = 0;
@@ -181,6 +173,16 @@ export class RegistroDistribucionPage implements OnInit {
   }
 
   ngOnInit() {
+    this.registrationForm = this.formBuilder.group({
+      lugar_partida: ['', [Validators.required, Validators.maxLength(100)]],
+      lugar_destino: ['', [Validators.required, Validators.maxLength(100)]],
+      encargado: this.formBuilder.group({
+        tipo_seleccion_encargado: ['', [Validators.required, Validators.maxLength(100)]],
+        nombre: ['', [Validators.required, Validators.maxLength(100)]],
+      }),
+      descripcion: ['', [Validators.required, Validators.maxLength(200)]]
+    });
+    this.llenarParametrosEdicion();
   }
 
 }

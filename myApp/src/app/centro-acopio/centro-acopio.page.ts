@@ -17,7 +17,6 @@ export class CentroAcopioPage implements OnInit {
 
   constructor(public activateRoute: ActivatedRoute, 
     private conexionApi: CentroAcopioService,private alertController:AlertController,private router:Router) {
-    this.recibiendoDatosApi();
   }
 
   doRefresh(event:any) {
@@ -29,6 +28,14 @@ export class CentroAcopioPage implements OnInit {
       this.recibiendoDatosApi();
       event.target.complete();
     }, 2000);
+  }
+
+  goDetails(id:any){
+    this.router.navigate(['./centro-acopio/centro-de-acopio-detalle'], {
+      queryParams: {
+        centroAcopioId:id,
+      }
+    })
   }
 
   checklist() {
@@ -46,6 +53,7 @@ export class CentroAcopioPage implements OnInit {
   }
 
   ngOnInit() {
+    this.recibiendoDatosApi();
   }
 
   async presentAlertConfirm(id:any) {

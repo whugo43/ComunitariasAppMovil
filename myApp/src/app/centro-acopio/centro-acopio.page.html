@@ -8,54 +8,41 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
-      refreshingSpinner="circles" refreshingText="Refreshing...">
-    </ion-refresher-content>
-  </ion-refresher>
+
   <ion-card *ngFor="let data of lista">
-    <ion-grid>
-      <ion-row>
-        <ion-col size='7'>Accion:</ion-col>
-        <ion-col>
-          <!--Esta es para poder editar un centro dee acopio ya registrado-->
-          <ion-button fill="outline" size='small' (click)='editar(data.id)' [routerLink]="['./centro-acopio-registro']">
-            <ion-icon name="create"></ion-icon>
-          </ion-button>
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+        refreshingSpinner="circles" refreshingText="Refreshing...">
+      </ion-refresher-content>
+    </ion-refresher>
 
-          <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
-          <ion-button fill="outline" size='small' (click)="presentAlertConfirm(data.id)">
-            <ion-icon name="trash"></ion-icon>
-          </ion-button>
+    <ion-item>
+      <ion-label>Acciones:</ion-label>
+      <ion-button fill="outline" size='small' slot="end" (click)='editar(data.id)'
+        [routerLink]="['./centro-acopio-registro']">
+        <ion-icon name="create"></ion-icon>
+      </ion-button>
 
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
-      </ion-row>
+      <!--Esta es para poder eliminar un centro dee acopio ya registrado-->
+      <ion-button fill="outline" size='small' slot="end" (click)="presentAlertConfirm(data.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
 
-      <ion-row>
-        <ion-label><b>Direccion:</b>{{data.address}}</ion-label><br><br>
-      </ion-row>
 
-      <ion-row>
-        <ion-label><b>Informacion de persona de contacto:</b></ion-label><br><br>
-        <ion-card>
-          <ion-grid>
-            <ion-row>
-              <ion-label><b>Nombre:</b></ion-label><br><br>
-            </ion-row>
-            
-            <ion-row>
-              <ion-label><b>Telefono:</b></ion-label><br><br>
-            </ion-row>
-          </ion-grid>
-        </ion-card>
-      </ion-row>
-    </ion-grid>
+
+    </ion-item>
+   
+      <ion-grid (click)='goDetails(data.id)'>
+        <ion-row>
+          <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
+        </ion-row>
+
+        <ion-row>
+          <ion-label><b>Direccion:</b>{{data.address}}</ion-label><br><br>
+        </ion-row>
+      </ion-grid>
 
   </ion-card>
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="./centro-acopio-registro" routerDirection="root">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>

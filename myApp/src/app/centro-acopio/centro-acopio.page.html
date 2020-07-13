@@ -2,19 +2,19 @@
   <ion-toolbar>
     <ion-title>Centros de Acopios</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="home"></ion-back-button>
+      <ion-back-button defaultHref="/home"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
+      refreshingSpinner="circles" refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
 
   <ion-card *ngFor="let data of lista">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
-      <ion-refresher-content pullingIcon="chevron-down-circle-outline" pullingText="Pull to refresh"
-        refreshingSpinner="circles" refreshingText="Refreshing...">
-      </ion-refresher-content>
-    </ion-refresher>
 
     <ion-item>
       <ion-label>Acciones:</ion-label>
@@ -31,16 +31,16 @@
 
 
     </ion-item>
-   
-      <ion-grid (click)='goDetails(data.id)'>
-        <ion-row>
-          <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
-        </ion-row>
 
-        <ion-row>
-          <ion-label><b>Direccion:</b>{{data.address}}</ion-label><br><br>
-        </ion-row>
-      </ion-grid>
+    <ion-grid (click)="goDetails(data.id)">
+      <ion-row>
+        <ion-label><b>Nombre:</b>{{data.name}}</ion-label><br><br>
+      </ion-row>
+
+      <ion-row>
+        <ion-label><b>Direccion:</b>{{data.address}}</ion-label><br><br>
+      </ion-row>
+    </ion-grid>
 
   </ion-card>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" routerLink="./centro-acopio-registro" routerDirection="root">

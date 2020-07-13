@@ -6,6 +6,7 @@ import {Campaign} from '../../interfaces/campaign';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 import { LoginService } from 'src/app/services/login/login.service';
+import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-generar-campaign',
@@ -35,7 +36,8 @@ export class GenerarCampaignPage implements OnInit {
               public scopeService:ScopeService,
               public campaignservice:CampaignService,
               public voluntariosvervice: VoluntariosService,
-              public gruposervice: GrupoService) { }
+              public gruposervice: GrupoService,
+              private createdBy:CreteByService) { }
 
   ngOnInit() {
     this.Getscopes()
@@ -80,6 +82,7 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("description",this.formularios.description)
     this.formData.append("scope",this.formularios.scope) 
     this.formData.append("photo",this.photo)  
+    this.formData.append("createdBy",this.createdBy.getNombre())  
 
     this.campaignservice.postCampaigns(this.formData).subscribe(
       (newTask)=>{console.log("metodo create");}

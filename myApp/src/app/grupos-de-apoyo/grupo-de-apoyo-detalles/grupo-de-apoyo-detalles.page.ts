@@ -22,7 +22,9 @@ export class GrupoDeApoyoDetallesPage implements OnInit {
 
   constructor(private navegacion: ActivatedRoute, private apiUser: LoginService
     , private conexionGrupo: GrupoService, private router: Router,
-    private alertController: AlertController, private conexionGroupMembers: GroupMemberServiceService, public toastController: ToastController) { }
+    private alertController: AlertController, 
+    private conexionGroupMembers: GroupMemberServiceService, 
+    public toastController: ToastController) { }
 
   
   ngOnInit() {

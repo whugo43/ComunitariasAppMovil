@@ -112,7 +112,7 @@ export class LoginService {
     return this.http.post(path, usuario)
   }
 
-  getUserId(id: string){ 
+  getUserId(id: any){ 
     return this.http.get<User>(this.api+id);
   }
 

@@ -17,7 +17,7 @@ export class DetalleDonacionPage implements OnInit {
   donacion=[];
   categoria=[];
   proveedor=[];
-  centroacopio=[];
+  centroacopio:any;
   voluntarios;
   gruposApoyos;
 

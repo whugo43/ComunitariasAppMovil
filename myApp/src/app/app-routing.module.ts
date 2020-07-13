@@ -63,6 +63,11 @@ const routes: Routes = [
         path: ':centro-acopioId',
         loadChildren: () => import('./centro-acopio/ubicacion/ubicacion.module').then( m => m.UbicacionPageModule),
         canActivate:[AuthGuard]
+      },
+      {
+        path: 'cntro-de-acopio-detalle/:id',
+        loadChildren: () => import('./centro-acopio/centro-de-acopio-detalle/centro-de-acopio-detalle.module').then( m => m.CentroDeAcopioDetallePageModule),
+        canActivate:[AuthGuard]
       }
   ]
   },

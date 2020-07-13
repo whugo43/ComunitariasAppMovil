@@ -40,7 +40,7 @@
       </ion-card>
     </form>
 
-    <ion-button expand='full' [disabled]="check()" (click)='sendData()' *ngIf="edicion!='editar'">
+    <ion-button expand='full' [disabled]="check()" (click)='sendData()' *ngIf="edicion!='editar'" routerLink="/grupos-de-apoyo">
       Registrar Grupo<ion-icon slot="end" name="create"></ion-icon>
     </ion-button>
     <ion-button expand='full' [disabled]="check()" (click)='sendData()' *ngIf="edicion=='editar'">

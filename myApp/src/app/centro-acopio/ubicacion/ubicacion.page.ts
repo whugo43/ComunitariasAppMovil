@@ -23,7 +23,7 @@ export class UbicacionPage implements OnInit {
   public direccion: string = '';
   private nombreContact: string = '';
   private telefonoContac: string = '';
-  private photo: any;
+  private photo: File=CentroAcopioRegistroPage.photo;
   public lat_pa: number;
   public lng_pa: number;
   public centroAcopio_save: CentroAcopioClass = new CentroAcopioClass();
@@ -47,7 +47,6 @@ export class UbicacionPage implements OnInit {
       this.direccion = data.get('direccion');
       this.nombreContact = data.get('nombre_contact');
       this.telefonoContac = data.get('telefono_contact');
-      this.photo = data.get('photo');
       if (data.get('accionEditar') == "1") {
         this.accionEditar = 1;
         this.centroAcopioId = data.get('id');
@@ -71,14 +70,15 @@ export class UbicacionPage implements OnInit {
     await alert.present();
   }
   public enviarDatos() {
-    console.log(this.createBy.getNombre())
     this.formData.append("name", this.nombre);
     this.formData.append('address', this.direccion);
     this.formData.append('latitude', this.lat_enviar.toString());
     this.formData.append('longitude', this.lng_enviar.toString());
     this.formData.append('contactName', this.nombreContact);
     this.formData.append('contactPhone', this.telefonoContac);
-    this.formData.append('photo', CentroAcopioRegistroPage.photo);
+    if(this.photo!=null){
+      this.formData.append("photo", this.photo);
+    }
     this.formData.append('createdBy', this.createBy.getNombre());
 
     if (this.accionEditar > 0) {

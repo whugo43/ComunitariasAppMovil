@@ -19,13 +19,13 @@ export class CentroAcopioService {
     return this.api;
   }
 
-  guardarCentroAcopio(centroAcopio) {
+  guardarCentroAcopio(centroAcopio:any) {
     const path= this.api;
     return this.http.post(path,centroAcopio)
   }
 
   getCentroAcopioId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<CentroAcopioClass>(this.api+id);
   }
 
   deleteCentroAcopio(id: string){

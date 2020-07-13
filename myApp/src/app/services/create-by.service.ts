@@ -6,16 +6,14 @@ import { LoginService } from './login/login.service';
 })
 export class CreteByService {
 
-  private nombre='';
+  private nombre:string='';
   constructor(private loginService:LoginService){
+    this.loginService.getUserId(this.loginService.getUserIdLogin()).subscribe(user=>{
+      this.nombre=user.username
+  });
   }
 
-  public getNombre():string{
-    
-      this.loginService.getUserId(this.loginService.getUserIdLogin()).subscribe(user=>{
-          this.nombre=user.username
-      });
-      console.log(this.nombre);
-      return this.nombre
+  getNombre():string{
+      return this.nombre;
   }
 }

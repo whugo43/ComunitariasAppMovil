@@ -6,7 +6,7 @@
       <ion-back-button defaultHref="/centro-acopio/centro-acopio-registro"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-button float-right [disabled]="check_ubicacion()" (click)="enviarDatos()" defaultHref="/centro-acopio">
+  <ion-button float-right [disabled]="check_ubicacion()" (click)="enviarDatos()" routerLink="/centro-acopio">
     <ion-icon name="checkmark"></ion-icon>Guardar
   </ion-button>
 </ion-header>

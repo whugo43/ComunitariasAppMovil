@@ -59,7 +59,7 @@ export class CentroAcopioRegistroPage implements OnInit {
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
       direccion: ['', [Validators.required, Validators.maxLength(100)]],
       nombre_persona_contacto: ['', [Validators.required, Validators.maxLength(100)]],
-      telefono_persona_contacto: ['', [Validators.required,Validators.pattern('[0-9]{11}')]]
+      telefono_persona_contacto: ['', [Validators.required,Validators.pattern('09[0-9]{9}')]]
     });
     this.opcionEditar();
   }
@@ -80,7 +80,7 @@ export class CentroAcopioRegistroPage implements OnInit {
   }
   validation_messages = {
     'telefono_persona_contacto': [
-        { type: 'pattern', message: 'Solo los números son permitidos, con una maxima \n longuitud de 11 caracteres, empezando con 09' },
+        { type: 'pattern', message: 'Solo los números son permitidos, con una longuitud \n máxima de 11 caracteres, empezando con 09' },
       ],
     }
 
@@ -126,8 +126,8 @@ export class CentroAcopioRegistroPage implements OnInit {
     this.formData.append('contactPhone', this.registrationForm.get('telefono_persona_contacto').value);
     this.formData.append('photo', CentroAcopioRegistroPage.photo);
     this.centroAcopioapi.getCentroAcopioId(this.centroAcopioId).subscribe(dato_final => {
-      this.formData.append('latitude', dato_final['latitude']);
-      this.formData.append('longitude', dato_final['longitude']);
+      this.formData.append('latitude', dato_final['latitude'].toString());
+      this.formData.append('longitude', dato_final['longitude'].toString());
       this.formData.append('createdBy', this.createBy.getNombre());
     });
 

@@ -10,15 +10,15 @@ const routes: Routes = [
   },
   {
     path: 'generar-contacto',
-    loadChildren: () => import('../Lista-contactos/generar-contacto/generar-contacto.module').then( m => m.GenerarContactoPageModule)
+    loadChildren: () => import('../lista-contactos/generar-contacto/generar-contacto.module').then( m => m.GenerarContactoPageModule)
   },
   {
     path: 'editar-contacto',
-    loadChildren: () => import('../Lista-contactos/editar-contacto/editar-contacto.module').then( m => m.EditarContactoPageModule)
+    loadChildren: () => import('../lista-contactos/editar-contacto/editar-contacto.module').then( m => m.EditarContactoPageModule)
   },
   {
     path: 'detalle-contacto',
-    loadChildren: () => import('../Lista-contactos/detalle-contacto/detalle-contacto.module').then( m => m.DetalleContactoPageModule)
+    loadChildren: () => import('../lista-contactos/detalle-contacto/detalle-contacto.module').then( m => m.DetalleContactoPageModule)
   }
 ];
 

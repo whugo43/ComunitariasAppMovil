@@ -74,16 +74,27 @@ export class GenerarvolunteerPage implements OnInit {
 
   }
 
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   postvolunteer(){
     this.formDataUser.append('username', this.formularios.username);
     this.formDataUser.append('password', this.formularios.password);
     this.formDataUser.append('email', this.formularios.email);
-
+    this.formDataUser.append("createdBy", localStorage.getItem('USER_NAME'));
+    
     this.formDataVoluntario.append('firstName', this.formularios.firstName);
     this.formDataVoluntario.append('lastName',  this.formularios.lastName);
     this.formDataVoluntario.append('social', this.formularios.social);
     this.formDataVoluntario.append('schedule', this.formularios.schedule);
     this.formDataVoluntario.append('phoneNumber', this.formularios.phoneNumber);
+    this.formDataVoluntario.append("createdBy", localStorage.getItem('USER_NAME'));
    
     for (let index = 0; index <  this.formularios.activities.length; index++) {
       this.formDataVoluntario.append('activities',  this.formularios.activities[index]);      
@@ -93,32 +104,21 @@ export class GenerarvolunteerPage implements OnInit {
       (data) => {
         this.formDataVoluntario.append('user', data['id']);
         this.voluntariosService.postVoluntario(this.formDataVoluntario).subscribe(
-          newTask => {
-            console.log(newTask);
+          data => {
+            this.alertaError('Crear Voluntario', 'Voluntario creado correctamente.');
             this.router.navigateByUrl('/volunteer');
           },
           error => {
-            console.log(error);
+            this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
+            this.router.navigateByUrl('/volunteer');
           }
         );
       },
       error => {
-        console.log(error);
-        this.presentAlert('El nombre del usuario o correo ya existe, por favor <strong>eliga otro nombre</strong>');
+        this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
       });
   }
 
-  async presentAlert(mensaje: string) {
-    const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: 'Especificacion del error',
-      message: mensaje,
-      buttons: ['Aceptar']
-    });
-
-    await alert.present();
-  }
 
 
 }

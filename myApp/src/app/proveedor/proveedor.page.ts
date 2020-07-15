@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { ProviderService} from '../services/provider/provider.service';
+import { ActivatedRoute } from '@angular/router';
 import { $$ } from 'protractor';
 
 
@@ -14,7 +15,11 @@ export class ProveedorPage implements OnInit {
   providers
 
   constructor(public alertController: AlertController,
+            route: ActivatedRoute,
               public providerservice:ProviderService) {
+    route.params.subscribe(val => {
+      this.ngOnInit(); // ejecutar ngOnInit al cargar pagina
+    })
    }
 
   ngOnInit() {

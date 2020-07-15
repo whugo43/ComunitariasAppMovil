@@ -5,6 +5,7 @@ import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.ser
 import { LoginService } from 'src/app/services/login/login.service';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-generarproveedor',
@@ -34,6 +35,7 @@ export class GenerarproveedorPage implements OnInit {
                 public categoriaservice: CategoriaService,
                 public voluntariosvervice: VoluntariosService,
                 public loginService: LoginService,
+                public alertController: AlertController,
                 public gruposervice: GrupoService) { }
 
     ngOnInit() { 
@@ -68,6 +70,15 @@ export class GenerarproveedorPage implements OnInit {
       (error)=>{console.log(error)}
       ); 
     }
+  
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
   postProvider() {
 
@@ -75,15 +86,22 @@ export class GenerarproveedorPage implements OnInit {
     this.formData.append("address", this.formularios.address)
     this.formData.append("phoneNumber", this.formularios.phoneNumber)
     this.formData.append("email", this.formularios.email)
+    this.formData.append("createdBy", localStorage.getItem('USER_NAME'));
     for (let index = 0; index <  this.formularios.categories.length; index++) {
       this.formData.append('categories',  this.formularios.categories[index]);      
     }
     
     this.providerservice.postProvider(this.formData).subscribe(
-      (newTask)=>{console.log(newTask);}
-      );
+      data => {
+        this.alertaError('Crear proveedor', 'Proveedor creado correctamente.');
+        this.router.navigateByUrl('/provider');
+      },
+      error => {
+        this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
+        this.router.navigateByUrl('/provider');
+      }
+    );
   
-    this.router.navigateByUrl('/provider')
     }
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import {CampaignService} from '../services/campaign/campaign.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-campaign',
@@ -10,7 +11,14 @@ import {CampaignService} from '../services/campaign/campaign.service';
 export class CampaignPage implements OnInit {
   campaigns
   constructor(public alertController: AlertController,
-              public campaignservice: CampaignService) { }
+              public campaignservice: CampaignService,
+    private route: ActivatedRoute
+              ) { 
+    route.params.subscribe(val => {
+      this.ngOnInit(); // ejecutar ngOnInit al cargar pagina
+    })
+
+  }
 
   ngOnInit() {
     this.campaignservice.getCampaigns()

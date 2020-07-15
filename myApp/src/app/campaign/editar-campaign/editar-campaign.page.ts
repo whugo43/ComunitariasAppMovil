@@ -1,7 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
-import {ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
 import {ScopeService} from '../../services/scope/scope.service';
+import { AlertController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-editar-campaign',
@@ -27,7 +29,9 @@ export class EditarCampaignPage implements OnInit {
   constructor(private activateRoute: ActivatedRoute,
               public campaignservice: CampaignService,
               public scopeService:ScopeService,
-              private cdRef : ChangeDetectorRef ) { }
+              public alertController: AlertController,
+              private cdRef : ChangeDetectorRef,
+              public router: Router ) { }
   
   ngAfterContentChecked() {
     this.cdRef.detectChanges();
@@ -57,6 +61,15 @@ export class EditarCampaignPage implements OnInit {
       ); 
   }
 
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   UpdateCampaign(){   
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
@@ -65,8 +78,16 @@ export class EditarCampaignPage implements OnInit {
     console.log("metodo update")
  
     this.campaignservice.updateCampaigns(this.formData,this.id).subscribe(
-      (newTask)=>{console.log(newTask);});
-    }
+      data => {
+        this.alertaError('Editar Campana', 'Campana editada correctamente.');
+        this.router.navigateByUrl('/campaign');
+      },
+      error => {
+        this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
+        this.router.navigateByUrl('/campaign');
+      }
+    );
+  }
 
     changeListener($event) : void {
       this.photo = $event.target.files[0];

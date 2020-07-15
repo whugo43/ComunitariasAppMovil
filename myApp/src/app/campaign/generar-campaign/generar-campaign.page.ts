@@ -6,7 +6,8 @@ import {Campaign} from '../../interfaces/campaign';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 import { LoginService } from 'src/app/services/login/login.service';
-import { CreteByService } from '../../services/create-by.service'
+import { CreteByService } from '../../services/create-by.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-generar-campaign',
@@ -37,6 +38,7 @@ export class GenerarCampaignPage implements OnInit {
               public campaignservice:CampaignService,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService,
+              public router: Router,
               private createdBy:CreteByService) { }
 
   ngOnInit() {
@@ -76,6 +78,15 @@ export class GenerarCampaignPage implements OnInit {
       );
   }
 
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   postCampaign(){ 
     this.formData.append("name",this.formularios.name) 
     this.formData.append("contactName", this.formularios.contactName) 
@@ -85,7 +96,14 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("createdBy",this.createdBy.getNombre())  
 
     this.campaignservice.postCampaigns(this.formData).subscribe(
-      (newTask)=>{console.log("metodo create");}
+      data => {
+        this.alertaError('Crear Campana', 'Campana creada correctamente.');
+        this.router.navigateByUrl('/campaign');
+      },
+      error => {
+        this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
+        this.router.navigateByUrl('/campaign');
+      }
     );
     }
 

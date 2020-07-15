@@ -31,7 +31,7 @@ export class GenerarCategoriaPage implements OnInit {
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService,
               public alertController: AlertController,
-              public router: Router,
+              public router: Router
               ) { }
 
 

@@ -65,6 +65,7 @@ export class CentroAcopioRegistroPage implements OnInit {
   }
 
   public opcionEditar() {
+    /** Añadiendo los valores guardados para la edicion*/
     this.activateRoute.queryParamMap.subscribe(dato => {
       if (dato.get('editar') == "1" && this.accionEditar == 0) {
         this.accionEditar = 1;
@@ -73,7 +74,13 @@ export class CentroAcopioRegistroPage implements OnInit {
           this.registrationForm.setValue({
             nombre: dato_final['name'],
             direccion: dato_final['address'],
+            nombre_persona_contacto:dato_final.contactName,
+            telefono_persona_contacto:dato_final.contactPhone,
           });
+          CentroAcopioRegistroPage.photo=dato_final.photo;
+          this.imageSrc=dato_final.photo;
+          
+          
         });
       }
     });
@@ -111,20 +118,25 @@ export class CentroAcopioRegistroPage implements OnInit {
           telefono_contact: this.registrationForm.get('telefono_persona_contacto').value,
           photo: CentroAcopioRegistroPage.photo,
           accionEditar: '0',
+          id: this.centroAcopioId,
         }
       });
     }
   }
 
   public enviarDatosOk() {
-    /**Agregando las actualizavciones sin en el sin tener que ingresar una nueva
+    /**Agregando las actualizaciones sin tener que ingresar una nueva
      * ubicacion
      */
     this.formData.append('name', this.registrationForm.get('nombre').value);
     this.formData.append('address', this.registrationForm.get('direccion').value);
     this.formData.append('contactName', this.registrationForm.get('nombre_persona_contacto').value);
     this.formData.append('contactPhone', this.registrationForm.get('telefono_persona_contacto').value);
-    this.formData.append('photo', CentroAcopioRegistroPage.photo);
+    if(CentroAcopioRegistroPage.photo==null){
+      this.formData.append('photo',"");//Removiendo la imagen
+    }else{
+      this.formData.append('photo', CentroAcopioRegistroPage.photo);
+    }
     this.centroAcopioapi.getCentroAcopioId(this.centroAcopioId).subscribe(dato_final => {
       this.formData.append('latitude', dato_final['latitude'].toString());
       this.formData.append('longitude', dato_final['longitude'].toString());

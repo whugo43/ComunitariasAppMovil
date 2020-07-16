@@ -4,6 +4,7 @@ export class Distribucion {
     destinationAddress?: string;
     manager_type?: string;
     information?: string;
+    photo:File;
     createdBy: string;
     user?: string;
 

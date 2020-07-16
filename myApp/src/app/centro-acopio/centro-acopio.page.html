@@ -15,7 +15,6 @@
   </ion-refresher>
 
   <ion-card *ngFor="let data of lista">
-
     <ion-item>
       <ion-label>Acciones:</ion-label>
       <ion-button fill="outline" size='small' slot="end" (click)='editar(data.id)'
@@ -27,8 +26,6 @@
       <ion-button fill="outline" size='small' slot="end" (click)="presentAlertConfirm(data.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
-
-
 
     </ion-item>
 

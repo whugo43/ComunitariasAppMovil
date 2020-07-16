@@ -33,6 +33,14 @@ export class DistribucionPage implements OnInit {
     }, 200);
   }
 
+  goDetails(idDistribucion:any){
+    this.activateRoute.navigate(['./distribucion/distribucion-detalles'], {
+      queryParams: {
+        id:idDistribucion,
+      }
+    });
+  }
+
   public recibiendoDatosApi() {
     this.distribucion_registrada=[];
     /* Recibiendo los datos guardados de la api*/
@@ -60,7 +68,6 @@ export class DistribucionPage implements OnInit {
         this.distribucion_registrada.push(f);
       })
     });
-    console.log(this.distribucion_registrada);
   }
 
   async presentAlertConfirm(id: any) {

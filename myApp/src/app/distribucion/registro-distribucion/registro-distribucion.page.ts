@@ -21,6 +21,10 @@ export class RegistroDistribucionPage implements OnInit {
   private userId: number;
   private formData = new FormData();
   private distribucionId: string;
+  private photo:File;
+  private file:any;
+  private reader:any;
+  private imageSrc:any;
 
   public errorMessage = {
     lugar_partida: [
@@ -56,7 +60,6 @@ export class RegistroDistribucionPage implements OnInit {
   llenarParametrosEdicion() {
     this.activateRoute.queryParamMap.subscribe((data) => {
       if (data.get('accionEditar') == '1' && this.accionEditar == 0) {
-        console.log('edicion');
         this.accionEditar = 1;
         this.distribucionId = data.get('id');
         this.conexionApi.getDistribucionId(this.distribucionId).subscribe(distribuciones => {
@@ -106,6 +109,32 @@ export class RegistroDistribucionPage implements OnInit {
 
   public checktEncargadoTipo() {
     return this.seleccion == '';
+  }
+
+  removeImage(idButton: any) {
+    if (this.photo != null) {
+      idButton.value = '';
+      this.photo = null;
+      this.reader = null;
+      this.imageSrc = null;
+      this.file = null;
+    }
+  }
+
+  changeListener($event): void {
+    this.photo = $event.target.files[0];
+  }
+
+  readURL(event): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = event.target.files[0];
+      this.photo = event.target.files[0];
+
+      this.reader = new FileReader();
+      this.reader.onload = e => this.imageSrc = this.reader.result;
+
+      this.reader.readAsDataURL(this.file);
+    }
   }
 
   public llenarLista(tipo: string) {
@@ -159,6 +188,13 @@ export class RegistroDistribucionPage implements OnInit {
     }
     this.formData.append('information', this.registrationForm.get('descripcion').value);
     this.formData.append('createdBy', this.createBy.getNombre());
+
+    if(this.photo==null){
+      this.formData.append('photo','');
+    }else{
+    this.formData.append('photo',this.photo);
+    }
+    
     this.formData.append('user', this.registrationForm.get('encargado.nombre').value);
     if (this.accionEditar > 0) {
       this.conexionApi.actualizarDistribucion(this.formData, this.distribucionId).subscribe(msm => {

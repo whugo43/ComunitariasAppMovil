@@ -50,6 +50,30 @@
       </ion-item>
     </ion-card>
 
+    <ion-card>
+      <ion-grid class="ion-padding">
+        <ion-row>
+          <ion-label>La imagen del Centro de Distribución es opcional</ion-label>
+        </ion-row>
+        <ion-row>
+          <ion-input #myInput type='file' accept="image/*" name="photo" required (change)="readURL($event);"
+            class="fileInput"></ion-input>
+          <ion-label for="file">
+            <ion-icon name="images"></ion-icon> Images
+
+            <ion-button slot='end' fill="clear" color="danger" (click)="removeImage(myInput)">
+              <ion-icon name='close'></ion-icon>
+              <ion-ripple-effect type="unbounded"></ion-ripple-effect>
+            </ion-button>
+          </ion-label>
+        </ion-row>
+      </ion-grid>
+
+      <ion-grid class="ion-padding" *ngIf="imageSrc != null">
+        <ion-label> Vista previa de la imagen</ion-label>
+        <ion-img id="blah" *ngIf="imageSrc != null" [src]="imageSrc" alt="your image"></ion-img>
+      </ion-grid>
+    </ion-card>
 
     <ion-button [disabled]="isinValid()"
       expand="block" (click)="enviarDatos()" routerLink="/distribucion">Enviar <ion-icon slot="end">

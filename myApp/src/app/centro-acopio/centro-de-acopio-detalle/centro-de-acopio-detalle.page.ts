@@ -32,6 +32,7 @@ export class CentroDeAcopioDetallePage implements OnInit {
     }, error => {
       console.log(error)
     });
+
   }
 
   ngOnInit() {

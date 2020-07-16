@@ -3,7 +3,7 @@ import { Grupo } from '../clases/grupo/grupo'
 import { GrupoService } from '../services/grupo-service/grupo.service'
 import { LoginService } from '../services/login/login.service'
 import { AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-grupos-de-apoyo',
@@ -13,9 +13,19 @@ import { Router } from '@angular/router';
 export class GruposDeApoyoPage implements OnInit {
   private gruposDeApoyo: Grupo[] = [];
   private seleccionado: string = '';
+  private getted = false;
 
   constructor(private apiGrupoApoyo: GrupoService, private apiUser: LoginService,
-    private alertController:AlertController,private router:Router) { }
+    private alertController: AlertController, private router: Router, route: ActivatedRoute) { 
+      route.params.subscribe(val => {
+          console.log('ssss');
+          this.obtenerGruposdeapoyo(); // ejecutar ngOnInit al cargar pagina
+      
+    })
+
+  }
+
+  ngOnInit(){}
 
   async presentAlertConfirm(id:any) {
     this.obtenerNombre(id);
@@ -34,7 +44,7 @@ export class GruposDeApoyoPage implements OnInit {
           text: 'Eliminar',
           handler: () => {
             this.apiGrupoApoyo.deleteGrupo(id);
-            this.ngOnInit();
+            this.obtenerGruposdeapoyo();
           }
         }
       ]
@@ -77,15 +87,12 @@ export class GruposDeApoyoPage implements OnInit {
 
   doRefresh(event) {
     setTimeout(() => {
-      this.ngOnInit();
+      this.obtenerGruposdeapoyo();
       event.target.complete();
     }, 200);
   }
 
-  ngOnInit() {
-    this.obtenerGruposdeapoyo();
-    console.log(this.gruposDeApoyo);
-  }
+  
 
   goDetails(id:string){
     this.router.navigate(['./grupos-de-apoyo/grupo-de-apoyo-detalles'], {

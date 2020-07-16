@@ -61,15 +61,12 @@ export class GruposDeApoyoRegistroPage implements OnInit {
       this.registrationFormUser.get('password').value == '';
   }
 
-  async presentAlert(mensaje: string) {
+  async alertaError(header_msg, msg) {
     const alert = await this.alertController.create({
-      cssClass: 'my-custom-class',
-      header: 'Error',
-      subHeader: 'Especificacion del error',
-      message: mensaje,
-      buttons: ['Aceptar']
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
     });
-
     await alert.present();
   }
 
@@ -90,10 +87,10 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         }
         console.log(data)
         this.conexionGrupos.updateGrupo(data, this.idGrupoEdicion).subscribe(de => {
-          console.log('Entro en editar');
-          this.router.navigate(['../grupos-de-apoyo']);
+          this.alertaError('Crear Grupo', 'Grupo creado correctamente');
+          this.router.navigateByUrl('/grupos-de-apoyo');
         }, error => {
-          console.log(error)
+          this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
         });
       });
 
@@ -107,17 +104,16 @@ export class GruposDeApoyoRegistroPage implements OnInit {
           }
           this.conexionGrupos.guardarGrupo(postData).subscribe(
             newTask => {
-              console.log(newTask);
-              this.router.navigate(['../grupos-de-apoyo']);
+              this.alertaError('Crear Grupo', 'Grupo creado correctamente');
+              this.router.navigateByUrl('/grupos-de-apoyo');
             },
             error => {
-              console.log(error);
+              this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
             }
           );
         },
         error => {
-          console.log(error);
-          this.presentAlert('El nombre del usuario o el correo ya existe, por favor <strong>eliga otro nombre u otro correo</strong>');
+          this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
         });
     }
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import {VoluntariosService} from '../services/voluntarios/voluntarios.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-volunteer',
@@ -10,7 +11,13 @@ import {VoluntariosService} from '../services/voluntarios/voluntarios.service';
 export class VolunteerPage implements OnInit {
 volunteers
   constructor(public alertController: AlertController,
-              public voluntariosService: VoluntariosService) { }
+              public voluntariosService: VoluntariosService,
+    route: ActivatedRoute) { 
+    route.params.subscribe(val => {
+      this.ngOnInit(); // ejecutar ngOnInit al cargar pagina
+    })
+
+    }
 
   ngOnInit() {
     this.voluntariosService.getVoluntarios()

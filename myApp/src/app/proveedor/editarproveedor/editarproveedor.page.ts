@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import {ActivatedRoute, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import {ProviderService} from '../../services/provider/provider.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 @Component({
@@ -15,7 +16,7 @@ export class EditarproveedorPage implements OnInit {
     address: '',
     phoneNumber: '',
     email: '',
-    categories: '',
+    categories: [],
     };
     formData= new FormData();
     provider=[];
@@ -26,6 +27,7 @@ export class EditarproveedorPage implements OnInit {
               public router: Router,
               private cdRef : ChangeDetectorRef,
               private activateRoute: ActivatedRoute,
+              public alertController: AlertController,
               public categoriaservice: CategoriaService) { 
                 this.activateRoute.paramMap.subscribe(paramMap => {
                   const Id = paramMap.get('id')
@@ -52,6 +54,15 @@ export class EditarproveedorPage implements OnInit {
     );
   }
 
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
   updateProvider(){
 
     this.formData.append("name", this.formularios.name)
@@ -63,10 +74,16 @@ export class EditarproveedorPage implements OnInit {
     }
     
     this.providerservice.updateProvider(this.formData,this.id).subscribe(
-      (newTask)=>{console.log(newTask);}
-      );
+      data => {
+        this.alertaError('Editar Proveedor', 'Proveedor editado correctamente.');
+        this.router.navigateByUrl('/provider');
+      },
+      error => {
+        this.alertaError('Error', 'Algo salio mal, por favor, intente de nuevo');
+        this.router.navigateByUrl('/provider');
+      }
+    );
   
-    this.router.navigateByUrl('/provider')
   }
 
 }

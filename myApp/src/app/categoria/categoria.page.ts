@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import {CategoriaService} from '../services/categoria/categoria.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-categoria',
@@ -11,9 +12,13 @@ export class CategoriaPage implements OnInit {
 categorias
 
   constructor(public alertController: AlertController,
-              public categoriaservice:CategoriaService) {
-
-   }
+              public categoriaservice:CategoriaService,
+              route: ActivatedRoute
+              ) {
+    route.params.subscribe(val => {
+      this.ngOnInit(); // ejecutar ngOnInit al cargar pagina
+    })
+  }
 
   ngOnInit() {
     this.categoriaservice.getCategorias()
@@ -21,8 +26,6 @@ categorias
       (data)=>{this.categorias=data},
       (error)=>{console.log(error);}
       );
-     
-    
   }
   
     deleteCategoria(id: string){

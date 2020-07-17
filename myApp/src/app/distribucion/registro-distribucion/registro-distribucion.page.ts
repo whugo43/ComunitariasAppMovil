@@ -87,7 +87,6 @@ export class RegistroDistribucionPage implements OnInit {
               });
             });
           }
-          console.log(nombref);
           this.seleccion = tipo;
           this.registrationForm.setValue({
             lugar_partida: distribuciones.departureAddress,

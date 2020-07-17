@@ -12,8 +12,9 @@ import { AlertController } from '@ionic/angular';
 export class DistribucionDetallesPage implements OnInit {
 
   private idDistribucion:string;
+  private distribucion:Distribucion;
 
-  constructor(private activateRoute: ActivatedRoute,private distribucion:Distribucion,
+  constructor(private activateRoute: ActivatedRoute,
               private apiDistribucion:DistribucionService,public alertController: AlertController) { }
 
   recibiendoDatos(){

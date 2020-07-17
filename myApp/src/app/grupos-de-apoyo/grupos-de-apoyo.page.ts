@@ -16,22 +16,20 @@ export class GruposDeApoyoPage implements OnInit {
   private getted = false;
 
   constructor(private apiGrupoApoyo: GrupoService, private apiUser: LoginService,
-    private alertController: AlertController, private router: Router, route: ActivatedRoute) { 
-      route.params.subscribe(val => {
-          console.log('ssss');
-          this.obtenerGruposdeapoyo(); // ejecutar ngOnInit al cargar pagina
-      
-    })
+    private alertController: AlertController, private router: Router, route: ActivatedRoute) {
+
 
   }
 
-  ngOnInit(){}
+  ngOnInit() {
+      this.obtenerGruposdeapoyo(); // ejecutar ngOnInit al cargar pagina
+    }
 
-  async presentAlertConfirm(id:any) {
+  async presentAlertConfirm(id: any) {
     this.obtenerNombre(id);
     let alert = await this.alertController.create({
       header: 'Confirmación!',
-      message: '<p>Esta seguro que desea eliminar: <strong>'+this.seleccionado+'</strong>!!!</p>',
+      message: '<p>Esta seguro que desea eliminar: <strong>' + this.seleccionado + '</strong>!!!</p>',
       buttons: [
         {
           text: 'Cancelar',
@@ -52,24 +50,24 @@ export class GruposDeApoyoPage implements OnInit {
     await alert.present();
   }
 
-  obtenerNombre(id:string){
-   this.gruposDeApoyo.forEach(grupo=>{
-     if(grupo.id==id){
-        this.seleccionado=grupo.name;
-     }
-   });
+  obtenerNombre(id: string) {
+    this.gruposDeApoyo.forEach(grupo => {
+      if (grupo.id == id) {
+        this.seleccionado = grupo.name;
+      }
+    });
   }
 
-  editar(id:string){
+  editar(id: string) {
     this.router.navigate(['./grupos-de-apoyo/grupos-de-apoyo-registro'], {
       queryParams: {
-        idGrupo:id,
-        editar:'editar',
+        idGrupo: id,
+        editar: 'editar',
       }
     });
   }
   obtenerGruposdeapoyo() {
-    this.gruposDeApoyo=[];
+    this.gruposDeApoyo = [];
     this.apiGrupoApoyo.getGrupo().subscribe(grupos => {
       grupos.forEach(grupo => {
         this.apiUser.getLogins().subscribe(users => {
@@ -92,12 +90,12 @@ export class GruposDeApoyoPage implements OnInit {
     }, 200);
   }
 
-  
 
-  goDetails(id:string){
+
+  goDetails(id: string) {
     this.router.navigate(['./grupos-de-apoyo/grupo-de-apoyo-detalles'], {
       queryParams: {
-        idGrupo:id
+        idGrupo: id
       }
     });
   }

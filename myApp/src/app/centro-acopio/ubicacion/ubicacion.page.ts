@@ -8,6 +8,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { CreteByService } from '../../services/create-by.service'
 import { CentroAcopioRegistroPage } from '../centro-acopio-registro/centro-acopio-registro.page'
 import { AlertController } from '@ionic/angular';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-ubicacion',
@@ -78,6 +79,8 @@ export class UbicacionPage implements OnInit {
     this.formData.append('contactPhone', this.telefonoContac);
     if(this.photo!=null){
       this.formData.append("photo", this.photo);
+    }else{
+      this.formData.append("photo",'');
     }
     this.formData.append('createdBy', this.createBy.getNombre());
 
@@ -122,8 +125,10 @@ export class UbicacionPage implements OnInit {
 
     }
     this.map = new Map('mapId2').setView([this.lat_ac, this.long_ac], 16);
-    tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-      attribution: 'edupala.com'
+    console.log(this.lat_ac);
+    console.log(this.long_ac);
+    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
     if (this.accionEditar > 0) {
       this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {

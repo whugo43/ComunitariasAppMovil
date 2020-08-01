@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-class';
 import { Api } from '../enum'
 
@@ -11,9 +11,11 @@ export class CentroAcopioService {
   constructor(private http: HttpClient) {
   }
 
+  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+
   getCentrosAcopios() {
     const path = this.api;
-    return this.http.get<CentroAcopioClass[]>(this.api)
+    return this.http.get<CentroAcopioClass[]>(this.api, { headers: this.headers })
   }
   getApi() {
     return this.api;
@@ -21,24 +23,24 @@ export class CentroAcopioService {
 
   guardarCentroAcopio(centroAcopio:any) {
     const path= this.api;
-    return this.http.post(path,centroAcopio)
+    return this.http.post(path, centroAcopio, { headers: this.headers })
   }
 
   getCentroAcopioId(id: string){ 
-    return this.http.get<CentroAcopioClass>(this.api+id);
+    return this.http.get<CentroAcopioClass>(this.api + id, { headers: this.headers });
   }
 
   deleteCentroAcopio(id: string){
     const path=`${this.api}${id}`;
     console.log(path);
-    return this.http.delete(path).subscribe(
+    return this.http.delete(path, { headers: this.headers }).subscribe(
       resp => console.log('eliminado'),
       error => console.log('error occur, delete fail'));
   }
 
   updateCentroAcopio(centroAcopio:any,id:any){
     const path= this.api+id+'/';
-    return this.http.patch(path,centroAcopio);
+    return this.http.patch(path, centroAcopio, { headers: this.headers });
   }
 } 
 

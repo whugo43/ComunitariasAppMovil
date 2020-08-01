@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Api } from '../enum'
 
@@ -13,29 +13,31 @@ export class ListaContactosService {
 
   }
 
+  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+
   getContactos(){
     const path= this.api;
-    return this.http.get(path)
+    return this.http.get(path, { headers: this.headers });
   }
 
   getContactosId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<any>(this.api + id, { headers: this.headers });
 
   }
 
   postContactos(contacto){
     const path= this.api;
-    return this.http.post(path,contacto)
+    return this.http.post(path, contacto, { headers: this.headers });
 
   }
 
   updateContactos(contacto,id: string){
     const path= this.api+id+'/';
-    return this.http.patch(path,contacto)
+    return this.http.patch(path, contacto, { headers: this.headers });
   }
   
   deleteContactos(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path, { headers: this.headers });
   }
 }

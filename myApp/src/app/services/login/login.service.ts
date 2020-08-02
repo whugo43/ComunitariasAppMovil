@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
 import { User } from '../../clases/user/user'
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import {tap, catchError } from 'rxjs/operators';
@@ -29,6 +29,8 @@ export class LoginService {
               public router: Router,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService ) { }
+
+  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -63,9 +65,9 @@ export class LoginService {
 
   logout(){
     this.token='';
-    localStorage.removeItem("ACCESS_TOKEN")
-    localStorage.removeItem("EXPIRES_IN")
-    this.router.navigateByUrl('/login')
+    localStorage.removeItem("ACCESS_TOKEN");
+    localStorage.removeItem("EXPIRES_IN");
+    this.router.navigateByUrl('/login');
   }
   tokenauth(){
     if(localStorage.getItem("ACCESS_TOKEN")==null){
@@ -109,21 +111,21 @@ export class LoginService {
 
   guardarUsuario(usuario) {
     const path = this.api;
-    return this.http.post(path, usuario)
+    return this.http.post(path, usuario, { headers: this.headers })
   }
 
   getUserId(id: any){ 
-    return this.http.get<User>(this.api+id);
+    return this.http.get<User>(this.api + id, { headers: this.headers });
   }
 
   updateUser(user: any, id: any) {
     const path = this.api + id + '/';
-    return this.http.patch(path, user);
+    return this.http.patch(path, user, { headers: this.headers });
   }
 
   deleteUser(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path, { headers: this.headers })
   }
 
 

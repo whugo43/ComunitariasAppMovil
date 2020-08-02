@@ -25,13 +25,14 @@ export class EditarvolunteerPage implements OnInit {
     phoneNumber:'',
     email:'',
     username:''
-    }
+  }
 
     formDataUser = new FormData();
     formDataVoluntario = new FormData();
   id: string;
   volunteer=[];
-  users=[]
+  users=[];
+  activities_selected = [];
 
   constructor(public router: Router,
               private activateRoute: ActivatedRoute,
@@ -41,28 +42,32 @@ export class EditarvolunteerPage implements OnInit {
               public activityService: ActivityService,
               private conexionUser: LoginService,
               private userservice: UserService,
-              
-            ) {     
-              this.activateRoute.paramMap.subscribe(paramMap => {
-                const voluntario = paramMap.get('id')
-                
-                this.id = voluntario
-                
-                this.voluntariosService.getVoluntarioId(voluntario)
-                .subscribe(
-                (data)=>{this.volunteer=data;
-                        
-                        this.userservice.getUserId(data.user)
-                        .subscribe(
-                          (data)=>{this.users=data},
-                          (error)=>{console.log(error)}
-                        )             
-                },
-                (error)=>{console.log(error);}
-                )
-              }); 
-              console.log(this.volunteer) 
-             }
+  ) {     
+    this.activateRoute.paramMap.subscribe(paramMap => {
+      const voluntario = paramMap.get('id')
+      
+      this.id = voluntario
+      
+      this.voluntariosService.getVoluntarioId(voluntario).subscribe((data)=>{this.volunteer=data;
+        this.activities_selected = []; 
+        // this.activities = []; 
+        for (let i = 0; i < data.activities.length; i++) {
+          //this.activities.push(data.activities[i].id);
+          this.activityService.getActivityId(data.activities[i]).subscribe(
+            data => this.activities_selected.push(data),
+            error => console.log(error)
+          )
+        }
+        this.userservice.getUserId(data.user).subscribe(
+          (data)=>{this.users=data},
+          (error)=>{console.log(error)}
+        )             
+      },
+      (error)=>{console.log(error);}
+      )
+    }); 
+    console.log(this.volunteer) 
+  }
 
   ngOnInit() {
     this.activityService.getActivity()

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DistribucionService } from '../services/distribucion/distribucion.service';
 import { AlertController } from '@ionic/angular';
 import { VoluntariosService } from '../services/voluntarios/voluntarios.service'
@@ -22,14 +22,20 @@ export class DistribucionPage implements OnInit {
 
   constructor(private activateRoute: Router, private conexionApi: DistribucionService
     , private alertController: AlertController, private conexionVoluntaio: VoluntariosService,
-    private conexionGrupo: GrupoService) {
-    this.recibiendoDatosApi();
+    private conexionGrupo: GrupoService, private recibir:ActivatedRoute) {
   }
 
   doRefresh(event) {
     setTimeout(() => {
       this.ngOnInit();
       event.target.complete();
+    }, 200);
+  }
+
+  actualizar() {
+    setTimeout(() => {
+      this.ngOnInit();
+      
     }, 200);
   }
 
@@ -89,6 +95,7 @@ export class DistribucionPage implements OnInit {
             console.log('Confirm Okay');
             console.log(id);
             this.conexionApi.eliminarDistribucion(id);
+            this.actualizar();
           }
         }
       ]

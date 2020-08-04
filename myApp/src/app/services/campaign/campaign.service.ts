@@ -9,43 +9,40 @@ import { Api } from '../enum'
 })
 export class CampaignService {
   private api=Api.api+'campaign/';
+  private headers:any={headers: {token: localStorage.getItem('token'),body:'body'}};
 
   constructor(private http: HttpClient) {
-    console.log("campañas");
    }
 
   getCampaigns(){
     const path= this.api;
-    return this.http.get<Campaign[]>(path)
+    return this.http.get<Campaign[]>(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   getCampaignsId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<any>(this.api+id,{headers: {token: localStorage.getItem('token'),body:'body'}});
 
   }
 
   postCampaigns(campaign){
     const path= this.api;
-    return this.http.post(path,campaign)
+    return this.http.post(path,campaign,{headers: {token: localStorage.getItem('token'),body:'body'}})
 
   }
 
   updateCampaigns(campaign,id: string){
     const path= this.api+id+'/';
-    return this.http.patch(path,campaign)
+    return this.http.patch(path,campaign,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
   
   deleteCampaigns(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   updateCampaigns0(id: string){
     const path= this.api+id+'/';
-    return this.http.patch(path,
-    {
-      state:'0'
-    })
+    return this.http.patch(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
 
   }  
   

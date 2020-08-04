@@ -21,10 +21,10 @@ export class RegistroDistribucionPage implements OnInit {
   private userId: number;
   private formData = new FormData();
   private distribucionId: string;
-  private photo:File;
-  private file:any;
-  private reader:any;
-  private imageSrc:any;
+  private photo: File;
+  private file: any;
+  private reader: any;
+  private imageSrc: any;
 
   public errorMessage = {
     lugar_partida: [
@@ -53,7 +53,7 @@ export class RegistroDistribucionPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private activateRoute: ActivatedRoute, private conexionApi: DistribucionService,
     private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService,
-    private router: Router, private createBy:CreteByService) {
+    private router: Router, private createBy: CreteByService) {
 
   }
 
@@ -65,11 +65,12 @@ export class RegistroDistribucionPage implements OnInit {
         this.conexionApi.getDistribucionId(this.distribucionId).subscribe(distribuciones => {
           let tipo = '';
           let nombref = '';
+          this.photo = distribuciones.photo;
+          this.imageSrc = this.photo;
           if (distribuciones.manager_type == '1') {
             tipo = 'Voluntarios';
             this.conexionVoluntarios.getVoluntarios().subscribe(voluntarios => {
               voluntarios.forEach(voluntario => {
-                console.log(voluntario.user.toString() + '  ' + distribuciones.user.toString());
                 if (voluntario.user.toString() == distribuciones.user.toString()) {
                   nombref = voluntario.user;
                   return;
@@ -188,23 +189,28 @@ export class RegistroDistribucionPage implements OnInit {
     this.formData.append('information', this.registrationForm.get('descripcion').value);
     this.formData.append('createdBy', this.createBy.getNombre());
 
-    if(this.photo==null){
-      this.formData.append('photo','');
-    }else{
-    this.formData.append('photo',this.photo);
+    if (this.photo == null) {
+      this.formData.append('photo', "");
+    } else {
+      this.formData.append('photo', this.photo);
     }
-    
     this.formData.append('user', this.registrationForm.get('encargado.nombre').value);
     if (this.accionEditar > 0) {
       this.conexionApi.actualizarDistribucion(this.formData, this.distribucionId).subscribe(msm => {
         console.log(msm);
+      }, error => {
+        console.log(error);
       });
       this.accionEditar = 0;
     } else {
       console.log(this.formData);
       this.conexionApi.agregarDistribucion(this.formData);
     }
-    this.router.navigate(['../distribucion']);
+    this.router.navigate(['../distribucion'], {
+      queryParams: {
+        exito: "exito",
+      }
+    });
   }
 
   ngOnInit() {

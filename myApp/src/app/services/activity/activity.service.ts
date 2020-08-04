@@ -8,31 +8,33 @@ import { Api } from '../enum'
 export class ActivityService {
 
    private api=Api.api+'activity/';
+   private headers:any={headers: {token: localStorage.getItem('token'),body:'body'}};
+
   constructor(private http:HttpClient) {
   }
   
   getActivity(){
     const path= this.api;
-    return this.http.get<any>(path)
+    return this.http.get<any>(path,this.headers)
   }
 
   getActivityId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<any>(this.api+id,this.headers);
 
   }
   
   postActivity(activity){
     const path= this.api;
-    return this.http.post(path,activity)
+    return this.http.post(path,activity,this.headers)
   }
 
   updateActivity(activity,id: string){
     const path= this.api+id+'/';
-    return this.http.patch(path,activity)
+    return this.http.patch(path,activity,this.headers)
   }
   
   deleteActivity(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path,this.headers)
   }
 }

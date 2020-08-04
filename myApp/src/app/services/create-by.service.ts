@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { HttpHeaders } from '@angular/common/http';
+import { Api } from './enum';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +19,6 @@ export class CreteByService {
   getNombre():string{
       return this.nombre;
   }
+
+  
 }

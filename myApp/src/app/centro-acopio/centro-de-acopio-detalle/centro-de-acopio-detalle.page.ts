@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from "@angular/router"
 })
 export class CentroDeAcopioDetallePage implements OnInit {
 
-  public centroAcopio: CentroAcopioClass;
+  public centroAcopio: CentroAcopioClass=new CentroAcopioClass();
   private idCentroAcopio: any;
   private booelanPhoto=false;
 

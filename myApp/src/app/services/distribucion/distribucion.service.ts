@@ -8,30 +8,34 @@ import { Api } from '../enum'
 })
 export class DistribucionService {
   private api: string = Api.api+'distribution/';
-  constructor(private http: HttpClient) { }
+  private headers:any={headers: {token: localStorage.getItem('token'),body:'body'}};
+
+  constructor(private http: HttpClient,) { }
 
   getDistribuciones() {
-    return this.http.get<Distribucion[]>(this.api);
+    return this.http.get<Distribucion[]>(this.api,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 
   eliminarDistribucion(id: string) {
-    return this.http.delete(this.api+id).subscribe(resp=>{
+    return this.http.delete(this.api+id,{headers: {token: localStorage.getItem('token'),body:'body'}}).subscribe(resp=>{
       console.log("Eliminacion exitosa en Distribucion"),
       error=>{console.log("Eliminacion fallida en Distribucion")}
     });
   }
 
   agregarDistribucion(formDistribucion:any){
-    return this.http.post(this.api,formDistribucion).subscribe(mensaje=>{
+    return this.http.post(this.api,formDistribucion,{headers: {token: localStorage.getItem('token'),body:'body'}}).subscribe(mensaje=>{
       console.log(mensaje);
+    },error=>{
+      console.log(error)
     });
   }
 
   actualizarDistribucion(distribucion:any,id:any){
     const path= this.api+id+'/';
-    return this.http.patch(path,distribucion);
+    return this.http.patch(path,distribucion,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
   getDistribucionId(id:any){
-    return this.http.get<Distribucion>(this.api+id);
+    return this.http.get<Distribucion>(this.api+id,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 }

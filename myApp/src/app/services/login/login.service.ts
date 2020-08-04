@@ -20,10 +20,10 @@ export class LoginService {
   private apiLogin = Api.api+'login/';
   authSubject=new BehaviorSubject(false);
   private token='';
-
   gruposApoyos;
   voluntario:Voluntario;
   voluntarios: Voluntario[];
+  private headers={headers: {token: localStorage.getItem('token'),body:"body"}};
 
   constructor(private http: HttpClient,
               public router: Router,
@@ -63,12 +63,12 @@ export class LoginService {
 
   logout(){
     this.token='';
-    localStorage.removeItem("ACCESS_TOKEN")
+    localStorage.removeItem("token")
     localStorage.removeItem("EXPIRES_IN")
     this.router.navigateByUrl('/login')
   }
   tokenauth(){
-    if(localStorage.getItem("ACCESS_TOKEN")==null){
+    if(localStorage.getItem("token")==null){
       return 0
     }else{
       return 1
@@ -77,7 +77,7 @@ export class LoginService {
   }
   
   saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{
-    localStorage.setItem("ACCESS_TOKEN",token)
+    localStorage.setItem("token",token)
     localStorage.setItem("EXPIRES_IN",expiresIn)
     localStorage.setItem("USER_ROLE", userRole)
     localStorage.setItem("USER_EMAIL", userEmail)
@@ -95,35 +95,35 @@ export class LoginService {
 
   }
   
-  private getToken():string{
+  getToken():string{
     if (this.token){
-      this.token=localStorage.getItem("ACCESS_TOKEN")
+      this.token=localStorage.getItem("token")
     }
     return this.token
   }
 
   getLogins() {
     const path = this.api;
-    return this.http.get<User[]>(path)
+    return this.http.get<User[]>(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   guardarUsuario(usuario) {
     const path = this.api;
-    return this.http.post(path, usuario)
+    return this.http.post(path, usuario,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   getUserId(id: any){ 
-    return this.http.get<User>(this.api+id);
+    return this.http.get<User>(this.api+id,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 
   updateUser(user: any, id: any) {
     const path = this.api + id + '/';
-    return this.http.patch(path, user);
+    return this.http.patch(path, user,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 
   deleteUser(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
 

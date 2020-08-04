@@ -8,11 +8,13 @@ import { Api } from '../enum'
 })
 export class VoluntariosService {
   private api=Api.api+'volunteer/';
+  private headers:any={headers: {token: localStorage.getItem('token'),body:"body"}};
+
   constructor(private http:HttpClient) { }
 
   getVoluntarios() {
     const path = this.api;
-    return this.http.get<Voluntario[]>(this.api)
+    return this.http.get<Voluntario[]>(this.api,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
   getApi() {
     return this.api;
@@ -20,20 +22,20 @@ export class VoluntariosService {
 
   postVoluntario(Grupo) {
     const path= this.api;
-    return this.http.post(path,Grupo)
+    return this.http.post(path,Grupo,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   getVoluntarioId(id: string){ 
-    return this.http.get<any>(this.api+id);
+    return this.http.get<any>(this.api+id,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 
   deletevoluntario(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path)
+    return this.http.delete(path,{headers: {token: localStorage.getItem('token'),body:'body'}})
   }
 
   updateVoluntario(voluntario,id:string){
     const path= this.api+id+'/';
-    return this.http.patch(path,voluntario);
+    return this.http.patch(path,voluntario,{headers: {token: localStorage.getItem('token'),body:'body'}});
   }
 }

@@ -118,6 +118,7 @@ export class GrupoDeApoyoPasswordPage implements OnInit {
              
             }else if(this.formGroupContrasenia.get('currentPassword').value!=null &&
             this.formGroupContrasenia.get('newPassword').value!=null){
+              console.log(user.password);
               let data={
                 currentpassword:this.formGroupContrasenia.get('currentPassword').value,
                 password:this.formGroupContrasenia.get('newPassword').value

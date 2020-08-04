@@ -22,6 +22,7 @@ export class EditarproveedorPage implements OnInit {
     provider=[];
     id: string;
     categorias;
+    categorias_selected = [];
     
   constructor(public providerservice: ProviderService,
               public router: Router,
@@ -36,7 +37,20 @@ export class EditarproveedorPage implements OnInit {
                   this.providerservice.getProviderId(Id)
                   .subscribe(
                   (data)=>{this.provider=data;
-                          this.providercateg=data.categories},
+                          this.providercateg=data.categories;
+
+                          this.categorias_selected = []; 
+                          // this.categories = []; 
+                          for (let i = 0; i < data.categories.length; i++) {
+                            //this.categories.push(data.activities[i].id);
+                            this.categoriaservice.getCategoriaId(data.categories[i]).subscribe(
+                              data => this.categorias_selected.push(data)            
+                            )
+                          }
+                        
+                        
+                        
+                        },
                   (error)=>{console.log(error);}
                   )
                 });

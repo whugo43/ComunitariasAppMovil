@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http'
 import { User } from '../../clases/user/user'
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import {tap, catchError } from 'rxjs/operators';
@@ -20,6 +20,8 @@ export class LoginService {
   private apiLogin = Api.api+'login/';
   authSubject=new BehaviorSubject(false);
   private token='';
+  private headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+
   gruposApoyos;
   voluntario:Voluntario;
   voluntarios: Voluntario[];
@@ -28,8 +30,6 @@ export class LoginService {
               public router: Router,
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService ) { }
-
-  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
 
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -64,12 +64,12 @@ export class LoginService {
 
   logout(){
     this.token='';
-    localStorage.removeItem("ACCESS_TOKEN");
-    localStorage.removeItem("EXPIRES_IN");
-    this.router.navigateByUrl('/login');
+    localStorage.removeItem("ACCESS_TOKEN")
+    localStorage.removeItem("EXPIRES_IN")
+    this.router.navigateByUrl('/login')
   }
   tokenauth(){
-    if(localStorage.getItem("token")==null){
+    if(localStorage.getItem("ACCESS_TOKEN")==null){
       return 0
     }else{
       return 1
@@ -78,7 +78,7 @@ export class LoginService {
   }
   
   saveToken(token:string, expiresIn:string, userRole: string, userEmail: string, userName: string, userId: string): void{
-    localStorage.setItem("token",token)
+    localStorage.setItem("ACCESS_TOKEN",token)
     localStorage.setItem("EXPIRES_IN",expiresIn)
     localStorage.setItem("USER_ROLE", userRole)
     localStorage.setItem("USER_EMAIL", userEmail)
@@ -96,9 +96,9 @@ export class LoginService {
 
   }
   
-  getToken():string{
+  private getToken():string{
     if (this.token){
-      this.token=localStorage.getItem("token")
+      this.token=localStorage.getItem("ACCESS_TOKEN")
     }
     return this.token
   }
@@ -110,21 +110,21 @@ export class LoginService {
 
   guardarUsuario(usuario) {
     const path = this.api;
-    return this.http.post(path, usuario, { headers: this.headers })
+    return this.http.post(path, usuario,{ headers: this.headers })
   }
 
   getUserId(id: any){ 
-    return this.http.get<User>(this.api + id, { headers: this.headers });
+    return this.http.get<User>(this.api+id,{ headers: this.headers });
   }
 
   updateUser(user: any, id: any) {
     const path = this.api + id + '/';
-    return this.http.patch(path, user, { headers: this.headers });
+    return this.http.patch(path, user,{ headers: this.headers });
   }
 
   deleteUser(id: string){
     const path=  `${this.api}${id}`;
-    return this.http.delete(path, { headers: this.headers })
+    return this.http.delete(path,{ headers: this.headers })
   }
 
 

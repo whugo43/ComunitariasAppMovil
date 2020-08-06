@@ -14,7 +14,7 @@ export class CentroAcopioService {
   constructor(private http: HttpClient,  private createBy:CreteByService, private loginsApi:LoginService) {
   }
 
-  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+  private headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
 
   getCentrosAcopios() {
     const path = this.api;

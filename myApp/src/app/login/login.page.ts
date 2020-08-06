@@ -56,7 +56,7 @@ export class LoginPage implements OnInit {
           let data_user = this.loginService.getDecodeAccessToken(data['token']);
           console.log(data_user)
           this.loginService.saveToken(
-              data.token, 
+              data['token'], 
               data_user.exp, 
               data_user.role,
               data_user.email,

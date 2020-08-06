@@ -86,6 +86,7 @@ export class GenerarvolunteerPage implements OnInit {
   postvolunteer(){
     this.formDataUser.append('username', this.formularios.username);
     this.formDataUser.append('password', this.formularios.password);
+    this.formDataUser.append('role', 'Volunteer');
     this.formDataUser.append('email', this.formularios.email);
     this.formDataUser.append("createdBy", localStorage.getItem('USER_NAME'));
     

@@ -25,6 +25,7 @@ export class RegistroDistribucionPage implements OnInit {
   public file: any;
   public reader: any;
   public imageSrc: any;
+  public name_html='';
 
   public errorMessage = {
     lugar_partida: [
@@ -73,6 +74,7 @@ export class RegistroDistribucionPage implements OnInit {
               voluntarios.forEach(voluntario => {
                 if (voluntario.user.toString() == distribuciones.user.toString()) {
                   nombref = voluntario.user;
+                  this.name_html=voluntario.user;
                   return;
                 }
               });
@@ -83,6 +85,7 @@ export class RegistroDistribucionPage implements OnInit {
               grupos.forEach(grupo => {
                 if (grupo.user.toString() == distribuciones.user.toString()) {
                   nombref = grupo.user;
+                  this.name_html=grupo.user
                   return;
                 }
               });
@@ -146,7 +149,7 @@ export class RegistroDistribucionPage implements OnInit {
         voluntarios.forEach(voluntario => {
           this.lista.push({
             id: voluntario.id,
-            name: voluntario.firstName,
+            name: voluntario.firstName +' '+voluntario.lastName,
             user: voluntario.user,
           });
         });
@@ -170,6 +173,9 @@ export class RegistroDistribucionPage implements OnInit {
   }
 
   public isinValid() {
+    if(this.accionEditar>0){
+      return false;
+    }
     return this.registrationForm.get('lugar_partida').value == '' ||
       this.registrationForm.get('lugar_destino').value == '' ||
       this.registrationForm.get('encargado.tipo_seleccion_encargado').value == '' ||

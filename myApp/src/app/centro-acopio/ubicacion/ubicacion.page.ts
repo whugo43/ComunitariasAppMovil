@@ -9,6 +9,7 @@ import { CreteByService } from '../../services/create-by.service'
 import { CentroAcopioRegistroPage } from '../centro-acopio-registro/centro-acopio-registro.page'
 import { AlertController } from '@ionic/angular';
 import { Console } from 'console';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-ubicacion',
@@ -22,19 +23,20 @@ export class UbicacionPage implements OnInit {
   public long_ac: number = 0;
   public nombre: string = '';
   public direccion: string = '';
-  private nombreContact: string = '';
-  private telefonoContac: string = '';
-  private photo: File=CentroAcopioRegistroPage.photo;
+  public nombreContact: string = '';
+  public telefonoContac: string = '';
+  public photo: File = CentroAcopioRegistroPage.photo;
   public lat_pa: number;
   public lng_pa: number;
   public centroAcopio_save: CentroAcopioClass = new CentroAcopioClass();
   public band: number = 0;
   public markPoint: Marker;
-  private formData: FormData = new FormData();
+  public formData: FormData = new FormData();
   public lat_enviar: number = 0;
   public lng_enviar: number = 0;
-  private accionEditar: number = 0;
-  private centroAcopioId: any;
+  public accionEditar: number = 0;
+  public centroAcopioId: any;
+  public photoF: File;
 
   constructor(public geolocation: Geolocation,
     public activateRoute: ActivatedRoute, public route: Router, private conexionApi: CentroAcopioService, private formBuilder:
@@ -59,7 +61,7 @@ export class UbicacionPage implements OnInit {
   async presentAlertConfirm() {
     let alert = await this.alertController.create({
       header: 'Error!',
-      message: '<p><strong>'+"Ha ocurrido un error por favor intentelo mas tarde.."+'</strong>!!!</p>',
+      message: '<p><strong>' + "Ha ocurrido un error por favor intentelo mas tarde.." + '</strong>!!!</p>',
       buttons: [
         {
           text: 'Cancelar',
@@ -77,35 +79,44 @@ export class UbicacionPage implements OnInit {
     this.formData.append('longitude', this.lng_enviar.toString());
     this.formData.append('contactName', this.nombreContact);
     this.formData.append('contactPhone', this.telefonoContac);
-    if(this.photo!=null){
-      this.formData.append("photo", this.photo);
-    }else{
-      this.formData.append("photo",'');
+    if (this.photo != null) {
+      this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(centroAcopio => {
+        if (centroAcopio.photo != null) {
+          if (centroAcopio.photo.name != CentroAcopioRegistroPage.photo.name) {
+            this.formData.append("photo", CentroAcopioRegistroPage.photo);
+          }
+        } else {
+          this.formData.append("photo", CentroAcopioRegistroPage.photo);
+        }
+      })
+    } else {
+      this.formData.append("photo", '');
     }
     this.formData.append('createdBy', this.createBy.getNombre());
 
     if (this.accionEditar > 0) {
       this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId)
-      .subscribe((newTask) => {
-        { console.log(newTask) 
-          this.route.navigate(['../centro-acopio']);
-        }
-      },error=>{
-        this.presentAlertConfirm();
-      this.accionEditar = 1;
-    });
+        .subscribe((newTask) => {
+          {
+            console.log(newTask)
+            this.route.navigate(['../centro-acopio']);
+          }
+        }, error => {
+          this.presentAlertConfirm();
+          this.accionEditar = 1;
+        });
 
     } else {
       this.conexionApi.guardarCentroAcopio(this.formData).subscribe(
-        (newTask) => { 
-          console.log(newTask); 
+        (newTask) => {
+          console.log(newTask);
           this.route.navigate(['../centro-acopio']);
         }
-      ,error=>{
-        this.presentAlertConfirm();
-      });
+        , error => {
+          this.presentAlertConfirm();
+        });
     }
-    
+
   }
 
   check_ubicacion() {

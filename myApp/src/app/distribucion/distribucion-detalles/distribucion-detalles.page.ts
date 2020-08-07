@@ -13,11 +13,11 @@ import { VoluntariosService } from '../../services/voluntarios/voluntarios.servi
 })
 export class DistribucionDetallesPage implements OnInit {
 
-  private idDistribucion: string;
-  private distribucion: Distribucion=new Distribucion();
-  private booleanPhto: boolean;
-  private encargadoNombre:string;
-  private encargadoTipo:string;
+  public idDistribucion: string;
+  public distribucion: Distribucion=new Distribucion();
+  public booleanPhto: boolean;
+  public encargadoNombre:string;
+  public encargadoTipo:string;
 
   constructor(private activateRoute: ActivatedRoute, private conexionGrupos:GrupoService,
     private apiDistribucion: DistribucionService, public alertController: AlertController,

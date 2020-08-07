@@ -11,12 +11,12 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./grupos-de-apoyo.page.scss'],
 })
 export class GruposDeApoyoPage implements OnInit {
-  private gruposDeApoyo: Grupo[] = [];
-  private seleccionado: string = '';
-  private getted = false;
+  public gruposDeApoyo: Grupo[] = [];
+  public seleccionado: string = '';
+  public getted = false;
 
   constructor(private apiGrupoApoyo: GrupoService, private apiUser: LoginService,
-    private alertController: AlertController, private router: Router, route: ActivatedRoute) {
+    private alertController: AlertController, private router: Router) {
 
 
   }

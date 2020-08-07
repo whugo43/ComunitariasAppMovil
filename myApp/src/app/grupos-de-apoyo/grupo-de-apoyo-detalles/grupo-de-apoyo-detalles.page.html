@@ -20,15 +20,19 @@
     <ion-item>
       <ion-label><strong>Usuario:</strong></ion-label>
       <ion-label>{{nombreUser}}</ion-label>
+    </ion-item>
+
+    <ion-item>
       <ion-grid>
         <ion-row>
-          <ion-note class='texto_contrasenia' (click)='cambiardecontrasenia(grupo.id)'>Cambiar de contraseña<br><br>
-          </ion-note>
-        </ion-row>
-
-        <ion-row>
-          <ion-note class='texto_contrasenia' (click)='reestablecerContrasenia(grupo.id)'>Reestablecer contraseña
-          </ion-note>
+          <ion-col>
+            <ion-note class='texto_contrasenia' (click)='cambiardecontrasenia(grupo.id)'>Cambiar de contraseña<br><br>
+            </ion-note>
+          </ion-col>
+         
+        <ion-col> <ion-note class='texto_contrasenia' (click)='reestablecerContrasenia(grupo.id)'>Reestablecer contraseña
+        </ion-note>
+      </ion-col>
         </ion-row>
       </ion-grid>
       <br><br>

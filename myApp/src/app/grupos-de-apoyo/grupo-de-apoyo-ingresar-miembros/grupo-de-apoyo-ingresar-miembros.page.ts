@@ -4,6 +4,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { GroupMemberServiceService } from '../../services/group-member/group-member-service.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { GroupMember } from '../../clases/miembros-grupos/group-member'
+import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-grupo-de-apoyo-ingresar-miembros',
@@ -12,14 +13,14 @@ import { GroupMember } from '../../clases/miembros-grupos/group-member'
 })
 export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
   public formMiembro: FormGroup;
-  private idGrupo: string;
-  private groupMember: GroupMember = new GroupMember();
-  private editar: string;
-  private idMiembro: string;
+  public idGrupo: string;
+  public groupMember: GroupMember = new GroupMember();
+  public editar: string;
+  public idMiembro: string;
 
   constructor(private recibiendo: ActivatedRoute, private formBuilder:
     FormBuilder, private apiConexionGroupMember: GroupMemberServiceService,
-    private navegar: Router, private apiGrupo: GrupoService) {
+    private navegar: Router, private apiGrupo: GrupoService, private createdBy:CreteByService) {
   }
 
   ngOnInit() {
@@ -38,7 +39,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
     this.formMiembro = this.formBuilder.group({
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
       apellidos: ['', [Validators.required, Validators.maxLength(100)]],
-      telefono: ['', [Validators.required, Validators.pattern('[0-9]{11}')]],
+      telefono: ['', [Validators.required, Validators.pattern('09[0-9]{8}')]],
     });
     console.log(this.editar+this.idMiembro)
     if (this.editar == 'editar' && this.idMiembro != null) {
@@ -54,7 +55,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
   }
 
   enviarDatos() {
-    this.groupMember.createdBy = 'mi';
+    this.groupMember.createdBy = this.createdBy.getNombre();
     this.groupMember.firstName = this.formMiembro.get('nombre').value;
     this.groupMember.lastName = this.formMiembro.get('apellidos').value;
     this.groupMember.phoneNumber = this.formMiembro.get('telefono').value;
@@ -62,7 +63,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
       'firstName': this.formMiembro.get('nombre').value,
       "lastName": this.formMiembro.get('apellidos').value,
       'phoneNumber': this.formMiembro.get('telefono').value,
-      'createdBy': 'mi',
+      'createdBy': this.createdBy.getNombre(),
       'supportgroup': this.idGrupo,
     }
     if (this.editar == 'editar' && this.idMiembro != null) {
@@ -84,7 +85,6 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
         this.apiGrupo.getGrupoId(this.idGrupo).subscribe(grupo => {
           grupo.members.push(this.groupMember);
           this.apiGrupo.updateGrupo(grupo, this.idGrupo).subscribe(ne => {
-            console.log(ne);
             this.navegar.navigate(['./grupos-de-apoyo/grupo-de-apoyo-detalles'], {
               queryParams: {
                 idGrupo: this.idGrupo,

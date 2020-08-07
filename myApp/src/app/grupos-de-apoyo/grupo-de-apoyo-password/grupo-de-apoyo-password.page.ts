@@ -11,17 +11,17 @@ import { LoginService } from '../../services/login/login.service'
   styleUrls: ['./grupo-de-apoyo-password.page.scss'],
 })
 export class GrupoDeApoyoPasswordPage implements OnInit {
-  private opcion: string = '';
-  private formGroupContrasenia: FormGroup;
-  private idGrupoEdicion: string = '';
+  public opcion: string = '';
+  public formGroupContrasenia: FormGroup;
+  public idGrupoEdicion: string = '';
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
 
   passwordType2: string = 'password';
   passwordIcon2: string = 'eye-off';
 
-  private passwordFinal:string;
-  private bandera:boolean=true;
+  public passwordFinal:string;
+  public bandera:boolean=true;
 
 
   constructor(public alertController: AlertController, private formBuilder:

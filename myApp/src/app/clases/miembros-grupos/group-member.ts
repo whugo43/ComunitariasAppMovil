@@ -3,6 +3,6 @@ export class GroupMember {
     firstName: string;
     lastName: string;
     phoneNumber: string;
-    createdBy: "mi";
+    createdBy: string;
     supportgroup: string;
 }

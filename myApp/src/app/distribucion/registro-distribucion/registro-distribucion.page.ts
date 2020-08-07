@@ -13,18 +13,18 @@ import { CreteByService } from '../../services/create-by.service'
   styleUrls: ['./registro-distribucion.page.scss'],
 })
 export class RegistroDistribucionPage implements OnInit {
-  private registrationForm: FormGroup;
+  public registrationForm: FormGroup;
   public lista: any[] = [];
   public voluntarios: any = [];
   public seleccion: string;
-  private accionEditar: number = 0;
-  private userId: number;
-  private formData = new FormData();
-  private distribucionId: string;
-  private photo: File;
-  private file: any;
-  private reader: any;
-  private imageSrc: any;
+  public accionEditar: number = 0;
+  public userId: number;
+  public formData = new FormData();
+  public distribucionId: string;
+  public photo: File;
+  public file: any;
+  public reader: any;
+  public imageSrc: any;
 
   public errorMessage = {
     lugar_partida: [

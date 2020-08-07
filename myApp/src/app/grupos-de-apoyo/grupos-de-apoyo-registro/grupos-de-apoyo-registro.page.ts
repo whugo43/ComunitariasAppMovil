@@ -5,6 +5,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CreteByService } from '../../services/create-by.service'
+import { GroupMember } from 'src/app/clases/miembros-grupos/group-member';
 
 @Component({
   selector: 'app-grupos-de-apoyo-registro',
@@ -12,13 +13,14 @@ import { CreteByService } from '../../services/create-by.service'
   styleUrls: ['./grupos-de-apoyo-registro.page.scss'],
 })
 export class GruposDeApoyoRegistroPage implements OnInit {
-  private registrationFormGrupo: FormGroup;
-  private registrationFormUser: FormGroup
+  public registrationFormGrupo: FormGroup;
+  public registrationFormUser: FormGroup
   passwordType: string = 'password';
   passwordIcon: string = 'eye-off';
-  private edicion: string = '';
-  private idGrupoEdicion: string = '';
-
+  public edicion: string = '';
+  public idGrupoEdicion: string = '';
+  public help_members=[];
+  
   hideShowPassword() {
     this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
     this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
@@ -38,8 +40,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         this.idGrupoEdicion = data.get('idGrupo');
         this.conexionGrupos.getGrupoId(this.idGrupoEdicion).subscribe(grupo => {
           this.conexionUser.getUserId(grupo.user).subscribe(user => {
-            this.registrationFormGrupo.setValue({
-              members: grupo.members,
+            this.registrationFormGrupo = this.formBuilder.group({
               name: grupo.name,
               user: grupo.user,
             });
@@ -99,6 +100,7 @@ export class GruposDeApoyoRegistroPage implements OnInit {
         (data) => {
           let postData = {
             "name": this.registrationFormGrupo.get('name').value,
+            'members':this.help_members,
             "createdBy": this.createby.getNombre(),
             "user": data['id'],
           }
@@ -120,7 +122,6 @@ export class GruposDeApoyoRegistroPage implements OnInit {
 
   ngOnInit() {
     this.registrationFormGrupo = this.formBuilder.group({
-      members: [],
       name: ['', [Validators.required, Validators.maxLength(100)]],
       user: '',
     });

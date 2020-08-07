@@ -16,9 +16,9 @@ export class DistribucionPage implements OnInit {
 
   public distribucion_registrada: Distribucion[] = [];
   public indice: number = 0;
-  private seleccionado: string = '';
-  private VOLUNTARIO: string = '1';
-  private GRUPO: string = '2';
+  public seleccionado: string = '';
+  public VOLUNTARIO: string = '1';
+  public GRUPO: string = '2';
 
   constructor(private activateRoute: Router, private conexionApi: DistribucionService
     , private alertController: AlertController, private conexionVoluntaio: VoluntariosService,

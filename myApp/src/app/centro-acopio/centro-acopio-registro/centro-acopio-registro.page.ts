@@ -12,15 +12,16 @@ import { CreteByService } from '../../services/create-by.service'
 })
 export class CentroAcopioRegistroPage implements OnInit {
 
-  private c: CentroAcopioPage;
+  public c: CentroAcopioPage;
   public registrationForm: FormGroup;
-  private accionEditar: number = 0;
-  private centroAcopioId: any;
-  private formData = new FormData();
+  public accionEditar: number = 0;
+  public centroAcopioId: any;
+  public formData = new FormData();
   static photo: File;
-  private file: any;
-  private reader: FileReader;
-  private imageSrc: any;
+  public file: any;
+  public reader: FileReader;
+  public imageSrc: any;
+  public photoF:File=null;
 
   constructor(private formBuilder:
     FormBuilder, private router: Router, public activateRoute: ActivatedRoute, 
@@ -59,7 +60,7 @@ export class CentroAcopioRegistroPage implements OnInit {
       nombre: ['', [Validators.required, Validators.maxLength(100)]],
       direccion: ['', [Validators.required, Validators.maxLength(100)]],
       nombre_persona_contacto: ['', [Validators.required, Validators.maxLength(100)]],
-      telefono_persona_contacto: ['', [Validators.required,Validators.pattern('09[0-9]{9}')]]
+      telefono_persona_contacto: ['', [Validators.required,Validators.pattern('09[0-9]{8}')]]
     });
     this.opcionEditar();
   }
@@ -78,6 +79,7 @@ export class CentroAcopioRegistroPage implements OnInit {
             telefono_persona_contacto:dato_final.contactPhone,
           });
           CentroAcopioRegistroPage.photo=dato_final.photo;
+          this.photoF=dato_final.photo;
           this.imageSrc=dato_final.photo;
           
           
@@ -132,17 +134,24 @@ export class CentroAcopioRegistroPage implements OnInit {
     this.formData.append('address', this.registrationForm.get('direccion').value);
     this.formData.append('contactName', this.registrationForm.get('nombre_persona_contacto').value);
     this.formData.append('contactPhone', this.registrationForm.get('telefono_persona_contacto').value);
+    console.log(CentroAcopioRegistroPage.photo)
     if(CentroAcopioRegistroPage.photo==null){
       this.formData.append('photo',"");//Removiendo la imagen
     }else{
-      this.formData.append('photo', CentroAcopioRegistroPage.photo);
+      if(this.photoF!=null){
+        if(CentroAcopioRegistroPage.photo.name != this.photoF.name){
+          this.formData.append('photo',CentroAcopioRegistroPage.photo);
+        }
+      }else{
+        this.formData.append('photo',CentroAcopioRegistroPage.photo);
+      }
+     
     }
     this.centroAcopioapi.getCentroAcopioId(this.centroAcopioId).subscribe(dato_final => {
       this.formData.append('latitude', dato_final['latitude'].toString());
       this.formData.append('longitude', dato_final['longitude'].toString());
       this.formData.append('createdBy', this.createBy.getNombre());
     });
-
     if (this.accionEditar > 0) {
       this.centroAcopioapi.updateCentroAcopio(this.formData, this.centroAcopioId).subscribe((newTask) => {
         { console.log(newTask) }

@@ -89,7 +89,7 @@ export class CentroAcopioRegistroPage implements OnInit {
   }
   validation_messages = {
     'telefono_persona_contacto': [
-        { type: 'pattern', message: 'Solo los números son permitidos, con una longuitud \n máxima de 11 caracteres, empezando con 09' },
+        { type: 'pattern', message: 'Solo los números son permitidos, con una longuitud \n máxima de 10 caracteres, empezando con 09' },
       ],
     }
 

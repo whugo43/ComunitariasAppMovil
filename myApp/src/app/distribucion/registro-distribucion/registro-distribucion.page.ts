@@ -26,6 +26,7 @@ export class RegistroDistribucionPage implements OnInit {
   public reader: any;
   public imageSrc: any;
   public name_html='';
+  public photoF:File;
 
   public errorMessage = {
     lugar_partida: [
@@ -67,6 +68,7 @@ export class RegistroDistribucionPage implements OnInit {
           let tipo = '';
           let nombref = '';
           this.photo = distribuciones.photo;
+          this.photoF=distribuciones.photo;
           this.imageSrc = this.photo;
           if (distribuciones.manager_type == '1') {
             tipo = 'Voluntarios';
@@ -173,9 +175,11 @@ export class RegistroDistribucionPage implements OnInit {
   }
 
   public isinValid() {
+  
     if(this.accionEditar>0){
       return false;
     }
+    
     return this.registrationForm.get('lugar_partida').value == '' ||
       this.registrationForm.get('lugar_destino').value == '' ||
       this.registrationForm.get('encargado.tipo_seleccion_encargado').value == '' ||
@@ -198,7 +202,13 @@ export class RegistroDistribucionPage implements OnInit {
     if (this.photo == null) {
       this.formData.append('photo', "");
     } else {
-      this.formData.append('photo', this.photo);
+      if(this.photoF!=null){
+        if(this.photo.name != this.photoF.name){
+          this.formData.append('photo',this.photo);
+        }
+      }else{
+        this.formData.append('photo',this.photo);
+      }
     }
     this.formData.append('user', this.registrationForm.get('encargado.nombre').value);
     if (this.accionEditar > 0) {

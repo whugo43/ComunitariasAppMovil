@@ -31,14 +31,10 @@
 
        <ion-item>
         <ion-label>Categorias</ion-label>
-        <ion-select placeholder="Seleccione" value="{{provider.categories}}" multiple required [(ngModel)]='formularios.categories' name='categories'>
+        <ion-select placeholder="Seleccione" multiple="true" [value]="categorias_selected"  required [(ngModel)]='formularios.categories' name='categories'>
             <ion-select-option *ngFor="let categoria of categorias" value="{{categoria.id}}">{{categoria.name}}</ion-select-option>
         </ion-select>
       </ion-item>
-
-      <ion-list>
-        <ion-item *ngFor="let act of categorias_selected">{{ act.name }}</ion-item>
-      </ion-list>
    
     
     </ion-list>

@@ -41,11 +41,16 @@ export class EditarproveedorPage implements OnInit {
 
                           this.categorias_selected = []; 
                           // this.categories = []; 
-                          for (let i = 0; i < data.categories.length; i++) {
+                          for ( let num of data.categories){
+                            this.categorias_selected.push(num.toString());
+
+
+                          //for (let i = 0; i < data.categories.length; i++) {
+                          //  this.categorias_selected.push(data.activities[i].toString())    
                             //this.categories.push(data.activities[i].id);
-                            this.categoriaservice.getCategoriaId(data.categories[i]).subscribe(
-                              data => this.categorias_selected.push(data)            
-                            )
+                            //this.categoriaservice.getCategoriaId(data.categories[i]).subscribe(
+                            //  data => this.categorias_selected.push(data.toString())            
+                            //)
                           }
                         
                         

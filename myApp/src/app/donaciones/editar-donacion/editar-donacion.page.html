@@ -45,14 +45,14 @@
    
       <ion-item>
         <ion-label>Voluntario</ion-label>
-        <ion-select placeholder="Seleccione uno" value="{{donaciones.users}}" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
+        <ion-select placeholder="Seleccione uno" [value]="responsable_selected" multiple [(ngModel)]='formularios.voluntario' name="voluntario">   
             <ion-select-option *ngFor="let voluntario of voluntarios" value="{{voluntario.user}}">{{voluntario.firstName}} {{voluntario.lastName}}</ion-select-option>
         </ion-select>
       </ion-item>
 
       <ion-item>
         <ion-label>Grupo de Apoyo</ion-label>
-        <ion-select placeholder="Seleccione uno" value="{{donaciones.users}}" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
+        <ion-select placeholder="Seleccione uno" [value]="responsable_selected" multiple [(ngModel)]='formularios.grupoapoyo' name="grupoapoyo">   
             <ion-select-option *ngFor="let gruposApoyos of gruposApoyos" value="{{gruposApoyos.user}}">{{gruposApoyos.name}}</ion-select-option>
         </ion-select>
       </ion-item>

@@ -51,12 +51,14 @@ export class EditarvolunteerPage implements OnInit {
       this.voluntariosService.getVoluntarioId(voluntario).subscribe((data)=>{this.volunteer=data;
         this.activities_selected = []; 
         // this.activities = []; 
-        for (let i = 0; i < data.activities.length; i++) {
+        for ( let num of data.activities){
+          this.activities_selected.push(num.toString());
+          //let i = 0; i < data.activities.length; i++) {
           //this.activities.push(data.activities[i].id);
-          this.activityService.getActivityId(data.activities[i]).subscribe(
-            data => this.activities_selected.push(data),
-            error => console.log(error)
-          )
+          //this.activityService.getActivityId(data.activities[i]).subscribe(
+          //  data => this.activities_selected.push(data),
+          //  error => console.log(error)
+         // )
         }
         this.userservice.getUserId(data.user).subscribe(
           (data)=>{this.users=data},

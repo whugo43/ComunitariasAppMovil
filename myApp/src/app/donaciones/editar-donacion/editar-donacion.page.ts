@@ -20,6 +20,7 @@ export class EditarDonacionPage implements OnInit {
   imageSrc;
   id: string;
   donaciones=[];
+  responsable_selected = [];
   centrosAcopios;
   providers;
   categorias;
@@ -58,8 +59,12 @@ export class EditarDonacionPage implements OnInit {
                   this.id = donaciones
                   this.donacionesService.getDonacionesId(donaciones)
                   .subscribe(
-                  (data)=>{this.donaciones=data},
-                  (error)=>{console.log(error);}
+                    (data)=>{ this.donaciones=data;
+                              this.responsable_selected = []; 
+                              for ( let num of data.users){
+                                this.responsable_selected.push(num.toString());
+                              }
+                            },(error)=>{console.log(error);}
                   )
                 });  
               }

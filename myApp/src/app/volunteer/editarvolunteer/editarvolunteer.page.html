@@ -38,13 +38,10 @@
 
       <ion-item>
         <ion-label>Actividades</ion-label>
-        <ion-select placeholder="Seleccione" [value]="[2,4]" multiple [(ngModel)]='formularios.activities' name='activities' required >   
+        <ion-select placeholder="Seleccione" multiple="true" [value]="activities_selected" [(ngModel)]='formularios.activities' name='activities' required >   
           <ion-select-option *ngFor="let activity of activities" value="{{activity.id}}" selected="1">{{activity.name}}</ion-select-option>   
         </ion-select>
       </ion-item>
-      <ion-list>
-        <ion-item *ngFor="let act of activities_selected">{{ act.name }}</ion-item>
-      </ion-list>
 
       <ion-text>
         <h4>Datos de Usuario</h4>

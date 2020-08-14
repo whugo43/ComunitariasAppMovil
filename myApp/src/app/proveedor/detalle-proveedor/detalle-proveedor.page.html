@@ -40,7 +40,7 @@
 
 
         <ion-card-content>  
-          <ion-card-subtitle color="dark">Actividades: </ion-card-subtitle>
+          <ion-card-subtitle color="dark">Categorias: </ion-card-subtitle>
           <ng-container *ngFor="let prov of provider.categories">
             <ng-container *ngFor="let categoria of categorias">
               <ion-card-subtitle *ngIf="categoria.id == prov">{{categoria.name}}</ion-card-subtitle>

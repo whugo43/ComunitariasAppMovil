@@ -21,8 +21,6 @@
         <ion-select placeholder="Seleccione uno" value="{{campaign.scope}}" (click)="Getscopes()" [(ngModel)]='formularios.scope' name='scope' required >   
           <ion-select-option *ngFor="let scope of Scopes" value="{{scope.id}}">{{scope.name}}</ion-select-option>
         </ion-select>
-
-        <app-scope></app-scope>
       </ion-item>
 
       <ion-item>

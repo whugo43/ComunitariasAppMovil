@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ScopeComponentModule } from '../../componentes/scope/scope.module';
-
 import { GenerarCampaignPageRoutingModule } from './generar-campaign-routing.module';
 
 import { GenerarCampaignPage } from './generar-campaign.page';
@@ -15,7 +13,6 @@ import { GenerarCampaignPage } from './generar-campaign.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ScopeComponentModule,
     GenerarCampaignPageRoutingModule
   ],
   declarations: [GenerarCampaignPage]

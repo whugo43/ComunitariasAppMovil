@@ -8,14 +8,11 @@ import { EditarCampaignPageRoutingModule } from './editar-campaign-routing.modul
 
 import { EditarCampaignPage } from './editar-campaign.page';
 
-import { ScopeComponentModule } from '../../componentes/scope/scope.module';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ScopeComponentModule,
     EditarCampaignPageRoutingModule
   ],
   declarations: [EditarCampaignPage]

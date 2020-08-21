@@ -38,24 +38,33 @@
 
   <ng-container  *ngFor="let donacion of donaciones">
   <ion-card *ngIf="donacion.collectionCenter == opcionfiltro ||  false== opcionfiltro">
-    <ion-item>
+      <ng-container *ngIf="donacion.state == 1">
+        <ion-item>
+          Acciones: 
+          <ion-button fill="outline" horizontal="start"  slot="end"   [routerLink]="['editardonacion',donacion.id]">
+            <ion-icon name="create"></ion-icon >
+          </ion-button>
+        
+          <ion-button color="warning" fill="outline" horizontal="center"  slot="end"  (click)="presentAlertCambiarestado(donacion.id)">
+            <ion-icon name="alert"></ion-icon>
+          </ion-button>
+        
+          <ion-button color="danger" fill="outline" horizontal="end" slot="end" (click)="presentAlertElimnarDonacion(donacion.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+          </ion-item>
 
-      <ng-container  *ngFor="let proveedor of proveedores">
+      </ng-container>
+    
+          <ng-container  *ngFor="let proveedor of proveedores">
+            <ion-item>
         <ion-label  *ngIf="proveedor.id == donacion.provider" [routerLink]="['detalledonacion',donacion.id]">
             {{proveedor.name}}
+            <p>{{donacion.description}}</p>
         </ion-label>
+      </ion-item>
       </ng-container>
 
-      <ng-container *ngIf="donacion.state == 1">
-        <ion-button fill="outline" (click)="mostrarpop($event,donacion.id)">
-        <ion-icon name="ellipsis-vertical"></ion-icon>
-        </ion-button>  
-      </ng-container>
-    </ion-item>
-
-    <ion-card-content>
-     <p>{{donacion.description}}</p>
-    </ion-card-content>
   </ion-card> 
   </ng-container> 
 

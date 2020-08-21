@@ -7,8 +7,6 @@ import {CategoriaService} from '../services/categoria/categoria.service';
 import {ProviderService} from '../services/provider/provider.service';
 import {CentroAcopioService} from '../services/centro-acopio/centro-acopio.service';
 
-import {DonacionComponent} from '../componentes/donacion/donacion.component';
-
 @Component({
   selector: 'app-donaciones',
   templateUrl: './donaciones.page.html',
@@ -66,17 +64,7 @@ export class DonacionesPage implements OnInit {
     
   }
 
-  async mostrarpop(ev: any,id){
-      const popover = await this.popoverController.create({
-        component: DonacionComponent,
-        //cssClass: 'my-custom-class',
-        event: ev,
-        //translucent: true
-        componentProps: {id: id, popoverController: this.popoverController} 
-      });
-      return await popover.present();
-
-  }
+  
 
   cambiarestado(id: string){
   let cont=1;  

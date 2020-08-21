@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/grupos-de-apoyo"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="edicion==null && opcion==null">Registro</ion-title>
+    <ion-title *ngIf="edicion==null">Registro</ion-title>
     <ion-title *ngIf="edicion=='editar'">Editar</ion-title>
     
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="registrationFormGrupo" *ngIf="opcion==null">
+  <form [formGroup]="registrationFormGrupo" >
     <ion-card>
       <ion-item>
         <ion-label position="floating">Nombre del Grupo</ion-label>
@@ -18,7 +18,7 @@
       </ion-item>
     </ion-card>
 
-    <form [formGroup]="registrationFormUser" *ngIf="opcion==null">
+    <form [formGroup]="registrationFormUser">
       <ion-card>
         <ion-label><strong>Datos del usuario</strong></ion-label>
         <ion-item>

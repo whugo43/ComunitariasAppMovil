@@ -8,7 +8,7 @@ import { DonacionComponent } from './donacion.component';
 
 @NgModule({
   imports: [ CommonModule, FormsModule, IonicModule],
-  declarations: [DonacionComponent],
+  declarations: [],
   exports: [DonacionComponent],
   entryComponents:[]
 })

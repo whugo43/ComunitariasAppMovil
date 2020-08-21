@@ -7,16 +7,18 @@ import {ProviderService} from '../../services/provider/provider.service';
 import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.service';
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
-
+import {Categoria} from '../../interfaces/categoria';
+import {Donacion} from '../../interfaces/donacion';
+import { Provider } from 'src/app/interfaces/provider';
 @Component({
   selector: 'app-detalle-donacion',
   templateUrl: './detalle-donacion.page.html',
   styleUrls: ['./detalle-donacion.page.scss'],
 })
 export class DetalleDonacionPage implements OnInit {
-  donacion=[];
-  categoria=[];
-  proveedor=[];
+  public donacion: Donacion=new Donacion();
+  public categoria: Categoria=new Categoria();
+  public proveedor: Provider=new Provider();
   centroacopio:any;
   voluntarios;
   gruposApoyos;

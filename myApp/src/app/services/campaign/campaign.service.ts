@@ -22,7 +22,7 @@ export class CampaignService {
   }
 
   getCampaignsId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Campaign>(this.api + id, { headers: this.headers });
 
   }
 

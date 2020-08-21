@@ -2,7 +2,8 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProviderService } from 'src/app/services/provider/provider.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
-
+import {Provider} from '../../interfaces/provider';
+import { Categoria } from 'src/app/interfaces/categoria';
 @Component({
   selector: 'app-detalle-proveedor',
   templateUrl: './detalle-proveedor.page.html',
@@ -10,8 +11,10 @@ import { CategoriaService } from 'src/app/services/categoria/categoria.service';
 })
 export class DetalleProveedorPage implements OnInit {
   id: string;
-  provider=[];
+  
   categorias;
+  public provider: Provider=new Provider();
+  //public categoria: Categoria=new Categoria();
 
   constructor(public providerservice: ProviderService,
               public router: Router,

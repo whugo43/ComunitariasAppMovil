@@ -27,7 +27,7 @@ export class VoluntariosService {
   }
 
   getVoluntarioId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Voluntario>(this.api + id, { headers: this.headers });
   }
 
   deletevoluntario(id: string){

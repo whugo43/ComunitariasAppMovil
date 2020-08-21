@@ -20,7 +20,7 @@ export class ProviderService {
   }
 
   getProviderId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Provider>(this.api + id, { headers: this.headers });
 
   }
   

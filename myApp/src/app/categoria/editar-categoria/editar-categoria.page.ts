@@ -17,7 +17,8 @@ export class EditarCategoriaPage implements OnInit {
     description: '',
     createdBy: ''
     };
-    categoria=[];
+    public categoria: Categoria=new Categoria();
+    
     id: string;
   constructor(private activateRoute: ActivatedRoute, 
     public alertController: AlertController,

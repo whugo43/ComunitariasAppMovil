@@ -3,14 +3,16 @@ import {ActivatedRoute, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import {ProviderService} from '../../services/provider/provider.service';
 import { CategoriaService } from 'src/app/services/categoria/categoria.service';
+import {Provider} from '../../interfaces/provider';
+import { Categoria } from 'src/app/interfaces/categoria';
 @Component({
   selector: 'app-editarproveedor',
   templateUrl: './editarproveedor.page.html',
   styleUrls: ['./editarproveedor.page.scss'],
 })
 export class EditarproveedorPage implements OnInit {
-  providercateg=[]
-
+  
+   providercateg= "";
   formularios={
     name: '',
     address: '',
@@ -19,7 +21,7 @@ export class EditarproveedorPage implements OnInit {
     categories: [],
     };
     formData= new FormData();
-    provider=[];
+    public provider: Provider=new Provider();
     id: string;
     categorias;
     categorias_selected = [];

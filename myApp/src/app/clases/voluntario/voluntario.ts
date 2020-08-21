@@ -6,6 +6,7 @@ export class Voluntario {
     social: string;
     createdBy: string;
     user: string;
+    schedule:string;
     activities:any[];
 }
 export interface Voluntario {

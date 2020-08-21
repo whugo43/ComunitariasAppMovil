@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Api } from '../enum'
+import { Api } from '../enum';
+import {ContactosList} from '../../interfaces/contactosList';
 
 @Injectable({
   providedIn: 'root'
@@ -17,11 +18,11 @@ export class ListaContactosService {
 
   getContactos(){
     const path= this.api;
-    return this.http.get(path, { headers: this.headers });
+    return this.http.get<ContactosList[]>(path, { headers: this.headers });
   }
 
   getContactosId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<ContactosList>(this.api + id, { headers: this.headers });
 
   }
 

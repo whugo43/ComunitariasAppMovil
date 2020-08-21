@@ -1,12 +1,8 @@
-export class Provider {
-    id?: string;
+export class Scope {
+    id?:string;
     name: string;
-    address: string;
-    phoneNumber: string;
-    email: string;
-    createdBy?:string;
-    createdAt?:string;
-    categories: string
+    description?: string;
+    createdBy: string;
 
     constructor() { }
 
@@ -17,6 +13,9 @@ export class Provider {
     public setName(name: string) {
         this.name = name;
     }
+    public setDescription(description: string) {
+        this.description = description;
+    }
 
     public setCreateBy(createdBy: string) {
         this.createdBy = createdBy;
@@ -24,6 +23,6 @@ export class Provider {
 
 }
 
-export interface Providers{
-    providers: Array<Provider>
+export interface Scopes{
+    Scopes: Array<Scope>
  }

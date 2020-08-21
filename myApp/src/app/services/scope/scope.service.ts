@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Api } from '../enum'
+import {Scope} from '../../interfaces/scope';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class ScopeService {
 
   getScope(){
     const path= this.api;
-    return this.http.get(path, { headers: this.headers });
+    return this.http.get<Scope[]>(path, { headers: this.headers });
   }
   getScopeId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Scope>(this.api + id, { headers: this.headers });
 
   }
   postScope(Scope){

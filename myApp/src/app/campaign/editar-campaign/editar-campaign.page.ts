@@ -3,6 +3,7 @@ import {ActivatedRoute, Router } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
 import {ScopeService} from '../../services/scope/scope.service';
 import { AlertController } from '@ionic/angular';
+import {Campaign} from '../../interfaces/campaign';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class EditarCampaignPage implements OnInit {
   imageSrc;
   Scopes;
 
-  campaign=[];
+  public campaign: Campaign=new Campaign();
   id: string;
   formData= new FormData();
   photo: File;

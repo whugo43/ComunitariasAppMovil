@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Api } from '../enum'
-
+import {Donacion} from '../../interfaces/donacion';
 @Injectable({
   providedIn: 'root'
 })
@@ -14,11 +14,11 @@ export class DonacionesService {
 
   getDonaciones(){
     const path= this.api;
-    return this.http.get(path, { headers: this.headers });
+    return this.http.get<Donacion[]>(path, { headers: this.headers });
   }
 
   getDonacionesId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Donacion>(this.api + id, { headers: this.headers });
 
   }
 

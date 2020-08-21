@@ -6,6 +6,8 @@ import { ActivityService } from 'src/app/services/activity/activity.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { Voluntario } from 'src/app/clases/voluntario/voluntario';
+import { User } from 'src/app/clases/user/user';
 
 @Component({
   selector: 'app-editarvolunteer',
@@ -30,8 +32,9 @@ export class EditarvolunteerPage implements OnInit {
     formDataUser = new FormData();
     formDataVoluntario = new FormData();
   id: string;
-  volunteer=[];
-  users=[];
+  public volunteer: Voluntario=new Voluntario();
+  
+  public users: User= new User();
   activities_selected = [];
 
   constructor(public router: Router,

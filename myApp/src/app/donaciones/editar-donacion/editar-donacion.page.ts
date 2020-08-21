@@ -8,6 +8,7 @@ import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.se
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
 import { AlertController } from '@ionic/angular';
+import {Donacion} from '../../interfaces/donacion';
 
 
 
@@ -19,7 +20,8 @@ import { AlertController } from '@ionic/angular';
 export class EditarDonacionPage implements OnInit {
   imageSrc;
   id: string;
-  donaciones=[];
+  
+  public donaciones: Donacion=new Donacion();
   responsable_selected = [];
   centrosAcopios;
   providers;

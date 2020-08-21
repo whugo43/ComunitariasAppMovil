@@ -23,7 +23,7 @@ export class CategoriaService {
   }
 
   getCategoriaId(id: string){ 
-    return this.http.get<any>(this.api + id, { headers: this.headers });
+    return this.http.get<Categoria>(this.api + id, { headers: this.headers });
 
   }
   

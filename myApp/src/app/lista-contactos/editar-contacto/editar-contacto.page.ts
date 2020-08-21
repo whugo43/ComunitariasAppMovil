@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ListaContactosService } from 'src/app/services/lista-contactos/lista-contactos.service';
-
+import {ContactosList} from '../../interfaces/contactosList';
 @Component({
   selector: 'app-editar-contacto',
   templateUrl: './editar-contacto.page.html',
@@ -18,7 +18,7 @@ export class EditarContactoPage implements OnInit {
     }
   
   formData = new FormData();
-  contacto=[];
+  public contacto: ContactosList=new ContactosList();
   idP: string;
 
   constructor(public router: Router,

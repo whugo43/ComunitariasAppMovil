@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute } from '@angular/router';
 import {CampaignService} from '../../services/campaign/campaign.service';
 import {ScopeService} from '../../services/scope/scope.service';
-
+import {Campaign} from '../../interfaces/campaign';
 @Component({
   selector: 'app-detalle-campaign',
   templateUrl: './detalle-campaign.page.html',
   styleUrls: ['./detalle-campaign.page.scss'],
 })
 export class DetalleCampaignPage implements OnInit {
-  campaign=[];
+  public campaign: Campaign=new Campaign();
+  
   id: string;
   Scopes;
 

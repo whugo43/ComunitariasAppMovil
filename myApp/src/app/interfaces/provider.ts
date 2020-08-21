@@ -1,12 +1,12 @@
 export class Provider {
     id?: string;
-    name: string;
-    address: string;
-    phoneNumber: string;
-    email: string;
+    name?: string;
+    address?: string;
+    phoneNumber?: string;
+    email?: string;
     createdBy?:string;
     createdAt?:string;
-    categories: string
+    categories?: string
 
     constructor() { }
 

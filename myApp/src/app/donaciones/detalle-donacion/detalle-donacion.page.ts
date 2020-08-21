@@ -10,6 +10,8 @@ import {GrupoService} from '../../services/grupo-service/grupo.service';
 import {Categoria} from '../../interfaces/categoria';
 import {Donacion} from '../../interfaces/donacion';
 import { Provider } from 'src/app/interfaces/provider';
+import { CentroAcopioClass } from 'src/app/clases/centro-acopio/centro-acopio-class';
+import { Voluntario } from 'src/app/clases/voluntario/voluntario';
 @Component({
   selector: 'app-detalle-donacion',
   templateUrl: './detalle-donacion.page.html',
@@ -17,11 +19,12 @@ import { Provider } from 'src/app/interfaces/provider';
 })
 export class DetalleDonacionPage implements OnInit {
   public donacion: Donacion=new Donacion();
-  public categoria: Categoria=new Categoria();
-  public proveedor: Provider=new Provider();
-  centroacopio:any;
-  voluntarios;
-  gruposApoyos;
+  public provider:  Provider = new Provider();
+  public categoria:  Provider = new Provider();
+  public centroacopio: CentroAcopioClass = new CentroAcopioClass();
+  public voluntarios;
+  public gruposApoyos;
+
 
   constructor(private datePipe: DatePipe,
     private activateRoute: ActivatedRoute,
@@ -37,43 +40,46 @@ export class DetalleDonacionPage implements OnInit {
       const donaciones = paramMap.get('id')
       this.donacionesService.getDonacionesId(donaciones)
       .subscribe(
-      (data)=>{this.donacion=data,
-              this.view(data.category, data.provider, data.collectionCenter);},
+      (data)=>{this.donacion=data;
+
+              this.categoriaservice.getCategoriaId(data.category)
+              .subscribe(
+                (data)=>{this.categoria=data},
+                (error)=>{console.log(error);}
+              );
+
+              this.providerservice.getProviderId(data.provider)
+              .subscribe(
+                (data)=>{this.provider=data},
+                (error)=>{console.log(error);}
+              );
+
+              this.centroAcopioservice.getCentroAcopioId(data.collectionCenter)
+              .subscribe(
+                (data)=>{this.centroacopio=data},
+                (error)=>{console.log(error);}
+              );
+            
+      },
       (error)=>{console.log(error);}
-      )
-    });
+      )  });
 
-    this.gruposervice.getGrupo()
-    .subscribe(
-    (data)=>{this.gruposApoyos=data},
-    (error)=>{console.log(error)}
-    );
+      this.voluntariosvervice.getVoluntarios()
+      .subscribe(
+      (data)=>{this.voluntarios=data},
+      (error)=>{console.log(error)}
+      );
 
-    this.voluntariosvervice.getVoluntarios()
-    .subscribe(
-    (data)=>{this.voluntarios=data},
-    (error)=>{console.log(error)}
-    );
+      this.gruposervice.getGrupo()
+      .subscribe(
+      (data)=>{this.gruposApoyos=data},
+      (error)=>{console.log(error)}
+      );
+
+
+
 
   }
 
-  view(idcategoria, idproveedor, idcentroacopio){
-    this.categoriaservice.getCategoriaId(idcategoria)
-    .subscribe(
-      (data)=>{this.categoria=data},
-      (error)=>{console.log(error);}
-    );
-    this.providerservice.getProviderId(idproveedor)
-    .subscribe(
-      (data)=>{this.proveedor=data},
-      (error)=>{console.log(error);}
-    );
-
-    this.centroAcopioservice.getCentroAcopioId(idcentroacopio)
-    .subscribe(
-      (data)=>{this.centroacopio=data},
-      (error)=>{console.log(error);}
-    );
-  }
-
+ 
 }

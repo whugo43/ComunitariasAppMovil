@@ -8,10 +8,11 @@ import {CentroAcopioService} from '../../services/centro-acopio/centro-acopio.se
 import {VoluntariosService} from '../../services/voluntarios/voluntarios.service';
 import {GrupoService} from '../../services/grupo-service/grupo.service';
 import {Categoria} from '../../interfaces/categoria';
+import { Grupo } from '../../clases/grupo/grupo';
 import {Donacion} from '../../interfaces/donacion';
 import { Provider } from 'src/app/interfaces/provider';
 import { CentroAcopioClass } from 'src/app/clases/centro-acopio/centro-acopio-class';
-import { Voluntario } from 'src/app/clases/voluntario/voluntario';
+import { Voluntario, Voluntarios } from 'src/app/clases/voluntario/voluntario';
 @Component({
   selector: 'app-detalle-donacion',
   templateUrl: './detalle-donacion.page.html',
@@ -22,8 +23,8 @@ export class DetalleDonacionPage implements OnInit {
   public provider:  Provider = new Provider();
   public categoria:  Provider = new Provider();
   public centroacopio: CentroAcopioClass = new CentroAcopioClass();
-  public voluntarios;
-  public gruposApoyos;
+  public voluntarios: Voluntario []=[];
+  public gruposApoyos: Grupo[] = [];
 
 
   constructor(private datePipe: DatePipe,

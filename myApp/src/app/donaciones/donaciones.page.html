@@ -39,17 +39,20 @@
   <ng-container  *ngFor="let donacion of donaciones">
   <ion-card *ngIf="donacion.collectionCenter == opcionfiltro ||  false== opcionfiltro">
       <ng-container *ngIf="donacion.state == 1">
-        <ion-item>
-          Accion: 
-          <ion-button fill="outline" horizontal="start"  slot="end"   [routerLink]="['editardonacion',donacion.id]">
+        
+        
+        <ion-item>        
+          <ion-label>Acciones:</ion-label>
+         
+          <ion-button fill="outline"   size='small'  [routerLink]="['editardonacion',donacion.id]">
             <ion-icon name="create"></ion-icon >
           </ion-button>
         
-          <ion-button color="warning" fill="outline" horizontal="center"  slot="end"  (click)="presentAlertCambiarestado(donacion.id)">
+          <ion-button color="warning" fill="outline" size='small'  (click)="presentAlertCambiarestado(donacion.id)">
             <ion-icon name="alert"></ion-icon>
           </ion-button>
         
-          <ion-button color="danger" fill="outline" horizontal="end" slot="end" (click)="presentAlertElimnarDonacion(donacion.id)">
+          <ion-button color="danger" fill="outline"  size='small' slot="end" (click)="presentAlertElimnarDonacion(donacion.id)">
             <ion-icon name="trash"></ion-icon>
           </ion-button>
           </ion-item>

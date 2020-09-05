@@ -12,6 +12,7 @@ import {Voluntario} from '../../clases/voluntario/voluntario'
 import { Router } from '@angular/router';
 import { Api } from '../enum'
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,7 +44,8 @@ export class LoginService {
         `body was: ${error.error}`);
     }
     // return an observable with a user-facing error message
-    return throwError('Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.'+ `Backend returned code ${error.status}, ` +
+    `body was: ${error.error.lengthComputable}`+'An error occurred:'+ error.error.message);
     
   }
 
@@ -57,9 +59,7 @@ export class LoginService {
 
   login(user:User): Observable<LoginResponse>{
     return this.http.post<LoginResponse>(this.apiLogin, user)
-                .pipe(
-                  catchError(this.handleError)
-                );
+                ;
   }
 
   logout(){

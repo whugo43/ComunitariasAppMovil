@@ -24,10 +24,10 @@ export class LoginPage implements OnInit {
   ngOnInit() {  
   }
 
-  async alertaError() {
+  async alertaError(sms:any) {
     const alert = await this.alertController.create({
       header: 'Error de inicio de sesion',
-      message: 'Algo salio mal, por favor, intente de nuevo',
+      message: 'Algo salio mal, por favor, intente de nuevo-- '+sms,
       buttons: ['OK']
     });
     await alert.present();
@@ -42,19 +42,11 @@ export class LoginPage implements OnInit {
 
   
   
-  validarlogin(form):void{
-    
-    const log={
-      username: this.formularios.Username,
-      password:this.formularios.Password
-    };
-    
-  
-    this.loginService.login(form.value)
+  validarlogin(form:FormGroup){
+    var smss=this.loginService.login(form.value)
       .subscribe(
         data => {
           let data_user = this.loginService.getDecodeAccessToken(data['token']);
-          console.log(data_user)
           this.loginService.saveToken(
               data['token'], 
               data_user.exp, 
@@ -65,7 +57,7 @@ export class LoginPage implements OnInit {
           );
           this.router.navigateByUrl('/home');
         },
-        error => this.alertaError()
+        (error) => {alert(JSON.stringify(error))}
       );
         
     console.log(form.value)

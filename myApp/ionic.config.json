@@ -3,7 +3,12 @@
   "integrations": {
     "capacitor": {},
     "cordova": {}
-    
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://api-misionalianza.it-doctux.com/api"
+    }
+  ]
 }

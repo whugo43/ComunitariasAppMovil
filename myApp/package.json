@@ -29,7 +29,7 @@
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/file-transfer": "^5.25.0",
     "@ionic-native/geolocation": "^5.25.0",
-    "@ionic-native/http": "^5.27.0",
+    "@ionic-native/http": "^5.28.0",
     "@ionic-native/native-geocoder": "^5.25.0",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
@@ -40,7 +40,7 @@
     "axios": "^0.19.2",
     "com-badrit-base64": "^0.2.0",
     "cordova": "^10.0.0",
-    "cordova-android": "8.1.0",
+    "cordova-android": "9.0.0",
     "cordova-plugin-add-swift-support": "^2.0.2",
     "cordova-plugin-advanced-http": "^2.5.1",
     "cordova-plugin-app-update": "^2.0.2",
@@ -51,6 +51,7 @@
     "cordova-plugin-http": "^1.2.0",
     "cordova-plugin-nativegeocoder": "^3.4.1",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "jwt-decode": "^2.2.0",
     "leaflet": "^1.6.0",
     "natives": "^1.1.6",
@@ -96,9 +97,7 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-advanced-http": {
-        "OKHTTP_VERSION": "3.10.0"
-      },
+      "cordova-plugin-advanced-http": {},
       "cordova-plugin-nativegeocoder": {},
       "cordova-plugin-geolocation": {},
       "cordova-plugin-file-transfer": {},

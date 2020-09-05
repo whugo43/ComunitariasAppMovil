@@ -31,11 +31,11 @@
           {{contacto.lastName}} {{contacto.firstName}}
       </ion-label>
       
-      <ion-button fill="outline" slot="end" [routerLink]="['editar-contacto',contacto.id]">
+      <ion-button fill="outline" size='small' [routerLink]="['editar-contacto',contacto.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
 
-      <ion-button fill="outline" slot="end" color="danger" (click)="presentAlertElimnarContacto(contacto.id)">
+      <ion-button fill="outline" slot="end" size='small' color="danger" (click)="presentAlertElimnarContacto(contacto.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

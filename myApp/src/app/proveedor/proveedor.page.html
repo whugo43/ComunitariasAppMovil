@@ -33,11 +33,11 @@
     <ion-item>
       <ion-label [routerLink]="['detalleproveedor',provider.id]">{{provider.name}}</ion-label>
       
-      <ion-button fill="outline" slot="end" [routerLink]="['editarproveedor',provider.id]">
+      <ion-button fill="outline" size='small' [routerLink]="['editarproveedor',provider.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
 
-      <ion-button fill="outline" slot="end" color="danger" (click)="presentAlertElimnarProvider(provider.id)">
+      <ion-button fill="outline" slot="end" size='small' color="danger" (click)="presentAlertElimnarProvider(provider.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

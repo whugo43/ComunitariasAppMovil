@@ -33,11 +33,11 @@
     <ion-item>
       <ion-label [routerLink]="['detallecampaign',campaign.id]">{{campaign.name}}</ion-label>
       
-      <ion-button fill="outline" slot="end" [routerLink]="['editarcampaign',campaign.id]">
+      <ion-button fill="outline" size='small' [routerLink]="['editarcampaign',campaign.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
 
-      <ion-button fill="outline" slot="end" color="danger" (click)="presentAlertElimnarCampaign(campaign.id)">
+      <ion-button fill="outline" slot="end" size='small' color="danger" (click)="presentAlertElimnarCampaign(campaign.id)">
         <ion-icon name="trash"></ion-icon>
       </ion-button>
     </ion-item>

@@ -33,10 +33,10 @@
     <ion-item>
       <ion-label>{{categoria.name}}</ion-label>
 
-      <ion-button fill="outline" slot="end" [routerLink]="['/categoria',categoria.id]">
+      <ion-button fill="outline" size='small'  [routerLink]="['/categoria',categoria.id]">
         <ion-icon name="create"></ion-icon >
       </ion-button>
-      <ion-button fill="outline" color="danger" slot="end" (click)="presentAlertElimnarCategoria(categoria.id)">
+      <ion-button fill="outline" color="danger" size='small' slot="end" (click)="presentAlertElimnarCategoria(categoria.id)">
       <ion-icon name="trash">
       </ion-icon></ion-button>
 

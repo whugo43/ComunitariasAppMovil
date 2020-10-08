@@ -6,8 +6,7 @@ import {Campaign} from '../../interfaces/campaign';
 import { GrupoService } from 'src/app/services/grupo-service/grupo.service';
 import { VoluntariosService } from 'src/app/services/voluntarios/voluntarios.service';
 import { LoginService } from 'src/app/services/login/login.service';
-import { CreteByService } from '../../services/create-by.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-generar-campaign',
@@ -39,7 +38,7 @@ export class GenerarCampaignPage implements OnInit {
               public voluntariosvervice: VoluntariosService,
               public gruposervice: GrupoService,
               public router: Router,
-              private createdBy:CreteByService) { }
+              ) { }
 
   ngOnInit() {
     this.Getscopes()
@@ -93,7 +92,7 @@ export class GenerarCampaignPage implements OnInit {
     this.formData.append("description",this.formularios.description)
     this.formData.append("scope",this.formularios.scope) 
     this.formData.append("photo",this.photo)  
-    this.formData.append("createdBy",this.createdBy.getNombre())  
+    this.formData.append("createdBy",localStorage.getItem('USER_NAME'))  
 
     this.campaignservice.postCampaigns(this.formData).subscribe(
       data => {

@@ -2,7 +2,7 @@
 <network-security-config>
     <base-config cleartextTrafficPermitted="true"/>
     <domain-config cleartextTrafficPermitted="true">
-        <domain includeSubdomains="true">"http://api-misionalianza.it-doctux.com</domain>
+        <domain includeSubdomains="true">http://api-misionalianza.it-doctux.com</domain>
     </domain-config>
     
 </network-security-config>

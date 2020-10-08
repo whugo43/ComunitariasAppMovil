@@ -3,7 +3,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { Router, ActivatedRoute } from '@angular/router'
 import { CentroAcopioPage } from '../centro-acopio.page'
 import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
-import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-centro-acopio-registro',
@@ -25,7 +24,7 @@ export class CentroAcopioRegistroPage implements OnInit {
 
   constructor(private formBuilder:
     FormBuilder, private router: Router, public activateRoute: ActivatedRoute, 
-    private centroAcopioapi: CentroAcopioService, private createBy:CreteByService) {
+    private centroAcopioapi: CentroAcopioService){
     
   }
 
@@ -150,7 +149,7 @@ export class CentroAcopioRegistroPage implements OnInit {
     this.centroAcopioapi.getCentroAcopioId(this.centroAcopioId).subscribe(dato_final => {
       this.formData.append('latitude', dato_final['latitude'].toString());
       this.formData.append('longitude', dato_final['longitude'].toString());
-      this.formData.append('createdBy', this.createBy.getNombre());
+      this.formData.append('createdBy',localStorage.getItem('USER_NAME'));
     });
     if (this.accionEditar > 0) {
       this.centroAcopioapi.updateCentroAcopio(this.formData, this.centroAcopioId).subscribe((newTask) => {

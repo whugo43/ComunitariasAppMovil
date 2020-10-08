@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {Router} from '@angular/router';
-import {LoginService} from '../services/login/login.service';
+import { Router } from '@angular/router';
+import { LoginService } from '../services/login/login.service';
 import { AlertController } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 
 @Component({
@@ -11,44 +11,42 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  Logins 
-  formularios={
+  Logins
+  formularios = {
     Username: '',
     Password: '',
-    }
-
-  constructor(public loginService: LoginService,
-              public router: Router,
-              public alertController: AlertController) { }
-
-  ngOnInit() {  
   }
 
-  async alertaError(sms:any) {
+  constructor(public loginService: LoginService,
+    public router: Router,
+    public alertController: AlertController) { }
+
+  ngOnInit() {
+  }
+
+  async alertaError(sms: any) {
     const alert = await this.alertController.create({
       header: 'Error de inicio de sesion',
-      message: 'Algo salio mal, por favor, intente de nuevo-- '+sms,
+      message: 'Algo salio mal, por favor, intente de nuevo-- ' + sms,
       buttons: ['OK']
     });
     await alert.present();
   }
-    passwordType: string = 'password';
-    passwordIcon: string = 'eye-off';
-  
-    hideShowPassword() {
-        this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
-        this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
-    }
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
 
-  
-  
-  validarlogin(form:FormGroup){
-    var smss=this.loginService.login(form.value)
-      .subscribe(
-        data => {
-          let data_user = this.loginService.getDecodeAccessToken(data['token']);
+  hideShowPassword() {
+    this.passwordType = this.passwordType === 'text' ? 'password' : 'text';
+    this.passwordIcon = this.passwordIcon === 'eye-off' ? 'eye' : 'eye-off';
+  }
+
+
+
+  async validarlogin(form: FormGroup) {
+    this.loginService.loginAxios(form.value['username'],form.value['password']).then(axiosPromise=>{
+      let data_user = this.loginService.getDecodeAccessToken(axiosPromise.data['token']);
           this.loginService.saveToken(
-              data['token'], 
+              axiosPromise.data['token'], 
               data_user.exp, 
               data_user.role,
               data_user.email,
@@ -56,11 +54,9 @@ export class LoginPage implements OnInit {
               data_user.user_id,
           );
           this.router.navigateByUrl('/home');
-        },
-        (error) => {alert(JSON.stringify(error))}
-      );
-        
-    console.log(form.value)
+    }).catch(error=>{
+      this.alertaError("ha ocurrido un error por favor intente mas tarde")
+    })
   }
 
 }

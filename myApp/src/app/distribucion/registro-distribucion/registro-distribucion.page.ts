@@ -5,7 +5,6 @@ import { DistribucionService } from '../../services/distribucion/distribucion.se
 import { VoluntariosService } from '../../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { ActivatedRoute } from '@angular/router';
-import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-registro-distribucion',
@@ -55,7 +54,7 @@ export class RegistroDistribucionPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private activateRoute: ActivatedRoute, private conexionApi: DistribucionService,
     private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService,
-    private router: Router, private createBy: CreteByService) {
+    private router: Router) {
 
   }
 
@@ -197,7 +196,7 @@ export class RegistroDistribucionPage implements OnInit {
       this.formData.append('manager_type', "2");
     }
     this.formData.append('information', this.registrationForm.get('descripcion').value);
-    this.formData.append('createdBy', this.createBy.getNombre());
+    this.formData.append('createdBy', localStorage.getItem('USER_NAME'));
 
     if (this.photo == null) {
       this.formData.append('photo', "");

@@ -4,7 +4,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms'
 import { GroupMemberServiceService } from '../../services/group-member/group-member-service.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { GroupMember } from '../../clases/miembros-grupos/group-member'
-import { CreteByService } from '../../services/create-by.service'
 
 @Component({
   selector: 'app-grupo-de-apoyo-ingresar-miembros',
@@ -20,7 +19,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
 
   constructor(private recibiendo: ActivatedRoute, private formBuilder:
     FormBuilder, private apiConexionGroupMember: GroupMemberServiceService,
-    private navegar: Router, private apiGrupo: GrupoService, private createdBy:CreteByService) {
+    private navegar: Router, private apiGrupo: GrupoService) {
   }
 
   ngOnInit() {
@@ -55,7 +54,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
   }
 
   enviarDatos() {
-    this.groupMember.createdBy = this.createdBy.getNombre();
+    this.groupMember.createdBy = localStorage.getItem('USER_NAME');
     this.groupMember.firstName = this.formMiembro.get('nombre').value;
     this.groupMember.lastName = this.formMiembro.get('apellidos').value;
     this.groupMember.phoneNumber = this.formMiembro.get('telefono').value;
@@ -63,7 +62,7 @@ export class GrupoDeApoyoIngresarMiembrosPage implements OnInit {
       'firstName': this.formMiembro.get('nombre').value,
       "lastName": this.formMiembro.get('apellidos').value,
       'phoneNumber': this.formMiembro.get('telefono').value,
-      'createdBy': this.createdBy.getNombre(),
+      'createdBy': localStorage.getItem('USER_NAME'),
       'supportgroup': this.idGrupo,
     }
     if (this.editar == 'editar' && this.idMiembro != null) {

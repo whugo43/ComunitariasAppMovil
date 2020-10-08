@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-class';
 import { Api } from '../enum'
-import { CreteByService } from '../create-by.service'
 import { LoginService } from '../../services/login/login.service'
 
 @Injectable({
@@ -11,7 +10,7 @@ import { LoginService } from '../../services/login/login.service'
 export class CentroAcopioService {
   private api = Api.api + 'collection-center/';
 
-  constructor(private http: HttpClient,  private createBy:CreteByService, private loginsApi:LoginService) {
+  constructor(private http: HttpClient, private loginsApi:LoginService) {
   }
 
   private headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));

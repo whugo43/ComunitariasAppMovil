@@ -10,7 +10,6 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { from } from 'rxjs';
 import { DatePipe } from "@angular/common";
 
 import { Geolocation } from "@ionic-native/geolocation/ngx"
@@ -25,6 +24,7 @@ import {VoluntariosService} from './services/voluntarios/voluntarios.service';
 import {ActivityService} from './services/activity/activity.service';
 import {ListaContactosService} from './services/lista-contactos/lista-contactos.service';
 import { MenuComponentModule } from './componentes/menu/menu.module';
+import { HTTP } from '@ionic-native/http/ngx';
 
 
 @NgModule({
@@ -46,8 +46,9 @@ import { MenuComponentModule } from './componentes/menu/menu.module';
     ProviderService,
     ListaContactosService,
     VoluntariosService,
-    ActivityService
-    ],
+    ActivityService,
+    HTTP,
+  ],
 
   bootstrap: [AppComponent]
 })

@@ -4,12 +4,9 @@ import { Geolocation } from "@ionic-native/geolocation/ngx"
 import { ActivatedRoute, Router } from "@angular/router"
 import { CentroAcopioClass } from '../../clases/centro-acopio/centro-acopio-class'
 import { CentroAcopioService } from '../../services/centro-acopio/centro-acopio.service'
-import { FormBuilder, Validators, FormGroup } from '@angular/forms'
-import { CreteByService } from '../../services/create-by.service'
+import { FormBuilder } from '@angular/forms'
 import { CentroAcopioRegistroPage } from '../centro-acopio-registro/centro-acopio-registro.page'
 import { AlertController } from '@ionic/angular';
-import { Console } from 'console';
-import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-ubicacion',
@@ -40,7 +37,7 @@ export class UbicacionPage implements OnInit {
 
   constructor(public geolocation: Geolocation,
     public activateRoute: ActivatedRoute, public route: Router, private conexionApi: CentroAcopioService, private formBuilder:
-      FormBuilder, private createBy: CreteByService, public alertController: AlertController) {
+      FormBuilder, public alertController: AlertController) {
 
   }
 
@@ -92,7 +89,7 @@ export class UbicacionPage implements OnInit {
     } else {
       this.formData.append("photo", '');
     }
-    this.formData.append('createdBy', this.createBy.getNombre());
+    this.formData.append('createdBy', localStorage.getItem('USER_NAME'));
 
     if (this.accionEditar > 0) {
       this.conexionApi.updateCentroAcopio(this.formData, this.centroAcopioId)
@@ -112,9 +109,9 @@ export class UbicacionPage implements OnInit {
           console.log(newTask);
           this.route.navigate(['../centro-acopio']);
         }
-        , error => {
+        ),error=>{
           this.presentAlertConfirm();
-        });
+        };
     }
 
   }

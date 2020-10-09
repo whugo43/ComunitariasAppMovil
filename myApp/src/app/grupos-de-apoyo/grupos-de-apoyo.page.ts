@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Grupo } from '../clases/grupo/grupo'
 import { GrupoService } from '../services/grupo-service/grupo.service'
-import { LoginService } from '../services/login/login.service'
+import { LoginService } from '../services/login/login.service';
+import { UserService } from '../services/user/user.service'
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 
@@ -15,15 +16,13 @@ export class GruposDeApoyoPage implements OnInit {
   public seleccionado: string = '';
   public getted = false;
 
-  constructor(private apiGrupoApoyo: GrupoService, private apiUser: LoginService,
+  constructor(private apiGrupoApoyo: GrupoService, private apiUser: UserService,
     private alertController: AlertController, private router: Router) {
-
-
   }
 
   ngOnInit() {
-      this.obtenerGruposdeapoyo(); // ejecutar ngOnInit al cargar pagina
-    }
+    this.obtenerGruposdeapoyo(); // ejecutar ngOnInit al cargar pagina
+  }
 
   async presentAlertConfirm(id: any) {
     this.obtenerNombre(id);
@@ -66,25 +65,30 @@ export class GruposDeApoyoPage implements OnInit {
       }
     });
   }
-  obtenerGruposdeapoyo() {
-    this.gruposDeApoyo = [];
+  async obtenerGruposdeapoyo() {
     this.apiGrupoApoyo.getGrupo().subscribe(grupos => {
-      grupos.forEach(grupo => {
-        this.apiUser.getLogins().subscribe(users => {
-          users.forEach(user => {
+      grupos.forEach(async grupo => {
+        this.apiUser.getUser().subscribe(users => {
+          users.forEach(async user => {
             if (user.id == grupo.user) {
               grupo.nombreuser = user.username;
-              return;
+              //return;
             }
           });
         });
         this.gruposDeApoyo.push(grupo);
+      },error=>{
+        console.log("1 "+error)
       });
+    },error=>{
+      console.log("2 "+error)
     });
+    console.log(this.gruposDeApoyo)
   }
 
   doRefresh(event) {
     setTimeout(() => {
+      this.gruposDeApoyo = [];
       this.obtenerGruposdeapoyo();
       event.target.complete();
     }, 200);

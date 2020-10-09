@@ -15,6 +15,7 @@ export class VoluntariosService {
 
   getVoluntarios() {
     const path = this.api;
+    this.headers = new HttpHeaders().set("token",localStorage.getItem('ACCESS_TOKEN'));
     return this.http.get<Voluntario[]>(this.api, {headers: this.headers})
   }
   getApi() {

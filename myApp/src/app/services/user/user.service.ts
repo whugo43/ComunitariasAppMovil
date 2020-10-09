@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Api } from '../enum'
+import { Api } from '../enum';
+import { User } from '../../clases/user/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private api=Api.api+'user/';
-
   constructor(private http: HttpClient) { }
 
   headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+
   getUser(){
-    const path= this.api;
-    return this.http.get(path, { headers: this.headers });
+    return this.http.get<User[]>(this.api, { headers: this.headers });
   }
   getUserId(id: string){ 
     return this.http.get<any>(this.api + id, { headers: this.headers });

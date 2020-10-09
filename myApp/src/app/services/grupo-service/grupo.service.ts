@@ -11,10 +11,11 @@ export class GrupoService {
 
   constructor(private http: HttpClient) { }
 
-  headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
+  private headers = new HttpHeaders().set("token",localStorage.getItem('ACCESS_TOKEN'));
 
   getGrupo() {
-    const path = this.api;
+    this.headers = new HttpHeaders().set("token",localStorage.getItem('ACCESS_TOKEN'));
+    //console.log(this.headers)
     return this.http.get<Grupo[]>(this.api, { headers: this.headers })
   }
   getApi() {
@@ -32,7 +33,6 @@ export class GrupoService {
 
   deleteGrupo(id: string) {
     const path = `${this.api}${id}`;
-    console.log(path);
     return this.http.delete(path, { headers: this.headers }).subscribe(
       resp => console.log('eliminado'),
       error => console.log('error occur, delete fail'));

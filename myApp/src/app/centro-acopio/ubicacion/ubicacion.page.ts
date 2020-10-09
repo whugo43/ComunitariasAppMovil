@@ -69,6 +69,7 @@ export class UbicacionPage implements OnInit {
     });
     await alert.present();
   }
+  
   public enviarDatos() {
     this.formData.append("name", this.nombre);
     this.formData.append('address', this.direccion);

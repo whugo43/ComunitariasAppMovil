@@ -88,8 +88,7 @@ export class LoginService {
   }
 
   getLogins() {
-    const path = this.api;
-    return this.http.get<User[]>(path, { headers: this.headers })
+    return this.http.get<User[]>(this.api, { headers: this.headers })
   }
 
   guardarUsuario(usuario) {

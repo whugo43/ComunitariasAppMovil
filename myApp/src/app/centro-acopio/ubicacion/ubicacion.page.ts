@@ -132,12 +132,28 @@ export class UbicacionPage implements OnInit {
         this.long_ac = data['longitude'];
       });
 
+
+      
+    }
+    /*
+    coordenadas guayaquil
+    latitud: -3.026415046831912
+    longuitud: -79.90943632284637
+    */
+    if(this.lat_ac===0 && this.long_ac===0){
+      this.lat_ac=-3.026415046831912;
+      this.long_ac=-79.90943632284637;
     }
     this.map = new Map('mapId2').setView([this.lat_ac, this.long_ac], 16);
     console.log(this.lat_ac);
     console.log(this.long_ac);
+    /*##PARA ESTAR DE LA MISMA MANERA QUE LA APP WEBB
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);*/
+    
+    tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+      attribution: 'edupala.com'
     }).addTo(this.map);
     if (this.accionEditar > 0) {
       this.conexionApi.getCentroAcopioId(this.centroAcopioId).subscribe(data => {

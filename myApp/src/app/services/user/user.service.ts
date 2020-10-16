@@ -13,9 +13,11 @@ export class UserService {
   headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
 
   getUser(){
+    this.headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
     return this.http.get<User[]>(this.api, { headers: this.headers });
   }
   getUserId(id: string){ 
+    console.log(this.headers)
     return this.http.get<any>(this.api + id, { headers: this.headers });
 
   }

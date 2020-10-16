@@ -49,7 +49,7 @@ export class CentroAcopioPage implements OnInit {
         this.lista.push(f);
       });
     });
-    console.log(this.lista);
+    //console.log(this.lista);
   }
 
   ngOnInit() {

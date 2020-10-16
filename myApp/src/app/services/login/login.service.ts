@@ -97,6 +97,7 @@ export class LoginService {
   }
 
   getUserId(id: any) {
+    this.headers = new HttpHeaders().set('Token', localStorage.getItem('ACCESS_TOKEN'));
     return this.http.get<User>(this.api + id, { headers: this.headers });
   }
 

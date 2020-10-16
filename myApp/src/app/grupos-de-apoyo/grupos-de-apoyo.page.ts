@@ -72,7 +72,7 @@ export class GruposDeApoyoPage implements OnInit {
           users.forEach(async user => {
             if (user.id == grupo.user) {
               grupo.nombreuser = user.username;
-              //return;
+              return;
             }
           });
         });
@@ -83,7 +83,7 @@ export class GruposDeApoyoPage implements OnInit {
     },error=>{
       console.log("2 "+error)
     });
-    console.log(this.gruposDeApoyo)
+    //console.log(this.gruposDeApoyo)
   }
 
   doRefresh(event) {

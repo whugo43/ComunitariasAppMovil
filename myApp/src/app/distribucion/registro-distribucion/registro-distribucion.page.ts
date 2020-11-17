@@ -5,6 +5,7 @@ import { DistribucionService } from '../../services/distribucion/distribucion.se
 import { VoluntariosService } from '../../services/voluntarios/voluntarios.service'
 import { GrupoService } from '../../services/grupo-service/grupo.service'
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro-distribucion',
@@ -54,7 +55,7 @@ export class RegistroDistribucionPage implements OnInit {
   constructor(private formBuilder:
     FormBuilder, private activateRoute: ActivatedRoute, private conexionApi: DistribucionService,
     private conexionVoluntarios: VoluntariosService, private conexionGrupos: GrupoService,
-    private router: Router) {
+    private router: Router, private alertController: AlertController) {
 
   }
 
@@ -186,6 +187,15 @@ export class RegistroDistribucionPage implements OnInit {
       this.registrationForm.get('descripcion').value == '';
   };
 
+  async alertaError(header_msg, msg) {
+    const alert = await this.alertController.create({
+      header: header_msg,
+      message: msg,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
 
   public enviarDatos() {
     this.formData.append('departureAddress', this.registrationForm.get('lugar_partida').value);
@@ -213,13 +223,19 @@ export class RegistroDistribucionPage implements OnInit {
     if (this.accionEditar > 0) {
       this.conexionApi.actualizarDistribucion(this.formData, this.distribucionId).subscribe(msm => {
         console.log(msm);
+        this.alertaError('Edición de Distribución','Edición de Distribucion Exitosa..');
       }, error => {
         console.log(error);
+        this.alertaError('Edición de Distribución','Edición de Distribucion No Exitosa..');
       });
       this.accionEditar = 0;
     } else {
       console.log(this.formData);
-      this.conexionApi.agregarDistribucion(this.formData);
+      this.conexionApi.agregarDistribucion(this.formData).subscribe(exito=>{
+        this.alertaError('Registro de Distribución','Registro de Distribucion Exitosa..');
+      },error=>{
+        this.alertaError('Registro de Distribución','Registro de Distribucion No Exitosa..');
+      });
     }
     this.router.navigate(['../distribucion'], {
       queryParams: {

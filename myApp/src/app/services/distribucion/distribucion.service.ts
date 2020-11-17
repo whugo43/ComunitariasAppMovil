@@ -25,11 +25,7 @@ export class DistribucionService {
   }
 
   agregarDistribucion(formDistribucion:any){
-    return this.http.post(this.api, formDistribucion, { headers: this.headers }).subscribe(mensaje=>{
-      console.log(mensaje);
-    },error=>{
-      console.log(error)
-    });
+    return this.http.post(this.api, formDistribucion, { headers: this.headers });
   }
 
   actualizarDistribucion(distribucion:any,id:any){
